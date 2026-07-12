@@ -64,6 +64,17 @@ HONESTY (firewall discipline)
 
 Run:
     python interpretability/cross_policy_crystal.py
+
+Structure (this file is long; jump by section):
+  * L132-172  scalar helpers: clip01, cluster_mean_r2, pareto_auc
+  * L174-236  behavioral_complexity  -- the static CrystalScore complexity term
+  * L238-440  the DYNAMIC-complexity ruler: _block_entropies / _causal_complexity /
+              _entropy_rate_complexity / _discretize / behavioral_complexity_dynamic (+ _selftest_dynamic).
+              This is the reusable metric block; mdl_fidelity_deficit.py imports behavioral_complexity_dynamic.
+  * L441-469  clustering_stability + register_final_latent_hook
+  * L471-556  Replay / replay_policy / score_replay  -- run a policy forward and score it
+  * L557-660  r6c_from_report, candidate_specs  -- assemble the policies to compare
+  * L662-940  main() + maybe_plot / write_markdown / print_console  -- orchestration and output
 """
 from __future__ import annotations
 

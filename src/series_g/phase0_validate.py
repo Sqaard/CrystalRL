@@ -39,6 +39,7 @@ EXPECTED = {"A_default": True, "B_nontrivial_blind": True,
 
 
 def main() -> int:
+    """Run the Phase-0 gate over the four validation configs (A/B must PASS, C/D must FAIL) and report whether the gate discriminates as expected."""
     results, ok_all = {}, True
     print(f"{'config':30s} {'aware':>8s} {'blind':>8s} {'ZI_u':>8s} {'VoI':>8s} {'gate':>5s} {'expect':>6s} {'disc?':>5s}")
     for name, over in CONFIGS.items():

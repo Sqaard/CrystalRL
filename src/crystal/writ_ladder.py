@@ -27,6 +27,7 @@ C_RUNGS = ["C0_addressable", "C1_causal", "C2_dose", "C3_envelope", "C4_side_eff
 
 @dataclass
 class WritCertificate:
+    """A belief-write certificate tracking the C0..C6 rung ladder; deployable only when every rung passes."""
     verb: str                       # e.g. "SET_BELIEF"
     site: str                       # named belief coordinate, e.g. "b_toxic" / "venue_2"
     policy_version: str
@@ -37,6 +38,7 @@ class WritCertificate:
     status: str = "DRAFT"
 
     def certify(self, rung: str, ok: bool, evidence: str = ""):
+        """Record rung `rung` as passed/failed, recompute the status, and return self (chainable)."""
         assert rung in self.rungs, f"unknown rung {rung}"
         self.rungs[rung] = bool(ok)
         self._recompute()
@@ -54,6 +56,7 @@ class WritCertificate:
         self.level = n - 1
 
     def void_on_version_bump(self, policy_version: str, cfbank_version: str):
+        """Lapse the writ back to C1 (void the C2+ rungs) if the policy/cfbank version changed; return whether voided."""
         if policy_version != self.policy_version or cfbank_version != self.cfbank_version:
             # C6 and above void; the write lapses back to C1 (causal claim survives, deployment authority does not)
             for r in C_RUNGS[2:]:
@@ -64,6 +67,7 @@ class WritCertificate:
         return False
 
     def deployable(self) -> bool:
+        """Return True only if every C0..C6 rung passes (only a fully-certified writ may act on capital)."""
         return all(self.rungs[r] for r in C_RUNGS)     # only a fully C0..C6 writ may act on capital
 
 
@@ -85,11 +89,13 @@ class CumulativeAuthorityLedger:
     log: list = field(default_factory=list)
 
     def can_issue(self, writ_id: str):
+        """Return (ok, reason): False if the N_live<=K_max co-activation cap is already reached."""
         if len(self.live) >= self.K_max:
             return False, f"N_live cap ({self.K_max}) — co-activation blocked (epistasis unbounded beyond K)"
         return True, None
 
     def issue(self, writ_id: str, alpha: float, duration: float):
+        """Charge the writ (|alpha|*duration + worst-case epistasis cross-term) to D; return (ok, reason), blocking on the K or D_cap cap."""
         ok, why = self.can_issue(writ_id)
         if not ok:
             self.log.append(("BLOCK", writ_id, why)); return False, why
@@ -105,10 +111,12 @@ class CumulativeAuthorityLedger:
         return True, None
 
     def release(self, writ_id: str):
+        """Retire a live writ; spent authority D is NOT refunded (irreversible-consequence discipline)."""
         # authority is not refunded on release (irreversible-consequence discipline): D stays spent
         self.live.pop(writ_id, None)
 
     def requalify(self, new_anchor_version: str):
+        """Reset spent authority D to zero and re-anchor to `new_anchor_version` (only re-certification refunds D)."""
         self.D = 0.0; self.anchor_version = new_anchor_version; self.log.append(("REQUALIFY", new_anchor_version))
 
 

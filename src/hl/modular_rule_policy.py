@@ -14,24 +14,30 @@ from src.series_g.family_env import RegimeRotationEnv
 
 
 def env_ctor(G=6):
+    """Return a zero-arg constructor for a RegimeRotationEnv with G venues (fixed seed)."""
     def _c():
         return RegimeRotationEnv(G=G, seed=0)
     return _c
 
 
 def unwind_clause():
+    """Build the shared inventory-management clause: UNWIND near the horizon."""
     return ("unwind",)
 
 
 def provide_clause(v, thr=0.556, cap=4):
+    """Build a per-venue PROVIDE clause: provide at venue v when belief>=thr and inventory<cap."""
     return ("provide", int(v), float(thr), int(cap))
 
 
 def covered_venues(policy):
+    """Return the set of venues the policy has a provide clause for (its niche coverage)."""
     return frozenset(c[1] for c in policy if c[0] == "provide")
 
 
 def act(policy, env):
+    """Choose the env action: UNWIND if inventory is due near the horizon, else PROVIDE at the highest-belief
+    covered venue whose clause matches, else ABSTAIN."""
     belief, inv, t, T, I_max = env.belief, env.inv, env.t, env.T, env.I_max
     has_unwind = any(c[0] == "unwind" for c in policy)
     if has_unwind and inv > 0 and (T - t) <= inv:
@@ -47,6 +53,7 @@ def act(policy, env):
 
 
 def evaluate(policy, ctor, seeds):
+    """Return per-seed episodic returns of the modular policy over `seeds`."""
     env = ctor(); rets = []
     for s in seeds:
         env.reset(seed=s); done = False; R = 0.0
@@ -59,6 +66,7 @@ def evaluate(policy, ctor, seeds):
 
 # ---- structural operators ----
 def add_provide(policy, v, thr=0.556, cap=4):
+    """Structural operator: add a provide clause for venue v unless one already covers it."""
     if any(c[0] == "provide" and c[1] == v for c in policy):
         return policy
     return list(policy) + [provide_clause(v, thr, cap)]
@@ -83,6 +91,7 @@ def recombine(a, b):
 
 
 def describe(policy):
+    """Render the policy as a compact legible string (unwind flag + covered provide venues)."""
     u = "UNWIND" if any(c[0] == "unwind" for c in policy) else ""
     vs = ",".join(str(c[1]) for c in policy if c[0] == "provide")
     return f"[{u}{' | ' if u and vs else ''}provide@{{{vs}}}]"

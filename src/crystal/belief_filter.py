@@ -35,6 +35,7 @@ class NeuralBayesFilter(nn.Module):
         self.logits_p0 = nn.Parameter(torch.zeros(K))
 
     def mats(self):
+        """Return the softmax-normalized (transition T, emission E, prior p0) probability matrices."""
         T = torch.softmax(self.logits_T, dim=1)     # T[i,j] = P(j | i), rows sum 1
         E = torch.softmax(self.logits_E, dim=1)     # E[g,o] = P(o | g)
         p0 = torch.softmax(self.logits_p0, dim=0)
@@ -58,6 +59,7 @@ class NeuralBayesFilter(nn.Module):
 
     # ---------------- numpy runtime (frozen filter inside an env wrapper) ----------------
     def numpy_params(self):
+        """Return (T, E, p0) as detached numpy arrays for the frozen numpy-runtime filter."""
         with torch.no_grad():
             T, E, p0 = self.mats()
         return T.numpy(), E.numpy(), p0.numpy()

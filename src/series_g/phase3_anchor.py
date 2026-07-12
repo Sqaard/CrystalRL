@@ -63,6 +63,7 @@ def _markov_simulatability(actions: np.ndarray, ep: np.ndarray, order: int) -> f
 
 
 def main() -> int:
+    """Measure the optimal-policy rollout on both frontier axes (L0 bits/action complexity + surrogate simulatability), place the Series-G anchor vs R6c, and write the report."""
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:

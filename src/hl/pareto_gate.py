@@ -22,6 +22,8 @@ from src.hl import tension as T
 
 @dataclass
 class ParetoGate:
+    """The Pareto / tension-vector gate: admits only non-dominated forward moves over (return, -description_len),
+    priced by alpha-investing wealth and a tension-harm budget, with an adversarial validator and canary teeth."""
     dev_ctor: object                          # base regime
     stressor_ctors: list                      # DISJOINT stressor regimes for the adversarial validator (F2)
     G: int
@@ -49,6 +51,8 @@ class ParetoGate:
         return max(0.0, (cand_vec["description_len"] - cur_vec["description_len"]))
 
     def review(self, cand, current):
+        """Admit `cand` only if it is a Pareto-non-dominated forward move that clears the alpha-investing holdout,
+        survives every stressor regime, and fits the tension budget; returns (verdict, info, resulting policy)."""
         # F12 teeth: once a canary has escaped, the gate is COMPROMISED and refuses every move until manual reset.
         if self.compromised:
             return "REFUSED_GATE_COMPROMISED", {}, current
@@ -133,6 +137,8 @@ class ParetoGate:
     # unconditional-provide -8.59 and unwind-strip +1.77); ALL must be rejected. An escape is not a statistic:
     # it sets compromised=True and the gate refuses every subsequent move until manually reset.
     def canary_check(self, current):
+        """Sandbox-review generated harmful canaries (legibility-only-cost, unconditional provide, unwind strip);
+        any ACCEPTED escape sets compromised=True and freezes the gate."""
         canaries = []
         # (a) legibility-only-cost: an EXACT duplicate of an existing provide clause — guaranteed behavior-identical
         # (a default-thr/cap duplicate could be a live improvement over a dead clause and false-positive-brick the gate)

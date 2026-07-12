@@ -28,6 +28,7 @@ def _match(r, belief, inv, tail):
 
 
 def act(rules, belief, inv, t, T, I_max):
+    """Fire the action of the first rule whose conjunction all holds; else ABSTAIN."""
     tail = (T - t)
     for r in rules:
         if _match(r, belief, inv, tail):
@@ -36,10 +37,12 @@ def act(rules, belief, inv, t, T, I_max):
 
 
 def default_policy():
+    """Return the detuned anchor: a never-matching rule, so the policy always ABSTAINs until add_rule grows it."""
     return [rule([("belief", ">=", 999.0)], ACTIONS["ABSTAIN"])]   # never matches -> always ABSTAIN (detuned anchor)
 
 
 def evaluate(rules, env_ctor, seeds):
+    """Return per-seed episodic returns of the rule-list policy over `seeds`."""
     env = env_ctor(); rets = []
     for s in seeds:
         obs, _ = env.reset(seed=s); done = False; R = 0.0
@@ -51,11 +54,13 @@ def evaluate(rules, env_ctor, seeds):
 
 
 def action_signature(rules, env_ctor, probe_states):
+    """The policy's action on a fixed probe grid = its behavioral fingerprint (for blast-radius measurement)."""
     env = env_ctor(); T, I_max = env.T, env.m.I_max
     return np.array([act(rules, b, inv, t, T, I_max) for (b, inv, t) in probe_states], dtype=int)
 
 
 def frozen_probe_states(env_ctor, n_belief=13):
+    """Build the fixed (belief, inventory, tail) probe grid used to fingerprint a policy."""
     env = env_ctor(); states = []
     for b in np.linspace(0.02, 0.98, n_belief):
         for inv in range(env.m.I_max + 1):
@@ -65,15 +70,18 @@ def frozen_probe_states(env_ctor, n_belief=13):
 
 
 def is_real(r):
+    """True unless r is the detuned never-matching anchor rule (i.e. a real, non-anchor clause)."""
     return not (len(r["conds"]) == 1 and r["conds"][0][2] >= 900)
 
 
 # ---- structural operators ----
 def add_rule(rules, r, pos=0):
+    """Structural operator: insert a copy of rule r into the decision list at position pos."""
     out = [dict(x) for x in rules]; out.insert(max(0, min(pos, len(out))), dict(r)); return out
 
 
 def retune_rule(rules, idx, cond_i, new_thr):
+    """Retune operator: set the threshold of condition cond_i in rule idx to new_thr (copy-on-write)."""
     out = [dict(x) for x in rules]
     if 0 <= idx < len(out) and 0 <= cond_i < len(out[idx]["conds"]):
         c = list(out[idx]["conds"]); f, o, _ = c[cond_i]; c[cond_i] = (f, o, float(new_thr)); out[idx]["conds"] = c
@@ -94,6 +102,7 @@ def recombine(parent_a, parent_b, cut=None):
 
 
 def describe(rules):
+    """Render the real (non-anchor) rules as a compact legible decision-list string."""
     def one(r):
         c = " & ".join(f"{f}{o}{t:.2f}" for f, o, t in r["conds"])
         return f"if {c}->{_ANAMES[r['action']]}"

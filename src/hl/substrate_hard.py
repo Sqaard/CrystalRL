@@ -30,10 +30,13 @@ ACTIONS = {"PROVIDE": 0, "ABSTAIN": 1, "AGGRESS": 2}
 
 
 def default_coeffs():
+    """Return the detuned starting coeffs (each knob at its default)."""
     return {k: v["default"] for k, v in KNOBS.items()}
 
 
 def policy_action(coeffs, belief, inv, t, T, I_max, providing_prev=False):
+    """Transparent 6-knob rule with interacting levers (risk-off dump, provide hysteresis, capacity cap):
+    returns 0 PROVIDE / 1 ABSTAIN / 2 AGGRESS."""
     if inv > 0 and belief >= coeffs["unwind_belief_thresh"]:
         return ACTIONS["AGGRESS"]                                   # risk-off dump in toxic
     if inv >= coeffs["unwind_inv_thresh"] and inv > 0 and (T - t) <= coeffs["unwind_horizon"]:
@@ -46,6 +49,7 @@ def policy_action(coeffs, belief, inv, t, T, I_max, providing_prev=False):
 
 
 def evaluate(coeffs, env_ctor, seeds):
+    """Return per-seed episodic returns, threading the providing-hysteresis state across steps."""
     env = env_ctor()
     rets = []
     for s in seeds:
@@ -60,12 +64,14 @@ def evaluate(coeffs, env_ctor, seeds):
 
 
 def action_signature(coeffs, env_ctor, probe_states):
+    """The policy's action on a fixed probe grid = its behavioral fingerprint (for blast-radius measurement)."""
     env = env_ctor(); T, I_max = env.T, env.m.I_max
     return np.array([policy_action(coeffs, b, inv, t, T, I_max, providing_prev=False)
                      for (b, inv, t) in probe_states], dtype=int)
 
 
 def frozen_probe_states(env_ctor, n_belief=13):
+    """Build the fixed (belief, inventory, tail) probe grid used to fingerprint a policy."""
     env = env_ctor(); states = []
     for b in np.linspace(0.02, 0.98, n_belief):
         for inv in range(env.m.I_max + 1):

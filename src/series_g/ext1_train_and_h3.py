@@ -39,6 +39,7 @@ OUT = HERE / "ext1_train_and_h3_report.json"
 
 
 def optimal_action(g, pol, belief, inv, t):
+    """Look up the belief-aware optimal action for (belief, inventory, time) on the discretized belief grid."""
     return int(pol[t, int(round(belief * (len(g) - 1))), int(inv)])
 
 
@@ -104,6 +105,7 @@ def h3_compression(df: pd.DataFrame, N: int, budget_per_worker=9) -> dict:
 
 
 def main() -> int:
+    """Train PPO on the multi-asset env, check it approaches the analytic optimum, re-run the high-dim H3 compression test (shared worker vs flat), and place the learned anchor on the frontier."""
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception:

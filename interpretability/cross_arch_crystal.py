@@ -59,6 +59,16 @@ FIREWALL DISCIPLINE
 
 Run:
     python interpretability/cross_arch_crystal.py
+
+Structure (this file is long; jump by section):
+  * L163-306  scoring primitives: common_regime_features, regime_simulatability_cv,
+              regime_clustering_stability, score_behavioral, native_latent_simulatability
+  * L307-585  the REPLAY adapters: TwoAgentReplay + replay_w1 / replay_p22 (+ the penultimate-latent
+              hooks) -- run each architecture forward and pull its latent/behavior. Needs the P22/W1
+              checkpoints (D:/Interpretable_CHRL) to re-score from raw; computed rows are cached.
+  * L586-612  check_h2_scorable  -- honest guard: only claim a curve where the range is real
+  * L613-773  the row builders: r6c_family_rows / w1_row / p22_row  -- one CrystalScore row per policy
+  * L774-1162 maybe_plot / append_markdown / main()  -- the cross-architecture frontier + output
 """
 from __future__ import annotations
 

@@ -21,6 +21,8 @@ from src.hl import substrate as S  # noqa: E402
 
 
 class Proposer:
+    """The teacher-guided coordinate-search proposer: emits Proposal edits, claims a blast radius by step size, and
+    consults the Teacher Bank; it never assigns its own tier and shrinks the step after a rejection."""
     def __init__(self, seed: int = 0, sub=S):
         self.S = sub
         self.knobs = list(sub.KNOBS)
@@ -39,6 +41,8 @@ class Proposer:
         return "small" if frac < 0.1 else ("medium" if frac < 0.3 else "large")
 
     def propose(self, current_coeffs, teacher_bank, current_round):
+        """Propose the next knob edit: pick the next knob, steer by teacher guidance, clip to the registry range,
+        and return a Proposal with a size-based blast-radius claim."""
         knob = self.knobs[self.k_idx % len(self.knobs)]
         self.k_idx += 1
         g = teacher_bank.guidance(knob)

@@ -10,6 +10,7 @@ ACTIONS = {"PROVIDE": 0, "ABSTAIN": 1, "AGGRESS": 2}
 
 
 def build_registry():
+    """Construct the v2 DynamicRegistry: exposed tuning knobs, latent add_knob targets, and a fenced contract knob."""
     specs = [
         # --- exposed TUNING knobs (agent-facing at start) ---
         KnobSpec("provide_belief_thresh", 0.05, 0.95, 0.80, "float", "exposure_action", "tuning",
@@ -39,10 +40,13 @@ def build_registry():
 
 
 def default_coeffs(reg):
+    """Return the registry's exposed-knob defaults."""
     return reg.defaults()
 
 
 def policy_action(coeffs, belief, inv, t, T, I_max, providing_prev=False, cooldown=0):
+    """Registry-driven rule reading whatever knobs are exposed (latent ones sit at no-op defaults):
+    returns 0 PROVIDE / 1 ABSTAIN / 2 AGGRESS."""
     if cooldown > 0:
         return ACTIONS["ABSTAIN"]                                       # abstain_after_dump cool-down (if exposed)
     if inv > 0 and belief >= coeffs.get("unwind_belief_thresh", 0.99):
@@ -60,6 +64,7 @@ def policy_action(coeffs, belief, inv, t, T, I_max, providing_prev=False, cooldo
 
 
 def evaluate(coeffs, env_ctor, seeds):
+    """Return per-seed episodic returns, threading the hysteresis state and the post-dump cool-down."""
     env = env_ctor(); rets = []
     ad = int(coeffs.get("abstain_after_dump", 0))
     for s in seeds:
@@ -75,11 +80,13 @@ def evaluate(coeffs, env_ctor, seeds):
 
 
 def action_signature(coeffs, env_ctor, probe_states):
+    """The policy's action on a fixed probe grid = its behavioral fingerprint (for blast-radius measurement)."""
     env = env_ctor(); T, I_max = env.T, env.m.I_max
     return np.array([policy_action(coeffs, b, inv, t, T, I_max) for (b, inv, t) in probe_states], dtype=int)
 
 
 def frozen_probe_states(env_ctor, n_belief=13):
+    """Build the fixed (belief, inventory, tail) probe grid used to fingerprint a policy."""
     env = env_ctor(); states = []
     for b in np.linspace(0.02, 0.98, n_belief):
         for inv in range(env.m.I_max + 1):

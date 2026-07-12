@@ -51,6 +51,7 @@ KNOWN_ROLES = {
 
 @dataclass
 class UniverseSpec:
+    """Serializable (JSON round-trip) universe: tickers, groups, role->column bindings, and fractional breadth."""
     name: str
     tickers: list
     role_bindings: dict                     # role -> column name in the panel (or env attribute)
@@ -60,21 +61,25 @@ class UniverseSpec:
 
     # ---------------- serialization (no runtime registration; child processes just load the file)
     def to_json(self, path: str | Path) -> Path:
+        """Write the spec to `path` as JSON and return the path (subprocess-safe: no runtime registration)."""
         p = Path(path)
         p.write_text(json.dumps(asdict(self), indent=2), encoding="utf-8")
         return p
 
     @staticmethod
     def from_json(path: str | Path) -> "UniverseSpec":
+        """Load and return a UniverseSpec from a JSON file written by to_json."""
         return UniverseSpec(**json.loads(Path(path).read_text(encoding="utf-8")))
 
     # ---------------- derived breadth (fractions -> counts at build time)
     def breadth_counts(self) -> dict:
+        """Derive absolute breadth counts (top_buy_k/top_sell_k) from the fractions and universe size N (half-up)."""
         n = len(self.tickers)
         # deterministic half-up (int(x+0.5)), NOT Python's banker's rounding — config derivation must never surprise
         return {k.replace("_frac", "_k"): max(1, int(v * n + 0.5)) for k, v in self.breadth_fractions.items()}
 
     def validate_roles(self) -> None:
+        """Raise RoleContractError if any bound role is not in KNOWN_ROLES (adding a role must be deliberate)."""
         unknown = [r for r in self.role_bindings if r not in KNOWN_ROLES]
         if unknown:
             raise RoleContractError(f"unknown roles {unknown}; add to KNOWN_ROLES deliberately (a design act)")
@@ -94,12 +99,14 @@ class RoleAdapter:
         self._map = dict(spec.role_bindings)
 
     def column(self, role: str) -> str:
+        """Return the panel column bound to `role`, raising RoleContractError if unbound (never a silent default)."""
         if role not in self._map:
             raise RoleContractError(f"universe '{self.spec.name}': role '{role}' is UNBOUND — bind it or "
                                     f"disable the consumer gate explicitly (no silent default)")
         return self._map[role]
 
     def series(self, df, role: str):
+        """Return the DataFrame column for `role` via the role->column binding."""
         return df[self.column(role)]
 
 
@@ -113,18 +120,21 @@ class RoleGate:
     direction: str = "above"                 # 'above' | 'below'
 
     def bind(self, adapter: RoleAdapter) -> "BoundGate":
+        """Resolve the gate's role to a column via `adapter` and return a BoundGate (raises if unbound at build)."""
         col = adapter.column(self.role)      # raises if unbound/absent
         return BoundGate(self.name, col, self.threshold, self.direction)
 
 
 @dataclass
 class BoundGate:
+    """A RoleGate resolved to a concrete panel column, ready to evaluate against panel rows."""
     name: str
     column: str
     threshold: float
     direction: str
 
     def fires(self, row) -> bool:
+        """Return whether the gate fires on `row` (value crosses threshold in `direction`); raises on NaN."""
         v = row[self.column]
         if v != v:                           # NaN: loud, not silent
             raise RoleContractError(f"gate '{self.name}': NaN in column '{self.column}'")

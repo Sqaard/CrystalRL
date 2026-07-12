@@ -24,6 +24,7 @@ ACTIONS = {"PROVIDE": 0, "ABSTAIN": 1, "AGGRESS": 2}
 
 
 def default_coeffs():
+    """Return the detuned starting coeffs (each knob at its default)."""
     return {k: v["default"] for k, v in KNOBS.items()}
 
 
@@ -59,6 +60,7 @@ def action_signature(coeffs, env_ctor, probe_states):
 
 
 def frozen_probe_states(env_ctor, n_belief=13):
+    """Build the fixed (belief, inventory, tail) probe grid used to fingerprint a policy."""
     env = env_ctor()
     states = []
     for b in np.linspace(0.02, 0.98, n_belief):

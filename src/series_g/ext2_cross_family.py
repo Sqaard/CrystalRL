@@ -49,6 +49,7 @@ def eval_on_sequence(econ, filt, g, pol, tox, obs, is_blind=False) -> float:
 
 
 def main() -> int:
+    """Fit and solve a policy per generator family, evaluate every policy on every family's stream, and report whether the regime-response transfers across model classes (full HC-3)."""
     econ = RegimePOMDP(**PRIMARY_ENRICHED)            # shared execution economics
     fam = {}
     for gen in ALL_GENERATORS:

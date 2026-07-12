@@ -41,6 +41,7 @@ class SoftDecisionTree(nn.Module):
             self._paths.append(steps)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Return log of the path-probability-weighted mixture of leaf action distributions (Categorical logits)."""
         B = x.shape[0]
         g = torch.sigmoid(self.beta * self.gate(x))       # (B, n_internal) = P(go left) at each node
         path = torch.empty(B, self.n_leaves, device=x.device, dtype=g.dtype)
@@ -100,6 +101,7 @@ class SoftTreeActorCriticPolicy(ActorCriticPolicy):
         return self.action_dist.proba_distribution(action_logits=logits)
 
     def forward(self, obs: torch.Tensor, deterministic: bool = False):
+        """Return (actions, values, log_prob): actions/log_prob from the tree actor, value from the full-obs critic."""
         dist = self._distribution(obs)
         actions = dist.get_actions(deterministic=deterministic)
         log_prob = dist.log_prob(actions)
@@ -107,13 +109,16 @@ class SoftTreeActorCriticPolicy(ActorCriticPolicy):
         return actions, values, log_prob
 
     def evaluate_actions(self, obs: torch.Tensor, actions: torch.Tensor):
+        """Return (values, log_prob, entropy) of the given actions for the PPO update."""
         dist = self._distribution(obs)
         return self.critic(obs.float()), dist.log_prob(actions), dist.entropy()
 
     def get_distribution(self, obs: torch.Tensor):
+        """Return the tree actor's action distribution over the selected feature subset of obs."""
         return self._distribution(obs)
 
     def predict_values(self, obs: torch.Tensor):
+        """Return the critic's value estimate over the full observation."""
         return self.critic(obs.float())
 
     def _predict(self, observation: torch.Tensor, deterministic: bool = False):

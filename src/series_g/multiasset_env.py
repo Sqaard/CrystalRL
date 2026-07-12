@@ -33,6 +33,7 @@ from src.series_g.regime_pomdp import BENIGN, BURST, QUIET, TOXIC, RegimePOMDP, 
 
 
 class MultiAssetRegimePOMDP(gym.Env):
+    """Gym env: N assets under ONE global hidden regime with separate per-asset inventories; the global toxic belief is the Bayes posterior over all N observations (Extension-1 high-dim test)."""
     metadata = {"render_modes": []}
 
     def __init__(self, n_assets: int = 6, econ: dict | None = None, seed: int | None = None):
@@ -58,6 +59,7 @@ class MultiAssetRegimePOMDP(gym.Env):
         return np.asarray(v, dtype=np.float32)
 
     def reset(self, *, seed: int | None = None, options=None):
+        """Reset to a prior-sampled global regime, zero inventories, and the prior belief; returns the initial obs and info."""
         if seed is not None:
             self._rng = np.random.default_rng(seed)
         self.t = 0
@@ -68,6 +70,7 @@ class MultiAssetRegimePOMDP(gym.Env):
         return self._obs(), {"regime": self.regime, "belief": self.belief}
 
     def step(self, action):
+        """Apply the per-asset action vector, sum per-asset rewards, advance the global regime, aggregate all N observations into the Bayes belief update, and liquidate at the horizon."""
         a = np.asarray(action, dtype=int).reshape(self.N)
         reward = float(sum(self.m.reward(self.regime, int(a[i]), int(self.inv[i])) for i in range(self.N)))
         for i in range(self.N):

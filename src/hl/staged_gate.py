@@ -22,6 +22,8 @@ CANARY = [list(range(1400, 1500)), list(range(1500, 1600))]  # OPERATOR canary w
 
 
 class StagedGate:
+    """The multi-role staged gate: proposer/validator/operator/auditor on disjoint seed sets, promoting a candidate
+    shadow -> canary -> fleet with abort-at-canary, and freezing if a known-bad is ever promoted."""
     def __init__(self, env_ctor, anchor_rules, probes, base_margin=0.10, val_env_ctor=None):
         # val_env_ctor = a SHIFTED regime for the VALIDATOR + CANARY roles: their job is to catch a change that overfits
         # the proposer's regime and does not generalize under a shift (real 'effective challenge', not more i.i.d. seeds).

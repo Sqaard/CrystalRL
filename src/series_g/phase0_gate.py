@@ -35,6 +35,7 @@ OUT = Path(__file__).resolve().parent / "phase0_gate_report.json"
 
 # ---------------------------------------------------------------- belief-aware POMDP value iteration
 def solve_belief_aware(m: RegimePOMDP, n_bins: int = 121):
+    """Exact belief-MDP backward induction over discretized toxic belief × inventory × time; returns the belief grid, value table, and optimal belief-aware policy."""
     g = np.linspace(0.0, 1.0, n_bins)
     V = np.zeros((m.T + 1, n_bins, m.I_max + 1))
     pol = np.full((m.T, n_bins, m.I_max + 1), -1, dtype=int)
@@ -63,6 +64,7 @@ def solve_belief_aware(m: RegimePOMDP, n_bins: int = 121):
 
 # ---------------------------------------------------------------- belief-blind (open-loop) value iteration
 def solve_belief_blind(m: RegimePOMDP):
+    """Backward induction over (inventory, time) using only the open-loop regime forecast (no observations); returns the belief-blind value table and policy."""
     fc = m.open_loop_forecast()
     V = np.zeros((m.T + 1, m.I_max + 1))
     pol = np.full((m.T, m.I_max + 1), -1, dtype=int)
@@ -121,6 +123,7 @@ def zi_value(m: RegimePOMDP, constrained: bool) -> float:
 
 # ---------------------------------------------------------------- belief-aware value at the start state
 def aware_start_value(m: RegimePOMDP, g, V) -> float:
+    """Belief-aware value at the start state (t=0, I=0), interpolated at the prior belief."""
     return float(np.interp(m.prior_toxic, g, V[0, :, 0]))
 
 
@@ -156,6 +159,7 @@ def policy_summary(m: RegimePOMDP, g, pol) -> dict:
 
 
 def run(m: RegimePOMDP) -> dict:
+    """Solve the three optima, compute the value-of-information gate (belief-aware vs belief-blind vs ZI floor) plus GM validation, and return the Phase-0 gate report."""
     g, Va, pol_a = solve_belief_aware(m)
     Vb, pol_b = solve_belief_blind(m)
     v_aware = aware_start_value(m, g, Va)

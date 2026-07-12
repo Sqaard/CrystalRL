@@ -22,6 +22,7 @@ import numpy as np
 
 @dataclass
 class BeliefGovernor:
+    """C-5 box governor: clamps belief writes to the visited per-coordinate envelope, annunciating demotions."""
     lo: np.ndarray                      # per-coordinate lower bound of the visited envelope (K,)
     hi: np.ndarray                      # per-coordinate upper bound (K,)
     eps: float = 1e-6                   # "changed" tolerance
@@ -85,6 +86,7 @@ class ManifoldGovernor:
 
     @classmethod
     def from_visited(cls, beliefs: np.ndarray, k: int = 8, q: float = 0.99, max_ref: int = 1500, seed: int = 0):
+        """Fit the kNN reference set and acceptance threshold from the visited belief cloud's own kNN distances."""
         B = np.atleast_2d(np.asarray(beliefs, float))
         rng = np.random.default_rng(seed)
         if len(B) > max_ref:
@@ -96,10 +98,12 @@ class ManifoldGovernor:
         return cls(ref=B, k=k, thr=thr)
 
     def knn_dist(self, b: np.ndarray) -> float:
+        """Return the L1 distance from b to its k-th nearest visited belief (the novelty score)."""
         d = np.abs(self.ref - np.asarray(b, float)).sum(-1)
         return float(np.sort(d)[self.k - 1])
 
     def govern(self, b_command: np.ndarray, guarantees=None):
+        """Pass on-manifold commands identically; project off-manifold ones toward the nearest visited belief + demote."""
         self.n_calls += 1
         b = np.asarray(b_command, float)
         dist = self.knn_dist(b)

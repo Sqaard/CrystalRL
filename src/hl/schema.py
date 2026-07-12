@@ -18,6 +18,8 @@ REQUIRED = ("proposal_id", "target", "operator", "value", "claimed_direction", "
 
 @dataclass
 class Proposal:
+    """The HLX proposal: a single typed knob edit with a blast-radius CLAIM (re-measured by the gate), teacher
+    provenance, and an executable rollback ref."""
     proposal_id: str
     target: str                      # knob name (must exist in the registry)
     operator: str                    # "SET" (absolute) | "DELTA" (relative step)
@@ -32,6 +34,7 @@ class Proposal:
     meta: dict = field(default_factory=dict)
 
     def to_json(self) -> str:
+        """Serialize the proposal to a canonical (sorted-key) JSON string."""
         return json.dumps(asdict(self), sort_keys=True)
 
 
@@ -81,8 +84,10 @@ class ChangeDossier:
     policy_hash: str
 
     def to_json(self) -> str:
+        """Serialize the dossier to a canonical (sorted-key) JSON string."""
         return json.dumps(asdict(self), sort_keys=True)
 
 
 def coeffs_hash(coeffs: dict) -> str:
+    """Short stable SHA-256 hash of a coeffs dict (the policy hash stamped into a dossier)."""
     return hashlib.sha256(json.dumps(coeffs, sort_keys=True).encode()).hexdigest()[:12]

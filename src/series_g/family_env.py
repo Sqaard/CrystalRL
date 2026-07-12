@@ -28,6 +28,7 @@ except Exception:  # pragma: no cover
 
 
 class RegimeRotationEnv(gym.Env):
+    """Gym env for the G-regime rotation POMDP: a hidden birth-death chain over G venues (each paying spread at its own venue); the agent tracks a G-dim belief and provides/abstains/unwinds."""
     metadata = {"render_modes": []}
 
     def __init__(self, G: int = 4, T: int = 20, I_max: int = 4, p_stay: float = 0.90,
@@ -83,6 +84,7 @@ class RegimeRotationEnv(gym.Env):
 
     # ------------------------------------------------------------------
     def reset(self, *, seed: int | None = None, options=None):
+        """Reset to a random regime, uniform belief, zero inventory; emit one signal and belief-update before returning the initial obs."""
         if seed is not None:
             self._rng = np.random.default_rng(seed)
         self.t = 0; self.inv = 0
@@ -93,6 +95,7 @@ class RegimeRotationEnv(gym.Env):
         return self._obs(), {"regime": self.g}
 
     def step(self, action):
+        """Apply the action (provide@venue / ABSTAIN / UNWIND), accrue reward, advance the hidden regime, emit + belief-update, and liquidate at the horizon."""
         a = int(action)
         r = -self.hold_cost * self.inv
         if a < self.G:                                   # provide @ venue a

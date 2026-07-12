@@ -48,6 +48,7 @@ PRIMARY_ENRICHED = dict(spread=2.0, adverse=4.0, aggress_cost=0.3, aggress_cost_
 
 @dataclass
 class RegimePOMDP:
+    """The tabular 2-state (benign/toxic) regime-POMDP: belief filter, economics, and inventory dynamics."""
     # --- hidden regime process (exogenous; actions do NOT move the regime) ---
     p_stay_benign: float = 0.95          # P(benign->benign); toxic is the sticky minority regime
     p_stay_toxic: float = 0.80           # P(toxic->toxic)
@@ -115,6 +116,7 @@ class RegimePOMDP:
 
     # ---------------------------------------------------------------- dynamics + reward
     def inventory_next(self, a: int, I: int) -> int:
+        """Deterministic inventory transition: PROVIDE fills +1 (capped at I_max), AGGRESS unwinds −1 (floored at 0), ABSTAIN holds."""
         if a == PROVIDE:
             return min(I + 1, self.I_max)
         if a == AGGRESS:
@@ -135,6 +137,7 @@ class RegimePOMDP:
         return (1 - b) * self.reward(BENIGN, a, I) + b * self.reward(TOXIC, a, I)
 
     def terminal(self, I: int) -> float:
+        """Terminal liquidation penalty for carrying inventory I past the horizon (−L·I)."""
         return -self.liq_penalty * I
 
 

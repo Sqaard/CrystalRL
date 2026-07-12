@@ -15,6 +15,8 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Teacher:
+    """One compiled gate outcome as a teacher: a positive (accepted) or negative (rejected) knob+direction record
+    with dev/hold/delta stats and provenance."""
     teacher_id: str
     kind: str                    # "positive" | "negative"
     knob: str
@@ -31,12 +33,15 @@ class Teacher:
 
 @dataclass
 class TeacherBank:
+    """Memory-as-teachers: match-first (same knob) then rank-by-holdout, with negative teachers as a
+    proposal-time oracle."""
     teachers: list = field(default_factory=list)
 
     def _hash(self, *parts):
         return hashlib.sha256("|".join(str(p) for p in parts).encode()).hexdigest()[:10]
 
     def record(self, dossier, accepted: bool):
+        """Compile a gate outcome into a positive or negative teacher and append it to the bank."""
         knob, val, op = dossier.target, dossier.value, dossier.operator
         direction = int((1 if val > 0 else -1) if op == "DELTA" else 0)
         t = Teacher(

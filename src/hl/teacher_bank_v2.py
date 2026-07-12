@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Teacher:
+    """A v2 teacher (expires without recert): a knob+direction outcome carrying a failure trigger for negatives."""
     teacher_id: str
     knob: str
     direction: int
@@ -19,6 +20,8 @@ class Teacher:
 
 
 class TeacherBankV2:
+    """v2 teacher bank: teachers expire without recertification and negatives feed a (knob, direction) trigger
+    index used as a proposal-time failure oracle."""
     def __init__(self, expiry_k: int = 8):
         self.teachers: list[Teacher] = []
         self.expiry_k = expiry_k
@@ -26,6 +29,7 @@ class TeacherBankV2:
         self._n = 0
 
     def record(self, dossier, accepted: bool, round: int = 0):
+        """Append a teacher for this outcome; on rejection also bump its (knob, direction) trigger count."""
         self._n += 1
         knob = dossier.target
         direction = 1 if dossier.value > 0 else -1
@@ -48,9 +52,11 @@ class TeacherBankV2:
         return expired
 
     def matched(self, knob: str):
+        """Return all teachers on the given knob."""
         return [t for t in self.teachers if t.knob == knob]
 
     def guidance(self, knob: str):
+        """Aggregate a knob's guidance: last positive direction to prefer + rejected directions to avoid."""
         pos = [t for t in self.teachers if t.knob == knob and t.accepted]
         neg = [t for t in self.teachers if t.knob == knob and not t.accepted]
         prefer = pos[-1].direction if pos else 0

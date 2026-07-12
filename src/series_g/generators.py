@@ -41,12 +41,14 @@ def _hysteresis(sig: np.ndarray, hi_q: float, lo_q: float) -> np.ndarray:
 
 
 class GeneratorRegimePOMDP:
+    """Baseline generator: the exogenous 2-state Markov regime-POMDP (geometric dwell times) — the reference toxicity model class."""
     name = "regime_pomdp_markov"
 
     def __init__(self, econ: dict | None = None):
         self.m = RegimePOMDP(**(econ or PRIMARY_ENRICHED))
 
     def simulate(self, T: int, seed: int):
+        """Simulate T steps of the Markov regime chain, returning the hidden toxicity and burst/quiet observation sequences."""
         rng = np.random.default_rng(seed)
         m = self.m
         tox = np.empty(T, int); obs = np.empty(T, int)
@@ -68,6 +70,7 @@ class GeneratorGCMG:
         self.N, self.mem, self.S, self.tox_q = N, mem, S, tox_quantile
 
     def simulate(self, T: int, seed: int):
+        """Simulate the minority game T steps; label persistent high-|attendance| episodes as toxic (hysteresis) and emit activity-driven bursts."""
         rng = np.random.default_rng(seed)
         P = 1 << self.mem
         strat = rng.integers(0, 2, size=(self.N, self.S, P)) * 2 - 1   # +/-1 strategy tables
@@ -104,6 +107,7 @@ class GeneratorBrockHommes:
         self.g, self.beta, self.r, self.noise, self.tox_q = g, beta, r, noise, tox_quantile
 
     def simulate(self, T: int, seed: int):
+        """Simulate the adaptive-belief system T steps; label persistent trend-follower-dominated episodes as toxic (hysteresis) and emit move-size bursts."""
         rng = np.random.default_rng(seed)
         warm = 200
         x = np.zeros(T + warm + 2)

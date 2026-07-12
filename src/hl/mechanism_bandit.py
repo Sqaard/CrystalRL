@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class MechanismBandit:
+    """UCB1 bandit over operator mechanism-classes: online credit assignment with portable per-mechanism priors."""
     arms: list
     counts: dict = field(default_factory=dict)
     reward: dict = field(default_factory=dict)
@@ -21,6 +22,7 @@ class MechanismBandit:
             self.counts.setdefault(a, 0); self.reward.setdefault(a, 0.0)
 
     def select(self, available):
+        """Pick an available arm: try each unplayed one once, then maximize the UCB1 index."""
         self.t += 1
         # try each available arm once, then UCB1
         for a in available:
@@ -29,6 +31,7 @@ class MechanismBandit:
         return max(available, key=lambda a: self.reward[a] / self.counts[a] + math.sqrt(2 * math.log(self.t) / self.counts[a]))
 
     def update(self, arm, reward):
+        """Record a pull of `arm` and accumulate its reward."""
         self.counts[arm] += 1; self.reward[arm] += float(reward)
 
     def prior(self):

@@ -15,6 +15,8 @@ from dataclasses import dataclass, field
 
 @dataclass
 class KnobSpec:
+    """A typed registry row: bounds/default/type plus the shared resource it writes, its knob class
+    (contract vs tuning), hazard, and whether it is exposed or latent."""
     name: str
     lo: float
     hi: float
@@ -27,6 +29,7 @@ class KnobSpec:
     exposed: bool = True          # False = latent (in the catalog, not yet on the surface)
 
     def clip(self, v):
+        """Clamp v to [lo, hi] and round to int if this knob is integer-typed."""
         v = max(self.lo, min(self.hi, v))
         return int(round(v)) if self.typ == "int" else float(v)
 
@@ -39,19 +42,24 @@ class DynamicRegistry:
 
     # ---- surfaces ----
     def exposed(self):
+        """Return the currently exposed knobs (on the command surface)."""
         return {n: s for n, s in self.specs.items() if s.exposed}
 
     def agent_facing(self):
+        """Return the exposed tuning knobs (the agent-facing, non-contract subset)."""
         return {n: s for n, s in self.specs.items() if s.exposed and s.knob_class == "tuning"}
 
     def latent_catalog(self):
+        """Return the latent knobs in the catalog not yet exposed (add_knob targets)."""
         return {n: s for n, s in self.specs.items() if not s.exposed}
 
     def defaults(self):
+        """Return {name: default} over the exposed knobs."""
         return {n: s.default for n, s in self.exposed().items()}
 
     # ---- add_knob operator: expose a latent lever ----
     def expose(self, name):
+        """add_knob operator: expose a latent knob by name; returns (ok, reason)."""
         if name not in self.specs:
             return False, f"unknown latent knob {name}"
         if self.specs[name].exposed:

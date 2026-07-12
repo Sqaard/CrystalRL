@@ -20,10 +20,12 @@ AXES = {"return": +1, "description_len": -1}
 
 
 def description_len(policy):
+    """Legibility axis: the policy's clause count (provide clauses + one for unwind if present)."""
     return float(sum(1 for c in policy if c[0] == "provide") + (1 if any(c[0] == "unwind" for c in policy) else 0))
 
 
 def tension_vector(policy, ctor, seeds):
+    """Score the policy on the tension axes: {return (maximize), description_len (minimize)}."""
     return {"return": float(M.evaluate(policy, ctor, seeds).mean()), "description_len": description_len(policy)}
 
 
@@ -40,6 +42,7 @@ def non_dominated(vec, frontier, tol=1e-6):
 
 
 def G_of(ctor):
+    """Return the number of venues G for the env built by `ctor`."""
     return ctor().G
 
 

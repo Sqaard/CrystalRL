@@ -23,6 +23,7 @@ AXES = {"sharpe": +1, "mdl_deficit": -1}
 
 
 def load_run(run_dir):
+    """Load an HCS run dir: per-candidate daily logs, the candidate registry, and summary; assert date alignment."""
     run = Path(run_dir)
     logs = {p.parent.name: pd.read_csv(p) for p in run.glob("daily/**/validation_daily.csv")}
     reg = pd.read_csv(run / "candidate_registry.csv")
@@ -56,6 +57,7 @@ def config_len(reg, cand):
 
 
 def sharpe(returns):
+    """Annualized Sharpe of a daily return series (0 if the series is degenerate)."""
     r = np.asarray(returns, float)
     sd = r.std(ddof=1)
     return 0.0 if sd < 1e-12 else float(r.mean() / sd * np.sqrt(252))
@@ -77,17 +79,20 @@ def mdl_deficit(daily, idx):
 
 
 def tension_vector(daily, dev_idx):
+    """Score a candidate on the day-slice: {sharpe (capability), mdl_deficit (controller legibility)}."""
     return {"sharpe": sharpe(daily["net_return"].to_numpy()[dev_idx]),
             "mdl_deficit": mdl_deficit(daily, dev_idx)}
 
 
 def dominates(a, b, tol=1e-6):
+    """True if vector a Pareto-dominates b over AXES (>= on every axis, strictly better on at least one)."""
     ge = all((a[k] - b[k]) * AXES[k] >= -tol for k in AXES)
     gt = any((a[k] - b[k]) * AXES[k] > tol for k in AXES)
     return ge and gt
 
 
 def non_dominated(vec, frontier, tol=1e-6):
+    """True if `vec` is dominated by no point on the frontier (admissible)."""
     return not any(dominates(f, vec, tol) for f in frontier)
 
 

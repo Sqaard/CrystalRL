@@ -115,6 +115,7 @@ ZOO = [("thermostat", thermostat), ("central_bank", central_bank), ("PID_control
 
 
 def main() -> int:
+    """Simulate each Complexity-Zoo archetype, measure its bits/action on the L0 ruler, and place R6c + Series-G on the same scale; write the report."""
     rng = np.random.default_rng(0)
     rows = []
     for name, fn in ZOO:

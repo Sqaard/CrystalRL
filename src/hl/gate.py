@@ -31,6 +31,7 @@ from src.crystal.writ_ladder import WritCertificate, CumulativeAuthorityLedger  
 
 @dataclass
 class HLGate:
+    """The proposer-blind, deny-by-default gate that re-measures each edit and solely deploys the policy."""
     env_ctor: object
     anchor_coeffs: dict
     dev_seeds: list
@@ -90,6 +91,8 @@ class HLGate:
         return float(diff.mean()), float(diff.std(ddof=1) / math.sqrt(len(diff)) + 1e-9)
 
     def review(self, p: Proposal, current_coeffs: dict, current_round: int, parent_change_id: str = "root"):
+        """Re-measure the proposal's blast radius, enforce the anchor Σδ budget, and accept only on a deflated,
+        tier-scaled paired frozen-holdout improvement; returns (verdict, ChangeDossier, resulting coeffs)."""
         # inject current values so DELTA validation & range checks are correct
         reg = {k: {**v, "_current": current_coeffs.get(k, v["default"])} for k, v in S.KNOBS.items()}
         ok, why = validate(p, reg, current_round)

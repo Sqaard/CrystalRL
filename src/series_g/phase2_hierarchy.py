@@ -92,6 +92,7 @@ def _fid(clf, X, y, w):
 
 
 def fit_flat(X, y, w, budget):
+    """Fit a flat (belief, inventory, time)->action decision tree at the given leaf budget; return its visitation-weighted fidelity and the classifier."""
     clf = DecisionTreeClassifier(max_leaf_nodes=max(2, budget), random_state=0).fit(X, y, sample_weight=w + 1e-9)
     return _fid(clf, X, y, w), clf
 
@@ -147,6 +148,7 @@ def make_rollout(m: RegimePOMDP, g: np.ndarray, pol: np.ndarray, n_episodes: int
 
 
 def run() -> dict:
+    """Solve the optimal policy, run the H3 flat-vs-hierarchical compactness comparison across leaf budgets, emit the per-level FSMs and the Phase-3 rollout log, and return the report."""
     m = RegimePOMDP(**PRIMARY)
     g, Va, pol = solve_belief_aware(m)
     W = visitation_weights(m, g, pol)

@@ -121,6 +121,7 @@ def eval_belief_policy(m: RegimePOMDP, g: np.ndarray, pol: np.ndarray, bf: Regim
 
 # ----------------------------------------------------------------- F1 concept-ablation (HC-1)
 def f1_concept_ablation(m, g, Va) -> dict:
+    """F1 (HC-1): ablate the toxicity posterior (belief-aware vs belief-blind vs oracle) and check the value drop is material — the belief is load-bearing and sufficient."""
     v_aware = aware_start_value(m, g, Va)
     v_blind = float(solve_belief_blind(m)[0][0, 0])      # toxicity posterior REMOVED
     v_oracle = solve_oracle(m)                            # perfect regime info (upper bound)
@@ -135,6 +136,7 @@ def f1_concept_ablation(m, g, Va) -> dict:
 
 # ----------------------------------------------------------------- F2 beat-ZI per-state
 def f2_beat_zi_per_state(m, g, Va) -> dict:
+    """F2: verify the belief-aware optimum beats the constrained Gode-Sunder ZI floor in EVERY reachable state, not just in aggregate."""
     Vzic = zi_value_function(m, constrained=True)         # the HARDER ZI (benefits from structure)
     gaps = []
     for t in range(m.T):
@@ -154,6 +156,7 @@ def f2_beat_zi_per_state(m, g, Va) -> dict:
 
 # ----------------------------------------------------------------- F3 belief->noise degradation
 def f3_belief_to_noise(m, g, pol_a) -> dict:
+    """F3 (HX null ii): decorrelate the belief from the regime (noise observations) and check performance collapses to the belief-blind baseline."""
     v_true = eval_belief_policy(m, g, pol_a, obs_source="true")    # sanity: should ~ aware VI value
     v_noise = eval_belief_policy(m, g, pol_a, obs_source="noise")  # belief decorrelated from regime
     v_blind = float(solve_belief_blind(m)[0][0, 0])
@@ -178,6 +181,7 @@ FAMILIES = {
 
 
 def f4_cross_family_and_costflip(primary: dict) -> dict:
+    """F4: cross-parameter-regime transfer must retain the VoI (HC-3), plus the GM cost-shell sign-flip and short-tree-can't-match tests (HC-2)."""
     # ---- HC-3: parameter-regime transfer (honest scope: cross-PARAMETER, not cross-model-class) ----
     solved = {}
     for name, over in FAMILIES.items():
@@ -235,6 +239,7 @@ def f4_cross_family_and_costflip(primary: dict) -> dict:
 
 
 def run() -> dict:
+    """Run all four Phase-1 falsifiers on the primary env and return the combined report with the ALL-PASS gate verdict."""
     m = RegimePOMDP(**PRIMARY)
     g, Va, pol_a = solve_belief_aware(m)
     f1 = f1_concept_ablation(m, g, Va)
