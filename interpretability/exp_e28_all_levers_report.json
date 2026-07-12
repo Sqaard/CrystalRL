@@ -180,5 +180,6 @@
     "CrystalScore_proper": 0.0333,
     "simulatability_note": "the earlier 'simulatability_depth2_vs_depth3'=0 compared two INDEPENDENTLY-trained heads (seed variance); the proper distill measure is simulatability_depth2_distill."
   },
-  "governance_status": "RESEARCH_ONLY_LEVER_STUDY_WITH_CONTROLS"
+  "governance_status": "RESEARCH_ONLY_LEVER_STUDY_WITH_CONTROLS",
+  "eligible_for_client_menu": false
 }

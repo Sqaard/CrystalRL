@@ -242,7 +242,8 @@ def main(argv=None):
            "base_head": "dd08_warm (teacher-warm)" if warm_used else "dd08 (cold fallback)",
            "lever_R_reward": lever_R, "lever_T_teachers": lever_T, "lever_I_interventions": lever_I,
            "lever_A_architecture": lever_A, "crystalscore": cs,
-           "governance_status": "RESEARCH_ONLY_LEVER_STUDY_WITH_CONTROLS"}
+           "governance_status": "RESEARCH_ONLY_LEVER_STUDY_WITH_CONTROLS",
+           "eligible_for_client_menu": False}
     OUT.write_text(json.dumps(rep, indent=2), encoding="utf-8")
     print("wrote", OUT.name)
 
