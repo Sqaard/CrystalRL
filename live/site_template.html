@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CrystalRL — live testing</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --blue:#2a78d6; --green:#008300; --amber:#b25e00; --purple:#4a3aa7;
+    --red:#c22f2f; --ink:#222; --mut:#666; --pale:#eaf2fc; --card:#f7fafd;
+  }
+  * { box-sizing:border-box; }
+  body { font-family:"Segoe UI", Arial, sans-serif; color:var(--ink); margin:0;
+         background:#fcfcfb; }
+  .wrap { max-width:1180px; margin:0 auto; padding:18px 22px 60px; }
+  h1 { color:var(--blue); margin:8px 0 2px; font-size:30px; }
+  .sub { color:var(--mut); margin:0 0 18px; font-size:14.5px; }
+  h2 { color:var(--blue); font-size:20px; margin:26px 0 10px; }
+  .cards { display:flex; gap:18px; flex-wrap:wrap; }
+  .card { flex:1 1 460px; background:var(--card); border:1px solid #d8e4f2;
+          border-radius:10px; padding:14px 16px; }
+  .card.off { opacity:.45; }
+  .card h3 { margin:0 0 6px; font-size:17px; display:flex; align-items:center; gap:10px; }
+  .card img { width:100%; border:1px solid #e3e9f0; border-radius:6px; background:#fff; }
+  .card p { font-size:13.5px; margin:8px 0 0; line-height:1.45; }
+  .flag { transform:scale(1.35); accent-color:var(--blue); }
+  .tag { font-size:11px; font-weight:700; border-radius:4px; padding:1px 7px; color:#fff; }
+  .tag.r6c { background:var(--amber); } .tag.c1 { background:var(--green); }
+  .tag.both { background:var(--blue); } .tag.mkt { background:var(--mut); }
+  .knobs { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:14px; }
+  .kgroup { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:12px 14px; }
+  .kgroup h4 { margin:0 0 10px; font-size:14px; color:var(--ink); }
+  .knob { display:grid; grid-template-columns:1fr 130px 52px; align-items:center;
+          gap:8px; margin:7px 0; font-size:13px; }
+  .knob label { display:flex; align-items:center; gap:6px; }
+  .knob input[type=range] { width:100%; accent-color:var(--blue); }
+  .knob select, .knob input[type=number] { width:100%; font-size:13px; padding:2px 4px; }
+  .kv { text-align:right; font-variant-numeric:tabular-nums; color:var(--mut); }
+  .chartbox { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:12px 14px; }
+  canvas { width:100%; height:auto; display:block; }
+  .legend { display:flex; gap:18px; flex-wrap:wrap; font-size:13.5px; margin:8px 2px 2px; }
+  .legend label { display:flex; align-items:center; gap:6px; cursor:pointer; }
+  .swatch { width:22px; height:4px; border-radius:2px; display:inline-block; }
+  .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;
+             margin-top:14px; }
+  .mtile { border:1px solid #e2e8f0; border-radius:10px; padding:10px 14px; background:#fff; }
+  .mtile h5 { margin:0 0 6px; font-size:13.5px; }
+  .mtile table { width:100%; font-size:12.8px; border-collapse:collapse; }
+  .mtile td { padding:1.5px 0; } .mtile td:last-child { text-align:right;
+             font-variant-numeric:tabular-nums; font-weight:600; }
+  .note { font-size:12.5px; color:var(--mut); margin-top:18px; line-height:1.5;
+          border-top:1px solid #e2e8f0; padding-top:10px; }
+  .btn { background:var(--blue); border:none; color:#fff; border-radius:6px; padding:6px 14px;
+         font-size:13px; cursor:pointer; }
+  .btn.gray { background:#8b98a8; }
+  .lesson { background:var(--pale); border-radius:8px; padding:10px 14px; font-size:13.5px;
+            margin:10px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>CrystalRL — live testing</h1>
+<p class="sub">An interactive sandbox for one lesson: <b>different models respond differently to the
+same knobs, and different knobs have different effects.</b> Tick a model on/off, move a knob, watch
+the curves — everything recomputes instantly on a seeded synthetic market.</p>
+
+<!-- ═══════════════════ the two models ═══════════════════ -->
+<div class="cards">
+  <div class="card" id="card_r6c">
+    <h3><input type="checkbox" id="flag_r6c" class="flag" checked>
+        <span style="color:var(--amber)">R6c</span> — the CHRL-line agent (latent core)</h3>
+    <img src="data:image/png;base64,{{R6C_IMG}}" alt="R6c schema">
+    <p><b>How it works:</b> a PPO network reads the market panel into a 64-dimensional
+    <i>unnamed</i> latent; three readable control layers (risk → groups → stocks) plus guardrails
+    (exposure pacing, confidence scaling, a buy gate, event de-risk) shape the final weights.
+    Transparent <i>layers</i>, opaque <i>core</i>: you steer it with engineering knobs, and there is
+    no named memory you can write a command to.</p>
+  </div>
+  <div class="card" id="card_c1">
+    <h3><input type="checkbox" id="flag_c1" class="flag" checked>
+        <span style="color:var(--green)">CRYSTAL-1</span> — legible by construction</h3>
+    <img src="data:image/png;base64,{{C1_IMG}}" alt="CRYSTAL-1 schema">
+    <p><b>How it works:</b> the only memory is a <i>named</i> belief — P(bear) — updated by a Bayes
+    filter; the policy is a small readable rule over that belief (in the real system: an ≤8-leaf
+    soft tree at full return parity). Because the memory is named, <code>SET_BELIEF</code> is a
+    <i>command</i> the policy must obey — and because the objective is certified, some interventions
+    get <i>refused</i>.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════ knobs ═══════════════════ -->
+<h2>The control surface — 14 knobs, color-coded by who listens
+  <button class="btn gray" id="reset" style="float:right">Reset knobs</button></h2>
+<div class="knobs">
+  <div class="kgroup">
+    <h4><span class="tag mkt">MARKET</span> environment (both models trade the same tape)</h4>
+    <div class="knob"><label>Scenario</label>
+      <select id="scenario">
+        <option value="crash">2008-like crash & recovery</option>
+        <option value="calm">calm bull market</option>
+        <option value="chop">sideways chop</option>
+        <option value="vshape">sharp V (2020-like)</option>
+      </select><span class="kv"></span></div>
+    <div class="knob"><label>Random seed</label>
+      <input type="number" id="seed" value="7" min="1" max="9999"><span class="kv"></span></div>
+    <div class="knob"><label><span class="tag both">BOTH</span> Transaction cost (bp/turnover)</label>
+      <input type="range" id="cost" min="0" max="50" value="10" step="1"><span class="kv" id="v_cost"></span></div>
+    <div class="knob"><label><span class="tag both">BOTH</span> Drawdown budget (%)</label>
+      <input type="range" id="ddb" min="4" max="25" value="15" step="1"><span class="kv" id="v_ddb"></span></div>
+    <div class="lesson">Same knob, different coupling: the drawdown budget is a <b>hard cap</b> in
+    CRYSTAL-1 (it scales the allowed exposure directly) but only a <b>soft nudge</b> in R6c (it
+    mildly retunes the vol target). Drag it and compare.</div>
+  </div>
+
+  <div class="kgroup">
+    <h4><span class="tag r6c">R6C</span> engineering knobs (the latent agent listens)</h4>
+    <div class="knob"><label>Exposure pacing (max daily Δ)</label>
+      <input type="range" id="pace" min="1" max="50" value="10" step="1"><span class="kv" id="v_pace"></span></div>
+    <div class="knob"><label>Confidence scaling (gain)</label>
+      <input type="range" id="conf" min="1" max="60" value="25" step="1"><span class="kv" id="v_conf"></span></div>
+    <div class="knob"><label>Buy gate (recovery days required)</label>
+      <input type="range" id="gate" min="0" max="15" value="3" step="1"><span class="kv" id="v_gate"></span></div>
+    <div class="knob"><label>Event de-risk trigger (vol z-score)</label>
+      <input type="range" id="trig" min="10" max="40" value="25" step="1"><span class="kv" id="v_trig"></span></div>
+    <div class="knob"><label>Vol target (%/yr)</label>
+      <input type="range" id="vtar" min="5" max="30" value="16" step="1"><span class="kv" id="v_vtar"></span></div>
+    <div class="lesson">These four barely touch CRYSTAL-1 — its rule does not read them. Watch the
+    green curve stay put while the amber one moves.</div>
+  </div>
+
+  <div class="kgroup">
+    <h4><span class="tag c1">C-1</span> named commands (the crystal agent listens)</h4>
+    <div class="knob"><label>Belief threshold: P(bear) &gt; …</label>
+      <input type="range" id="thr" min="30" max="90" value="66" step="1"><span class="kv" id="v_thr"></span></div>
+    <div class="knob"><label>SET_BELIEF(bear) — write strength</label>
+      <input type="range" id="sbw" min="0" max="100" value="0" step="1"><span class="kv" id="v_sbw"></span></div>
+    <div class="knob"><label>SET_BELIEF(bear) — written value</label>
+      <input type="range" id="sbv" min="0" max="100" value="80" step="1"><span class="kv" id="v_sbv"></span></div>
+    <div class="knob"><label>Dose nudge on belief (nats)</label>
+      <input type="range" id="dose" min="-20" max="20" value="0" step="1"><span class="kv" id="v_dose"></span></div>
+    <div class="knob"><label>Tree depth (story size)</label>
+      <select id="depth"><option value="2">depth-2 → 4 leaves</option>
+        <option value="3" selected>depth-3 → 8 leaves</option></select><span class="kv"></span></div>
+    <div class="knob"><label>Abstain floor (min cash, %)</label>
+      <input type="range" id="abst" min="0" max="50" value="0" step="1"><span class="kv" id="v_abst"></span></div>
+    <div class="knob"><label>Teacher weight (pull to certified rule)</label>
+      <input type="range" id="teach" min="0" max="100" value="0" step="1"><span class="kv" id="v_teach"></span></div>
+    <div class="lesson">The killer demo: crank <b>SET_BELIEF write strength</b> to 100%. CRYSTAL-1
+    obeys the written belief (it is a command). R6c cannot even receive it — <b>there is no named
+    memory to write to</b>. That asymmetry is the whole thesis.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ chart ═══════════════════ -->
+<h2>Wealth &amp; exposure — toggle series to compare</h2>
+<div class="chartbox">
+  <div class="legend" id="legend">
+    <label><span class="swatch" style="background:#9aa4b0"></span>
+      <input type="checkbox" id="s_bh" checked> Buy &amp; hold</label>
+    <label><span class="swatch" style="background:#eda100"></span>
+      <input type="checkbox" id="s_r6c" checked> R6c wealth</label>
+    <label><span class="swatch" style="background:#008300"></span>
+      <input type="checkbox" id="s_c1" checked> CRYSTAL-1 wealth</label>
+    <label><span class="swatch" style="background:#eda100; height:2px"></span>
+      <input type="checkbox" id="s_r6ce" checked> R6c exposure</label>
+    <label><span class="swatch" style="background:#008300; height:2px"></span>
+      <input type="checkbox" id="s_c1e" checked> CRYSTAL-1 exposure</label>
+    <label><span class="swatch" style="background:#c22f2f; height:2px"></span>
+      <input type="checkbox" id="s_bear"> true bear regime (shading)</label>
+  </div>
+  <canvas id="chart" width="1120" height="460"></canvas>
+  <div class="metrics" id="metrics"></div>
+</div>
+
+<p class="note"><b>Honesty note.</b> This page is a <i>didactic sandbox</i>: both agents are
+faithful miniatures of the real machinery (R6c’s pacing/confidence/gate/trigger shell; CRYSTAL-1’s
+Bayes belief + thresholded readable rule with certified-rule teacher), run on a seeded synthetic
+regime-switching market. Numbers here are illustrative, <b>not</b> investment results and
+<b>not</b> the certified backtests — those live in the repository behind frozen gates
+(see <code>EXPERIMENT_LOGBOOK.md</code>). The legacy page
+(<code>CrystalRL_live_testing_legacy.html</code> + <code>live_server.py</code>) runs the REAL
+frozen R6c policy-forward replay, one knob at a time, in ~1–2&nbsp;s per evaluation.</p>
+
+<script>
+"use strict";
+/* ───────────────────────── seeded RNG ───────────────────────── */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);
+  t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function gauss(rng){let u=0,v=0;while(u===0)u=rng();while(v===0)v=rng();
+  return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+
+/* ───────────────────────── market ───────────────────────── */
+const T=750, MU={bull:0.00055,bear:-0.0016}, SIG={bull:0.010,bear:0.024};
+function regimes(scen,rng){
+  const reg=new Array(T).fill('bull');
+  if(scen==='crash'){for(let t=230;t<400;t++)reg[t]='bear';}
+  else if(scen==='vshape'){for(let t=180;t<245;t++)reg[t]='bear';}
+  else if(scen==='chop'){let s='bull';for(let t=0;t<T;t++){if(rng()<0.02)s=(s==='bull'?'bear':'bull');reg[t]=s;}}
+  else {for(let t=0;t<T;t++)reg[t]=(rng()<0.015&&t>100&&t<160)?'bear':'bull';}
+  return reg;
+}
+function makeMarket(scen,seed){
+  const rng=mulberry32(seed*7919+13), reg=regimes(scen,rng), r=new Array(T);
+  for(let t=0;t<T;t++) r[t]=MU[reg[t]]+SIG[reg[t]]*gauss(rng);
+  if(scen==='vshape'){for(let t=245;t<330;t++) r[t]+=0.0022;}   // sharp recovery leg
+  return {r,reg};
+}
+
+/* ───────────────────────── CRYSTAL-1 miniature ─────────────────────────
+   Bayes filter over the two regimes (the real system's belief in miniature),
+   dose shift in log-odds, SET_BELIEF blend, quantized readable rule,
+   teacher pull toward the certified rule, abstain floor, hard DD-budget cap. */
+function pdf(x,mu,sig){const z=(x-mu)/sig;return Math.exp(-0.5*z*z)/sig;}
+function runCrystal(mkt,k){
+  const {r}=mkt, e=new Array(T), bel=new Array(T);
+  const cap=Math.min(1, k.ddb/20);                      // hard budget→exposure map
+  const maxExp=Math.min(cap, 1-k.abst);
+  const L=(k.depth===2)?4:8;
+  let b=0.2, prev=0, w=1, peak=1; const wealth=new Array(T); let mdd=0, turn=0;
+  for(let t=0;t<T;t++){
+    b=0.97*b+0.03*0.35;                                 // transition prior
+    const lb=pdf(r[t],MU.bear,SIG.bear)*b, lg=pdf(r[t],MU.bull,SIG.bull)*(1-b);
+    b=lb/(lb+lg);
+    let lo=Math.log(b/(1-b))+k.dose; b=1/(1+Math.exp(-lo));      // dose (nats)
+    b=(1-k.sbw)*b+k.sbw*k.sbv;                          // SET_BELIEF write (obeyed)
+    bel[t]=b;
+    let tgt=(b>k.thr)?0.3*maxExp:maxExp;                // the readable rule
+    tgt=Math.round(tgt*(L-1))/(L-1);                    // story quantization
+    const teacher=(b>0.66)?0.74*maxExp:maxExp;          // the certified sentence
+    tgt=(1-k.teach)*tgt+k.teach*teacher;
+    e[t]=Math.max(0,Math.min(maxExp,tgt));
+    const de=Math.abs(e[t]-prev); turn+=de; prev=e[t];
+    w*=1+e[t]*r[t]-k.cost*de; wealth[t]=w;
+    peak=Math.max(peak,w); mdd=Math.min(mdd,w/peak-1);
+  }
+  return {wealth,expo:e,belief:bel,mdd,turn};
+}
+
+/* ───────────────────────── R6c miniature ─────────────────────────
+   EMA-momentum latent stance + confidence scaling + vol targeting +
+   buy gate + event de-risk + exposure pacing. DD budget only mildly
+   retunes the vol target (the honest asymmetry). */
+function runR6c(mkt,k){
+  const {r}=mkt, e=new Array(T);
+  let ema=0, vol=0.012, prev=0.6, w=1, peak=1, downRun=0, recov=99;
+  const wealth=new Array(T); let mdd=0, turn=0;
+  const vtar=(k.vtar/100/Math.sqrt(252))*(0.9+0.2*(k.ddb/15)); // soft budget coupling
+  for(let t=0;t<T;t++){
+    ema=0.92*ema+0.08*r[t];
+    vol=Math.sqrt(0.94*vol*vol+0.06*r[t]*r[t]);
+    const stance=1/(1+Math.exp(-k.conf*ema/vol*4));      // confidence-scaled latent stance
+    let tgt=stance*Math.min(1.4, vtar/vol);              // vol targeting
+    if(r[t]<0)downRun++; else {recov=(downRun>=3)?0:recov; downRun=0;}
+    if(recov<k.gate){tgt=Math.min(tgt,prev); recov++;}   // buy gate: no re-risking yet
+    const vz=(vol-0.013)/0.006;
+    if(vz>k.trig) tgt*=0.3;                              // event de-risk
+    const de=Math.max(-k.pace,Math.min(k.pace,tgt-prev));// pacing
+    let ex=Math.max(0,Math.min(1,prev+de));
+    e[t]=ex; const dd=Math.abs(ex-prev); turn+=dd; prev=ex;
+    w*=1+ex*r[t]-k.cost*dd; wealth[t]=w;
+    peak=Math.max(peak,w); mdd=Math.min(mdd,w/peak-1);
+  }
+  return {wealth,expo:e,mdd,turn};
+}
+
+function runBH(mkt,k){
+  let w=1,peak=1,mdd=0; const wealth=new Array(T);
+  for(let t=0;t<T;t++){w*=1+mkt.r[t];wealth[t]=w;peak=Math.max(peak,w);mdd=Math.min(mdd,w/peak-1);}
+  return {wealth,expo:null,mdd,turn:0};
+}
+
+/* ───────────────────────── knob state ───────────────────────── */
+const $=id=>document.getElementById(id);
+const DEF={scenario:'crash',seed:7,cost:10,ddb:15,pace:10,conf:25,gate:3,trig:25,vtar:16,
+           thr:66,sbw:0,sbv:80,dose:0,depth:3,abst:0,teach:0};
+function readKnobs(){
+  return {scenario:$('scenario').value, seed:+$('seed').value,
+    cost:+$('cost').value/1e4, ddb:+$('ddb').value,
+    pace:+$('pace').value/100, conf:+$('conf').value/10, gate:+$('gate').value,
+    trig:+$('trig').value/10, vtar:+$('vtar').value,
+    thr:+$('thr').value/100, sbw:+$('sbw').value/100, sbv:+$('sbv').value/100,
+    dose:+$('dose').value/10, depth:+$('depth').value, abst:+$('abst').value/100,
+    teach:+$('teach').value/100};
+}
+function showVals(){
+  $('v_cost').textContent=$('cost').value+' bp';  $('v_ddb').textContent=$('ddb').value+'%';
+  $('v_pace').textContent=($('pace').value/100).toFixed(2); $('v_conf').textContent=($('conf').value/10).toFixed(1);
+  $('v_gate').textContent=$('gate').value+' d';   $('v_trig').textContent='z='+($('trig').value/10).toFixed(1);
+  $('v_vtar').textContent=$('vtar').value+'%';    $('v_thr').textContent='0.'+$('thr').value;
+  $('v_sbw').textContent=$('sbw').value+'%';      $('v_sbv').textContent='0.'+String($('sbv').value).padStart(2,'0');
+  $('v_dose').textContent=($('dose').value/10).toFixed(1); $('v_abst').textContent=$('abst').value+'%';
+  $('v_teach').textContent=$('teach').value+'%';
+}
+
+/* ───────────────────────── metrics ───────────────────────── */
+function ann(x){return (Math.pow(x,252/T)-1)*100;}
+function tile(name,color,res){
+  const ret=ann(res.wealth[T-1]);
+  return `<div class="mtile"><h5 style="color:${color}">${name}</h5><table>
+    <tr><td>final wealth</td><td>${res.wealth[T-1].toFixed(3)}×</td></tr>
+    <tr><td>ann. return</td><td>${ret.toFixed(1)}%</td></tr>
+    <tr><td>max drawdown</td><td>${(res.mdd*100).toFixed(1)}%</td></tr>
+    <tr><td>turnover (total)</td><td>${res.turn.toFixed(1)}×</td></tr></table></div>`;
+}
+
+/* ───────────────────────── chart (hand-rolled canvas) ───────────────────────── */
+function draw(mkt,bh,r6,c1){
+  const cv=$('chart'),ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  const mL=52,mR=14,mT=10,mB=44, wH=Math.round((H-mT-mB)*0.68), gap=26;
+  const eT=mT+wH+gap, eH=H-eT-mB+18;
+  ctx.clearRect(0,0,W,H); ctx.font='12px Segoe UI';
+  const xs=t=>mL+(W-mL-mR)*t/(T-1);
+  const series=[]; if($('s_bh').checked)series.push(bh.wealth);
+  if($('s_r6c').checked&&r6)series.push(r6.wealth);
+  if($('s_c1').checked&&c1)series.push(c1.wealth);
+  let lo=0.95,hi=1.05; series.forEach(s=>s.forEach(v=>{lo=Math.min(lo,v);hi=Math.max(hi,v);}));
+  const yw=v=>mT+wH-(wH)*(v-lo)/(hi-lo);
+  /* bear shading */
+  if($('s_bear').checked){ctx.fillStyle='rgba(194,47,47,0.08)';
+    for(let t=0;t<T;t++)if(mkt.reg[t]==='bear')ctx.fillRect(xs(t),mT,(W-mL-mR)/(T-1)+1,wH);}
+  /* grid + axes */
+  ctx.strokeStyle='#e8edf3';ctx.beginPath();
+  for(let i=0;i<=4;i++){const y=mT+wH*i/4;ctx.moveTo(mL,y);ctx.lineTo(W-mR,y);}ctx.stroke();
+  ctx.fillStyle='#666';
+  for(let i=0;i<=4;i++){const v=hi-(hi-lo)*i/4;ctx.fillText(v.toFixed(2)+'×',6,mT+wH*i/4+4);}
+  function line(data,color,width,ymap){ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();
+    for(let t=0;t<T;t++){const y=ymap(data[t]);t?ctx.lineTo(xs(t),y):ctx.moveTo(xs(t),y);}ctx.stroke();}
+  if($('s_bh').checked) line(bh.wealth,'#9aa4b0',1.6,yw);
+  if($('s_r6c').checked&&r6) line(r6.wealth,'#eda100',2.2,yw);
+  if($('s_c1').checked&&c1) line(c1.wealth,'#008300',2.2,yw);
+  ctx.fillStyle='#444';ctx.fillText('wealth (×, start = 1)',mL,mT+12);
+  /* exposure strip */
+  const ye=v=>eT+eH-(eH)*v;
+  ctx.strokeStyle='#e8edf3';ctx.beginPath();
+  [0,0.5,1].forEach(v=>{ctx.moveTo(mL,ye(v));ctx.lineTo(W-mR,ye(v));});ctx.stroke();
+  ctx.fillStyle='#666';[0,0.5,1].forEach(v=>ctx.fillText((v*100)+'%',14,ye(v)+4));
+  if($('s_r6ce').checked&&r6) line(r6.expo,'#eda100',1.4,ye);
+  if($('s_c1e').checked&&c1) line(c1.expo,'#008300',1.4,ye);
+  ctx.fillStyle='#444';ctx.fillText('exposure (0–100%)',mL,eT+12);
+  ctx.fillStyle='#666';ctx.fillText('day 0',mL,H-8);ctx.fillText('day '+T,W-mR-46,H-8);
+}
+
+/* ───────────────────────── main ───────────────────────── */
+function recompute(){
+  showVals();
+  const k=readKnobs(), mkt=makeMarket(k.scenario,k.seed);
+  const bh=runBH(mkt,k);
+  const useR6=$('flag_r6c').checked, useC1=$('flag_c1').checked;
+  $('card_r6c').classList.toggle('off',!useR6);
+  $('card_c1').classList.toggle('off',!useC1);
+  const r6=useR6?runR6c(mkt,k):null, c1=useC1?runCrystal(mkt,k):null;
+  draw(mkt,bh,r6,c1);
+  let m=tile('Buy & hold','#667',bh);
+  if(r6)m+=tile('R6c','#b25e00',r6);
+  if(c1)m+=tile('CRYSTAL-1','#008300',c1);
+  $('metrics').innerHTML=m;
+}
+document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',recompute));
+$('reset').addEventListener('click',()=>{
+  for(const [id,v] of Object.entries(DEF)){const el=$(id);if(!el)continue;
+    if(el.type==='checkbox')el.checked=v;else el.value=v;}
+  $('flag_r6c').checked=true;$('flag_c1').checked=true;recompute();});
+recompute();
+</script>
+</div>
+</body>
+</html>
