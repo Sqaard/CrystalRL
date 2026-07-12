@@ -1,0 +1,59 @@
+{
+  "params": {
+    "p_stay_benign": 0.95,
+    "p_stay_toxic": 0.8,
+    "prior_toxic": 0.2,
+    "p_burst_benign": 0.15,
+    "p_burst_toxic": 0.7,
+    "spread": 1.0,
+    "adverse": 3.0,
+    "hold_cost": 0.1,
+    "aggress_cost": 0.5,
+    "liq_penalty": 2.0,
+    "I_max": 4,
+    "T": 20
+  },
+  "values": {
+    "belief_aware_optimum": 1.6638,
+    "belief_blind_optimum": -0.0,
+    "ZI_floor_unconstrained": -7.1134,
+    "ZI_floor_constrained": -5.2405
+  },
+  "GATE": {
+    "value_of_information": 1.6638,
+    "voi_relative_to_blind": Infinity,
+    "ZI_honesty_gap_(c_minus_u)": 1.8729,
+    "ordering_aware>blind>ZI": true,
+    "material_margin": true,
+    "VERDICT": "PASS \u2014 regime belief is load-bearing; optimum requires belief-memory"
+  },
+  "gm_validation": {
+    "gm_analytic_threshold": 0.25,
+    "myopic_reward_crossing": 0.25,
+    "full_policy_last_PROVIDE_belief_at_I0_midT": 0.0833,
+    "matches_analytic": true
+  },
+  "policy_ride_fade_unwind_midT": {
+    "I=0": [
+      "b=0.05:PROVIDE",
+      "b=0.2:ABSTAIN",
+      "b=0.35:ABSTAIN",
+      "b=0.6:ABSTAIN",
+      "b=0.9:ABSTAIN"
+    ],
+    "I=2": [
+      "b=0.05:AGGRESS",
+      "b=0.2:AGGRESS",
+      "b=0.35:AGGRESS",
+      "b=0.6:AGGRESS",
+      "b=0.9:AGGRESS"
+    ],
+    "I=4": [
+      "b=0.05:PROVIDE",
+      "b=0.2:PROVIDE",
+      "b=0.35:ABSTAIN",
+      "b=0.6:AGGRESS",
+      "b=0.9:AGGRESS"
+    ]
+  }
+}

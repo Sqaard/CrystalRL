@@ -1,0 +1,57 @@
+{
+  "substrate": "Series-G corner polygon; analytic reference = exact belief-MDP optimum (phase0_gate.solve_belief_aware)",
+  "gm_threshold_belief": 0.333,
+  "note": "filter_policy_agreement is measured vs the EXOGENOUS belief-MDP optimum (not a self-fit story) => a PROOF of C1, not a probe.",
+  "results": {
+    "corner_ppo_mlp": {
+      "filter_policy_agreement": 0.8,
+      "n_probes": 375,
+      "refusal_rate": 0.0,
+      "dose": {
+        "0.02": 0.991,
+        "0.1": 0.952,
+        "0.18": 0.69,
+        "0.26": 0.163,
+        "0.34": 0.018,
+        "0.42": 0.002,
+        "0.5": 0.0,
+        "0.58": 0.0,
+        "0.66": 0.0,
+        "0.74": 0.0,
+        "0.82": 0.0,
+        "0.9": 0.0,
+        "0.98": 0.0
+      },
+      "dose_monotone": true,
+      "command_threshold_belief": 0.26,
+      "C1_PROVED": true
+    },
+    "m6_softtree": {
+      "filter_policy_agreement": 0.835,
+      "n_probes": 375,
+      "refusal_rate": 0.0,
+      "dose": {
+        "0.02": 0.999,
+        "0.1": 0.999,
+        "0.18": 0.952,
+        "0.26": 0.118,
+        "0.34": 0.002,
+        "0.42": 0.0,
+        "0.5": 0.0,
+        "0.58": 0.0,
+        "0.66": 0.0,
+        "0.74": 0.0,
+        "0.82": 0.0,
+        "0.9": 0.0,
+        "0.98": 0.0
+      },
+      "dose_monotone": true,
+      "command_threshold_belief": 0.26,
+      "C1_PROVED": true
+    }
+  },
+  "refusal_rate_structural": "0 by construction \u2014 every b in [0,1] is an on-simplex write; contrast R6c latent forcing which needs safe_alpha (src/evaluation/firewall.py).",
+  "caveats": [
+    "K=2 polygon; belief-MDP optimum is the finite-horizon dynamic optimum (not myopic GM); teeth only where VoI>0."
+  ]
+}

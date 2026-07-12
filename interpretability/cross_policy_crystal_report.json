@@ -1,0 +1,336 @@
+{
+  "title": "Cross-policy CrystalScore -- behavioral-complexity vs interpretability",
+  "x_axis": "behavioral_complexity (action-only proxy; mean of cash_entropy, book_dispersion, action_eff_dim)",
+  "y_axis": "CrystalScore-core (cross-comparable subset = Simulatability_cash(K=9) x clustering-stability)",
+  "cross_comparable_metrics": [
+    "behavioral_complexity",
+    "simulatability_cash_K9",
+    "completeness_stance",
+    "completeness_selection",
+    "pareto_*_auc",
+    "clustering_stability_proxy_K9",
+    "crystalscore_core"
+  ],
+  "r6c_only_metrics": [
+    "faithfulness",
+    "controllability",
+    "full_crystalscore"
+  ],
+  "frozen_panel": "artifacts\\stage4\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_frozen_2022_2023_for_Joseph\\feature_scalers_frozen\\fold_2021\\model_ready.csv",
+  "latent_layer": "policy_net.5.ReLU",
+  "K_budget": 9,
+  "K_grid": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "n_policies_scored": 6,
+  "correlation_complexity_vs_core": {
+    "pearson": -0.5278,
+    "spearman": -0.3143
+  },
+  "rows": [
+    {
+      "policy": "R6c",
+      "family": "R6c (root_split_beta_dirichlet)",
+      "n_steps": 289,
+      "behavioral_complexity": 0.3579,
+      "cash_entropy": 0.8967,
+      "book_dispersion": 0.096,
+      "action_eff_dim": 0.0809,
+      "n_assets": 29,
+      "simulatability_cash_K9": 0.244,
+      "completeness_stance": {
+        "2": 0.0732,
+        "3": 0.2041,
+        "4": 0.1745,
+        "5": 0.1175,
+        "6": 0.1775,
+        "7": 0.1282,
+        "8": 0.1188,
+        "9": 0.244
+      },
+      "completeness_selection": {
+        "2": 0.0243,
+        "3": 0.0389,
+        "4": 0.0546,
+        "5": 0.0498,
+        "6": 0.0725,
+        "7": 0.1384,
+        "8": 0.1777,
+        "9": 0.1409
+      },
+      "completeness_selection_K9": 0.1409,
+      "clustering_stability_proxy_K9": 0.619,
+      "pareto_stance": {
+        "auc_normalized": 0.1542,
+        "at_K9": 0.244
+      },
+      "pareto_selection": {
+        "auc_normalized": 0.0878,
+        "at_K9": 0.1409
+      },
+      "crystalscore_core": 0.1511,
+      "crystalscore_core_nostab": 0.244,
+      "full_crystalscore": 0.1511,
+      "notes": "reused verbatim from crystal_score_report.json; full CrystalScore incl. Faithfulness=1.0 (R6c-only steering)",
+      "source": "crystal_score_report.json"
+    },
+    {
+      "policy": "R6c+_latent_relabel_off",
+      "family": "R6c+ latent-action (gaussian_logits)",
+      "n_steps": 289,
+      "behavioral_complexity": 0.3785,
+      "cash_entropy": 0.91,
+      "book_dispersion": 0.1137,
+      "action_eff_dim": 0.1119,
+      "n_assets": 29,
+      "simulatability_cash_K9": 0.1684,
+      "completeness_stance": {
+        "2": 0.1568,
+        "3": 0.0729,
+        "4": 0.0185,
+        "5": 0.1034,
+        "6": 0.0613,
+        "7": 0.0976,
+        "8": 0.1482,
+        "9": 0.1684
+      },
+      "completeness_selection": {
+        "2": 0.0225,
+        "3": 0.0195,
+        "4": 0.0424,
+        "5": 0.0783,
+        "6": 0.0607,
+        "7": 0.0617,
+        "8": 0.1216,
+        "9": 0.0829
+      },
+      "completeness_selection_K9": 0.0829,
+      "clustering_stability_proxy_K9": 0.4116,
+      "pareto_stance": {
+        "auc_normalized": 0.0949,
+        "at_K9": 0.1684
+      },
+      "pareto_selection": {
+        "auc_normalized": 0.0624,
+        "at_K9": 0.0829
+      },
+      "crystalscore_core": 0.0693,
+      "crystalscore_core_nostab": 0.1684,
+      "full_crystalscore": null,
+      "notes": "replayed frozen 2022-2023; CrystalScore-core only (Faithfulness/Controllability are R6c-only)",
+      "source": "artifacts\\stage0_1\\r6c_latent_ab\\R6c_latent_relabel_off\\fold_2021\\model.zip"
+    },
+    {
+      "policy": "R6c+_latent_relabel_on",
+      "family": "R6c+ latent-action (gaussian_logits)",
+      "n_steps": 289,
+      "behavioral_complexity": 0.3109,
+      "cash_entropy": 0.7152,
+      "book_dispersion": 0.1703,
+      "action_eff_dim": 0.0472,
+      "n_assets": 29,
+      "simulatability_cash_K9": 0.3732,
+      "completeness_stance": {
+        "2": 0.191,
+        "3": 0.2282,
+        "4": 0.2114,
+        "5": 0.2875,
+        "6": 0.229,
+        "7": 0.2509,
+        "8": 0.2204,
+        "9": 0.3732
+      },
+      "completeness_selection": {
+        "2": 0.0069,
+        "3": 0.0148,
+        "4": 0.0498,
+        "5": 0.068,
+        "6": 0.0696,
+        "7": 0.0933,
+        "8": 0.131,
+        "9": 0.0757
+      },
+      "completeness_selection_K9": 0.0757,
+      "clustering_stability_proxy_K9": 0.3958,
+      "pareto_stance": {
+        "auc_normalized": 0.2442,
+        "at_K9": 0.3732
+      },
+      "pareto_selection": {
+        "auc_normalized": 0.0668,
+        "at_K9": 0.0757
+      },
+      "crystalscore_core": 0.1477,
+      "crystalscore_core_nostab": 0.3732,
+      "full_crystalscore": null,
+      "notes": "replayed frozen 2022-2023; CrystalScore-core only (Faithfulness/Controllability are R6c-only)",
+      "source": "artifacts\\stage0_1\\r6c_latent_ab\\R6c_latent_relabel_on\\fold_2021\\model.zip"
+    },
+    {
+      "policy": "R6c_vol0",
+      "family": "R6c vol_excess (root_split_beta_dirichlet)",
+      "n_steps": 289,
+      "behavioral_complexity": 0.349,
+      "cash_entropy": 0.8805,
+      "book_dispersion": 0.0791,
+      "action_eff_dim": 0.0875,
+      "n_assets": 29,
+      "simulatability_cash_K9": 0.192,
+      "completeness_stance": {
+        "2": 0.0374,
+        "3": 0.0335,
+        "4": 0.1126,
+        "5": 0.2347,
+        "6": 0.3261,
+        "7": 0.3242,
+        "8": 0.3458,
+        "9": 0.192
+      },
+      "completeness_selection": {
+        "2": 0.0201,
+        "3": 0.0247,
+        "4": 0.0312,
+        "5": 0.0439,
+        "6": 0.0778,
+        "7": 0.0796,
+        "8": 0.1391,
+        "9": 0.0592
+      },
+      "completeness_selection_K9": 0.0592,
+      "clustering_stability_proxy_K9": 0.2845,
+      "pareto_stance": {
+        "auc_normalized": 0.2131,
+        "at_K9": 0.192
+      },
+      "pareto_selection": {
+        "auc_normalized": 0.0623,
+        "at_K9": 0.0592
+      },
+      "crystalscore_core": 0.0546,
+      "crystalscore_core_nostab": 0.192,
+      "full_crystalscore": null,
+      "notes": "replayed frozen 2022-2023; CrystalScore-core only (Faithfulness/Controllability are R6c-only)",
+      "source": "artifacts\\stage0_1\\r6c_vol_excess_full\\R6c_AB_vol0\\fold_2021\\model.zip"
+    },
+    {
+      "policy": "R6c_vol05",
+      "family": "R6c vol_excess (root_split_beta_dirichlet)",
+      "n_steps": 289,
+      "behavioral_complexity": 0.3583,
+      "cash_entropy": 0.9162,
+      "book_dispersion": 0.0816,
+      "action_eff_dim": 0.077,
+      "n_assets": 29,
+      "simulatability_cash_K9": 0.1821,
+      "completeness_stance": {
+        "2": 0.0329,
+        "3": 0.0356,
+        "4": 0.1249,
+        "5": 0.2639,
+        "6": 0.3595,
+        "7": 0.3438,
+        "8": 0.3697,
+        "9": 0.1821
+      },
+      "completeness_selection": {
+        "2": 0.0194,
+        "3": 0.0227,
+        "4": 0.0319,
+        "5": 0.0434,
+        "6": 0.0799,
+        "7": 0.0737,
+        "8": 0.1377,
+        "9": 0.0619
+      },
+      "completeness_selection_K9": 0.0619,
+      "clustering_stability_proxy_K9": 0.2851,
+      "pareto_stance": {
+        "auc_normalized": 0.2293,
+        "at_K9": 0.1821
+      },
+      "pareto_selection": {
+        "auc_normalized": 0.0614,
+        "at_K9": 0.0619
+      },
+      "crystalscore_core": 0.0519,
+      "crystalscore_core_nostab": 0.1821,
+      "full_crystalscore": null,
+      "notes": "replayed frozen 2022-2023; CrystalScore-core only (Faithfulness/Controllability are R6c-only)",
+      "source": "artifacts\\stage0_1\\r6c_vol_excess_full\\R6c_AB_vol05\\fold_2021\\model.zip"
+    },
+    {
+      "policy": "R6c_vol10",
+      "family": "R6c vol_excess (root_split_beta_dirichlet)",
+      "n_steps": 289,
+      "behavioral_complexity": 0.354,
+      "cash_entropy": 0.8986,
+      "book_dispersion": 0.0788,
+      "action_eff_dim": 0.0847,
+      "n_assets": 29,
+      "simulatability_cash_K9": 0.2813,
+      "completeness_stance": {
+        "2": 0.0002,
+        "3": 0.0148,
+        "4": 0.0771,
+        "5": 0.0349,
+        "6": 0.0809,
+        "7": 0.1891,
+        "8": 0.1376,
+        "9": 0.2813
+      },
+      "completeness_selection": {
+        "2": 0.0246,
+        "3": 0.0381,
+        "4": 0.0475,
+        "5": 0.0592,
+        "6": 0.1055,
+        "7": 0.0591,
+        "8": 0.1577,
+        "9": 0.1556
+      },
+      "completeness_selection_K9": 0.1556,
+      "clustering_stability_proxy_K9": 0.368,
+      "pareto_stance": {
+        "auc_normalized": 0.0965,
+        "at_K9": 0.2813
+      },
+      "pareto_selection": {
+        "auc_normalized": 0.0796,
+        "at_K9": 0.1556
+      },
+      "crystalscore_core": 0.1035,
+      "crystalscore_core_nostab": 0.2813,
+      "full_crystalscore": null,
+      "notes": "replayed frozen 2022-2023; CrystalScore-core only (Faithfulness/Controllability are R6c-only)",
+      "source": "artifacts\\stage0_1\\r6c_vol_excess_full\\R6c_AB_vol10\\fold_2021\\model.zip"
+    }
+  ],
+  "skipped": [
+    {
+      "policy": "P22",
+      "family": "two-agent (pm + trader)",
+      "reason": "Architecture mismatch: P22 is a two-module pm.* (Beta cash/q actor) + trader.* (stock_encoder + GraphHierarchicalAssetEncoder) design, NOT a single SB3 policy_net/value_net MLP. There is no single comparable 64-d 'latent -> cash/q + weights' map (the export reports/firewall_upgrade/p22_hidden_activations has split pm.actor / trader.* heads). Forcing a CrystalScore on a different latent geometry would be apples-to-oranges, so it is skipped rather than mis-scored."
+    },
+    {
+      "policy": "W1",
+      "family": "two-agent (pm_policy.pt + trader_policy.pt)",
+      "reason": "Architecture mismatch: W1 ships separate pm_policy.pt + trader_policy.pt (Beta-budget PM + a distinct trader net), not an SB3 model.zip with mlp_extractor.policy_net. The uniform replay/hook machinery (policy_layers + policy_net.5.ReLU) does not apply; skipped to avoid a non-comparable score."
+    },
+    {
+      "policy": "H2",
+      "family": "two-agent (pm + trader, no-LOB)",
+      "reason": "Architecture mismatch: H2 (stage0_1_h2_pm_trader_nolob) is the same two-agent pm+trader family as W1/P22 (separate policy modules), not the single-MLP R6c arch. No single comparable policy latent -> skipped."
+    }
+  ],
+  "plot": {
+    "plotted": true,
+    "file": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\interpretability\\cross_policy_curve.png"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "L1_v2": {
+    "n_ssl": 2000,
+    "belief_MAE_vs_analytic": 0.0132,
+    "v1_MAE": 0.024
+  },
+  "returns": {
+    "CRYSTAL1_v2": 7.1,
+    "noise_belief": -0.33,
+    "v1": 6.84,
+    "privileged": 7.11
+  },
+  "battery": {
+    "x_h_mu": [
+      0.9335,
+      1.1656
+    ],
+    "structure": "2/2",
+    "y_reactive": 0.839,
+    "y_autoregressive": 0.66,
+    "rashomon_ratio_3seeds": [
+      0.16,
+      0.305,
+      0.31
+    ],
+    "v1_rashomon_3seeds": [
+      0.375,
+      0.395,
+      0.43
+    ],
+    "privileged_rashomon_3seeds": [
+      0.02,
+      0.02,
+      0.105
+    ],
+    "belief_N7": {
+      "pct": 100.0,
+      "verdict": "ASYMMETRIC"
+    }
+  },
+  "gates": {
+    "high_complexity": true,
+    "structured": true,
+    "reactive>>autoregressive": true,
+    "rashomon_crisp(state-aware, median of 3 seeds)": false,
+    "belief_N7_asym": true,
+    "HC1_ablation_hurts": true
+  },
+  "B1v2_PASS": false,
+  "uniqueness_tracks_fidelity": false
+}

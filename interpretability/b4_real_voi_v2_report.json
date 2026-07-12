@@ -1,0 +1,145 @@
+{
+  "month": "2023-08",
+  "maker_fee_bp": 2.0,
+  "symbols": {
+    "SOLUSDT": {
+      "toxic_rate": 0.295,
+      "n_minutes": 44640,
+      "benign": {
+        "quoted_spread_bp": 0.453,
+        "quoted_ci": [
+          0.445,
+          0.461
+        ],
+        "effective_half_spread_bp": 1.793,
+        "maker_edge_D1m_bp": -0.386,
+        "maker_edge_D1m_ci": [
+          -0.49,
+          -0.288
+        ],
+        "maker_edge_D5m_bp": -0.257,
+        "maker_edge_D5m_ci": [
+          -0.484,
+          -0.059
+        ]
+      },
+      "toxic": {
+        "quoted_spread_bp": 0.669,
+        "quoted_ci": [
+          0.537,
+          0.822
+        ],
+        "effective_half_spread_bp": 3.063,
+        "maker_edge_D1m_bp": -0.221,
+        "maker_edge_D1m_ci": [
+          -1.021,
+          0.317
+        ],
+        "maker_edge_D5m_bp": 0.123,
+        "maker_edge_D5m_ci": [
+          -0.762,
+          0.666
+        ]
+      },
+      "net_D5m": {
+        "benign": -2.257,
+        "toxic": -1.877
+      },
+      "sign_flip_net": false,
+      "VoI_bp_per_minute": 0.0
+    },
+    "AVAXUSDT": {
+      "toxic_rate": 0.298,
+      "n_minutes": 44638,
+      "benign": {
+        "quoted_spread_bp": 0.89,
+        "quoted_ci": [
+          0.87,
+          0.908
+        ],
+        "effective_half_spread_bp": 1.568,
+        "maker_edge_D1m_bp": -1.01,
+        "maker_edge_D1m_ci": [
+          -1.909,
+          -0.526
+        ],
+        "maker_edge_D5m_bp": -1.094,
+        "maker_edge_D5m_ci": [
+          -2.163,
+          -0.452
+        ]
+      },
+      "toxic": {
+        "quoted_spread_bp": 1.207,
+        "quoted_ci": [
+          1.019,
+          1.416
+        ],
+        "effective_half_spread_bp": 2.937,
+        "maker_edge_D1m_bp": -0.842,
+        "maker_edge_D1m_ci": [
+          -1.893,
+          -0.021
+        ],
+        "maker_edge_D5m_bp": -0.504,
+        "maker_edge_D5m_ci": [
+          -1.76,
+          0.46
+        ]
+      },
+      "net_D5m": {
+        "benign": -3.094,
+        "toxic": -2.504
+      },
+      "sign_flip_net": false,
+      "VoI_bp_per_minute": 0.0
+    },
+    "GALAUSDT": {
+      "toxic_rate": 0.304,
+      "n_minutes": 44633,
+      "benign": {
+        "quoted_spread_bp": 4.716,
+        "quoted_ci": [
+          4.665,
+          4.764
+        ],
+        "effective_half_spread_bp": 3.454,
+        "maker_edge_D1m_bp": -0.237,
+        "maker_edge_D1m_ci": [
+          -0.533,
+          0.029
+        ],
+        "maker_edge_D5m_bp": -0.138,
+        "maker_edge_D5m_ci": [
+          -0.426,
+          0.15
+        ]
+      },
+      "toxic": {
+        "quoted_spread_bp": 4.702,
+        "quoted_ci": [
+          4.529,
+          4.881
+        ],
+        "effective_half_spread_bp": 4.662,
+        "maker_edge_D1m_bp": -0.849,
+        "maker_edge_D1m_ci": [
+          -2.041,
+          0.064
+        ],
+        "maker_edge_D5m_bp": -0.956,
+        "maker_edge_D5m_ci": [
+          -2.54,
+          0.363
+        ]
+      },
+      "net_D5m": {
+        "benign": -2.138,
+        "toxic": -2.956
+      },
+      "sign_flip_net": false,
+      "VoI_bp_per_minute": 0.0
+    }
+  },
+  "verdict": "corner does NOT open on any of the 3 wider-spread instruments with TRUE BBO \u2014 hypothesis (a) strengthens: the config-D law extends to real execution economics at retail-accessible granularity (queue-position economics remain the final untested refuge)."
+}

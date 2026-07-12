@@ -1,0 +1,16 @@
+{
+  "substrate": "Series-G corner PPO; certifier = C1/C2 core (policy takes claimed action in >=tau=0.67 of a region's probes)",
+  "n_regions": 24,
+  "alpha_machine_behavioral": 0.0,
+  "n_behavioral_null_claims": 48,
+  "behavioral_power_on_true_modal_claims": 0.7083,
+  "behavioral_null_accepts": [],
+  "alpha_optimality_SECONDARY": 0.0208,
+  "n_optimality_null_claims": 48,
+  "random_claim_chance": 0.3333,
+  "reading": "alpha_machine (behavioral, correctly framed) = 0.0 = the automatable C1/C2 certifier's FALSE-ACCEPT rate for WRONG claims about what the write actually does (a non-modal action described as the write's effect passes 0.0% of the time); behavioral POWER on true modal claims = 70.8%. The SEPARATE, wider optimality-claim false-accept (null=non-belief-MDP-optimal, which ALSO fires when the policy is merely sub-optimal) = 0.0208. This is a K=2, C1/C2-CORE-ONLY, n=48 PROXY for HL5's machine-rate false-accept (which ultimately spans the full C1..C6 firewall) \u2014 a lower bound / first estimate, not the whole quantity. Implication unchanged: size D_cap / N_live<=K to (proposal_rate * alpha_machine) against the human-rate anchor (the program's two same-session retractions).",
+  "caveats": [
+    "FIXED after adversarial review: alpha_machine now measures being wrong about the POLICY'S EFFECT (vs its own modal action), NOT wrong about optimality \u2014 the earlier 0.0208 conflated the two (its single 'false-accept' was a TRUE behavioral claim that merely disagreed with the belief-MDP).",
+    "C1/C2 core only (C4 side-effect + C5 frozen gate would lower it further, not automated here); K=2 polygon; concentrated deterministic policy; a PROXY for, not equal to, the full-firewall alpha_machine."
+  ]
+}

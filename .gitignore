@@ -5,3 +5,6 @@ main.bbl
 main.blg
 *.synctex.gz
 __pycache__/
+
+__pycache__/
+*.pyc

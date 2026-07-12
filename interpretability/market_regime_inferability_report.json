@@ -1,0 +1,55 @@
+{
+  "Dow-29 2010-2023": {
+    "n_days": 3290,
+    "toxic_rate": 0.291,
+    "p_stay_benign": 0.994,
+    "p_stay_toxic": 0.984,
+    "p_burst_benign": 0.129,
+    "p_burst_toxic": 0.372,
+    "inferability_gap": 0.243,
+    "drift_benign_bp": 5.03,
+    "drift_toxic_bp": 9.66,
+    "drift_diff_bp": -4.63,
+    "drift_diff_95ci_bp": [
+      -12.12,
+      3.87
+    ],
+    "modulation_significant": false,
+    "VoI_per_20d_bp": 0.0,
+    "VoI_annualized_pct": 0.0,
+    "belief_aware_bp": 110.86,
+    "belief_blind_bp": 110.86
+  },
+  "csi500 2018-2023": {
+    "n_days": 1232,
+    "toxic_rate": 0.303,
+    "p_stay_benign": 0.991,
+    "p_stay_toxic": 0.979,
+    "p_burst_benign": 0.149,
+    "p_burst_toxic": 0.319,
+    "inferability_gap": 0.17,
+    "drift_benign_bp": 4.63,
+    "drift_toxic_bp": 8.88,
+    "drift_diff_bp": -4.26,
+    "drift_diff_95ci_bp": [
+      -20.32,
+      12.7
+    ],
+    "modulation_significant": false,
+    "VoI_per_20d_bp": 0.0,
+    "VoI_annualized_pct": 0.0,
+    "belief_aware_bp": 102.38,
+    "belief_blind_bp": 102.38
+  },
+  "Series-G polygon (reference)": {
+    "VoI_per_20d_units": 3.61,
+    "belief_aware": 18.51,
+    "belief_blind": 14.9
+  },
+  "WH2_verdict": {
+    "regimes_inferable": true,
+    "regimes_valueless_at_return_economics": true,
+    "config_D_law_holds": true,
+    "reading": "REAL MARKETS ARE CONFIG-D: the vol regime is highly inferable (the storm is visible) but its return-modulation is statistically/economically negligible net of costs \u2192 tracking the regime buys ~nothing \u2192 the optimal real-market policy is a persister BY CONSTRUCTION \u2192 the empty real corner is a property of the market's information structure, not of architectures. Scope: return-economics of daily panels; execution/microstructure economics (where Series-G lives) is exactly what these panels cannot see."
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "env": "multi-asset regime-POMDP, N=6, enriched economics",
+  "ppo_budget": 150000,
+  "returns": {
+    "PPO": 60.716,
+    "optimal": 61.997,
+    "random": -11.48,
+    "PPO_fraction_of_optimal": 0.983
+  },
+  "H3_retest_high_dim": {
+    "on_optimal_policy": {
+      "shared_worker": {
+        "fidelity": 0.9617,
+        "total_rules": 9,
+        "note": "ONE tree reused for all N assets (manager=belief, worker shared)"
+      },
+      "flat_separate": {
+        "fidelity": 0.9617,
+        "total_rules": 54,
+        "note": "N=6 separate per-asset trees (no sharing)"
+      },
+      "flat_fullstate": {
+        "fidelity": 0.9617,
+        "leaves": 9,
+        "note": "monolithic tree forced to see ALL inventories (sharing-blind)"
+      },
+      "compression_ratio_flat_over_shared": 6.0,
+      "H3_PASS": true
+    },
+    "on_trained_PPO_policy": {
+      "shared_worker": {
+        "fidelity": 0.7719,
+        "total_rules": 9,
+        "note": "ONE tree reused for all N assets (manager=belief, worker shared)"
+      },
+      "flat_separate": {
+        "fidelity": 0.8381,
+        "total_rules": 54,
+        "note": "N=6 separate per-asset trees (no sharing)"
+      },
+      "flat_fullstate": {
+        "fidelity": 0.7719,
+        "leaves": 9,
+        "note": "monolithic tree forced to see ALL inventories (sharing-blind)"
+      },
+      "compression_ratio_flat_over_shared": 6.0,
+      "H3_PASS": false
+    },
+    "verdict": "H3 SUPPORTED in high-dim: the shared-worker hierarchy reproduces all N assets at ~6.0x fewer rules than the flat (no-sharing) description, at equal fidelity \u2014 exactly the compression Phase-2 said needs a high-dim env."
+  },
+  "learned_anchor_frontier": {
+    "x_bits_per_action": [
+      1.1009,
+      1.1938
+    ],
+    "x_structure": "2/2",
+    "x_E_range": [
+      0.3247,
+      0.4639
+    ],
+    "y_simulatability_shared_worker": 0.7719,
+    "note": "LEARNED (PPO) policy on the high-dim env \u2014 the apples-to-apples-with-R6c/P22 trained anchor"
+  }
+}

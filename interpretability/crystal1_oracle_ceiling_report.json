@@ -1,0 +1,414 @@
+{
+  "design": "O-A oracle regime through the SAME 4-knob class + REAL v4 gate; O-B next-day-sign oracle ceiling; O-C class headroom with the current learned belief.",
+  "panels": {
+    "csi500": {
+      "O_A_gate": [
+        {
+          "candidate": "oracle_vol+B3",
+          "verdict": "REJECTED_HOLDOUT",
+          "info": {
+            "type": "RETURN",
+            "z": 1.52,
+            "z_crit": 2.15,
+            "wealth": 0.0889
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.226,
+              "DD": -0.074
+            },
+            "cand": {
+              "ann": 0.24,
+              "DD": -0.055
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.031,
+              "DD": -0.251
+            },
+            "cand": {
+              "ann": 0.221,
+              "DD": -0.12
+            }
+          },
+          "grid_best": null
+        },
+        {
+          "candidate": "oracle_vol+devgrid",
+          "verdict": "REJECTED_HOLDOUT",
+          "info": {
+            "type": "RETURN",
+            "z": 1.52,
+            "z_crit": 2.15,
+            "wealth": 0.0889
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.226,
+              "DD": -0.074
+            },
+            "cand": {
+              "ann": 0.245,
+              "DD": -0.054
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.031,
+              "DD": -0.251
+            },
+            "cand": {
+              "ann": 0.31,
+              "DD": -0.096
+            }
+          },
+          "grid_best": {
+            "t1": 0.1,
+            "t2": 0.5,
+            "lvl_reduced": 0.25,
+            "lvl_defensive": 0.0
+          }
+        },
+        {
+          "candidate": "oracle_dd+B3",
+          "verdict": "REJECTED_HOLDOUT",
+          "info": {
+            "type": "RETURN",
+            "z": 1.3,
+            "z_crit": 2.15,
+            "wealth": 0.0889
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.226,
+              "DD": -0.074
+            },
+            "cand": {
+              "ann": 0.272,
+              "DD": -0.054
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.031,
+              "DD": -0.251
+            },
+            "cand": {
+              "ann": 0.185,
+              "DD": -0.165
+            }
+          },
+          "grid_best": null
+        },
+        {
+          "candidate": "oracle_dd+devgrid",
+          "verdict": "REJECTED_HOLDOUT",
+          "info": {
+            "type": "RETURN",
+            "z": 1.3,
+            "z_crit": 2.15,
+            "wealth": 0.0889
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.226,
+              "DD": -0.074
+            },
+            "cand": {
+              "ann": 0.291,
+              "DD": -0.054
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.031,
+              "DD": -0.251
+            },
+            "cand": {
+              "ann": 0.256,
+              "DD": -0.134
+            }
+          },
+          "grid_best": {
+            "t1": 0.1,
+            "t2": 0.5,
+            "lvl_reduced": 0.25,
+            "lvl_defensive": 0.0
+          }
+        }
+      ],
+      "O_B_gate": [
+        {
+          "candidate": "oracle_sign+devgrid",
+          "verdict": "ACCEPTED_RISKMODE",
+          "info": {
+            "harm": 4.0,
+            "type": "RETURN",
+            "z": 6.0,
+            "z_crit": 2.15
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.226,
+              "DD": -0.074
+            },
+            "cand": {
+              "ann": 1.616,
+              "DD": -0.003
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.031,
+              "DD": -0.251
+            },
+            "cand": {
+              "ann": 1.661,
+              "DD": -0.002
+            }
+          },
+          "grid_best": {
+            "t1": 0.1,
+            "t2": 0.5,
+            "lvl_reduced": 0.25,
+            "lvl_defensive": 0.0
+          }
+        }
+      ],
+      "O_C_headroom": {
+        "dev_grid_best": {
+          "t1": 0.1,
+          "t2": 0.9,
+          "lvl_reduced": 1.0,
+          "lvl_defensive": 0.0
+        },
+        "dev": {
+          "anchor": {
+            "ann": 0.226,
+            "DD": -0.074
+          },
+          "best": {
+            "ann": 0.337,
+            "DD": -0.05
+          }
+        },
+        "hold_raw": {
+          "anchor": {
+            "ann": 0.031,
+            "DD": -0.251
+          },
+          "best": {
+            "ann": -0.118,
+            "DD": -0.257
+          }
+        }
+      }
+    },
+    "dow": {
+      "O_A_gate": [
+        {
+          "candidate": "oracle_vol+B3",
+          "verdict": "ACCEPTED_RISKMODE",
+          "info": {
+            "harm": 2.0,
+            "type": "RETURN",
+            "z": 2.33,
+            "z_crit": 2.15
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.163,
+              "DD": -0.16
+            },
+            "cand": {
+              "ann": 0.237,
+              "DD": -0.05
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.227,
+              "DD": -0.329
+            },
+            "cand": {
+              "ann": 0.282,
+              "DD": -0.11
+            }
+          },
+          "grid_best": null
+        },
+        {
+          "candidate": "oracle_vol+devgrid",
+          "verdict": "ACCEPTED_RISKMODE",
+          "info": {
+            "harm": 4.0,
+            "type": "RETURN",
+            "z": 2.33,
+            "z_crit": 2.15
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.163,
+              "DD": -0.16
+            },
+            "cand": {
+              "ann": 0.268,
+              "DD": -0.039
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.227,
+              "DD": -0.329
+            },
+            "cand": {
+              "ann": 0.295,
+              "DD": -0.059
+            }
+          },
+          "grid_best": {
+            "t1": 0.1,
+            "t2": 0.5,
+            "lvl_reduced": 0.25,
+            "lvl_defensive": 0.0
+          }
+        },
+        {
+          "candidate": "oracle_dd+B3",
+          "verdict": "REJECTED_HOLDOUT",
+          "info": {
+            "type": "RETURN",
+            "z": 0.96,
+            "z_crit": 2.15,
+            "wealth": 0.0889
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.163,
+              "DD": -0.16
+            },
+            "cand": {
+              "ann": 0.182,
+              "DD": -0.122
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.227,
+              "DD": -0.329
+            },
+            "cand": {
+              "ann": 0.335,
+              "DD": -0.241
+            }
+          },
+          "grid_best": null
+        },
+        {
+          "candidate": "oracle_dd+devgrid",
+          "verdict": "REJECTED_HOLDOUT",
+          "info": {
+            "type": "RETURN",
+            "z": 0.96,
+            "z_crit": 2.15,
+            "wealth": 0.0889
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.163,
+              "DD": -0.16
+            },
+            "cand": {
+              "ann": 0.189,
+              "DD": -0.11
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.227,
+              "DD": -0.329
+            },
+            "cand": {
+              "ann": 0.381,
+              "DD": -0.224
+            }
+          },
+          "grid_best": {
+            "t1": 0.1,
+            "t2": 0.5,
+            "lvl_reduced": 0.25,
+            "lvl_defensive": 0.0
+          }
+        }
+      ],
+      "O_B_gate": [
+        {
+          "candidate": "oracle_sign+devgrid",
+          "verdict": "ACCEPTED_RISKMODE",
+          "info": {
+            "harm": 4.0,
+            "type": "RETURN",
+            "z": 4.41,
+            "z_crit": 2.15
+          },
+          "dev": {
+            "anchor": {
+              "ann": 0.163,
+              "DD": -0.16
+            },
+            "cand": {
+              "ann": 0.875,
+              "DD": -0.005
+            }
+          },
+          "hold_raw": {
+            "anchor": {
+              "ann": 0.227,
+              "DD": -0.329
+            },
+            "cand": {
+              "ann": 2.233,
+              "DD": -0.004
+            }
+          },
+          "grid_best": {
+            "t1": 0.1,
+            "t2": 0.5,
+            "lvl_reduced": 0.25,
+            "lvl_defensive": 0.0
+          }
+        }
+      ],
+      "O_C_headroom": {
+        "dev_grid_best": {
+          "t1": 0.1,
+          "t2": 0.5,
+          "lvl_reduced": 0.25,
+          "lvl_defensive": 0.0
+        },
+        "dev": {
+          "anchor": {
+            "ann": 0.163,
+            "DD": -0.16
+          },
+          "best": {
+            "ann": 0.166,
+            "DD": -0.059
+          }
+        },
+        "hold_raw": {
+          "anchor": {
+            "ann": 0.227,
+            "DD": -0.329
+          },
+          "best": {
+            "ann": -0.001,
+            "DD": -0.106
+          }
+        }
+      }
+    }
+  },
+  "verdict": "ORACLE-THROUGH-KNOBS CERTIFIES on 2/8 gate tests: the 4-knob policy class + the v4 gate CAN monetize a good regime signal \u2014 the bottleneck is the SIGNAL (K=2 binary-|EW-ret| preprocessing), so upgrade the belief observation, not the shell."
+}

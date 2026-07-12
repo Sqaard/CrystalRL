@@ -1,0 +1,86 @@
+{
+  "policy": "GENUINE two-agent P22 (Beta-budget PM + latent-action Trader), csi500 frozen 2022-2023",
+  "recipe": "x = L0 bits/action (3-symbol cash stance); y = best compact simulatability = max(reactive obs->action, autoregressive own-past)",
+  "results": {
+    "P22 deadline": {
+      "cash_stance_3bin": {
+        "h_mu_range": [
+          1.4926,
+          1.5467
+        ],
+        "structure": "0/2",
+        "reactive_obs_to_action": 0.333,
+        "autoregressive_own_past": 0.353,
+        "best_simulatability": 0.353
+      },
+      "book_mode_K6": {
+        "h_mu_range": [
+          2.0018,
+          2.082
+        ],
+        "structure": "2/2",
+        "reactive_obs_to_action": 0.167,
+        "autoregressive_own_past": 0.178,
+        "best_simulatability": 0.178
+      }
+    },
+    "P22 PIT": {
+      "cash_stance_3bin": {
+        "h_mu_range": [
+          1.4583,
+          1.5499
+        ],
+        "structure": "0/2",
+        "reactive_obs_to_action": 0.333,
+        "autoregressive_own_past": 0.31,
+        "best_simulatability": 0.333
+      },
+      "book_mode_K6": {
+        "h_mu_range": [
+          2.1084,
+          2.4734
+        ],
+        "structure": "1/2",
+        "reactive_obs_to_action": 0.167,
+        "autoregressive_own_past": 0.211,
+        "best_simulatability": 0.211
+      }
+    }
+  },
+  "reference": {
+    "R6c": {
+      "x_cash_3sym": [
+        0.288,
+        0.487
+      ],
+      "y_best_sim": 0.95,
+      "mechanism": "autoregressive persister"
+    },
+    "Series-G_optimal": {
+      "x": [
+        0.853,
+        1.39
+      ],
+      "y_best_sim": 0.93,
+      "mechanism": "state-reactive controller"
+    }
+  },
+  "frontier_points": {
+    "P22 deadline": {
+      "x_bits_per_action": [
+        1.4926,
+        1.5467
+      ],
+      "y_best_simulatability": 0.353,
+      "mechanism": "cash-stance NOISE (0/2); book-mode STRUCTURED (2/2); y from autoregressive"
+    },
+    "P22 PIT": {
+      "x_bits_per_action": [
+        1.4583,
+        1.5499
+      ],
+      "y_best_simulatability": 0.333,
+      "mechanism": "cash-stance NOISE (0/2); book-mode STRUCTURED (1/2); y from reactive"
+    }
+  }
+}

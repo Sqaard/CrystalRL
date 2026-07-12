@@ -1,0 +1,121 @@
+{
+  "F1_F10_pareto_frontier_G6_seed0": [
+    {
+      "return": 0.0,
+      "desc_len": 1,
+      "mdl_deficit": 0.0
+    },
+    {
+      "return": 1.35,
+      "desc_len": 2,
+      "mdl_deficit": 0.0
+    },
+    {
+      "return": 4.03,
+      "desc_len": 4,
+      "mdl_deficit": 0.198
+    }
+  ],
+  "F6_population_G6": {
+    "frontier_sizes": [
+      3,
+      3,
+      3
+    ],
+    "best_return": [
+      4.03,
+      4.08,
+      4.65
+    ],
+    "gate_counts_union": {
+      "REFUSED_ALPHA_WEALTH_EXHAUSTED": 29,
+      "REJECTED_NO_FRONTIER_GAIN": 24,
+      "ACCEPTED_PARETO": 11,
+      "REFUSED_TENSION_BUDGET": 24,
+      "REJECTED_DOMINATED": 3,
+      "REJECTED_HOLDOUT": 29
+    }
+  },
+  "F2_adversary_vetoes": 0,
+  "F3_wealth_and_refusals": {
+    "wealth_left_G6": [
+      0.0005,
+      0.0006,
+      0.0005
+    ],
+    "alpha_wealth_refusals": 29
+  },
+  "F4_F11_tension_budget": {
+    "tension_spent_G6": [
+      3.0,
+      3.0,
+      3.0
+    ],
+    "tension_budget_refusals": 24
+  },
+  "F7_tension_binned_niches_G6": [
+    2,
+    2,
+    3
+  ],
+  "F7_archive_keys_G6": [
+    [
+      [
+        1,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    [
+      [
+        1,
+        0
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    [
+      [
+        1,
+        0
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        2
+      ]
+    ]
+  ],
+  "F8_bandit_prior_G6_seed0": {
+    "add_rule": 0.1,
+    "joint_move": 0.1,
+    "retune": 0.167,
+    "recombine": 0.0
+  },
+  "F12_canary": {
+    "caught": 27,
+    "escaped": 0,
+    "gate_compromised": [
+      false,
+      false,
+      false
+    ]
+  },
+  "F9_transfer_G6_to_G12": {
+    "warm_best_return": 2.87,
+    "cold_best_return": 2.61,
+    "warm_frontier": 4,
+    "cold_frontier": 3,
+    "warm_accepts": 5,
+    "cold_accepts": 3
+  },
+  "headline": "HL v4 Pareto redesign: the loop now returns a FRONTIER of 3 non-dominated (return, description_len) policies (F1/F10), not a scalar. It REJECTED 27 dominated/no-gain moves the old return-only gate would have accepted. Adversary vetoes 0 (F2); alpha-wealth priced per-query, refusals 29 (F3); tension-budget refusals 24 (F4/F11); canary caught 27/27 (F12); bandit picks the load-bearing operator online (F8); mechanism prior TRANSFERS G6->G12 (warm best 2.87 vs cold 2.61, F9). Population over seeds (F6). Objective is now 'walk the return x legibility frontier under no-uncertified-regression', not 'maximize return'."
+}

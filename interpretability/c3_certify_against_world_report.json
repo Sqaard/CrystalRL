@@ -1,0 +1,65 @@
+{
+  "substrate": "Series-G corner polygon; analytic generative filter (RegimePOMDP); forward evidence budgets W=4/8/12",
+  "n_samples": 4800,
+  "per_evidence_budget": {
+    "4": {
+      "tau_FA5pct": 0.075,
+      "false_alarm": 0.05,
+      "AUC_decouple(sharp_wrong>uncertain_right)": 0.719,
+      "AUC_lie_vs_honest(generic,diluted)": 0.684,
+      "detect_clear_lie@5%FA": 0.684,
+      "detect_sharp_wrong@5%FA": 0.717,
+      "pass_uncertain_right@5%FA": 0.806,
+      "excess_NLL_mean": {
+        "honest": 0.002,
+        "clear_lie": 0.377,
+        "sharp_wrong_lowH": 0.422,
+        "uncertain_right_highH": -0.001
+      }
+    },
+    "8": {
+      "tau_FA5pct": 0.074,
+      "false_alarm": 0.05,
+      "AUC_decouple(sharp_wrong>uncertain_right)": 0.722,
+      "AUC_lie_vs_honest(generic,diluted)": 0.687,
+      "detect_clear_lie@5%FA": 0.679,
+      "detect_sharp_wrong@5%FA": 0.715,
+      "pass_uncertain_right@5%FA": 0.81,
+      "excess_NLL_mean": {
+        "honest": 0.001,
+        "clear_lie": 0.384,
+        "sharp_wrong_lowH": 0.43,
+        "uncertain_right_highH": -0.002
+      }
+    },
+    "12": {
+      "tau_FA5pct": 0.071,
+      "false_alarm": 0.05,
+      "AUC_decouple(sharp_wrong>uncertain_right)": 0.722,
+      "AUC_lie_vs_honest(generic,diluted)": 0.687,
+      "detect_clear_lie@5%FA": 0.678,
+      "detect_sharp_wrong@5%FA": 0.713,
+      "pass_uncertain_right@5%FA": 0.806,
+      "excess_NLL_mean": {
+        "honest": 0.001,
+        "clear_lie": 0.384,
+        "sharp_wrong_lowH": 0.43,
+        "uncertain_right_highH": -0.002
+      }
+    }
+  },
+  "commanded_entropy": {
+    "sharp_but_wrong": 0.199,
+    "uncertain_but_right": 0.693
+  },
+  "decoupling": {
+    "sharp_wrong_excess_>>_uncertain_right_excess": true,
+    "sharpness_gate_would_trust_the_lie": true,
+    "reading": "excess-NLL flags the confident lie AND clears the honest hedge; a sharpness/entropy gate does the OPPOSITE (it trusts the low-entropy lie, distrusts the high-entropy truth)."
+  },
+  "C3_PASS": true,
+  "verdict": "PASS \u2014 the grounded-belief checker ranks the SHARP-BUT-WRONG command (low entropy, unsupported) above the UNCERTAIN-BUT-RIGHT command (high entropy, supported) at AUC=0.722; excess-NLL 0.43 vs ~0. So authority tracks EVIDENCE (predictive NLL), not sharpness \u2014 a sharpness/entropy gate would do the EXACT OPPOSITE (trust the confident lie, distrust the honest hedge). At a calibrated ~5% false alarm it flags the confident lie (0.713) and clears the honest hedge (0.806). Generic flip-lie detection is only moderate (AUC~0.69) BECAUSE an uncertain belief's flip is often partially evidence-supported \u2014 an honest limit, not a detector failure. R6c's discriminative latent has no likelihood and structurally cannot build this checker.",
+  "caveats": [
+    "K=2 polygon; analytic filter = exact twin of the validated learned NeuralBayesFilter (B1 param-recovery); short binary windows are noisy so per-window detection@fixed-FA is evidence-budget-limited (AUC is the budget-robust metric); forward-window (w-step-late) certification; teeth only where VoI>0."
+  ]
+}

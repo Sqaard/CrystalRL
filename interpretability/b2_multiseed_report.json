@@ -1,0 +1,93 @@
+{
+  "C1_crystal_v3_profile": {
+    "n": 3,
+    "pass6_rate": "2/3",
+    "react": "0.909\u00b10.042",
+    "auto": "0.632\u00b10.119",
+    "rashomon_med": "0.371\u00b10.219",
+    "return": "7.043\u00b10.144",
+    "per_seed_gates": {
+      "1": {
+        "hc": true,
+        "st": true,
+        "ra": true,
+        "rc": true,
+        "n7": true,
+        "ab": true
+      },
+      "2": {
+        "hc": true,
+        "st": true,
+        "ra": true,
+        "rc": true,
+        "n7": true,
+        "ab": true
+      },
+      "3": {
+        "hc": true,
+        "st": true,
+        "ra": true,
+        "rc": false,
+        "n7": true,
+        "ab": true
+      }
+    }
+  },
+  "C2_privileged_profile": {
+    "n": 3,
+    "pass5_rate": "0/3",
+    "react": "0.904\u00b10.016",
+    "rashomon_med": "0.558\u00b10.104",
+    "return": "7.157\u00b10.097"
+  },
+  "C3_uniqueness_endpoints": {
+    "v1_rashomon": [
+      0.47,
+      0.074,
+      0.395
+    ],
+    "v3_rashomon": [
+      0.176,
+      0.26,
+      0.676,
+      0.145
+    ],
+    "v1_mae": [
+      0.0093,
+      0.0128
+    ],
+    "v3_mae": [
+      0.0032,
+      0.0063,
+      0.0081
+    ],
+    "all_v1_gt_all_v3": false
+  },
+  "C4_bend": {
+    "gap_G4": [
+      0.088,
+      0.069,
+      0.077
+    ],
+    "gap_G12": [
+      0.33,
+      0.356,
+      0.314
+    ],
+    "bend_replicates_all_seeds": true
+  },
+  "C5_price_of_learned_beliefs": {
+    "crystal_v3_returns": [
+      7.02,
+      6.88,
+      7.23,
+      6.9
+    ],
+    "privileged_returns": [
+      7.02,
+      7.23,
+      7.22,
+      7.11
+    ]
+  }
+}

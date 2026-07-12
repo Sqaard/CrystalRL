@@ -68,3 +68,25 @@ knobs, and different knobs have different effects.*
 | Honesty has teeth | a famous indicator (CAPE) falsified; the RL challenger loses to the readable table — both reported |
 | The open frontier | a **certified** return↔legibility tension on hard substrates — H3 in your program |
 
+## The code (clone and continue)
+
+The full interpretability-track codebase is in this repo — verified to import and run from a
+fresh clone (the coding-agent machinery and the *Hello Crystal* product line stay in the
+mothership):
+
+```bash
+git clone https://github.com/Sqaard/CrystalRL.git && cd CrystalRL
+pip install -r requirements.txt
+python -c "import sys; sys.path[:0]=['.','scripts']; import interpretability.mdl_fidelity_deficit"
+# ~30 s: recomputes the frozen-log headline -> your setup works
+```
+
+What you get: `src/crystal/` (the belief filter, the soft-tree policy, the governor, the writ
+ladder), `src/series_g/` (the designed market of paper §8), `src/hl/` (the legibility-loop
+library), 58 experiment scripts in `interpretability/` **with their result JSONs/CSVs** (every
+number in the paper is reproducible in place), the real US daily panel in
+`data/_dow_extended/`, the readable DP policy tables, the frozen R6c behavior package prepared
+for you in `artifacts/stage4/R6c_*_for_Joseph/`, and the 5-lever command registry in
+`contracts/`. Start with **[`docs/CODE_MAP.md`](docs/CODE_MAP.md)** — entry points by theme,
+conventions, and the short list of deliberately-not-included pieces.
+

@@ -1,0 +1,178 @@
+{
+  "created_by": "scripts/export_r6c_hidden_activations.py",
+  "purpose": "Full per-step hidden-activation stack for the R6c frozen 2022-2023 rollout (transparency gap closure).",
+  "source_zip": "artifacts\\stage6b\\cloud_packages_r6c_stage6b_counterfactual_20260605\\_build\\stage6b_job_001_R6c_counterfactual_frozen2022_2023\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_213_R6c_v1_fold_2021_results.zip",
+  "fold": "fold_2021",
+  "window": {
+    "start": "2022-01-03",
+    "end": "2023-02-28"
+  },
+  "n_steps": 289,
+  "obs_dim": 1834,
+  "architecture": {
+    "policy_net": "Linear(1834->256) ReLU -> Linear(256->128) ReLU -> Linear(128->64) ReLU",
+    "value_net": "same shape",
+    "action_net": "Linear(64->31)"
+  },
+  "self_verification": {
+    "max_abs_mismatch": 0.0,
+    "checks": [
+      "hook value_net.5.ReLU == policy_layers value_latent (64-d)",
+      "hook policy_net.3.ReLU == policy_layers 'policy_latent_64' (128-d)"
+    ],
+    "interpretation": "0 => hooks captured the canonical forward exactly (shape-matched, not skipped)"
+  },
+  "naming_correction": "The shipped r6c_frozen_2022_2023_rollout_package.npz 'test_hidden' is (N,128) -- it is the PENULTIMATE 128-d activation (policy_net.3.ReLU), not the 64-d final latent. policy_layers() mislabels it 'policy_latent_64' because it assumes a 2-Linear MLP. The TRUE 64-d final latent that feeds action_net is exported here as 'policy_net.5.ReLU'. The Stage-1 KMeans codebook was fit on the 128-d penultimate (self-consistent, but it is the penultimate, not the final, layer).",
+  "alignment": "row i of every array corresponds to dates[i]; one row per internal trading day",
+  "layers": {
+    "action_mode": {
+      "shape": [
+        289,
+        30
+      ],
+      "net": "head/IO",
+      "role": "deterministic action (Beta/Dirichlet mode) fed to env.step"
+    },
+    "alpha_params": {
+      "shape": [
+        289,
+        1
+      ],
+      "net": "head/IO",
+      "role": "Dirichlet/Beta concentration params of the action distribution"
+    },
+    "features": {
+      "shape": [
+        289,
+        1834
+      ],
+      "net": "head/IO",
+      "role": "MLP input (1834-d observation / flatten-extractor output)"
+    },
+    "policy_latent_penultimate_128": {
+      "shape": [
+        289,
+        128
+      ],
+      "net": "head/IO",
+      "role": "LEGACY policy_layers field mislabeled 'policy_latent_64'; really the 128-d penultimate (==policy_net.3.ReLU)"
+    },
+    "policy_net.0.Linear": {
+      "shape": [
+        289,
+        256
+      ],
+      "net": "policy MLP",
+      "role": "pre-activation (Linear output)"
+    },
+    "policy_net.1.ReLU": {
+      "shape": [
+        289,
+        256
+      ],
+      "net": "policy MLP",
+      "role": "post-activation (ReLU output)"
+    },
+    "policy_net.2.Linear": {
+      "shape": [
+        289,
+        128
+      ],
+      "net": "policy MLP",
+      "role": "pre-activation (Linear output)"
+    },
+    "policy_net.3.ReLU": {
+      "shape": [
+        289,
+        128
+      ],
+      "net": "policy MLP",
+      "role": "post-activation (ReLU output)"
+    },
+    "policy_net.4.Linear": {
+      "shape": [
+        289,
+        64
+      ],
+      "net": "policy MLP",
+      "role": "pre-activation (Linear output)"
+    },
+    "policy_net.5.ReLU": {
+      "shape": [
+        289,
+        64
+      ],
+      "net": "policy MLP",
+      "role": "TRUE final 64-d policy latent (feeds action_net) -- the correct 'policy latent'"
+    },
+    "raw_action_params": {
+      "shape": [
+        289,
+        31
+      ],
+      "net": "head/IO",
+      "role": "action_net output before the policy transform"
+    },
+    "value_latent": {
+      "shape": [
+        289,
+        64
+      ],
+      "net": "head/IO",
+      "role": "value latent from policy_layers (==value_net.5.ReLU)"
+    },
+    "value_net.0.Linear": {
+      "shape": [
+        289,
+        256
+      ],
+      "net": "value MLP",
+      "role": "pre-activation (Linear output)"
+    },
+    "value_net.1.ReLU": {
+      "shape": [
+        289,
+        256
+      ],
+      "net": "value MLP",
+      "role": "post-activation (ReLU output)"
+    },
+    "value_net.2.Linear": {
+      "shape": [
+        289,
+        128
+      ],
+      "net": "value MLP",
+      "role": "pre-activation (Linear output)"
+    },
+    "value_net.3.ReLU": {
+      "shape": [
+        289,
+        128
+      ],
+      "net": "value MLP",
+      "role": "post-activation (ReLU output)"
+    },
+    "value_net.4.Linear": {
+      "shape": [
+        289,
+        64
+      ],
+      "net": "value MLP",
+      "role": "pre-activation (Linear output)"
+    },
+    "value_net.5.ReLU": {
+      "shape": [
+        289,
+        64
+      ],
+      "net": "value MLP",
+      "role": "final 64-d value latent (feeds value head)"
+    }
+  },
+  "outputs": {
+    "npz": "r6c_frozen_hidden_activations.npz",
+    "unit_stats_csv": "r6c_frozen_activation_unit_stats.csv"
+  },
+  "note": "Closes the gap from build_r6c_frozen_test_rollout_for_joseph.py, which kept only the (mislabeled) penultimate latent + value latent. Here EVERY layer's pre- and post-activation is exported, plus the 1834-d input and the true 64-d final policy latent."
+}

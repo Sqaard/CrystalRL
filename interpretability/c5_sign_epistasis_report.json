@@ -1,0 +1,2422 @@
+{
+  "substrate": "family_G4 PPO on RegimeRotationEnv(G=4); belief = 4-simplex; factor A/B = mass on venue i/j; outcome P(provide@i)",
+  "design": "6 venue-pairs x 12 contexts = 216 belief x belief interaction cells",
+  "stats_all": {
+    "n_cells": 216,
+    "median_abs_eps_logit": 2.6578,
+    "frac_material_gt_0.5": 0.87,
+    "n_material_pos": 79,
+    "n_material_neg": 109
+  },
+  "by_outcome": {
+    "own_i": {
+      "n": 72,
+      "median_abs": 4.1818,
+      "frac_material": 0.944,
+      "n_material_pos": 0,
+      "n_material_neg": 68,
+      "both_signs_material": false
+    },
+    "third_k": {
+      "n": 72,
+      "median_abs": 1.4795,
+      "frac_material": 0.792,
+      "n_material_pos": 41,
+      "n_material_neg": 16,
+      "both_signs_material": true
+    },
+    "abstain": {
+      "n": 72,
+      "median_abs": 2.4409,
+      "frac_material": 0.875,
+      "n_material_pos": 38,
+      "n_material_neg": 25,
+      "both_signs_material": true
+    }
+  },
+  "NON_ADDITIVITY": true,
+  "SIGN_EPISTASIS": true,
+  "contrast_with_corner": "corner (belief x inventory, 1-belief-dim): non-additive but SIGN-STABLE (+68/-0). This G=4 belief x belief run is the >=2-belief-dim test IV-10 owed.",
+  "verdict": "SIGN-EPISTASIS CONFIRMED on a >=2-belief-dim surface: the cross-term takes BOTH signs (+79/-109 of 216 material cells). So two belief-writes can interact with a sign that reverses across venue-pairs/context \u2014 the OOS-reversal IV-10 warned about is REAL on genuine multi-belief-dim writes (the corner's belief x inventory could not show it). => the co-activation cap + forbidden-pair registry + worst-case cross-term bounds move from [PLAUS] toward [SBC, measured]; per-command certs provably do not compose, and the combination certificate must carry a SIGNED, non-commutative cross-term.",
+  "caveats": [
+    "Forced beliefs may sit off the natural manifold (the governor handles that in deployment); a single trained family policy; polygon, teeth only where VoI>0."
+  ],
+  "cells": [
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": -2.5469
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.2127
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.6248
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -4.5899
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": 0.3384
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -0.4613
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -5.5894
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -0.2921
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -2.6571
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": -1.9456
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 5.287
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 5.6541
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -4.2166
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 0.8244
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 0.3055
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -5.4156
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -0.4428
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -2.5426
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": -1.2231
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 6.3904
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 6.6451
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": -3.7082
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 1.4288
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 1.1946
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -5.1194
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -0.5605
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -2.2946
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": -0.4097
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 7.4523
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 7.55
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": -3.0687
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 2.4916
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 2.164
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -4.706
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "third_k",
+      "idx": 2,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -0.317
+    },
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -1.8872
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": -1.0511
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 2.7085
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.9398
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -3.6121
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": 0.247
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": 0.1818
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -4.5156
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": 0.0
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -2.1491
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": -0.5718
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 3.1547
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 5.792
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -3.1806
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 0.5853
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 1.0265
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -4.5534
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": 0.0
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -2.0174
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": -0.1228
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 3.6541
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 6.5469
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": -2.6509
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 0.9911
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 1.9554
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -4.4623
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": 0.0
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -1.7328
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 0.2751
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 4.1967
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 7.1961
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": -2.0572
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 1.4671
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 2.9023
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -4.2309
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": 0.0
+    },
+    {
+      "pair": [
+        0,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -1.2655
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": -1.7276
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 1.9098
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.6975
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -3.579
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -1.4192
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -0.2351
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -4.8101
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -1.1194
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -2.7811
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": -1.1885
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 2.4623
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 5.4262
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -3.3202
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -1.1829
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 0.383
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -4.8256
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -1.2948
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -2.6585
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": -0.5284
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 3.0105
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 6.0869
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": -2.9656
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": -0.9107
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 1.0757
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -4.7436
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -1.4919
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -2.4263
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 0.2257
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 3.5236
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 6.6395
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": -2.5212
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": -0.6054
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 1.808
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 0,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -4.5695
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 1,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -1.7152
+    },
+    {
+      "pair": [
+        0,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -2.072
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": -3.3218
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.4526
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.846
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -5.8005
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": 0.4786
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -0.4725
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -5.6726
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -0.7838
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -2.7587
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": -2.9536
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 5.4819
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 5.8199
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -5.5258
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 0.979
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 0.3176
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -5.7679
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -0.7295
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -2.672
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": -2.5438
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 6.5171
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 6.7315
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": -5.1522
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 1.8252
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 1.2259
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -5.84
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -0.5756
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -2.4555
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": -2.1202
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 7.516
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 7.5411
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": -4.6757
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 2.9318
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 2.2104
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -5.884
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -0.3135
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -2.0732
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": -2.8647
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.1368
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.4419
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -4.7956
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": 1.5236
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": 0.3979
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -4.147
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -0.29
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -1.931
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": -2.6495
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 4.7661
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 4.9488
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -4.6374
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 2.0243
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 0.8725
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -4.41
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -0.142
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -1.8463
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": -2.3943
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 5.4609
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 5.4106
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": -4.4132
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 2.6278
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 1.3986
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -4.6714
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": 0.0579
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -1.6926
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": -2.1115
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 6.2008
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 5.8091
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": -4.1246
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 3.2695
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 1.9503
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 1,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -4.9316
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": 0.2954
+    },
+    {
+      "pair": [
+        1,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -1.4569
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": -3.1391
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 5.6138
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 0,
+      "eps_logit": 4.8038
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -5.2945
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": 0.9374
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 1,
+      "eps_logit": -0.6723
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -5.6435
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -1.0738
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 2,
+      "inv": 2,
+      "eps_logit": -3.3803
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": -2.6604
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 6.6037
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 0,
+      "eps_logit": 5.588
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -5.0978
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": 1.6534
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 1,
+      "eps_logit": -0.041
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -5.9072
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -1.1547
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 6,
+      "inv": 2,
+      "eps_logit": -3.3158
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": -2.041
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 7.6218
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 0,
+      "eps_logit": 6.3342
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": -4.7573
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 2.4618
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 1,
+      "eps_logit": 0.6782
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -6.1317
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -1.164
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 10,
+      "inv": 2,
+      "eps_logit": -3.1391
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": -1.2994
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 8.6244
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 0,
+      "eps_logit": 7.0006
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": -4.262
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 3.3335
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 1,
+      "eps_logit": 1.4578
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "own_i",
+      "idx": 2,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -5.9821
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "third_k",
+      "idx": 0,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -1.0951
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "outcome": "abstain",
+      "idx": 4,
+      "t": 14,
+      "inv": 2,
+      "eps_logit": -2.8244
+    }
+  ]
+}

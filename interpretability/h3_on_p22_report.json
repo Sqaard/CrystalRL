@@ -1,0 +1,60 @@
+{
+  "policy": "GENUINE two-agent P22 (Beta-budget PM -> latent-action Trader), csi500 frozen",
+  "test": "H3 hierarchical factoring on P22's real two levels: flat(obs->mode) vs hierarchical(PM-budget-mediated worker->mode), temporal 60/40 holdout, vs chance",
+  "results": {
+    "P22 deadline": {
+      "flat_fidelity_by_budget": {
+        "3": 0.234,
+        "4": 0.234,
+        "6": 0.234,
+        "8": 0.234,
+        "12": 0.234,
+        "16": 0.234
+      },
+      "hier_fidelity_by_budget": {
+        "3": 0.0,
+        "4": 0.234,
+        "6": 0.234,
+        "8": 0.234,
+        "12": 0.234,
+        "16": 0.234
+      },
+      "PM_stance_distillability(obs->budget)": 0.306,
+      "chance_mode_majority": 0.333,
+      "chance_stance_majority": 0.36,
+      "flat_best": 0.234,
+      "hier_best": 0.234,
+      "any_surrogate_above_chance": false,
+      "hierarchy_helps": false,
+      "H3_PASS": false
+    },
+    "P22 PIT": {
+      "flat_fidelity_by_budget": {
+        "3": 0.162,
+        "4": 0.162,
+        "6": 0.162,
+        "8": 0.162,
+        "12": 0.162,
+        "16": 0.162
+      },
+      "hier_fidelity_by_budget": {
+        "3": 0.0,
+        "4": 0.162,
+        "6": 0.162,
+        "8": 0.162,
+        "12": 0.162,
+        "16": 0.162
+      },
+      "PM_stance_distillability(obs->budget)": 0.279,
+      "chance_mode_majority": 0.477,
+      "chance_stance_majority": 0.36,
+      "flat_best": 0.162,
+      "hier_best": 0.162,
+      "any_surrogate_above_chance": false,
+      "hierarchy_helps": false,
+      "H3_PASS": false
+    }
+  },
+  "H3_on_P22_verdict": "H3 NEGATIVE on P22 (as predicted) \u2014 neither flat nor PM->Trader-hierarchical distillation reproduces P22's within-book selection above chance, and the hierarchy buys nothing. P22 is an unstructured churner (structure 0/6, simulatability at chance), and you cannot hierarchically distill noise: there is no compact readable PM->Trader factoring because there is no readable program. A clean negative \u2014 a property of P22, not a failure of H3. This CLOSES the coverage matrix (the last applicable cell).",
+  "closes_coverage_cell": true
+}

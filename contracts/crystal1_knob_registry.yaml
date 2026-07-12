@@ -1,0 +1,127 @@
+# CRYSTAL-1 KNOB REGISTRY v1 — R6c's ~214-knob surface migrated onto the BORN-LEGIBLE belief-write command surface.
+# The HL5_FINAL_K lever grammar, made concrete for CRYSTAL-1: ~20 agent-facing levers, rest engineering-fenced.
+# Each lever carries a machine-checkable GUARANTEE (post-condition, not a mode name), an authority tier, a
+# rate/dwell limit, a cumulative-authority trajectory budget, the min writ-ladder rung required to act (C0..C6),
+# a reversibility class R0..R4, and a version pin. Migrate, do not retrofit (Plan A Fix 1/5).
+#
+# Provenance: reports/HL5_FINAL_K_KnobRegistry_v2.md (schema); reports/CRYSTAL1_PLAN_A_R6c_control_analysis.md
+# (R6c weaknesses); src/crystal/{belief_filter,soft_tree_policy,governor,writ_ladder}.py (the enforcement code);
+# interpretability/{c1_leakage_certificate,c2_filter_grounded_c1,c3_certify_against_world,c5_sign_epistasis}.py (evidence).
+
+meta:
+  version: crystal1_knob_registry_v1
+  policy_version_pin: corner_ppo_n1        # every writ voids to C1 on a policy or cfbank bump (writ_ladder.void_on_version_bump)
+  cfbank_version_pin: cfbank_v1
+  anchor_version: frozen_2022_2023         # cumulative-authority budgets reset only by re-cert vs this anchor
+  agent_facing_count: 5                    # SET_BELIEF, EXPOSURE_MODE, GROUP_CONCENTRATION_CAP, ABSTAIN_FLOOR, DRAWDOWN_BUDGET (K_VOCABULARY is engineering_fenced — a T1 retrain, not a runtime knob). Aviation-sized surface; rest fenced.
+  reversibility_classes: {R0: bitwise-reversible, R1: unwind-to-ghost, R2: costly-unwind, R3: slow-decay, R4: irreversible}
+
+# ============================ AGENT-FACING command surface (the belief-write levers) ============================
+levers:
+  - name: SET_BELIEF
+    kind: belief_write                     # the K-simplex command surface (src/crystal/belief_filter.py)
+    unit: simplex_coordinate
+    range: [0.0, 1.0]                      # barycentric; every value on-simplex (refusal-rate 0, C-2)
+    default: filtered                      # default = the self-supervised filter posterior (no override)
+    guarantee: "policy action tracks the world-model optimum for the commanded belief (C-2 agreement>=0.80 corner)"
+    authority_tier: agent_facing
+    rate_limit: {max_writes_per_step: 1, dwell_steps: 1}
+    trajectory_budget: {metric: "D=sum|d_belief|*duration", cap: 3.0, refill: windowed_recert_only}
+    writ_min_rung: C6                       # a live capital-acting write needs the full ladder
+    reversibility_class: R1
+    annunciation_channel: guarantee_delta_stream
+    interaction_owner: belief_simplex       # single owner of the shared belief resource
+    guards:
+      grounded_command_check: c3_certify_against_world   # authority scales with predictive-NLL, not sharpness
+      envelope_governor: governor.BeliefGovernor         # off-envelope -> project + annunciate demotion (C3)
+      co_activation_cap: N_live_le_K                      # C-5 sign-epistasis -> bounded co-active belief-writes
+
+  - name: EXPOSURE_MODE
+    kind: risk_stance
+    unit: enum
+    range: [FULL, REDUCED, DEFENSIVE]      # B3 pre-registered exposure map keyed on belief
+    default: belief_conditional
+    guarantee: "gross exposure <= mode cap; on belief-quality degradation authority DEMOTES and annunciates lost cap"
+    authority_tier: agent_facing
+    rate_limit: {dwell_steps: 3}
+    trajectory_budget: {metric: switch_count, cap: 8, refill: windowed_recert_only}
+    writ_min_rung: C3
+    reversibility_class: R1
+    annunciation_channel: guarantee_delta_stream
+    interaction_owner: capital_scope
+
+  - name: GROUP_CONCENTRATION_CAP
+    kind: hard_cap                         # the R6c soft-cap-that-didn't-bind (W8) made HARD
+    unit: fraction
+    range: [0.05, 0.60]
+    default: 0.35
+    guarantee: "no group weight exceeds the cap at any step (HARD, not a soft priority) — enforced post-projection"
+    authority_tier: agent_facing
+    rate_limit: {dwell_steps: 5}
+    trajectory_budget: {metric: anchor_sigma_delta, cap: 0.15, refill: windowed_recert_only}
+    writ_min_rung: C4
+    reversibility_class: R2
+    annunciation_channel: guarantee_delta_stream
+    interaction_owner: book_allocation
+
+  - name: ABSTAIN_FLOOR
+    kind: verb_enable                      # first-class ABSTAIN (Plan C H6): ~19% of value is in not-trading
+    unit: fraction
+    range: [0.0, 1.0]
+    default: 0.0
+    guarantee: "when belief-quality (filter NLL) exceeds tau, ABSTAIN is available and forced-selling is gated"
+    authority_tier: agent_facing
+    rate_limit: {dwell_steps: 1}
+    trajectory_budget: {metric: none}
+    writ_min_rung: C3
+    reversibility_class: R0
+    annunciation_channel: guarantee_delta_stream
+    interaction_owner: capital_scope
+
+  - name: K_VOCABULARY
+    kind: architectural_dial               # GROW_K (C-5): the belief vocabulary size; C*~=K bend (B2 C4 ironclad)
+    unit: integer
+    range: [2, 12]
+    default: 2
+    guarantee: "a new belief vertex is load-bearing (HC-1 ablation hurts + belief-N7) before it is exposed"
+    authority_tier: engineering_fenced     # T1 retrain — not a runtime knob
+    rate_limit: {retrain_required: true}
+    trajectory_budget: {metric: none}
+    writ_min_rung: C5
+    reversibility_class: R3
+    annunciation_channel: change_dossier
+    interaction_owner: belief_simplex
+
+  - name: DRAWDOWN_BUDGET
+    kind: risk_limit
+    unit: fraction
+    range: [0.05, 0.40]
+    default: 0.20
+    guarantee: "realized drawdown stays within budget or the agent demotes to DEFENSIVE and annunciates"
+    authority_tier: agent_facing
+    rate_limit: {dwell_steps: 5}
+    trajectory_budget: {metric: anchor_sigma_delta, cap: 0.10, refill: windowed_recert_only}
+    writ_min_rung: C4
+    reversibility_class: R2
+    annunciation_channel: guarantee_delta_stream
+    interaction_owner: capital_scope
+
+# ============================ ENGINEERING-FENCED (behind the authority fence; not agent-facing) ================
+fenced:
+  # R6c's ~214 raw knobs collapse here (HL5_FINAL_K mapping): 30 confidence keys -> merged into SET_BELIEF's
+  # filter; 7 group coeffs -> GROUP_CONCENTRATION_CAP; reward/PPO/formation/intervention knobs -> training-time only;
+  # turnover_cap / lambda_cash / selection-overlay-deconcentration -> FENCED (near-no-ops on a near-EW book, Plan A W_).
+  - {group: reward_shaping, note: "return/turnover/drawdown/concentration/action-change weights — training-time only"}
+  - {group: ppo_optimizer, note: "n_steps/batch/lr/clip/gamma/gae/ent_coef/vf_coef/max_grad_norm — training-time only"}
+  - {group: filter_hyperparams, note: "K-state HMM logits_T/E/p0, train epochs/lr — set by GROW_K retrain"}
+  - {group: formation_intervention, note: "R6c latent-action/codebook/residual_mix/cash_blend — retired: migrate to SET_BELIEF"}
+  - {group: legacy_no_ops, note: "turnover_cap, lambda_cash, selection-overlay-deconc — near-no-op on near-EW book; fenced"}
+
+# ============================ CROSS-CUTTING invariants (outside the modifiable surface) ========================
+invariants:
+  - "The proposer may never self-classify, self-approve, or self-deploy a lever change (GV Constitution)."
+  - "No SET_BELIEF acts on capital below writ rung C6; any policy/cfbank bump voids to C1 (writ_ladder)."
+  - "Cumulative-authority ledger is signed per-principal; reset only by re-cert vs anchor_version (anti-salami)."
+  - "N_live belief-writes <= K_VOCABULARY (C-5 sign-epistasis: cross-term sign-unstable beyond direct competition)."
+  - "Every degradation/demotion emits a machine-readable GUARANTEE_DELTA (annunciate lost guarantees, not mode names)."
+  - "Safety invariants (kill-switch, envelope, drawdown hard-stop) live OUTSIDE this registry and cannot be edited by the agent."

@@ -1,0 +1,170 @@
+{
+  "R6c csi500 (cash)": {
+    "n": 272,
+    "baseline": 0.00016836184989767357,
+    "Lstar": 4.6586132433340525e-06,
+    "structure_frac": 0.972329757328246,
+    "curve": {
+      "0.02": {
+        "ratio": 0.01,
+        "diameter": 0.0
+      },
+      "0.05": {
+        "ratio": 0.01,
+        "diameter": 0.0
+      },
+      "0.1": {
+        "ratio": 0.01,
+        "diameter": 0.0
+      },
+      "0.25": {
+        "ratio": 0.01,
+        "diameter": 0.0
+      },
+      "0.5": {
+        "ratio": 0.02,
+        "diameter": 0.151
+      }
+    }
+  },
+  "P22 csi500 (cash)": {
+    "n": 272,
+    "baseline": 7.549688259047799e-06,
+    "Lstar": 7.549688259047799e-06,
+    "structure_frac": 0.0,
+    "curve": {
+      "0.02": {
+        "ratio": 0.24,
+        "diameter": 0.088
+      },
+      "0.05": {
+        "ratio": 0.56,
+        "diameter": 0.108
+      },
+      "0.1": {
+        "ratio": 0.8,
+        "diameter": 0.129
+      },
+      "0.25": {
+        "ratio": 0.99,
+        "diameter": 0.127
+      },
+      "0.5": {
+        "ratio": 1.0,
+        "diameter": 0.136
+      }
+    }
+  },
+  "R6c Dow (cash_target)": {
+    "n": 284,
+    "baseline": 0.0064919786341687945,
+    "Lstar": 0.0010751514089184597,
+    "structure_frac": 0.8343877160562903,
+    "curve": {
+      "0.02": {
+        "ratio": 0.01,
+        "diameter": 0.0
+      },
+      "0.05": {
+        "ratio": 0.01,
+        "diameter": 0.0
+      },
+      "0.1": {
+        "ratio": 0.02,
+        "diameter": 0.143
+      },
+      "0.25": {
+        "ratio": 0.03,
+        "diameter": 0.147
+      },
+      "0.5": {
+        "ratio": 0.04,
+        "diameter": 0.185
+      }
+    }
+  },
+  "CTRL persister*": {
+    "n": 272,
+    "baseline": 0.092562720370791,
+    "Lstar": 0.030122495286988477,
+    "structure_frac": 0.6745720613404325,
+    "curve": {
+      "0.02": {
+        "ratio": 0.03,
+        "diameter": 0.141
+      },
+      "0.05": {
+        "ratio": 0.04,
+        "diameter": 0.13
+      },
+      "0.1": {
+        "ratio": 0.11,
+        "diameter": 0.176
+      },
+      "0.25": {
+        "ratio": 0.3,
+        "diameter": 0.239
+      },
+      "0.5": {
+        "ratio": 0.5,
+        "diameter": 0.259
+      }
+    }
+  },
+  "CTRL ar1*": {
+    "n": 272,
+    "baseline": 0.17152230604927018,
+    "Lstar": 0.09087130182328088,
+    "structure_frac": 0.4702070889999702,
+    "curve": {
+      "0.02": {
+        "ratio": 0.02,
+        "diameter": 0.253
+      },
+      "0.05": {
+        "ratio": 0.02,
+        "diameter": 0.253
+      },
+      "0.1": {
+        "ratio": 0.02,
+        "diameter": 0.253
+      },
+      "0.25": {
+        "ratio": 0.13,
+        "diameter": 0.343
+      },
+      "0.5": {
+        "ratio": 0.54,
+        "diameter": 0.364
+      }
+    }
+  },
+  "CTRL iid noise*": {
+    "n": 272,
+    "baseline": 0.07198058951163454,
+    "Lstar": 0.07161573508979745,
+    "structure_frac": 0.005068789020936215,
+    "curve": {
+      "0.02": {
+        "ratio": 0.17,
+        "diameter": 0.086
+      },
+      "0.05": {
+        "ratio": 0.59,
+        "diameter": 0.114
+      },
+      "0.1": {
+        "ratio": 0.95,
+        "diameter": 0.126
+      },
+      "0.25": {
+        "ratio": 1.0,
+        "diameter": 0.127
+      },
+      "0.5": {
+        "ratio": 1.0,
+        "diameter": 0.126
+      }
+    }
+  }
+}

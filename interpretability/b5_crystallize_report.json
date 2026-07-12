@@ -1,0 +1,67 @@
+{
+  "env": "RegimeRotation G=12",
+  "lambda": 0.5,
+  "baselines_B2": {
+    "sim_K9": [
+      0.611,
+      0.594,
+      0.583
+    ],
+    "return": [
+      3.99,
+      9.14,
+      4.6
+    ]
+  },
+  "arms": [
+    {
+      "seed": 1,
+      "sim_K9": 0.685,
+      "sim_K64": 0.931,
+      "gap": 0.246,
+      "return": 4.65,
+      "x_h_mu": [
+        1.153,
+        1.7911
+      ],
+      "structure": "2/2",
+      "story_agreement_by_round": [
+        0.891,
+        0.901,
+        0.866
+      ],
+      "gates": {
+        "sim_up": false,
+        "return_ok": true,
+        "h_mu_ok": true,
+        "structured": true
+      },
+      "pass": false
+    },
+    {
+      "seed": 2,
+      "sim_K9": 0.587,
+      "sim_K64": 0.913,
+      "gap": 0.326,
+      "return": 11.75,
+      "x_h_mu": [
+        1.3924,
+        2.081
+      ],
+      "structure": "2/2",
+      "story_agreement_by_round": [
+        0.83,
+        0.828,
+        0.71
+      ],
+      "gates": {
+        "sim_up": false,
+        "return_ok": true,
+        "h_mu_ok": true,
+        "structured": true
+      },
+      "pass": false
+    }
+  ],
+  "verdict": "not confirmed on all seeds \u2014 inspect arms (which gate failed)."
+}

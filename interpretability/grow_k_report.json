@@ -1,0 +1,151 @@
+{
+  "corner_G2": {
+    "G": 2,
+    "command_surface_axes": 1,
+    "of_possible": 2,
+    "note": "the K=2 corner belief is one scalar (toxic-mass) = a single SET_BELIEF axis (C-1/C-2)"
+  },
+  "family_G4": {
+    "G": 4,
+    "command_surface_axes": 4,
+    "of_possible": 4,
+    "per_axis": [
+      {
+        "vertex": 0,
+        "P_base": 0.007,
+        "P_forced": 0.984,
+        "steer": 0.977,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 1,
+        "P_base": 0.002,
+        "P_forced": 0.981,
+        "steer": 0.978,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 2,
+        "P_base": 0.005,
+        "P_forced": 0.99,
+        "steer": 0.985,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 3,
+        "P_base": 0.009,
+        "P_forced": 0.986,
+        "steer": 0.977,
+        "monotone": true,
+        "live_command_axis": true
+      }
+    ]
+  },
+  "family_G12": {
+    "G": 12,
+    "command_surface_axes": 12,
+    "of_possible": 12,
+    "per_axis": [
+      {
+        "vertex": 0,
+        "P_base": 0.001,
+        "P_forced": 0.687,
+        "steer": 0.686,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 1,
+        "P_base": 0.001,
+        "P_forced": 0.457,
+        "steer": 0.457,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 2,
+        "P_base": 0.002,
+        "P_forced": 0.933,
+        "steer": 0.931,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 3,
+        "P_base": 0.0,
+        "P_forced": 0.916,
+        "steer": 0.916,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 4,
+        "P_base": 0.001,
+        "P_forced": 0.639,
+        "steer": 0.638,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 5,
+        "P_base": 0.001,
+        "P_forced": 0.419,
+        "steer": 0.418,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 6,
+        "P_base": 0.001,
+        "P_forced": 0.85,
+        "steer": 0.849,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 7,
+        "P_base": 0.001,
+        "P_forced": 0.893,
+        "steer": 0.892,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 8,
+        "P_base": 0.001,
+        "P_forced": 0.807,
+        "steer": 0.806,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 9,
+        "P_base": 0.005,
+        "P_forced": 0.262,
+        "steer": 0.256,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 10,
+        "P_base": 0.002,
+        "P_forced": 0.826,
+        "steer": 0.824,
+        "monotone": true,
+        "live_command_axis": true
+      },
+      {
+        "vertex": 11,
+        "P_base": 0.001,
+        "P_forced": 0.691,
+        "steer": 0.69,
+        "monotone": true,
+        "live_command_axis": true
+      }
+    ]
+  },
+  "headline": "GROW_K measured: command-surface axes grow with K \u2014 {'corner_G2': 1, 'family_G4': 4, 'family_G12': 12}. Growing the belief vocabulary from K=2 to a K=G family multiplies the number of independently-steerable SET_BELIEF command axes (each a causal, dose-monotone lever), so GROW_K is a concrete way to expand CRYSTAL-1's command surface; each new axis is gated as a T1 retrain and remains legible while G+2 <= K (the C*=K law)."
+}

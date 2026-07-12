@@ -1,0 +1,186 @@
+{
+  "substrate": "Series-G corner polygon; jointly-trained PPO soft-tree actor, burst-EXCLUDED (feat_idx=[belief,inv,time])",
+  "total_timesteps": 500000,
+  "smoke": false,
+  "tree_depth": 3,
+  "n_leaves": 8,
+  "return": {
+    "mlp_baseline_mean": 7.71,
+    "mlp_sem": 0.39,
+    "softtree_mean": 7.692,
+    "softtree_sem": 0.39,
+    "gap": -0.018,
+    "parity_floor": 7.515,
+    "PARITY": true,
+    "paired_diff_mean": -0.018,
+    "paired_diff_sem": 0.091
+  },
+  "burst_leak_action_distribution": {
+    "tv_mean": 0.0,
+    "tv_max": 0.0,
+    "CLOSED_by_construction": true
+  },
+  "dose": {
+    "0.02": 0.999,
+    "0.1": 0.999,
+    "0.18": 0.952,
+    "0.26": 0.118,
+    "0.34": 0.002,
+    "0.42": 0.0,
+    "0.5": 0.0,
+    "0.58": 0.0,
+    "0.66": 0.0,
+    "0.74": 0.0,
+    "0.82": 0.0,
+    "0.9": 0.0,
+    "0.98": 0.0
+  },
+  "dose_monotone": true,
+  "command_threshold_belief": 0.26,
+  "leaf_table": {
+    "gates": [
+      {
+        "node": 0,
+        "w": [
+          7.221,
+          5.948,
+          3.518
+        ],
+        "b": 8.475
+      },
+      {
+        "node": 1,
+        "w": [
+          -0.124,
+          1.477,
+          0.012
+        ],
+        "b": -2.636
+      },
+      {
+        "node": 2,
+        "w": [
+          -10.259,
+          2.755,
+          2.014
+        ],
+        "b": -2.49
+      },
+      {
+        "node": 3,
+        "w": [
+          1.517,
+          -1.193,
+          -1.085
+        ],
+        "b": -1.478
+      },
+      {
+        "node": 4,
+        "w": [
+          -5.468,
+          6.701,
+          3.817
+        ],
+        "b": 3.445
+      },
+      {
+        "node": 5,
+        "w": [
+          5.616,
+          6.657,
+          0.393
+        ],
+        "b": 8.189
+      },
+      {
+        "node": 6,
+        "w": [
+          -5.601,
+          0.813,
+          1.387
+        ],
+        "b": -2.885
+      }
+    ],
+    "leaves": [
+      {
+        "leaf": 0,
+        "argmax_action": 0,
+        "action_probs": [
+          0.667,
+          0.19,
+          0.142
+        ]
+      },
+      {
+        "leaf": 1,
+        "argmax_action": 2,
+        "action_probs": [
+          0.095,
+          0.035,
+          0.87
+        ]
+      },
+      {
+        "leaf": 2,
+        "argmax_action": 2,
+        "action_probs": [
+          0.0,
+          0.0,
+          0.999
+        ]
+      },
+      {
+        "leaf": 3,
+        "argmax_action": 1,
+        "action_probs": [
+          0.0,
+          0.999,
+          0.001
+        ]
+      },
+      {
+        "leaf": 4,
+        "argmax_action": 2,
+        "action_probs": [
+          0.002,
+          0.002,
+          0.996
+        ]
+      },
+      {
+        "leaf": 5,
+        "argmax_action": 0,
+        "action_probs": [
+          0.999,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "leaf": 6,
+        "argmax_action": 0,
+        "action_probs": [
+          0.966,
+          0.016,
+          0.017
+        ]
+      },
+      {
+        "leaf": 7,
+        "argmax_action": 1,
+        "action_probs": [
+          0.001,
+          0.998,
+          0.001
+        ]
+      }
+    ]
+  },
+  "M6_PASS": true,
+  "verdict": "PASS \u2014 the jointly-trained belief-only soft-tree head reaches MLP return parity AND has TV=0 under burst-flip: the C-1 residual leak is now closed IN THE ACTION DISTRIBUTION (structural, not just in return). A legible tree IS the policy; commands are leaf edits; the raw observable has zero authority.",
+  "caveats": [
+    "K=2 polygon, deterministic + sampled dist both from the same burst-blind head; teeth only where VoI>0; critic sees full obs (training-only, does not affect the deployed action distribution)."
+  ]
+}

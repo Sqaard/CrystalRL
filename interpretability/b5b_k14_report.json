@@ -1,0 +1,31 @@
+{
+  "baselines": [
+    {
+      "tag": "s1",
+      "sim_K14": 0.832,
+      "return": 9.63
+    },
+    {
+      "tag": "s2",
+      "sim_K14": 0.855,
+      "return": 4.75
+    }
+  ],
+  "arm": {
+    "seed": 1,
+    "sim_K14": 0.869,
+    "return": 21.08,
+    "x_h_mu": [
+      1.3716,
+      1.9104
+    ],
+    "structure": "2/2",
+    "story_agreement_by_round": [
+      0.942,
+      0.866,
+      0.672
+    ]
+  },
+  "arm_beats_all_baselines": false,
+  "law_reading": "arm does not beat baselines at K=14 either \u2014 the bonus itself is weak, not (only) the budget."
+}

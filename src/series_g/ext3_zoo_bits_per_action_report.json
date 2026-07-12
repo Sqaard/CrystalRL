@@ -1,0 +1,141 @@
+{
+  "what": "FINAL_A Complexity Zoo converted to MEASURED bits/action (L0 ruler), with R6c + Series-G placed",
+  "honesty": "archetype rows are minimal BEHAVIORAL MODELS capturing each class's action-entropy character (NOT real systems / not task difficulty); R6c + Series-G rows are MEASURED on real/solved policies. Converts the FINAL_A ordinal axis into bits/action so the references are recognizable.",
+  "ruler_low_to_high": [
+    {
+      "archetype": "thermostat",
+      "alphabet": "2 (on/off)",
+      "h_mu_bits_per_action": [
+        0.2449,
+        0.3977
+      ],
+      "structure": "2/2",
+      "E_range": [
+        0.6109,
+        0.7597
+      ]
+    },
+    {
+      "archetype": "chess_engine(strong)",
+      "alphabet": "6 (move types)",
+      "h_mu_bits_per_action": [
+        0.3674,
+        0.376
+      ],
+      "structure": "0/2",
+      "E_range": [
+        0.0959,
+        0.1055
+      ]
+    },
+    {
+      "archetype": "R6c (Dow-29, MEASURED)",
+      "alphabet": "3 (stance)",
+      "h_mu_bits_per_action": [
+        0.288,
+        0.487
+      ],
+      "structure": "6/6",
+      "E_range": "\u2014"
+    },
+    {
+      "archetype": "central_bank",
+      "alphabet": "3 (cut/hold/hike)",
+      "h_mu_bits_per_action": [
+        0.6803,
+        0.712
+      ],
+      "structure": "2/2",
+      "E_range": [
+        0.4894,
+        0.5469
+      ]
+    },
+    {
+      "archetype": "Series-G optimal (MEASURED)",
+      "alphabet": "3 (exec mode)",
+      "h_mu_bits_per_action": [
+        0.853,
+        1.39
+      ],
+      "structure": "2/2",
+      "E_range": "\u2014"
+    },
+    {
+      "archetype": "Series-G PPO multi-asset (MEASURED)",
+      "alphabet": "3 (exec mode)",
+      "h_mu_bits_per_action": [
+        1.101,
+        1.194
+      ],
+      "structure": "2/2",
+      "E_range": "\u2014"
+    },
+    {
+      "archetype": "PID_controller",
+      "alphabet": "5 (levels)",
+      "h_mu_bits_per_action": [
+        1.0215,
+        1.4375
+      ],
+      "structure": "2/2",
+      "E_range": [
+        1.0293,
+        1.6646
+      ]
+    },
+    {
+      "archetype": "market_maker",
+      "alphabet": "3 (widen/hold/tighten)",
+      "h_mu_bits_per_action": [
+        1.1748,
+        1.3537
+      ],
+      "structure": "2/2",
+      "E_range": [
+        0.386,
+        0.6849
+      ]
+    },
+    {
+      "archetype": "poker_GTO(mixed)",
+      "alphabet": "3 (fold/call/raise)",
+      "h_mu_bits_per_action": [
+        1.4921,
+        1.5433
+      ],
+      "structure": "0/2",
+      "E_range": [
+        0.1389,
+        0.3303
+      ]
+    },
+    {
+      "archetype": "ant_forager",
+      "alphabet": "4 (directions)",
+      "h_mu_bits_per_action": [
+        1.5028,
+        1.7404
+      ],
+      "structure": "2/2",
+      "E_range": [
+        0.4727,
+        0.595
+      ]
+    },
+    {
+      "archetype": "LLM_like",
+      "alphabet": "16 (tokens)",
+      "h_mu_bits_per_action": [
+        3.7571,
+        3.8874
+      ],
+      "structure": "1/2",
+      "E_range": [
+        0.1049,
+        0.2394
+      ]
+    }
+  ],
+  "poker_reconciliation": "FINAL_A placed poker at normalized ~0.78 (high); on this bits/action ruler the poker GTO mixed-strategy model lands among the HIGH-h_mu archetypes \u2014 consistent with 'mixed strategy \u21d2 high entropy rate'. The ordinal\u2192bits/action map is monotone."
+}

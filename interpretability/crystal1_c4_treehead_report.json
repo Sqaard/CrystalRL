@@ -1,0 +1,219 @@
+{
+  "substrate": "src/series_g/corner_ppo_n1.zip; distill-and-rollout pilot (tree AS head, not surrogate)",
+  "n_eval_episodes": 300,
+  "baseline_mlp": {
+    "return_mean": 7.71,
+    "sem": 0.39,
+    "parity_floor": 7.515
+  },
+  "grid": [
+    {
+      "features": "belief_only",
+      "max_leaves": 2,
+      "n_leaves": 2,
+      "distill_acc": 0.603,
+      "return_mean": -4.363,
+      "gap_vs_mlp": -12.073,
+      "parity": false
+    },
+    {
+      "features": "belief_only",
+      "max_leaves": 3,
+      "n_leaves": 3,
+      "distill_acc": 0.632,
+      "return_mean": -1.346,
+      "gap_vs_mlp": -9.055,
+      "parity": false
+    },
+    {
+      "features": "belief_only",
+      "max_leaves": 4,
+      "n_leaves": 4,
+      "distill_acc": 0.69,
+      "return_mean": -1.497,
+      "gap_vs_mlp": -9.207,
+      "parity": false
+    },
+    {
+      "features": "belief_only",
+      "max_leaves": 6,
+      "n_leaves": 6,
+      "distill_acc": 0.729,
+      "return_mean": 4.131,
+      "gap_vs_mlp": -3.578,
+      "parity": false
+    },
+    {
+      "features": "belief_only",
+      "max_leaves": 8,
+      "n_leaves": 8,
+      "distill_acc": 0.76,
+      "return_mean": 4.667,
+      "gap_vs_mlp": -3.042,
+      "parity": false
+    },
+    {
+      "features": "belief_book",
+      "max_leaves": 2,
+      "n_leaves": 2,
+      "distill_acc": 0.603,
+      "return_mean": -4.363,
+      "gap_vs_mlp": -12.073,
+      "parity": false
+    },
+    {
+      "features": "belief_book",
+      "max_leaves": 3,
+      "n_leaves": 3,
+      "distill_acc": 0.772,
+      "return_mean": 5.575,
+      "gap_vs_mlp": -2.134,
+      "parity": false
+    },
+    {
+      "features": "belief_book",
+      "max_leaves": 4,
+      "n_leaves": 4,
+      "distill_acc": 0.828,
+      "return_mean": 7.026,
+      "gap_vs_mlp": -0.684,
+      "parity": false
+    },
+    {
+      "features": "belief_book",
+      "max_leaves": 6,
+      "n_leaves": 6,
+      "distill_acc": 0.86,
+      "return_mean": 7.06,
+      "gap_vs_mlp": -0.65,
+      "parity": false
+    },
+    {
+      "features": "belief_book",
+      "max_leaves": 8,
+      "n_leaves": 8,
+      "distill_acc": 0.863,
+      "return_mean": 7.06,
+      "gap_vs_mlp": -0.65,
+      "parity": false
+    },
+    {
+      "features": "belief_book_time",
+      "max_leaves": 2,
+      "n_leaves": 2,
+      "distill_acc": 0.603,
+      "return_mean": -4.363,
+      "gap_vs_mlp": -12.073,
+      "parity": false
+    },
+    {
+      "features": "belief_book_time",
+      "max_leaves": 3,
+      "n_leaves": 3,
+      "distill_acc": 0.772,
+      "return_mean": 5.575,
+      "gap_vs_mlp": -2.134,
+      "parity": false
+    },
+    {
+      "features": "belief_book_time",
+      "max_leaves": 4,
+      "n_leaves": 4,
+      "distill_acc": 0.828,
+      "return_mean": 7.026,
+      "gap_vs_mlp": -0.684,
+      "parity": false
+    },
+    {
+      "features": "belief_book_time",
+      "max_leaves": 6,
+      "n_leaves": 6,
+      "distill_acc": 0.894,
+      "return_mean": 7.562,
+      "gap_vs_mlp": -0.147,
+      "parity": true
+    },
+    {
+      "features": "belief_book_time",
+      "max_leaves": 8,
+      "n_leaves": 8,
+      "distill_acc": 0.933,
+      "return_mean": 7.571,
+      "gap_vs_mlp": -0.139,
+      "parity": true
+    },
+    {
+      "features": "all_incl_burst",
+      "max_leaves": 2,
+      "n_leaves": 2,
+      "distill_acc": 0.603,
+      "return_mean": -4.363,
+      "gap_vs_mlp": -12.073,
+      "parity": false
+    },
+    {
+      "features": "all_incl_burst",
+      "max_leaves": 3,
+      "n_leaves": 3,
+      "distill_acc": 0.772,
+      "return_mean": 5.575,
+      "gap_vs_mlp": -2.134,
+      "parity": false
+    },
+    {
+      "features": "all_incl_burst",
+      "max_leaves": 4,
+      "n_leaves": 4,
+      "distill_acc": 0.828,
+      "return_mean": 7.026,
+      "gap_vs_mlp": -0.684,
+      "parity": false
+    },
+    {
+      "features": "all_incl_burst",
+      "max_leaves": 6,
+      "n_leaves": 6,
+      "distill_acc": 0.894,
+      "return_mean": 7.562,
+      "gap_vs_mlp": -0.147,
+      "parity": true
+    },
+    {
+      "features": "all_incl_burst",
+      "max_leaves": 8,
+      "n_leaves": 8,
+      "distill_acc": 0.933,
+      "return_mean": 7.571,
+      "gap_vs_mlp": -0.139,
+      "parity": true
+    }
+  ],
+  "best_burst_free_parity": {
+    "features": "belief_book_time",
+    "max_leaves": 8,
+    "n_leaves": 8,
+    "distill_acc": 0.933,
+    "return_mean": 7.571,
+    "gap_vs_mlp": -0.139,
+    "parity": true
+  },
+  "winning_tree_belief_dose": {
+    "0.02": 0,
+    "0.1": 0,
+    "0.18": 0,
+    "0.26": 1,
+    "0.34": 1,
+    "0.42": 1,
+    "0.5": 1,
+    "0.58": 1,
+    "0.66": 1,
+    "0.74": 1,
+    "0.82": 1,
+    "0.9": 1,
+    "0.98": 1
+  },
+  "winning_tree_dose_monotone": true,
+  "winning_tree": "|--- belief <= -0.61 | |   |--- inv <= -0.25 | |   |   |--- time <= 0.35 | |   |   |   |--- class: 0 | |   |   |--- time >  0.35 | |   |   |   |--- inv <= -0.75 | |   |   |   |   |--- class: 0 | |   |   |   |--- inv >  -0.75 | |   |   |   |   |--- time <= 0.45 | |   |   |   |   |   |--- class: 0 | |   |   |   |   |--- time >  0.45 | |   |   |   |   |   |--- class: 2 | |   |--- inv >  -0.25 | |   |   |--- class: 2 | |--- belief >  -0.61 | |   |--- inv <= -0.75 | |   |   |--- class: 1 | |   |--- inv >  -0.75 | |   |   |--- belief <= 0.20 | |   |   |   |--- class: 2 | |   |   |--- belief >  0.20 ",
+  "STRUCTURAL_LEGIBILITY_PASS": true,
+  "verdict": "PASS \u2014 a small BURST-FREE tree head reaches MLP return parity, so the story tree can BE the policy head at no return cost. This delivers the B5-mandated STRUCTURAL legibility AND closes the C-1 residual burst leakage (a belief-based head needs no raw observable). Commands are now diffable leaf edits."
+}

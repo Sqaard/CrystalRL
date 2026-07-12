@@ -1,0 +1,74 @@
+{
+  "families": {
+    "regime_pomdp_markov": {
+      "params": {
+        "p_stay_benign": 0.9502533394748963,
+        "p_stay_toxic": 0.7826379542395693,
+        "prior_toxic": 0.185875,
+        "p_burst_benign": 0.14570858283433133,
+        "p_burst_toxic": 0.7047747141896435
+      },
+      "own_value": 6.5812,
+      "blind_value": 3.135,
+      "toxic_rate": 0.186
+    },
+    "gcmg_minority_game": {
+      "params": {
+        "p_stay_benign": 0.9230650869364517,
+        "p_stay_toxic": 0.6666666666666667,
+        "prior_toxic": 0.1875,
+        "p_burst_benign": 0.18261538461538462,
+        "p_burst_toxic": 0.6926666666666667
+      },
+      "own_value": 5.2715,
+      "blind_value": 6.0,
+      "toxic_rate": 0.188
+    },
+    "brock_hommes_adaptive": {
+      "params": {
+        "p_stay_benign": 0.8004765687053217,
+        "p_stay_toxic": 0.5,
+        "prior_toxic": 0.213,
+        "p_burst_benign": 0.19456797966963152,
+        "p_burst_toxic": 0.67018779342723
+      },
+      "own_value": 1.0537,
+      "blind_value": 0.219,
+      "toxic_rate": 0.213
+    }
+  },
+  "transfer_value_matrix": {
+    "regime_pomdp_markov__on__regime_pomdp_markov": 6.5812,
+    "regime_pomdp_markov__on__gcmg_minority_game": 5.0584,
+    "regime_pomdp_markov__on__brock_hommes_adaptive": 0.9851,
+    "gcmg_minority_game__on__regime_pomdp_markov": 6.4462,
+    "gcmg_minority_game__on__gcmg_minority_game": 5.2715,
+    "gcmg_minority_game__on__brock_hommes_adaptive": 0.9719,
+    "brock_hommes_adaptive__on__regime_pomdp_markov": 6.3881,
+    "brock_hommes_adaptive__on__gcmg_minority_game": 4.0648,
+    "brock_hommes_adaptive__on__brock_hommes_adaptive": 1.0537
+  },
+  "VoI_retained_matrix": {
+    "regime_pomdp_markov__on__regime_pomdp_markov": 1.0,
+    "regime_pomdp_markov__on__gcmg_minority_game": 1.293,
+    "regime_pomdp_markov__on__brock_hommes_adaptive": 0.918,
+    "gcmg_minority_game__on__regime_pomdp_markov": 0.961,
+    "gcmg_minority_game__on__gcmg_minority_game": 1.0,
+    "gcmg_minority_game__on__brock_hommes_adaptive": 0.902,
+    "brock_hommes_adaptive__on__regime_pomdp_markov": 0.944,
+    "brock_hommes_adaptive__on__gcmg_minority_game": 2.656,
+    "brock_hommes_adaptive__on__brock_hommes_adaptive": 1.0
+  },
+  "valid_transfer_targets (belief load-bearing, own-blind>0.5)": [
+    "regime_pomdp_markov",
+    "brock_hommes_adaptive"
+  ],
+  "off_diagonal_retained_to_valid_targets": {
+    "min": 0.902,
+    "mean": 0.931,
+    "max": 0.961
+  },
+  "HC3_full_cross_model_class_PASS": true,
+  "verdict": "HC-3 (FULL) PASS \u2014 the execution policy's regime-response transfers across MODEL CLASSES (Markov \u2194 minority-game \u2194 adaptive-beliefs), retaining >50% of the value-of-information off-diagonal; the semantics are task-, not generator-, specific.",
+  "scope": "3 model classes via a shared (toxicity, burst/quiet) interface + a Markov filter view; the generators differ in lag-1 toxic autocorrelation (Markov +0.73, GCMG +0.33, BH -0.04)."
+}

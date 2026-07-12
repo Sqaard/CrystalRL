@@ -1,0 +1,906 @@
+{
+  "substrate": "CRYSTAL-1-native: K=2 self-supervised belief filter (frozen train) + 4-knob exposure policy; REAL Dow-29 (2010-2023) and csi500 (2018-2023) EW panels",
+  "voi_gate_context": "belief-on-capital fenced by voi_gate.py: CLOSED on BTC + SOL/AVAX/GALA (VoI=0, regime priced); CN A-shares pending data (L5 recorder restarted 2026-07-06, accumulating). This loop certifies TRANSPARENCY/RISK-mode edits only.",
+  "dow": {
+    "panel": "dow",
+    "certified_coeffs": {
+      "t1": 0.3,
+      "t2": 0.7,
+      "lvl_reduced": 1.0,
+      "lvl_defensive": 1.0
+    },
+    "input_prior": null,
+    "canary_log": [
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        2e-06
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -4e-06
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        2e-06
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -4e-06
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        2e-06
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -4e-06
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        2e-06
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -4e-06
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ]
+    ],
+    "accepts": 0,
+    "gate_counts": {
+      "REJECTED_NO_FRONTIER_GAIN": 36,
+      "REJECTED_HOLDOUT": 4
+    },
+    "audit": {
+      "dominated": 36,
+      "adversary_vetoes": 0,
+      "budget_refusals": 0,
+      "wealth_refusals": 0,
+      "holdout_rejections": 4,
+      "inert_windows": 0,
+      "canary_caught": 4,
+      "canary_escaped": 0,
+      "canary_unarmed": 8
+    },
+    "wealth_left": 0.0103,
+    "tension_spent": 0.0,
+    "gate_compromised": false,
+    "frontier": [
+      {
+        "coeffs": {
+          "t1": 0.3,
+          "t2": 0.7,
+          "lvl_reduced": 1.0,
+          "lvl_defensive": 1.0
+        },
+        "ann_dev": 0.1634,
+        "maxDD_dev": -0.1601
+      }
+    ],
+    "bandit_prior": {
+      "t1": 0.0,
+      "t2": 0.0,
+      "lvl_reduced": 0.0,
+      "lvl_defensive": 0.0,
+      "joint_defend": 0.0
+    },
+    "oos_single_shot": {
+      "anchor_static_full": {
+        "ann": 0.0518,
+        "maxDD": -0.2117,
+        "sharpe": 0.388
+      },
+      "final_incumbent": {
+        "ann": 0.0518,
+        "maxDD": -0.2117,
+        "sharpe": 0.388
+      }
+    },
+    "hold_full_window": {
+      "anchor_static_full": {
+        "ann": 0.2269,
+        "maxDD": -0.3292,
+        "sharpe": 0.912
+      },
+      "final_incumbent": {
+        "ann": 0.2269,
+        "maxDD": -0.3292,
+        "sharpe": 0.912
+      }
+    },
+    "mdl_axis_a": {
+      "anchor": 0.0,
+      "final": 0.0
+    }
+  },
+  "csi500_warm": {
+    "panel": "csi500",
+    "certified_coeffs": {
+      "t1": 0.3,
+      "t2": 0.7,
+      "lvl_reduced": 1.0,
+      "lvl_defensive": 1.0
+    },
+    "input_prior": {
+      "t1": 0.0,
+      "t2": 0.0,
+      "lvl_reduced": 0.0,
+      "lvl_defensive": 0.0,
+      "joint_defend": 0.0
+    },
+    "canary_log": [
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ]
+    ],
+    "accepts": 0,
+    "gate_counts": {
+      "REJECTED_NO_FRONTIER_GAIN": 25,
+      "REJECTED_DOMINATED": 4,
+      "REFUSED_INERT_ON_WINDOW": 4,
+      "REJECTED_HOLDOUT": 7
+    },
+    "audit": {
+      "dominated": 29,
+      "adversary_vetoes": 0,
+      "budget_refusals": 0,
+      "wealth_refusals": 0,
+      "holdout_rejections": 7,
+      "inert_windows": 4,
+      "canary_caught": 4,
+      "canary_escaped": 0,
+      "canary_unarmed": 8
+    },
+    "wealth_left": 0.0013,
+    "tension_spent": 0.0,
+    "gate_compromised": false,
+    "frontier": [
+      {
+        "coeffs": {
+          "t1": 0.3,
+          "t2": 0.7,
+          "lvl_reduced": 1.0,
+          "lvl_defensive": 1.0
+        },
+        "ann_dev": 0.2255,
+        "maxDD_dev": -0.0741
+      }
+    ],
+    "bandit_prior": {
+      "t1": 0.0,
+      "t2": 0.0,
+      "lvl_reduced": 0.0,
+      "lvl_defensive": 0.0,
+      "joint_defend": 0.0
+    },
+    "oos_single_shot": {
+      "anchor_static_full": {
+        "ann": 0.0594,
+        "maxDD": -0.1094,
+        "sharpe": 0.483
+      },
+      "final_incumbent": {
+        "ann": 0.0594,
+        "maxDD": -0.1094,
+        "sharpe": 0.483
+      }
+    },
+    "hold_full_window": {
+      "anchor_static_full": {
+        "ann": 0.0309,
+        "maxDD": -0.2509,
+        "sharpe": 0.258
+      },
+      "final_incumbent": {
+        "ann": 0.0309,
+        "maxDD": -0.2509,
+        "sharpe": 0.258
+      }
+    },
+    "mdl_axis_a": {
+      "anchor": 0.0,
+      "final": 0.0
+    }
+  },
+  "csi500_cold": {
+    "panel": "csi500",
+    "certified_coeffs": {
+      "t1": 0.3,
+      "t2": 0.7,
+      "lvl_reduced": 1.0,
+      "lvl_defensive": 1.0
+    },
+    "input_prior": null,
+    "canary_log": [
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ],
+      [
+        "defensive_lockdown",
+        "UNARMED",
+        -0.000129
+      ],
+      [
+        "cost_churn",
+        "UNARMED",
+        -0.000145
+      ],
+      [
+        "config_bloat",
+        "REJECTED_NO_FRONTIER_GAIN",
+        null
+      ]
+    ],
+    "accepts": 0,
+    "gate_counts": {
+      "REJECTED_NO_FRONTIER_GAIN": 25,
+      "REJECTED_DOMINATED": 4,
+      "REFUSED_INERT_ON_WINDOW": 4,
+      "REJECTED_HOLDOUT": 7
+    },
+    "audit": {
+      "dominated": 29,
+      "adversary_vetoes": 0,
+      "budget_refusals": 0,
+      "wealth_refusals": 0,
+      "holdout_rejections": 7,
+      "inert_windows": 4,
+      "canary_caught": 4,
+      "canary_escaped": 0,
+      "canary_unarmed": 8
+    },
+    "wealth_left": 0.0013,
+    "tension_spent": 0.0,
+    "gate_compromised": false,
+    "frontier": [
+      {
+        "coeffs": {
+          "t1": 0.3,
+          "t2": 0.7,
+          "lvl_reduced": 1.0,
+          "lvl_defensive": 1.0
+        },
+        "ann_dev": 0.2255,
+        "maxDD_dev": -0.0741
+      }
+    ],
+    "bandit_prior": {
+      "t1": 0.0,
+      "t2": 0.0,
+      "lvl_reduced": 0.0,
+      "lvl_defensive": 0.0,
+      "joint_defend": 0.0
+    },
+    "oos_single_shot": {
+      "anchor_static_full": {
+        "ann": 0.0594,
+        "maxDD": -0.1094,
+        "sharpe": 0.483
+      },
+      "final_incumbent": {
+        "ann": 0.0594,
+        "maxDD": -0.1094,
+        "sharpe": 0.483
+      }
+    },
+    "hold_full_window": {
+      "anchor_static_full": {
+        "ann": 0.0309,
+        "maxDD": -0.2509,
+        "sharpe": 0.258
+      },
+      "final_incumbent": {
+        "ann": 0.0309,
+        "maxDD": -0.2509,
+        "sharpe": 0.258
+      }
+    },
+    "mdl_axis_a": {
+      "anchor": 0.0,
+      "final": 0.0
+    }
+  },
+  "positive_control_dow": {
+    "verdict": "ACCEPTED_RISKMODE",
+    "harm": 0.0,
+    "type": "RETURN",
+    "z": 6.56,
+    "z_crit": 2.15,
+    "accepted": true
+  },
+  "trails": {
+    "dow": [
+      {
+        "round": 0,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 1,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 2,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 3,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RISK",
+        "z_dsd": 0.21,
+        "ni_z": 2.89,
+        "z_crit": 2.15,
+        "hold_dsd_gain": 8e-06,
+        "wealth": 0.0889
+      },
+      {
+        "round": 4,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RISK",
+        "z_dsd": 1.44,
+        "ni_z": 4.12,
+        "z_crit": 2.5,
+        "hold_dsd_gain": 0.000174,
+        "wealth": 0.0424
+      },
+      {
+        "round": 5,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 6,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 7,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 8,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 9,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 10,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 11,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 12,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 13,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RISK",
+        "z_dsd": 1.54,
+        "ni_z": 6.7,
+        "z_crit": 2.78,
+        "hold_dsd_gain": 0.00011,
+        "wealth": 0.0207
+      },
+      {
+        "round": 14,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 15,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 16,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 17,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 18,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 19,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 20,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 21,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 22,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": -2.35,
+        "z_crit": 3.02,
+        "wealth": 0.0103
+      },
+      {
+        "round": 23,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 24,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 25,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 26,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 27,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 28,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 29,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 30,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 31,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 32,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 33,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 34,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 35,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 36,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 37,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 38,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 39,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      }
+    ],
+    "csi500_warm": [
+      {
+        "round": 0,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 1,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 2,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_DOMINATED"
+      },
+      {
+        "round": 3,
+        "arm": "lvl_defensive",
+        "verdict": "REFUSED_INERT_ON_WINDOW",
+        "window_start": 0
+      },
+      {
+        "round": 4,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": 0.91,
+        "z_crit": 2.15,
+        "wealth": 0.0889
+      },
+      {
+        "round": 5,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 6,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 7,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 8,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 9,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": -1.2,
+        "z_crit": 2.5,
+        "wealth": 0.0424
+      },
+      {
+        "round": 10,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 11,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 12,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_DOMINATED"
+      },
+      {
+        "round": 13,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": -1.41,
+        "z_crit": 2.78,
+        "wealth": 0.0207
+      },
+      {
+        "round": 14,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": -1.41,
+        "z_crit": 3.02,
+        "wealth": 0.0103
+      },
+      {
+        "round": 15,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 16,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 17,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 18,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 19,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": -2.02,
+        "z_crit": 3.25,
+        "wealth": 0.0051
+      },
+      {
+        "round": 20,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 21,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 22,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_DOMINATED"
+      },
+      {
+        "round": 23,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": -2.34,
+        "z_crit": 3.46,
+        "wealth": 0.0025
+      },
+      {
+        "round": 24,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_HOLDOUT",
+        "type": "RETURN",
+        "z": -2.41,
+        "z_crit": 3.65,
+        "wealth": 0.0013
+      },
+      {
+        "round": 25,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 26,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 27,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 28,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 29,
+        "arm": "joint_defend",
+        "verdict": "REFUSED_INERT_ON_WINDOW",
+        "window_start": 0
+      },
+      {
+        "round": 30,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 31,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 32,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_DOMINATED"
+      },
+      {
+        "round": 33,
+        "arm": "lvl_defensive",
+        "verdict": "REFUSED_INERT_ON_WINDOW",
+        "window_start": 0
+      },
+      {
+        "round": 34,
+        "arm": "joint_defend",
+        "verdict": "REFUSED_INERT_ON_WINDOW",
+        "window_start": 0
+      },
+      {
+        "round": 35,
+        "arm": "t1",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 36,
+        "arm": "t2",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 37,
+        "arm": "lvl_reduced",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 38,
+        "arm": "lvl_defensive",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      },
+      {
+        "round": 39,
+        "arm": "joint_defend",
+        "verdict": "REJECTED_NO_FRONTIER_GAIN"
+      }
+    ]
+  },
+  "honesty_caps": [
+    "RISK-mode ceiling: an accept certifies a (DD, non-inferior return) or return improvement WITHIN single-panel replay of the exposure shell \u2014 not alpha, not a promotion of belief-writing to capital (the VoI gate stays CLOSED on accessible substrates).",
+    "The B3 lesson stands as the null to beat: the hand-tuned defensive config's DD benefit was a single-path 2020-crash-timing artifact that died under block-bootstrap; this gate uses the same bootstrap discipline plus typed RISK certification, so a certified DD cut here means it survived what killed B3-config.",
+    "DETECTABILITY (verifier-measured): RETURN-branch MDE on calm 120-day windows is ~1.5-4.8 bp/day (3.7-12.7%/yr) for realistic knob moves \u2014 high; '0 certified' on the RETURN lane means below-floor-or-absent. The RISK lane was REDESIGNED after the verifier proved the maxDD bootstrap unwinnable-by-construction (a perfect-foresight oracle passed 0/55 Dow windows): certification now tests DOWNSIDE-DEVIATION improvement (size-sensitive tail-mean), and the rotation stride now covers the whole hold span so crash windows are reachable within the alpha-wealth budget.",
+    "ROTATING WINDOWS OVERLAP (120-day windows, span-covering stride): alpha-investing prices the COUNT of adaptive tests, not their dependence. Hardened after the red-team mined a window-local RISK false-accept cluster: (i) inert refusals no longer advance the rotation (free window-shopping is dead by design, not by coincidence), (ii) RISK accepts must RE-CONFIRM their non-inferiority claim on the maximally-distant disjoint window in-code (also contains the anti-conservative z_dsd null, empirical sd~1.38). RETURN accepts should still be re-confirmed on a disjoint window before any promotion beyond risk-mode.",
+    "F9 DISCLOSURE: the Dow->csi500 transferred prior was ALL-ZERO (source loop certified nothing), so warm==cold identically \u2014 the transfer mechanism is live but had nothing to carry (input_prior is recorded per run).",
+    "CANARY COVERAGE (honest): config_bloat fires every check; the harm-canary bank was UNARMED all run on BOTH panels \u2014 on calm dev windows every expressible bounded-exposure config (incl. cost_churn) measures neutral-to-HELPFUL on dev while being genuinely harmful on hold, and arming on hold would break the PIT discipline. Harm-rejection teeth on such panels therefore rest on the escape=>freeze wiring + the positive/negative controls (verified live), NOT on in-space canaries.",
+    "MDL Axis A of the exposure decision is ~0 by construction (a 3-region threshold rule over ONE feature is an 8-leaf story) \u2014 the contrast with R6c's 0.286 is directional, NOT apples-to-apples (R6c's controller decision is measured over 11 state features).",
+    "Panel naming: the 'csi500' panel file is csi300_model_ready.csv (csi300 constituents, the csi500 project lineage's model-ready panel)."
+  ]
+}

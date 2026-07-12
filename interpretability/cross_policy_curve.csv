@@ -1,0 +1,7 @@
+policy,family,behavioral_complexity,crystalscore_core,crystalscore_core_nostab,simulatability_cash_K9,completeness_selection_K9
+R6c+_latent_relabel_on,R6c+ latent-action (gaussian_logits),0.3109,0.1477,0.3732,0.3732,0.0757
+R6c_vol0,R6c vol_excess (root_split_beta_dirichlet),0.349,0.0546,0.192,0.192,0.0592
+R6c_vol10,R6c vol_excess (root_split_beta_dirichlet),0.354,0.1035,0.2813,0.2813,0.1556
+R6c,R6c (root_split_beta_dirichlet),0.3579,0.1511,0.244,0.244,0.1409
+R6c_vol05,R6c vol_excess (root_split_beta_dirichlet),0.3583,0.0519,0.1821,0.1821,0.0619
+R6c+_latent_relabel_off,R6c+ latent-action (gaussian_logits),0.3785,0.0693,0.1684,0.1684,0.0829

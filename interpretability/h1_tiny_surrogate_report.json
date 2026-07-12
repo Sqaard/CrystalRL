@@ -1,0 +1,208 @@
+{
+  "policy": "R6c (original_ppo)",
+  "universe": "Dow-29",
+  "frozen_window": [
+    "2022-01-03",
+    "2023-02-27"
+  ],
+  "n_days": 289,
+  "predictors": "30 market_feature_* (regime/macro obs the policy saw)",
+  "action_alphabet_K": 5,
+  "tree_depths": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "markov_orders": [
+    1,
+    2
+  ],
+  "kl_eps_bits": 0.1,
+  "mirror_of_the_hall": "R6c's OOS edge on Dow-29 is NULL -- high simulatability means this null-edge cash-timing policy is easy to simulate, NOT that the surrogate understands a real signal.",
+  "decisive_null": "order-k Markov on the action's OWN past: if it ties/beats the obs->action tree, the simplicity is action-autocorrelation (simple market), not a readable policy program.",
+  "stance": {
+    "axis": "STANCE (cash)",
+    "K": 5,
+    "splits": {
+      "temporal_60_40": {
+        "n_train": 173,
+        "n_test": 116,
+        "n_test_classes": 5,
+        "depths": {
+          "1": {
+            "balanced_acc": 0.2,
+            "acc": 0.1724,
+            "TV": 0.8103,
+            "KL_bits": 22.3734,
+            "n_leaves": 2
+          },
+          "2": {
+            "balanced_acc": 0.2,
+            "acc": 0.1724,
+            "TV": 0.6293,
+            "KL_bits": 8.0512,
+            "n_leaves": 4
+          },
+          "3": {
+            "balanced_acc": 0.1273,
+            "acc": 0.1552,
+            "TV": 0.3621,
+            "KL_bits": 0.5562,
+            "n_leaves": 7
+          },
+          "4": {
+            "balanced_acc": 0.0926,
+            "acc": 0.1207,
+            "TV": 0.2931,
+            "KL_bits": 0.5059,
+            "n_leaves": 12
+          }
+        },
+        "markov": {
+          "1": {
+            "balanced_acc": 0.9547,
+            "acc": 0.9483,
+            "TV": 0.0086,
+            "KL_bits": 0.0026
+          },
+          "2": {
+            "balanced_acc": 0.9273,
+            "acc": 0.9224,
+            "TV": 0.0259,
+            "KL_bits": 0.0172
+          }
+        },
+        "tree_best_bal_acc": 0.2,
+        "markov_best_bal_acc": 0.9547,
+        "tree_beats_markov": false,
+        "d4_kl_le_eps": false,
+        "verdict": "AUTOREGRESSIVE-TINY-SURROGATE (a low-order Markov chain on the action's OWN past reproduces the log; R6c is a tiny persistence/smoothing program, NOT a reactive obs->action map -- and since the OOS edge is NULL this self-predictability is the policy's own autocorrelation, not market signal)"
+      },
+      "regime_drawdown": {
+        "n_train": 145,
+        "n_test": 144,
+        "n_test_classes": 5,
+        "depths": {
+          "1": {
+            "balanced_acc": 0.184,
+            "acc": 0.1597,
+            "TV": 0.7222,
+            "KL_bits": 15.7995,
+            "n_leaves": 2
+          },
+          "2": {
+            "balanced_acc": 0.2763,
+            "acc": 0.25,
+            "TV": 0.6042,
+            "KL_bits": 13.3946,
+            "n_leaves": 4
+          },
+          "3": {
+            "balanced_acc": 0.301,
+            "acc": 0.2917,
+            "TV": 0.3958,
+            "KL_bits": 6.9496,
+            "n_leaves": 8
+          },
+          "4": {
+            "balanced_acc": 0.3193,
+            "acc": 0.3264,
+            "TV": 0.3681,
+            "KL_bits": 6.8192,
+            "n_leaves": 10
+          }
+        },
+        "markov": {
+          "1": {
+            "balanced_acc": 0.9272,
+            "acc": 0.9375,
+            "TV": 0.0139,
+            "KL_bits": 0.0008
+          },
+          "2": {
+            "balanced_acc": 0.8974,
+            "acc": 0.9097,
+            "TV": 0.0486,
+            "KL_bits": 0.0097
+          }
+        },
+        "tree_best_bal_acc": 0.3193,
+        "markov_best_bal_acc": 0.9272,
+        "tree_beats_markov": false,
+        "d4_kl_le_eps": false,
+        "verdict": "AUTOREGRESSIVE-TINY-SURROGATE (a low-order Markov chain on the action's OWN past reproduces the log; R6c is a tiny persistence/smoothing program, NOT a reactive obs->action map -- and since the OOS edge is NULL this self-predictability is the policy's own autocorrelation, not market signal)"
+      }
+    }
+  },
+  "selection": {
+    "axis": "SELECTION (within-book, exposure-free)",
+    "K": 5,
+    "splits": {
+      "temporal_60_40": {
+        "n_train": 173,
+        "n_test": 116,
+        "n_test_classes": 1,
+        "depths": {},
+        "markov": {},
+        "verdict": "DEGENERATE (test window is single-valued: the action collapses to 1 symbol over 116 days -> near-static behaviour, fidelity metric uninformative)",
+        "tree_best_bal_acc": NaN,
+        "markov_best_bal_acc": NaN
+      },
+      "regime_drawdown": {
+        "n_train": 145,
+        "n_test": 144,
+        "n_test_classes": 5,
+        "depths": {
+          "1": {
+            "balanced_acc": 0.2,
+            "acc": 0.7083,
+            "TV": 0.2917,
+            "KL_bits": 7.2799,
+            "n_leaves": 1
+          },
+          "2": {
+            "balanced_acc": 0.2,
+            "acc": 0.7083,
+            "TV": 0.2917,
+            "KL_bits": 7.2799,
+            "n_leaves": 1
+          },
+          "3": {
+            "balanced_acc": 0.2,
+            "acc": 0.7083,
+            "TV": 0.2917,
+            "KL_bits": 7.2799,
+            "n_leaves": 1
+          },
+          "4": {
+            "balanced_acc": 0.2,
+            "acc": 0.7083,
+            "TV": 0.2917,
+            "KL_bits": 7.2799,
+            "n_leaves": 1
+          }
+        },
+        "markov": {
+          "1": {
+            "balanced_acc": 0.2,
+            "acc": 0.7083,
+            "TV": 0.2917,
+            "KL_bits": 7.2799
+          },
+          "2": {
+            "balanced_acc": 0.2,
+            "acc": 0.7083,
+            "TV": 0.2917,
+            "KL_bits": 7.2799
+          }
+        },
+        "tree_best_bal_acc": 0.2,
+        "markov_best_bal_acc": 0.2,
+        "tree_beats_markov": false,
+        "d4_kl_le_eps": false,
+        "verdict": "NO-READABLE-SURROGATE (neither the obs->action tree nor a short action-history predicts above ~chance on this holdout -- the structure does not transfer across this split)"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "model": "R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1",
+  "source_zip": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage0_1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_rotation_internaldays_v1\\stage0_1_job_213_R6c_v1_fold_2021_results.zip",
+  "fold": "fold_2021",
+  "split": "frozen_test",
+  "date_start": "2022-01-03",
+  "date_end": "2023-02-28",
+  "rows": 289,
+  "valid_rows": 273,
+  "selected_k": 8,
+  "window_length": 17,
+  "stage1_codebook_source": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage1\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_stage1",
+  "train_code_valid_match": true,
+  "train_code_match_rate_same_seed": 1.0,
+  "hidden_dim": 128,
+  "model_ready_csv": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\artifacts\\stage4\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_frozen_2022_2023_for_Joseph\\feature_scalers_frozen\\fold_2021\\model_ready.csv",
+  "outputs": {
+    "npz": "r6c_frozen_2022_2023_rollout_package.npz",
+    "test_codes": "test_codes.parquet",
+    "behavior_log": "frozen_test_behavior_log_daily.parquet",
+    "code_summary": "frozen_test_code_summary.csv"
+  }
+}

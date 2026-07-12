@@ -1,0 +1,23 @@
+{
+  "R6c_v1_reference": {
+    "CrystalScore_stance": 0.151,
+    "Faithfulness": 1.0,
+    "Simulatability": 0.244,
+    "Stability": 0.619
+  },
+  "CRYSTAL1_corner_PPO": {
+    "Faithfulness": 1.0,
+    "Simulatability": 0.939,
+    "Stability": 0.991,
+    "CrystalScore": 0.931,
+    "tree_leaves": 8
+  },
+  "CRYSTAL1_M6_soft_tree": {
+    "Faithfulness": 1.0,
+    "Simulatability": 0.938,
+    "Stability": 1.0,
+    "CrystalScore": 0.938,
+    "tree_leaves": 8
+  },
+  "headline": "CrystalScore (same F x Simul x Stab axis as R6c v1 = 0.151): CRYSTAL-1 corner PPO = 0.931, M6 soft-tree head = 0.938. The metric CHANGES and it changes in the predicted direction \u2014 CRYSTAL-1's born-legible policy is far MORE simulatable (a <=8-leaf story reproduces it) than R6c's 64-d latent (Simul 0.244), so the same scalar rises ~6x. This is exactly what the controllability/interpretability north star optimizes \u2014 CrystalScore, not alpha; the C-ladder metrics ARE these axes measured natively (faithfulness=C-1/C-2, simulatability=M6 tree parity, stability=B2 replication, controllability=C-1 dose)."
+}

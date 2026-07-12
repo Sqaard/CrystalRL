@@ -1,0 +1,64 @@
+{
+  "policy": "Series-G optimal belief-aware (Phase-1 gated env)",
+  "n_steps": 1600,
+  "x_behavioral_complexity_bits_per_action": {
+    "h_mu_range_3symbol": [
+      0.853,
+      1.39
+    ],
+    "E_range": [
+      0.3301,
+      1.4933
+    ],
+    "C_mu_Lstar_range": [
+      4.4878,
+      4.7419
+    ],
+    "structure_vs_phase_shuffle": "2/2",
+    "structure_present": true
+  },
+  "y_simulatability": {
+    "state_to_action_depth4": {
+      "accuracy": 0.9231,
+      "balanced_accuracy": 0.9256,
+      "n_leaves": 14
+    },
+    "state_to_action_K9": {
+      "accuracy": 0.945,
+      "balanced_accuracy": 0.9463,
+      "n_leaves": 9
+    },
+    "autoregressive_markov": 0.7035,
+    "completeness_pareto_acc_by_leaves": {
+      "2": 0.6319,
+      "3": 0.7844,
+      "4": 0.7906,
+      "6": 0.85,
+      "9": 0.945,
+      "12": 0.9619,
+      "16": 0.9812
+    }
+  },
+  "reference_points": {
+    "R6c_frozen_Dow29": {
+      "x_h_mu_3sym": [
+        0.288,
+        0.487
+      ],
+      "y_state_obs_to_action": 0.2,
+      "y_autoregressive": 0.95
+    },
+    "poker_design_judgment": {
+      "x_norm": 0.78,
+      "y": 0.62,
+      "note": "design-judgment, normalized; not yet bits/action"
+    }
+  },
+  "frontier_placement": {
+    "x_series_g_vs_r6c": "h_mu [0.853, 1.39] (3-symbol) vs R6c [0.288, 0.487] \u2014 HIGHER (Series-G is more behaviorally complex)",
+    "mechanism_contrast": "Series-G is STATE-reactive (state\u2192action 0.9256 >> autoregressive 0.703); R6c is the OPPOSITE \u2014 autoregressive 0.95 >> obs-reactive 0.2. Both interpretable, different mechanisms.",
+    "high_complexity_AND_interpretable": true
+  },
+  "verdict": "SECOND ANCHOR PLACED. Series-G's optimal policy is more behaviorally complex than R6c on the identical bits/action ruler ([0.853, 1.39] vs [0.288, 0.487]) AND highly simulatable from its belief-state (state\u2192action 0.9256) \u2014 a high(er)-complexity-yet-interpretable point, reached by a STATE-reactive (not autoregressive) mechanism. It moves RIGHT along the frontier at high y vs R6c's low corner.",
+  "honesty": "Analytic optimum (not a PPO agent); x directly comparable to R6c (same L0 ruler, 3-symbol); y is the state/autoregressive surrogate fidelity (H1 recipe), NOT R6c's latent\u2192action CrystalScore \u2014 flagged. H3 (hierarchical interpretability) did NOT hold here (Phase 2): this is a flat-interpretable anchor. Poker's (0.78,0.62) is normalized design-judgment, not bits/action."
+}

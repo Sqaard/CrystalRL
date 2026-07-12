@@ -1,0 +1,122 @@
+{
+  "policy": "R6c (original_ppo)",
+  "stream": "action_mode KMeans(6) modes (mode-arbitration of the action-weight vector)",
+  "argmax_degenerate": "argmax collapses to 1 mode (col-0 dominates every day); KMeans used instead",
+  "action_vector_daily_L1": 0.0259,
+  "frozen_window": [
+    "2022-01-03",
+    "2023-02-27"
+  ],
+  "n_days": 289,
+  "n_modes_active": 6,
+  "leg": "MEASUREMENT ONLY (h_mu/E/C_mu); the PnL / noise-twin / obs-shuffle leg is GATED OUT (HCS, not now)",
+  "mirror_of_the_hall": "OOS edge is NULL -> this is the mode stream's self-structure, not market signal.",
+  "result": {
+    "kind": "discrete",
+    "n_configs": 2,
+    "h_mu_range": [
+      0.934,
+      2.3549
+    ],
+    "E_range": [
+      0.0,
+      1.4831
+    ],
+    "C_mu_L1_range": [
+      2.358,
+      2.361
+    ],
+    "C_mu_Lstar_range": [
+      2.358,
+      3.3692
+    ],
+    "structure_present_configs": "1/2",
+    "structure_present": true,
+    "configs": [
+      {
+        "alphabet": 6,
+        "dt": 1,
+        "T": 289,
+        "Lstar": 3,
+        "h_mu": 0.934,
+        "h_mu_ci95": [
+          0.7294,
+          0.9944
+        ],
+        "H1_iid_bound": 2.3592,
+        "E": 1.4831,
+        "C_mu_L1": 2.361,
+        "C_mu_Lstar": 3.3692,
+        "null_h_mu_mean": 2.2915,
+        "null_h_mu_p05": 2.2568,
+        "structure_gap": 0.5924,
+        "structure_present": true,
+        "h_curve": {
+          "1": 2.3592,
+          "2": 0.9919,
+          "3": 0.934,
+          "4": 0.8613
+        },
+        "depth_table": {
+          "0": {
+            "H": 0.0,
+            "mean_count": 289.0
+          },
+          "1": {
+            "H": 2.3592,
+            "mean_count": 48.17
+          },
+          "2": {
+            "H": 3.3511,
+            "mean_count": 9.93
+          },
+          "3": {
+            "H": 4.2851,
+            "mean_count": 5.42
+          },
+          "4": {
+            "H": 5.1463,
+            "mean_count": 3.71
+          }
+        }
+      },
+      {
+        "alphabet": 6,
+        "dt": 2,
+        "T": 145,
+        "Lstar": 1,
+        "h_mu": 2.3549,
+        "h_mu_ci95": [
+          1.3733,
+          2.4106
+        ],
+        "H1_iid_bound": 2.3549,
+        "E": 0.0,
+        "C_mu_L1": 2.358,
+        "C_mu_Lstar": 2.358,
+        "null_h_mu_mean": 2.3469,
+        "null_h_mu_p05": 2.3549,
+        "structure_gap": -0.0034,
+        "structure_present": false,
+        "h_curve": {
+          "1": 2.3549,
+          "2": 1.5635
+        },
+        "depth_table": {
+          "0": {
+            "H": 0.0,
+            "mean_count": 145.0
+          },
+          "1": {
+            "H": 2.3549,
+            "mean_count": 24.17
+          },
+          "2": {
+            "H": 3.9185,
+            "mean_count": 4.97
+          }
+        }
+      }
+    ]
+  }
+}

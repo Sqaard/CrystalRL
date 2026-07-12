@@ -1,0 +1,117 @@
+{
+  "suite": {
+    "A_default": {
+      "overrides": {},
+      "values": {
+        "belief_aware_optimum": 1.3072,
+        "belief_blind_optimum": -0.0,
+        "ZI_floor_unconstrained": -7.2325,
+        "ZI_floor_constrained": -5.2405
+      },
+      "gate": {
+        "value_of_information": 1.3072,
+        "voi_relative_to_blind": Infinity,
+        "ZI_honesty_gap_(c_minus_u)": 1.992,
+        "ordering_aware>blind>ZI": true,
+        "material_margin": true,
+        "VERDICT": "PASS \u2014 regime belief is load-bearing; optimum requires belief-memory"
+      },
+      "expected_pass": true,
+      "discriminates": true,
+      "gm": {
+        "gm_analytic_threshold": 0.25,
+        "myopic_reward_crossing": 0.25,
+        "full_policy_last_PROVIDE_belief_at_I0_midT": 0.0833,
+        "matches_analytic": true
+      }
+    },
+    "B_nontrivial_blind": {
+      "overrides": {
+        "spread": 2.0,
+        "adverse": 4.0,
+        "aggress_cost": 0.3,
+        "hold_cost": 0.05
+      },
+      "values": {
+        "belief_aware_optimum": 9.2341,
+        "belief_blind_optimum": 4.5,
+        "ZI_floor_unconstrained": -1.4519,
+        "ZI_floor_constrained": 1.367
+      },
+      "gate": {
+        "value_of_information": 4.7341,
+        "voi_relative_to_blind": 1.052,
+        "ZI_honesty_gap_(c_minus_u)": 2.8189,
+        "ordering_aware>blind>ZI": true,
+        "material_margin": true,
+        "VERDICT": "PASS \u2014 regime belief is load-bearing; optimum requires belief-memory"
+      },
+      "expected_pass": true,
+      "discriminates": true,
+      "gm": {
+        "gm_analytic_threshold": 0.3333,
+        "myopic_reward_crossing": 0.3333,
+        "full_policy_last_PROVIDE_belief_at_I0_midT": 0.2583,
+        "matches_analytic": true
+      }
+    },
+    "C_control_uninformative_obs": {
+      "overrides": {
+        "p_burst_benign": 0.4,
+        "p_burst_toxic": 0.45
+      },
+      "values": {
+        "belief_aware_optimum": 0.0,
+        "belief_blind_optimum": -0.0,
+        "ZI_floor_unconstrained": -7.2325,
+        "ZI_floor_constrained": -5.2405
+      },
+      "gate": {
+        "value_of_information": 0.0,
+        "voi_relative_to_blind": Infinity,
+        "ZI_honesty_gap_(c_minus_u)": 1.992,
+        "ordering_aware>blind>ZI": false,
+        "material_margin": false,
+        "VERDICT": "FAIL \u2014 belief not materially load-bearing; FIX the generator before Phase 1"
+      },
+      "expected_pass": false,
+      "discriminates": true,
+      "gm": {
+        "gm_analytic_threshold": 0.25,
+        "myopic_reward_crossing": 0.25,
+        "full_policy_last_PROVIDE_belief_at_I0_midT": 0.1,
+        "matches_analytic": true
+      }
+    },
+    "D_control_no_modulation": {
+      "overrides": {
+        "spread": 1.0,
+        "adverse": -1.0
+      },
+      "values": {
+        "belief_aware_optimum": 4.0,
+        "belief_blind_optimum": 4.0,
+        "ZI_floor_unconstrained": -2.3756,
+        "ZI_floor_constrained": 0.0302
+      },
+      "gate": {
+        "value_of_information": 0.0,
+        "voi_relative_to_blind": 0.0,
+        "ZI_honesty_gap_(c_minus_u)": 2.4057,
+        "ordering_aware>blind>ZI": false,
+        "material_margin": false,
+        "VERDICT": "FAIL \u2014 belief not materially load-bearing; FIX the generator before Phase 1"
+      },
+      "expected_pass": false,
+      "discriminates": true,
+      "gm": {
+        "gm_analytic_threshold": NaN,
+        "myopic_reward_crossing": 1.0,
+        "full_policy_last_PROVIDE_belief_at_I0_midT": 1.0,
+        "matches_analytic": false
+      }
+    }
+  },
+  "all_discriminate": true,
+  "PHASE0_VERDICT": "VALIDATED \u2014 gate has teeth: PASSES when regime is inferable AND economically relevant, FAILS otherwise; the default env is sound for Phase 1"
+}

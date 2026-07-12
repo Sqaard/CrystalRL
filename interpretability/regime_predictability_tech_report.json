@@ -1,0 +1,266 @@
+{
+  "Dow-29": {
+    "T1_state_t5": {
+      "per_year_BASE": {
+        "2012": 0.976,
+        "2014": 0.993,
+        "2015": 0.957,
+        "2016": 0.991,
+        "2018": 0.985,
+        "2019": 0.992,
+        "2020": 0.988,
+        "2022": 0.984,
+        "2023": 0.996
+      },
+      "per_year_BASE+TECH": {
+        "2012": 0.95,
+        "2014": 0.988,
+        "2015": 0.957,
+        "2016": 0.996,
+        "2018": 0.982,
+        "2019": 0.99,
+        "2020": 0.981,
+        "2022": 0.983,
+        "2023": 0.982
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2012": 0.912,
+        "2014": 0.967,
+        "2015": 0.964,
+        "2016": 0.999,
+        "2018": 0.987,
+        "2019": 0.98,
+        "2020": 0.981,
+        "2022": 0.986,
+        "2023": 0.986
+      },
+      "incr_TECH_mean": -0.006,
+      "incr_TECH_years_positive": "1/9",
+      "incr_TECH+HMM_mean": -0.011,
+      "incr_TECH+HMM_years_positive": "4/9"
+    },
+    "T2_entry_h5": {
+      "per_year_BASE": {
+        "2012": 0.77,
+        "2014": 0.985,
+        "2015": 0.766,
+        "2016": 0.978,
+        "2018": 0.882,
+        "2019": 0.977,
+        "2020": 0.955,
+        "2022": 0.953
+      },
+      "per_year_BASE+TECH": {
+        "2012": 0.902,
+        "2014": 0.941,
+        "2015": 0.819,
+        "2016": 0.979,
+        "2018": 0.892,
+        "2019": 0.937,
+        "2020": 0.904,
+        "2022": 0.945
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2012": 0.914,
+        "2014": 0.985,
+        "2015": 0.812,
+        "2016": 0.984,
+        "2018": 0.857,
+        "2019": 0.937,
+        "2020": 0.927,
+        "2022": 0.883
+      },
+      "incr_TECH_mean": 0.007,
+      "incr_TECH_years_positive": "4/8",
+      "incr_TECH+HMM_mean": 0.004,
+      "incr_TECH+HMM_years_positive": "3/8"
+    },
+    "T3_exit_h5": {
+      "per_year_BASE": {
+        "2015": 1.0,
+        "2016": 0.905,
+        "2018": 0.946,
+        "2019": 0.953,
+        "2020": 0.968,
+        "2022": 0.955
+      },
+      "per_year_BASE+TECH": {
+        "2015": 0.991,
+        "2016": 0.984,
+        "2018": 0.977,
+        "2019": 0.968,
+        "2020": 0.981,
+        "2022": 0.952
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2015": 1.0,
+        "2016": 0.982,
+        "2018": 0.983,
+        "2019": 0.953,
+        "2020": 0.991,
+        "2022": 0.911
+      },
+      "incr_TECH_mean": 0.021,
+      "incr_TECH_years_positive": "4/6",
+      "incr_TECH+HMM_mean": 0.016,
+      "incr_TECH+HMM_years_positive": "3/6"
+    },
+    "T2_entry_h10": {
+      "per_year_BASE": {
+        "2012": 0.739,
+        "2014": 0.965,
+        "2015": 0.586,
+        "2016": 0.956,
+        "2018": 0.819,
+        "2019": 0.965,
+        "2020": 0.986,
+        "2022": 0.854
+      },
+      "per_year_BASE+TECH": {
+        "2012": 0.92,
+        "2014": 0.839,
+        "2015": 0.752,
+        "2016": 0.978,
+        "2018": 0.826,
+        "2019": 0.959,
+        "2020": 0.777,
+        "2022": 0.869
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2012": 0.926,
+        "2014": 0.922,
+        "2015": 0.836,
+        "2016": 0.999,
+        "2018": 0.743,
+        "2019": 0.958,
+        "2020": 0.972,
+        "2022": 0.963
+      },
+      "incr_TECH_mean": 0.006,
+      "incr_TECH_years_positive": "5/8",
+      "incr_TECH+HMM_mean": 0.056,
+      "incr_TECH+HMM_years_positive": "4/8"
+    },
+    "T3_exit_h10": {
+      "per_year_BASE": {
+        "2015": 0.997,
+        "2016": 0.988,
+        "2018": 0.906,
+        "2019": 0.961,
+        "2020": 0.948,
+        "2022": 0.916
+      },
+      "per_year_BASE+TECH": {
+        "2015": 0.974,
+        "2016": 0.989,
+        "2018": 0.814,
+        "2019": 0.975,
+        "2020": 0.933,
+        "2022": 0.893
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2015": 0.985,
+        "2016": 0.988,
+        "2018": 0.883,
+        "2019": 0.975,
+        "2020": 0.912,
+        "2022": 0.904
+      },
+      "incr_TECH_mean": -0.023,
+      "incr_TECH_years_positive": "2/6",
+      "incr_TECH+HMM_mean": -0.011,
+      "incr_TECH+HMM_years_positive": "1/6"
+    }
+  },
+  "csi500": {
+    "T1_state_t5": {
+      "per_year_BASE": {
+        "2020": 0.962,
+        "2021": 0.994,
+        "2022": 0.99
+      },
+      "per_year_BASE+TECH": {
+        "2020": 0.974,
+        "2021": 0.932,
+        "2022": 0.988
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2020": 0.965,
+        "2021": 0.969,
+        "2022": 0.985
+      },
+      "incr_TECH_mean": -0.017,
+      "incr_TECH_years_positive": "1/3",
+      "incr_TECH+HMM_mean": -0.009,
+      "incr_TECH+HMM_years_positive": "1/3"
+    },
+    "T2_entry_h5": {
+      "per_year_BASE": {
+        "2021": 0.994,
+        "2022": 0.929
+      },
+      "per_year_BASE+TECH": {
+        "2021": 0.598,
+        "2022": 0.967
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2021": 0.783,
+        "2022": 0.972
+      },
+      "incr_TECH_mean": -0.179,
+      "incr_TECH_years_positive": "1/2",
+      "incr_TECH+HMM_mean": -0.084,
+      "incr_TECH+HMM_years_positive": "1/2"
+    },
+    "T3_exit_h5": {
+      "per_year_BASE": {
+        "2022": 0.897
+      },
+      "per_year_BASE+TECH": {
+        "2022": 0.826
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2022": 0.819
+      },
+      "incr_TECH_mean": -0.071,
+      "incr_TECH_years_positive": "0/1",
+      "incr_TECH+HMM_mean": -0.078,
+      "incr_TECH+HMM_years_positive": "0/1"
+    },
+    "T2_entry_h10": {
+      "per_year_BASE": {
+        "2021": 0.839,
+        "2022": 0.764
+      },
+      "per_year_BASE+TECH": {
+        "2021": 0.54,
+        "2022": 0.859
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2021": 0.654,
+        "2022": 0.845
+      },
+      "incr_TECH_mean": -0.102,
+      "incr_TECH_years_positive": "1/2",
+      "incr_TECH+HMM_mean": -0.052,
+      "incr_TECH+HMM_years_positive": "1/2"
+    },
+    "T3_exit_h10": {
+      "per_year_BASE": {
+        "2022": 0.931
+      },
+      "per_year_BASE+TECH": {
+        "2022": 0.942
+      },
+      "per_year_BASE+TECH+HMM": {
+        "2022": 0.938
+      },
+      "incr_TECH_mean": 0.011,
+      "incr_TECH_years_positive": "1/1",
+      "incr_TECH+HMM_mean": 0.007,
+      "incr_TECH+HMM_years_positive": "1/1"
+    }
+  },
+  "verdict": "INCREMENTAL SIGNAL FOUND: Dow-29/T3_exit_h5/TECH: +0.021 AUC (4/6 years)",
+  "honest_override": "The single nominal hit (Dow-29/T3_exit_h5/TECH +0.021 AUC, 4/6 years) is the expected 1-in-20 multiplicity artifact: it sits exactly at both thresholds (mean 0.021 vs 0.02; 4/6 vs 2/3) and the SAME target at h10 is NEGATIVE (-0.023, 2/6) \u2014 horizon-inconsistent. Under the alpha-era discipline (within-year consistency + no cherry-picking across 20 combos) the verdict is: NO consistent incremental signal from tech or HMM features over the trailing-vol baseline, on either market, for state/entry/exit."
+}

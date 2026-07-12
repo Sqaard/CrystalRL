@@ -1,0 +1,97 @@
+{
+  "experiment": "E-04 G12 certified legibility-raising rule (Joseph, interpretability track)",
+  "setup": {
+    "G": 12,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "rounds": 45,
+    "mdl_n_seeds_traj": 20,
+    "legibility_rule_def": "gate-ACCEPTED move with d_mdl<=-0.02 AND d_ret>=-0.1"
+  },
+  "nonsaturation_check": {
+    "best_return_mdl_deficit_per_seed": [
+      0.363,
+      0.078,
+      0.187
+    ],
+    "verdict": "NON-SATURATED (legibility is NOT free on G12)"
+  },
+  "n_certified_legibility_moves": 0,
+  "certified_legibility_raising_moves": [],
+  "frontiers": {
+    "seed0": [
+      {
+        "return": 0.0,
+        "desc_len": 1,
+        "mdl_deficit": 0.0
+      },
+      {
+        "return": 0.94,
+        "desc_len": 2,
+        "mdl_deficit": 0.0
+      },
+      {
+        "return": 2.61,
+        "desc_len": 4,
+        "mdl_deficit": 0.363
+      }
+    ],
+    "seed1": [
+      {
+        "return": 0.0,
+        "desc_len": 1,
+        "mdl_deficit": 0.0
+      },
+      {
+        "return": 0.7,
+        "desc_len": 2,
+        "mdl_deficit": 0.0
+      },
+      {
+        "return": 2.4,
+        "desc_len": 4,
+        "mdl_deficit": 0.078
+      }
+    ],
+    "seed2": [
+      {
+        "return": 0.0,
+        "desc_len": 1,
+        "mdl_deficit": 0.0
+      },
+      {
+        "return": 1.07,
+        "desc_len": 2,
+        "mdl_deficit": 0.0
+      },
+      {
+        "return": 3.09,
+        "desc_len": 4,
+        "mdl_deficit": 0.187
+      }
+    ]
+  },
+  "gate_counts_union": {
+    "ACCEPTED_PARETO": 10,
+    "REJECTED_NO_FRONTIER_GAIN": 21,
+    "REFUSED_TENSION_BUDGET": 23,
+    "REJECTED_HOLDOUT": 24,
+    "REJECTED_DOMINATED": 18,
+    "VETOED_BY_ADVERSARY": 1,
+    "REFUSED_ALPHA_WEALTH_EXHAUSTED": 38
+  },
+  "canary": {
+    "caught": 36,
+    "escaped": 0,
+    "compromised": [
+      false,
+      false,
+      false
+    ]
+  },
+  "table3_row": "none certified \u2014 on G12 no gate-accepted move lowered MDL deficit without regressing return",
+  "verdict": "NULL \u2014 no certified legibility-raising rule on G12 this run (legibility is not freely raisable)"
+}

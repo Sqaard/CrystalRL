@@ -1,0 +1,147 @@
+{
+  "policy": "CRYSTAL-1 risk-mode (pre-registered 3-mode exposure over EW book; L1 trained on train window only)",
+  "panels": [
+    {
+      "panel": "Dow-29",
+      "train": [
+        "2010-01-01",
+        "2016-12-31"
+      ],
+      "oos": [
+        "2017-01-01",
+        "2023-02-28"
+      ],
+      "n_oos_days": 1548,
+      "L1_readable_world_model": {
+        "p_stay": [
+          0.9819999933242798,
+          0.9539999961853027
+        ],
+        "E_burst": [
+          0.09600000083446503,
+          0.43299999833106995
+        ],
+        "burst_thr_daily_pct": 1.051
+      },
+      "performance": {
+        "EW_buyhold": {
+          "ann_return": 0.14,
+          "sharpe": 0.772,
+          "maxDD": -0.3292,
+          "calmar": 0.425
+        },
+        "CRYSTAL1_belief_mode": {
+          "ann_return": 0.0717,
+          "sharpe": 0.725,
+          "maxDD": -0.1674,
+          "calmar": 0.428
+        },
+        "trailingRV_incumbent": {
+          "ann_return": 0.1026,
+          "sharpe": 0.927,
+          "maxDD": -0.154,
+          "calmar": 0.667
+        },
+        "HC1_noise_belief": {
+          "ann_return": -0.0042,
+          "sharpe": 0.032,
+          "maxDD": -0.2324,
+          "calmar": -0.018
+        }
+      },
+      "battery": {
+        "stance_x_h_mu": [
+          0.4327,
+          0.5359
+        ],
+        "stance_structure": "2/2",
+        "belief_N7_pct": 100.0,
+        "belief_N7_increments_pct": 100.0,
+        "mean_exposure": 0.747,
+        "mode_days": {
+          "FULL": 886,
+          "REDUCED": 237,
+          "DEFENSIVE": 425
+        }
+      },
+      "gates": {
+        "maxDD_improved_20pct": true,
+        "calmar_up": true,
+        "sharpe_non_degraded": true,
+        "HC1_noise_loses_DD_gain": true
+      },
+      "pass": true
+    },
+    {
+      "panel": "csi500",
+      "train": [
+        "2018-01-01",
+        "2020-12-31"
+      ],
+      "oos": [
+        "2021-01-01",
+        "2023-03-01"
+      ],
+      "n_oos_days": 521,
+      "L1_readable_world_model": {
+        "p_stay": [
+          0.9789999723434448,
+          0.9769999980926514
+        ],
+        "E_burst": [
+          0.10100000351667404,
+          0.36800000071525574
+        ],
+        "burst_thr_daily_pct": 1.605
+      },
+      "performance": {
+        "EW_buyhold": {
+          "ann_return": 0.105,
+          "sharpe": 0.695,
+          "maxDD": -0.2509,
+          "calmar": 0.419
+        },
+        "CRYSTAL1_belief_mode": {
+          "ann_return": 0.0349,
+          "sharpe": 0.322,
+          "maxDD": -0.2514,
+          "calmar": 0.139
+        },
+        "trailingRV_incumbent": {
+          "ann_return": 0.0861,
+          "sharpe": 0.611,
+          "maxDD": -0.247,
+          "calmar": 0.349
+        },
+        "HC1_noise_belief": {
+          "ann_return": 0.0503,
+          "sharpe": 0.508,
+          "maxDD": -0.1407,
+          "calmar": 0.357
+        }
+      },
+      "battery": {
+        "stance_x_h_mu": [
+          0.2841,
+          0.46
+        ],
+        "stance_structure": "2/2",
+        "belief_N7_pct": 100.0,
+        "belief_N7_increments_pct": 100.0,
+        "mean_exposure": 0.866,
+        "mode_days": {
+          "FULL": 385,
+          "REDUCED": 85,
+          "DEFENSIVE": 51
+        }
+      },
+      "gates": {
+        "maxDD_improved_20pct": false,
+        "calmar_up": false,
+        "sharpe_non_degraded": false,
+        "HC1_noise_loses_DD_gain": false
+      },
+      "pass": false
+    }
+  ]
+}

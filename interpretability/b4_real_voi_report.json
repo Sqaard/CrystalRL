@@ -1,0 +1,54 @@
+{
+  "data": "BTCUSDT um futures 2023-03 (SVB month), Binance Vision",
+  "maker_fee_bp": 2.0,
+  "regimes": {
+    "toxic_rate": 0.311
+  },
+  "edges": {
+    "D1_benign": {
+      "edge_bp_gross": -0.486,
+      "ci": [
+        -0.672,
+        -0.305
+      ],
+      "n_minutes": 30777
+    },
+    "D1_toxic": {
+      "edge_bp_gross": -0.459,
+      "ci": [
+        -0.728,
+        -0.199
+      ],
+      "n_minutes": 13862
+    },
+    "D5_benign": {
+      "edge_bp_gross": -0.288,
+      "ci": [
+        -0.607,
+        0.016
+      ],
+      "n_minutes": 30773
+    },
+    "D5_toxic": {
+      "edge_bp_gross": -0.148,
+      "ci": [
+        -0.527,
+        0.186
+      ],
+      "n_minutes": 13862
+    }
+  },
+  "net_edges_D5_bp": {
+    "benign": -2.288,
+    "toxic": -2.148
+  },
+  "sign_flip_net": false,
+  "VoI_bp_per_provided_minute": 0.0,
+  "verdict": "corner does NOT open at this granularity/market/costs \u2014 extend (symbols/periods/fees) or the config-D law covers real execution economics too.",
+  "honest_notes": [
+    "1m-close mid proxy (no BBO): markouts include half-spread noise, symmetric across regimes",
+    "maker fee 2bp = default tier; VIP/rebate tiers shift net edges uniformly",
+    "single symbol, single month (chosen FOR its regime contrast); replication queue: more months/symbols",
+    "static per-minute VoI (no inventory dynamics) \u2014 the full MDP comes with the env"
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "experiment": "E-28 all influence levers on the real PPO (reward / teachers / interventions / architecture)",
+  "governance_status": "RESEARCH_ONLY_LEVER_DEMONSTRATION_NOT_CAUSAL_CONTROL",
+  "eligible_for_client_menu": false,
+  "lever_R_reward": {
+    "grid_disclosed": [
+      {
+        "budget": 0.08,
+        "lam": 1.0
+      },
+      {
+        "budget": 0.08,
+        "lam": 4.0
+      },
+      {
+        "budget": 0.08,
+        "lam": 8.0
+      },
+      {
+        "budget": 0.06,
+        "lam": 2.0
+      },
+      {
+        "budget": 0.1,
+        "lam": 2.0
+      }
+    ],
+    "base_dev_score": -0.3573,
+    "candidates": [
+      {
+        "cfg": {
+          "budget": 0.08,
+          "lam": 1.0
+        },
+        "dev_score": -0.3573,
+        "dev_ann": 0.1649,
+        "dev_maxDD": -0.2541,
+        "model": "e28R_0"
+      },
+      {
+        "cfg": {
+          "budget": 0.08,
+          "lam": 4.0
+        },
+        "dev_score": -0.3573,
+        "dev_ann": 0.1649,
+        "dev_maxDD": -0.2541,
+        "model": "e28R_1"
+      },
+      {
+        "cfg": {
+          "budget": 0.08,
+          "lam": 8.0
+        },
+        "dev_score": -0.3573,
+        "dev_ann": 0.1649,
+        "dev_maxDD": -0.2541,
+        "model": "e28R_2"
+      },
+      {
+        "cfg": {
+          "budget": 0.06,
+          "lam": 2.0
+        },
+        "dev_score": -0.3573,
+        "dev_ann": 0.1649,
+        "dev_maxDD": -0.2541,
+        "model": "e28R_3"
+      },
+      {
+        "cfg": {
+          "budget": 0.1,
+          "lam": 2.0
+        },
+        "dev_score": -0.1685,
+        "dev_ann": 0.1135,
+        "dev_maxDD": -0.174,
+        "model": "e28R_4"
+      }
+    ],
+    "winner": {
+      "budget": 0.1,
+      "lam": 2.0
+    },
+    "hold_read": {
+      "winner_vs_base_hold": {
+        "ann": 0.0452,
+        "maxDD": -0.1044,
+        "z_dsd_vs_ref": 10.75,
+        "ni_z": 1.49,
+        "dsd_gain_bp": 18.7
+      },
+      "winner_vs_bh": {
+        "ann": 0.0452,
+        "maxDD": -0.1044,
+        "z_dsd_vs_ref": 10.76,
+        "ni_z": 0.63,
+        "dsd_gain_bp": 37.4
+      },
+      "base_vs_bh": {
+        "ann": 0.0475,
+        "maxDD": -0.159,
+        "z_dsd_vs_ref": 10.76,
+        "ni_z": 1.49,
+        "dsd_gain_bp": 18.7
+      }
+    },
+    "verdict": "reward shaping MOVES the policy (winner beat base on dev; hold read shown)"
+  },
+  "lever_T_teachers": {
+    "teacher": "the E-15 certified rule (leak-free: our own certified artifact)",
+    "bc_train_accuracy": 0.866,
+    "hold": {
+      "BC_only": {
+        "ann": 0.0418,
+        "maxDD": -0.1661,
+        "z_dsd_vs_ref": 6.27,
+        "ni_z": 1.47,
+        "dsd_gain_bp": 15.3
+      },
+      "BC_then_PPO": {
+        "ann": 0.0418,
+        "maxDD": -0.1661,
+        "z_dsd_vs_ref": 6.27,
+        "ni_z": 1.47,
+        "dsd_gain_bp": 15.3
+      },
+      "cold_PPO(base)": {
+        "ann": 0.0475,
+        "maxDD": -0.159,
+        "z_dsd_vs_ref": 10.76,
+        "ni_z": 1.49,
+        "dsd_gain_bp": 18.7
+      }
+    },
+    "verdict": "BC acc 87%; hold dsd: BC 58.4 / warm 58.4 / cold 55.0 bp \u2014 PPO washes the teacher out (reward dominates init)"
+  },
+  "lever_I_interventions": {
+    "belief_write_fidelity_monotone": 1.0,
+    "defensive_leaf": 6,
+    "behavior_code_shifts": {
+      "promote_defense_+2": {
+        "mean_exposure": 0.25,
+        "hold": {
+          "ann": 0.0412,
+          "maxDD": -0.0481,
+          "z_dsd_vs_ref": 10.75,
+          "ni_z": 0.35,
+          "dsd_gain_bp": 56.09
+        }
+      },
+      "suppress_defense_-2": {
+        "mean_exposure": 0.75,
+        "hold": {
+          "ann": 0.0475,
+          "maxDD": -0.159,
+          "z_dsd_vs_ref": 10.76,
+          "ni_z": 1.49,
+          "dsd_gain_bp": 18.7
+        }
+      }
+    },
+    "certified_intervention_candidate(+1nat_promote)": {
+      "ann": 0.0412,
+      "maxDD": -0.0481,
+      "z_dsd_vs_ref": 10.75,
+      "ni_z": 0.63,
+      "dsd_gain_bp": 37.39,
+      "certifies_full_hold": false
+    }
+  },
+  "lever_A_architecture": {
+    "depth2_hold": {
+      "ann": 0.0412,
+      "maxDD": -0.0481,
+      "z_dsd_vs_ref": 10.75,
+      "ni_z": 0.35,
+      "dsd_gain_bp": 56.09
+    },
+    "depth3_hold": {
+      "ann": 0.0475,
+      "maxDD": -0.159,
+      "z_dsd_vs_ref": 10.76,
+      "ni_z": 1.49,
+      "dsd_gain_bp": 18.7
+    },
+    "note": "depth-2 = 4 leaves (more legible); depth-3 = 8 leaves"
+  }
+}

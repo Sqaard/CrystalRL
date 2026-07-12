@@ -1,0 +1,410 @@
+{
+  "experiment": "E-11 v7 macro-belief loop (capacity-matched belief swap vs the v5-era return-belief run)",
+  "panel_integrity": "DOW30 verified clean by E-10c (close/volume lag0 corr 1.000 vs Yahoo)",
+  "belief": {
+    "observables": [
+      "VIX",
+      "SP500_Trend",
+      "turbulence",
+      "10Y_Yield"
+    ],
+    "K": 3,
+    "heldout_ll": -4.693,
+    "bear_state_vix_mu": 1.86,
+    "train": [
+      "2010-01-01",
+      "2016-12-31"
+    ]
+  },
+  "windows": {
+    "dev": [
+      "2017-01-01",
+      "2018-12-31"
+    ],
+    "hold": [
+      "2019-01-01",
+      "2020-12-31"
+    ],
+    "oos": [
+      "2021-01-01",
+      "2023-02-28"
+    ],
+    "hold_win_days": 120
+  },
+  "main": {
+    "tag": "v7_macro_belief",
+    "accepts": 0,
+    "gate_counts": {
+      "REJECTED_NO_FRONTIER_GAIN": 35,
+      "REJECTED_HOLDOUT": 2,
+      "REFUSED_INERT_ON_WINDOW": 3
+    },
+    "audit": {
+      "dominated": 35,
+      "adversary_vetoes": 0,
+      "budget_refusals": 0,
+      "wealth_refusals": 0,
+      "holdout_rejections": 2,
+      "inert_windows": 3,
+      "canary_caught": 4,
+      "canary_escaped": 0,
+      "canary_unarmed": 8
+    },
+    "gate_compromised": false,
+    "certified_coeffs": {
+      "t1": 0.3,
+      "t2": 0.7,
+      "lvl_reduced": 1.0,
+      "lvl_defensive": 1.0
+    },
+    "belief_occupancy": {
+      "dev": {
+        "mean": 0.038,
+        "frac>0.3": 0.04,
+        "frac>0.7": 0.036
+      },
+      "hold": {
+        "mean": 0.16,
+        "frac>0.3": 0.167,
+        "frac>0.7": 0.157
+      },
+      "oos": {
+        "mean": 0.223,
+        "frac>0.3": 0.227,
+        "frac>0.7": 0.22
+      }
+    },
+    "hold_full": {
+      "anchor": {
+        "ann": 0.2269,
+        "maxDD": -0.3292,
+        "sharpe": 0.912,
+        "dsd_bp": 117.4
+      },
+      "final": {
+        "ann": 0.2269,
+        "maxDD": -0.3292,
+        "sharpe": 0.912,
+        "dsd_bp": 117.4
+      }
+    },
+    "oos_single_shot": {
+      "anchor": {
+        "ann": 0.0518,
+        "maxDD": -0.2117,
+        "sharpe": 0.388,
+        "dsd_bp": 73.67
+      },
+      "final": {
+        "ann": 0.0518,
+        "maxDD": -0.2117,
+        "sharpe": 0.388,
+        "dsd_bp": 73.67
+      }
+    },
+    "mdl_axis_a_dev": {
+      "anchor": 0.0,
+      "final": 0.0
+    }
+  },
+  "placebo": {
+    "tag": "placebo_shuffled_belief",
+    "accepts": 0,
+    "gate_counts": {
+      "REJECTED_NO_FRONTIER_GAIN": 36,
+      "REJECTED_HOLDOUT": 2,
+      "REFUSED_INERT_ON_WINDOW": 2
+    },
+    "audit": {
+      "dominated": 36,
+      "adversary_vetoes": 0,
+      "budget_refusals": 0,
+      "wealth_refusals": 0,
+      "holdout_rejections": 2,
+      "inert_windows": 2,
+      "canary_caught": 4,
+      "canary_escaped": 0,
+      "canary_unarmed": 8
+    },
+    "gate_compromised": false,
+    "certified_coeffs": {
+      "t1": 0.3,
+      "t2": 0.7,
+      "lvl_reduced": 1.0,
+      "lvl_defensive": 1.0
+    },
+    "belief_occupancy": {
+      "dev": {
+        "mean": 0.341,
+        "frac>0.3": 0.353,
+        "frac>0.7": 0.331
+      },
+      "hold": {
+        "mean": 0.141,
+        "frac>0.3": 0.143,
+        "frac>0.7": 0.141
+      },
+      "oos": {
+        "mean": 0.014,
+        "frac>0.3": 0.015,
+        "frac>0.7": 0.011
+      }
+    },
+    "hold_full": {
+      "anchor": {
+        "ann": 0.2269,
+        "maxDD": -0.3292,
+        "sharpe": 0.912,
+        "dsd_bp": 117.4
+      },
+      "final": {
+        "ann": 0.2269,
+        "maxDD": -0.3292,
+        "sharpe": 0.912,
+        "dsd_bp": 117.4
+      }
+    },
+    "oos_single_shot": {
+      "anchor": {
+        "ann": 0.0518,
+        "maxDD": -0.2117,
+        "sharpe": 0.388,
+        "dsd_bp": 73.67
+      },
+      "final": {
+        "ann": 0.0518,
+        "maxDD": -0.2117,
+        "sharpe": 0.388,
+        "dsd_bp": 73.67
+      }
+    },
+    "mdl_axis_a_dev": {
+      "anchor": 0.0,
+      "final": 0.0
+    }
+  },
+  "positive_control": {
+    "verdict": "ACCEPTED_RISKMODE",
+    "accepted": true,
+    "harm": 0.0,
+    "type": "RETURN",
+    "z": 6.56,
+    "z_crit": 2.15
+  },
+  "trail": [
+    {
+      "round": 0,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 1,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 2,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_HOLDOUT",
+      "type": "RETURN",
+      "z": 0.19,
+      "z_crit": 2.15,
+      "wealth": 0.0889
+    },
+    {
+      "round": 3,
+      "arm": "lvl_defensive",
+      "verdict": "REJECTED_HOLDOUT",
+      "type": "RISK",
+      "z_dsd": -1.16,
+      "ni_z": 21.68,
+      "z_crit": 2.5,
+      "hold_dsd_gain": -0.0,
+      "wealth": 0.0424
+    },
+    {
+      "round": 4,
+      "arm": "joint_defend",
+      "verdict": "REFUSED_INERT_ON_WINDOW",
+      "window_start": 108
+    },
+    {
+      "round": 5,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 6,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 7,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 8,
+      "arm": "lvl_defensive",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 9,
+      "arm": "joint_defend",
+      "verdict": "REFUSED_INERT_ON_WINDOW",
+      "window_start": 108
+    },
+    {
+      "round": 10,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 11,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 12,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 13,
+      "arm": "lvl_defensive",
+      "verdict": "REFUSED_INERT_ON_WINDOW",
+      "window_start": 108
+    },
+    {
+      "round": 14,
+      "arm": "joint_defend",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 15,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 16,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 17,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 18,
+      "arm": "lvl_defensive",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 19,
+      "arm": "joint_defend",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 20,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 21,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 22,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 23,
+      "arm": "lvl_defensive",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 24,
+      "arm": "joint_defend",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 25,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 26,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 27,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 28,
+      "arm": "lvl_defensive",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 29,
+      "arm": "joint_defend",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 30,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 31,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 32,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 33,
+      "arm": "lvl_defensive",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 34,
+      "arm": "joint_defend",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 35,
+      "arm": "t1",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 36,
+      "arm": "t2",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 37,
+      "arm": "lvl_reduced",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 38,
+      "arm": "lvl_defensive",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    },
+    {
+      "round": 39,
+      "arm": "joint_defend",
+      "verdict": "REJECTED_NO_FRONTIER_GAIN"
+    }
+  ],
+  "verdict": "NULL \u2014 the macro belief certifies 0 through the same gate (consistent with Cederburg et al.: windowed IC does not convert to a certifiable policy)"
+}

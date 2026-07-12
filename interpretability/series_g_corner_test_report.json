@@ -1,0 +1,95 @@
+{
+  "returns_PPO_vs_optimal_vs_blind": {
+    "PPO": 8.12,
+    "optimal": 8.584,
+    "belief_blind": 3.068
+  },
+  "battery": [
+    {
+      "stream": "Series-G PPO (MODEL)",
+      "x_bits_per_action": [
+        0.8542,
+        1.2128
+      ],
+      "structure": "2/2",
+      "sim_autoregressive": 0.701,
+      "sim_reactive_state": 0.929,
+      "rashomon_structure_frac": 0.928,
+      "rashomon_ratio_e25": 0.01,
+      "N7_shuffle_pct": 57.5,
+      "N7_verdict": "symmetric"
+    },
+    {
+      "stream": "Series-G analytic-optimum",
+      "x_bits_per_action": [
+        0.8569,
+        1.2742
+      ],
+      "structure": "2/2",
+      "sim_autoregressive": 0.672,
+      "sim_reactive_state": 0.904,
+      "rashomon_structure_frac": 0.979,
+      "rashomon_ratio_e25": 0.01,
+      "N7_shuffle_pct": 23.5,
+      "N7_verdict": "symmetric"
+    },
+    {
+      "stream": "Series-G belief-BLIND (N7 control)",
+      "x_bits_per_action": [
+        -0.0,
+        -0.0
+      ],
+      "structure": "1/1",
+      "sim_autoregressive": 1.0,
+      "sim_reactive_state": 1.0,
+      "rashomon_structure_frac": 1.0,
+      "rashomon_ratio_e25": 0.78,
+      "N7_shuffle_pct": 4.5,
+      "N7_verdict": "symmetric"
+    },
+    {
+      "stream": "R6c csi500 (persister ref)",
+      "x_bits_per_action": [
+        0.1643,
+        0.3655
+      ],
+      "structure": "2/2",
+      "sim_autoregressive": 0.994,
+      "sim_reactive_state": "(prior: R6c~0.2 / P22~0.33)",
+      "rashomon_structure_frac": 0.973,
+      "rashomon_ratio_e25": 0.02,
+      "N7_shuffle_pct": 98.2,
+      "N7_verdict": "ASYMMETRIC"
+    },
+    {
+      "stream": "P22 csi500 (churner ref)",
+      "x_bits_per_action": [
+        1.4926,
+        1.5467
+      ],
+      "structure": "0/2",
+      "sim_autoregressive": 0.353,
+      "sim_reactive_state": "(prior: R6c~0.2 / P22~0.33)",
+      "rashomon_structure_frac": 0.001,
+      "rashomon_ratio_e25": 1.0,
+      "N7_shuffle_pct": 71.5,
+      "N7_verdict": "symmetric"
+    }
+  ],
+  "N7_controls": {
+    "c_ratchet(state-reactive*)": {
+      "N7_shuffle_pct": 100.0,
+      "verdict": "ASYMMETRIC"
+    },
+    "c_persister*": {
+      "N7_shuffle_pct": 46.8,
+      "verdict": "symmetric"
+    },
+    "c_iid*": {
+      "N7_shuffle_pct": 7.8,
+      "verdict": "symmetric"
+    }
+  },
+  "corner_occupied": false,
+  "verdict": "does NOT cleanly occupy the corner on all axes \u2014 inspect which gate failed (see battery)."
+}

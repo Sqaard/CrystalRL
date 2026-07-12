@@ -1,0 +1,47 @@
+{
+  "L1_frozen_filter": {
+    "p_stay": [
+      0.7879999876022339,
+      0.9549999833106995
+    ],
+    "E_burst": [
+      0.7250000238418579,
+      0.1720000058412552
+    ],
+    "provenance": "self-supervised on raw obs streams; param recovery verified in module selftest"
+  },
+  "returns": {
+    "CRYSTAL1(learned belief)": 6.84,
+    "HC1_noise_belief": 0.53,
+    "privileged_corner_PPO": 7.11,
+    "analytic_optimum": 8.58,
+    "price_of_learning_beliefs": 0.26
+  },
+  "battery": {
+    "x_h_mu": [
+      0.8851,
+      1.2238
+    ],
+    "structure": "2/2",
+    "y_reactive": 0.871,
+    "y_autoregressive": 0.664,
+    "rashomon_state_aware": {
+      "n": 3195,
+      "structure_frac": 0.399,
+      "ratio_e25": 0.438
+    },
+    "belief_N7": {
+      "pct": 100.0,
+      "verdict": "ASYMMETRIC"
+    }
+  },
+  "gates": {
+    "high_complexity": true,
+    "structured": true,
+    "reactive>>autoregressive": true,
+    "rashomon_crisp(state-aware)": false,
+    "belief_N7_asym(learned stream)": true,
+    "HC1_ablation_hurts": true
+  },
+  "B1_PASS": false
+}

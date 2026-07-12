@@ -1,0 +1,64 @@
+{
+  "data": "csi500 real OHLC 2018-2023 (344 names), Corwin-Schultz daily spread proxy",
+  "regime_conditional_facts": {
+    "spread_benign_bp": 462.69,
+    "spread_toxic_bp": 471.82,
+    "spread_widening_bp_95ci": [
+      -30.49,
+      52.19
+    ],
+    "spread_widening_significant": false,
+    "adverse_benign_bp": 90.31,
+    "adverse_toxic_bp": 119.6,
+    "regime_dynamics": {
+      "p_stay_benign": 0.989,
+      "p_stay_toxic": 0.976,
+      "toxic_rate": 0.314
+    }
+  },
+  "edge_and_VoI_by_lambda": [
+    {
+      "lambda": 0.05,
+      "edge_benign_bp": 226.83,
+      "edge_toxic_bp": 229.93,
+      "sign_flip": false,
+      "VoI_bp_per_20d": 0.0,
+      "VoI_annualized_pct": 0.0
+    },
+    {
+      "lambda": 0.1,
+      "edge_benign_bp": 222.31,
+      "edge_toxic_bp": 223.95,
+      "sign_flip": false,
+      "VoI_bp_per_20d": 0.0,
+      "VoI_annualized_pct": 0.0
+    },
+    {
+      "lambda": 0.2,
+      "edge_benign_bp": 213.28,
+      "edge_toxic_bp": 211.99,
+      "sign_flip": false,
+      "VoI_bp_per_20d": 0.0,
+      "VoI_annualized_pct": 0.0
+    },
+    {
+      "lambda": 0.3,
+      "edge_benign_bp": 204.25,
+      "edge_toxic_bp": 200.03,
+      "sign_flip": false,
+      "VoI_bp_per_20d": 0.0,
+      "VoI_annualized_pct": 0.0
+    },
+    {
+      "lambda": 0.5,
+      "edge_benign_bp": 186.19,
+      "edge_toxic_bp": 176.11,
+      "sign_flip": false,
+      "VoI_bp_per_20d": 0.0,
+      "VoI_annualized_pct": 0.0
+    }
+  ],
+  "corner_opens_at_lambda": [],
+  "verdict": "Corner does NOT open at any plausible lambda \u2014 even execution-proxy economics on daily data doesn't reward regime tracking; the bridge needs true intraday data (the explicit data requirement).",
+  "honesty": "CS is a noisy proxy (negatives floored); lambda (adverse-capture fraction) is unknowable without fill-level data; PROXY task \u2014 the deliverable is the map + the data requirement (true LOB/fill data), not a deployable claim."
+}

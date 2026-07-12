@@ -1,0 +1,99 @@
+{
+  "rows": [
+    {
+      "G": 2,
+      "n_actions": 4,
+      "ppo_return": 25.36,
+      "oracle_return": 7.87,
+      "random_return": -1.48,
+      "learned_frac": 2.87,
+      "x_h_mu": [
+        1.1461,
+        1.3591
+      ],
+      "structure": "2/2",
+      "sim_K9": 0.875,
+      "sim_K64": 0.972,
+      "H_belief_bits": 0.401,
+      "E_actions": [
+        0.41,
+        0.9403
+      ],
+      "budget_gap_K9": 0.097
+    },
+    {
+      "G": 4,
+      "n_actions": 6,
+      "ppo_return": 22.71,
+      "oracle_return": 7.53,
+      "random_return": -12.14,
+      "learned_frac": 1.77,
+      "x_h_mu": [
+        1.2417,
+        1.5951
+      ],
+      "structure": "2/2",
+      "sim_K9": 0.874,
+      "sim_K64": 0.951,
+      "H_belief_bits": 0.511,
+      "E_actions": [
+        0.8808,
+        1.6336
+      ],
+      "budget_gap_K9": 0.077
+    },
+    {
+      "G": 8,
+      "n_actions": 10,
+      "ppo_return": 21.39,
+      "oracle_return": 7.26,
+      "random_return": -16.98,
+      "learned_frac": 1.58,
+      "x_h_mu": [
+        1.3786,
+        1.916
+      ],
+      "structure": "2/2",
+      "sim_K9": 0.668,
+      "sim_K64": 0.945,
+      "H_belief_bits": 0.552,
+      "E_actions": [
+        1.1071,
+        2.2486
+      ],
+      "budget_gap_K9": 0.277
+    },
+    {
+      "G": 12,
+      "n_actions": 14,
+      "ppo_return": 3.99,
+      "oracle_return": 7.13,
+      "random_return": -16.5,
+      "learned_frac": 0.87,
+      "x_h_mu": [
+        1.2248,
+        1.8588
+      ],
+      "structure": "2/2",
+      "sim_K9": 0.611,
+      "sim_K64": 0.925,
+      "H_belief_bits": 0.566,
+      "E_actions": [
+        1.8728,
+        2.6557
+      ],
+      "budget_gap_K9": 0.314
+    }
+  ],
+  "W3_learned_bend": {
+    "gap_small_G": 0.087,
+    "gap_large_G": 0.295,
+    "bend_at_C_star_approx_K": true
+  },
+  "W1_belief_bottleneck": {
+    "spearman_Hbelief_vs_hmu": 0.8,
+    "spearman_Hbelief_vs_Eactions": 1.0,
+    "co_grow": true
+  },
+  "verdict": "LEARNED BEND CONFIRMED (C*\u2248K survives learning): the K9-vs-K64 simulatability gap opens once the number of named modes G+2 exceeds the budget K=9."
+}

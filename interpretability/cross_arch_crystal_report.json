@@ -1,0 +1,472 @@
+{
+  "title": "Cross-architecture CrystalScore -- common market-regime axis (frozen 2022-2023)",
+  "x_axis": "behavioral_complexity (action-only; identical to cross-policy)",
+  "y_axis": "crystalscore_behavioral = regime_simulatability(cash cv-R^2) x regime_clustering_stability(K9)",
+  "regime_feature_names": [
+    "realized_vol_20",
+    "drawdown_60",
+    "momentum_20",
+    "momentum_60",
+    "breadth_20",
+    "dispersion_20"
+  ],
+  "regime_clustering_stability_shared": 0.7479,
+  "frozen_panel": "artifacts\\stage4\\R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12_frozen_2022_2023_for_Joseph\\feature_scalers_frozen\\fold_2021\\model_ready.csv",
+  "K_budget": 9,
+  "K_grid": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "n_scored": 8,
+  "n_two_agent": 2,
+  "n_single_mlp": 6,
+  "correlation_complexity_vs_behavioral": {
+    "pearson": 0.4002,
+    "spearman": 0.1667
+  },
+  "ols_slope": 1.4138,
+  "two_agent_complexity_vs_family": {
+    "w1_complexity": 0.2857,
+    "r6c_family_mean_complexity": 0.3514333333333333,
+    "r6c_family_min_complexity": 0.3109,
+    "r6c_family_max_complexity": 0.3785
+  },
+  "regime_compressibility": {
+    "w1_behavioral": 0.3235,
+    "w1_completeness_stance9": 0.408,
+    "w1_book_dispersion": 0.0095,
+    "family_min_behavioral": 0.1323,
+    "family_max_behavioral": 0.4636,
+    "family_min_completeness9": 0.192,
+    "family_max_completeness9": 0.5164,
+    "family_mean_book_dispersion": 0.10325
+  },
+  "p22_vs_field": {
+    "p22_complexity": 0.2617,
+    "p22_book_dispersion": 0.021,
+    "p22_cash_entropy": 0.7307,
+    "p22_action_eff_dim": 0.0335,
+    "p22_behavioral": 0.0449,
+    "p22_completeness_stance9": 0.2743,
+    "p22_completeness_selection9": 0.17,
+    "field_min_complexity": 0.2857,
+    "field_max_complexity": 0.3785,
+    "field_mean_complexity": 0.34204285714285715,
+    "field_min_book_dispersion": 0.0095,
+    "field_max_book_dispersion": 0.1703,
+    "field_mean_book_dispersion": 0.08985714285714284,
+    "p22_extends_complexity_range": false,
+    "p22_extends_dispersion_range": false
+  },
+  "rows": [
+    {
+      "policy": "R6c",
+      "family": "R6c (root_split_beta_dirichlet)",
+      "arch": "single-MLP",
+      "behavioral_complexity": 0.3579,
+      "cash_entropy": 0.8967,
+      "book_dispersion": 0.096,
+      "action_eff_dim": 0.0809,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.1769,
+      "regime_completeness_stance": {
+        "2": 0.0772,
+        "3": 0.111,
+        "4": 0.1432,
+        "5": 0.1543,
+        "6": 0.267,
+        "7": 0.3143,
+        "8": 0.3411,
+        "9": 0.4165
+      },
+      "regime_completeness_selection": {
+        "2": 0.0257,
+        "3": 0.0443,
+        "4": 0.0722,
+        "5": 0.0883,
+        "6": 0.0983,
+        "7": 0.1067,
+        "8": 0.3524,
+        "9": 0.2561
+      },
+      "regime_completeness_stance_K9": 0.4165,
+      "regime_completeness_selection_K9": 0.2561,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.2254,
+        "at_K9": 0.4165
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.129,
+        "at_K9": 0.2561
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.1323,
+      "crystalscore_behavioral_nostab": 0.1769,
+      "native_latent_dim": 64,
+      "native_latent_simul_cash_cv": 0.244,
+      "native_latent_note": "R6c native = 64-d policy_net.5.ReLU; value reused from crystal_score_report (K9 latent-cluster cash R^2).",
+      "source": "crystal_score_report.json (actions: frozen behavior log)",
+      "notes": "R6c-family; cross-arch y recomputed from frozen behavior log on common regime axis."
+    },
+    {
+      "policy": "R6c+_latent_relabel_off",
+      "family": "R6c+ latent-action (gaussian_logits)",
+      "arch": "single-MLP",
+      "behavioral_complexity": 0.3785,
+      "cash_entropy": 0.91,
+      "book_dispersion": 0.1137,
+      "action_eff_dim": 0.1119,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.2617,
+      "regime_completeness_stance": {
+        "2": 0.0573,
+        "3": 0.0969,
+        "4": 0.1309,
+        "5": 0.1108,
+        "6": 0.117,
+        "7": 0.1619,
+        "8": 0.1809,
+        "9": 0.192
+      },
+      "regime_completeness_selection": {
+        "2": 0.0133,
+        "3": 0.0265,
+        "4": 0.0402,
+        "5": 0.0493,
+        "6": 0.0721,
+        "7": 0.0785,
+        "8": 0.3957,
+        "9": 0.2877
+      },
+      "regime_completeness_stance_K9": 0.192,
+      "regime_completeness_selection_K9": 0.2877,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.1319,
+        "at_K9": 0.192
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.1161,
+        "at_K9": 0.2877
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.1958,
+      "crystalscore_behavioral_nostab": 0.2617,
+      "native_latent_dim": 64,
+      "native_latent_simul_cash_cv": 0.8886,
+      "native_latent_note": "64-d policy_net.5.ReLU; cv-R^2 cash (standardized).",
+      "source": "artifacts\\stage0_1\\r6c_latent_ab\\R6c_latent_relabel_off\\fold_2021\\model.zip",
+      "notes": "R6c-family; replayed frozen 2022-2023; cross-arch y on common regime axis."
+    },
+    {
+      "policy": "R6c+_latent_relabel_on",
+      "family": "R6c+ latent-action (gaussian_logits)",
+      "arch": "single-MLP",
+      "behavioral_complexity": 0.3109,
+      "cash_entropy": 0.7152,
+      "book_dispersion": 0.1703,
+      "action_eff_dim": 0.0472,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.2967,
+      "regime_completeness_stance": {
+        "2": 0.1843,
+        "3": 0.1638,
+        "4": 0.1644,
+        "5": 0.213,
+        "6": 0.2174,
+        "7": 0.319,
+        "8": 0.3884,
+        "9": 0.4749
+      },
+      "regime_completeness_selection": {
+        "2": 0.0133,
+        "3": 0.0367,
+        "4": 0.0603,
+        "5": 0.0699,
+        "6": 0.1064,
+        "7": 0.1117,
+        "8": 0.5819,
+        "9": 0.4161
+      },
+      "regime_completeness_stance_K9": 0.4749,
+      "regime_completeness_selection_K9": 0.4161,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.2565,
+        "at_K9": 0.4749
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.1688,
+        "at_K9": 0.4161
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.2219,
+      "crystalscore_behavioral_nostab": 0.2967,
+      "native_latent_dim": 64,
+      "native_latent_simul_cash_cv": 0.8608,
+      "native_latent_note": "64-d policy_net.5.ReLU; cv-R^2 cash (standardized).",
+      "source": "artifacts\\stage0_1\\r6c_latent_ab\\R6c_latent_relabel_on\\fold_2021\\model.zip",
+      "notes": "R6c-family; replayed frozen 2022-2023; cross-arch y on common regime axis."
+    },
+    {
+      "policy": "R6c_vol0",
+      "family": "R6c vol_excess (root_split_beta_dirichlet)",
+      "arch": "single-MLP",
+      "behavioral_complexity": 0.349,
+      "cash_entropy": 0.8805,
+      "book_dispersion": 0.0791,
+      "action_eff_dim": 0.0875,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.5425,
+      "regime_completeness_stance": {
+        "2": 0.028,
+        "3": 0.1937,
+        "4": 0.1733,
+        "5": 0.3001,
+        "6": 0.2802,
+        "7": 0.3873,
+        "8": 0.4327,
+        "9": 0.5027
+      },
+      "regime_completeness_selection": {
+        "2": 0.0137,
+        "3": 0.0268,
+        "4": 0.0437,
+        "5": 0.0532,
+        "6": 0.0755,
+        "7": 0.0806,
+        "8": 0.3578,
+        "9": 0.2437
+      },
+      "regime_completeness_stance_K9": 0.5027,
+      "regime_completeness_selection_K9": 0.2437,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.2904,
+        "at_K9": 0.5027
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.1095,
+        "at_K9": 0.2437
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.4057,
+      "crystalscore_behavioral_nostab": 0.5425,
+      "native_latent_dim": 64,
+      "native_latent_simul_cash_cv": 0.9419,
+      "native_latent_note": "64-d policy_net.5.ReLU; cv-R^2 cash (standardized).",
+      "source": "artifacts\\stage0_1\\r6c_vol_excess_full\\R6c_AB_vol0\\fold_2021\\model.zip",
+      "notes": "R6c-family; replayed frozen 2022-2023; cross-arch y on common regime axis."
+    },
+    {
+      "policy": "R6c_vol05",
+      "family": "R6c vol_excess (root_split_beta_dirichlet)",
+      "arch": "single-MLP",
+      "behavioral_complexity": 0.3583,
+      "cash_entropy": 0.9162,
+      "book_dispersion": 0.0816,
+      "action_eff_dim": 0.077,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.5039,
+      "regime_completeness_stance": {
+        "2": 0.0262,
+        "3": 0.2093,
+        "4": 0.1921,
+        "5": 0.2912,
+        "6": 0.2682,
+        "7": 0.3515,
+        "8": 0.3999,
+        "9": 0.4648
+      },
+      "regime_completeness_selection": {
+        "2": 0.0162,
+        "3": 0.0305,
+        "4": 0.0509,
+        "5": 0.0576,
+        "6": 0.0798,
+        "7": 0.0851,
+        "8": 0.4236,
+        "9": 0.2926
+      },
+      "regime_completeness_stance_K9": 0.4648,
+      "regime_completeness_selection_K9": 0.2926,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.2797,
+        "at_K9": 0.4648
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.126,
+        "at_K9": 0.2926
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.3769,
+      "crystalscore_behavioral_nostab": 0.5039,
+      "native_latent_dim": 64,
+      "native_latent_simul_cash_cv": 0.9457,
+      "native_latent_note": "64-d policy_net.5.ReLU; cv-R^2 cash (standardized).",
+      "source": "artifacts\\stage0_1\\r6c_vol_excess_full\\R6c_AB_vol05\\fold_2021\\model.zip",
+      "notes": "R6c-family; replayed frozen 2022-2023; cross-arch y on common regime axis."
+    },
+    {
+      "policy": "R6c_vol10",
+      "family": "R6c vol_excess (root_split_beta_dirichlet)",
+      "arch": "single-MLP",
+      "behavioral_complexity": 0.354,
+      "cash_entropy": 0.8986,
+      "book_dispersion": 0.0788,
+      "action_eff_dim": 0.0847,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.6199,
+      "regime_completeness_stance": {
+        "2": 0.0003,
+        "3": 0.0931,
+        "4": 0.1268,
+        "5": 0.3836,
+        "6": 0.3227,
+        "7": 0.4258,
+        "8": 0.4633,
+        "9": 0.5164
+      },
+      "regime_completeness_selection": {
+        "2": 0.0155,
+        "3": 0.0259,
+        "4": 0.0422,
+        "5": 0.0506,
+        "6": 0.0722,
+        "7": 0.0772,
+        "8": 0.3779,
+        "9": 0.2622
+      },
+      "regime_completeness_stance_K9": 0.5164,
+      "regime_completeness_selection_K9": 0.2622,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.2962,
+        "at_K9": 0.5164
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.1121,
+        "at_K9": 0.2622
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.4636,
+      "crystalscore_behavioral_nostab": 0.6199,
+      "native_latent_dim": 64,
+      "native_latent_simul_cash_cv": 0.5748,
+      "native_latent_note": "64-d policy_net.5.ReLU; cv-R^2 cash (standardized).",
+      "source": "artifacts\\stage0_1\\r6c_vol_excess_full\\R6c_AB_vol10\\fold_2021\\model.zip",
+      "notes": "R6c-family; replayed frozen 2022-2023; cross-arch y on common regime axis."
+    },
+    {
+      "policy": "W1",
+      "family": "two-agent (BetaBudget PM + Dirichlet Trader)",
+      "arch": "two-agent (PM+Trader)",
+      "behavioral_complexity": 0.2857,
+      "cash_entropy": 0.7995,
+      "book_dispersion": 0.0095,
+      "action_eff_dim": 0.048,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.4325,
+      "regime_completeness_stance": {
+        "2": 0.163,
+        "3": 0.3061,
+        "4": 0.2988,
+        "5": 0.3919,
+        "6": 0.4119,
+        "7": 0.3961,
+        "8": 0.4022,
+        "9": 0.408
+      },
+      "regime_completeness_selection": {
+        "2": 0.0196,
+        "3": 0.0297,
+        "4": 0.0384,
+        "5": 0.0551,
+        "6": 0.0693,
+        "7": 0.0905,
+        "8": 0.0978,
+        "9": 0.1097
+      },
+      "regime_completeness_stance_K9": 0.408,
+      "regime_completeness_selection_K9": 0.1097,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.3561,
+        "at_K9": 0.408
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.0636,
+        "at_K9": 0.1097
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.3235,
+      "crystalscore_behavioral_nostab": 0.4325,
+      "native_latent_dim": 256,
+      "native_latent_simul_cash_cv": 0.9952,
+      "native_latent_note": "two-agent native latent = concat(PM penultimate 128-d, Trader q_ctx 128-d) = 256-d. CAVEAT: 256-d >> R6c-family 64-d, so this cv-R^2 is mechanically inflated vs the single-MLP rows and is NOT cross-arch-comparable -- shown for transparency only.",
+      "source": "artifacts\\stage0_1\\_unpacked_W1_P4PrimitiveWarmStart_results\\stage0_1_job_703_W1_P4PrimitiveWarmStart_fold_2021_results\\stage0_1_job_703_W1_P4PrimitiveWarmStart_fold_2021\\artifacts\\stage0_1\\weight_based_w1_p4_primitive_warmstart_batch\\W1_PM_BetaBudget_Trader_P4PrimitiveWarmStart_v1\\fold_2021",
+      "notes": "two-agent; replayed frozen 2022-2023 natively; cross-arch y on common regime axis."
+    },
+    {
+      "policy": "P22",
+      "family": "two-agent (BetaBudget PM + LatentAction Trader)",
+      "arch": "two-agent (PM+Trader)",
+      "behavioral_complexity": 0.2617,
+      "cash_entropy": 0.7307,
+      "book_dispersion": 0.021,
+      "action_eff_dim": 0.0335,
+      "n_steps": 289,
+      "regime_simulatability_cash_cv": 0.06,
+      "regime_completeness_stance": {
+        "2": 0.0064,
+        "3": 0.0432,
+        "4": 0.1025,
+        "5": 0.1053,
+        "6": 0.167,
+        "7": 0.3182,
+        "8": 0.3511,
+        "9": 0.2743
+      },
+      "regime_completeness_selection": {
+        "2": 0.08,
+        "3": 0.0918,
+        "4": 0.0972,
+        "5": 0.1178,
+        "6": 0.1251,
+        "7": 0.1574,
+        "8": 0.1604,
+        "9": 0.17
+      },
+      "regime_completeness_stance_K9": 0.2743,
+      "regime_completeness_selection_K9": 0.17,
+      "regime_pareto_stance": {
+        "auc_normalized": 0.1754,
+        "at_K9": 0.2743
+      },
+      "regime_pareto_selection": {
+        "auc_normalized": 0.125,
+        "at_K9": 0.17
+      },
+      "regime_clustering_stability_K9": 0.7479,
+      "crystalscore_behavioral": 0.0449,
+      "crystalscore_behavioral_nostab": 0.06,
+      "native_latent_dim": 256,
+      "native_latent_simul_cash_cv": 1.0,
+      "native_latent_note": "two-agent latent-action native latent = concat(PM penultimate 128-d, Trader q_ctx 128-d) = 256-d. CAVEAT: 256-d >> R6c-family 64-d, so this cv-R^2 is mechanically inflated vs the single-MLP rows and is NOT cross-arch-comparable -- transparency only.",
+      "source": "D:\\Interpretable_CHRL\\stage0_1\\current\\weight_based_w2_p22_context_selective_anti_collapse_batch\\W2_P22P18ContextSelectiveAntiCollapseLatentActionTrader_P22WarmStart_v1\\fold_2021",
+      "notes": "two-agent latent-action; replayed frozen 2022-2023 natively (firewall base-arm path; decode via P18 teacher prototypes); cross-arch y on common regime axis."
+    }
+  ],
+  "skipped": [
+    {
+      "policy": "H2",
+      "family": "two-agent (pm + trader, NoLOB)",
+      "reason": "No checkpoints on disk: H2 (R6c-PM + T5-Trader, NoLOB CTDE) was only produced as cloud job archives (stage0_1_job_510..513_H2_R6c_PM_T5_Trader_NoLOB_CTDE_fold_*.zip) which are not extracted/present here -- only configs/generated/stage0_1_h2_pm_trader_nolob.yaml, the package-builder script, and an audit .md exist. No pm_policy.pt / trader_policy.pt (or model.zip) exists for H2, so there is nothing to replay -> skipped (not fabricated)."
+    }
+  ],
+  "plot": {
+    "plotted": true,
+    "file": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\interpretability\\cross_arch_curve.png"
+  }
+}

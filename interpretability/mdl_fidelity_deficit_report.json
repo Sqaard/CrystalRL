@@ -1,0 +1,55 @@
+{
+  "corner_G2": {
+    "G": 2,
+    "n_actions_used": 3,
+    "simul_K9": 0.934,
+    "simul_ceiling64": 0.989,
+    "deficit": 0.055,
+    "h_mu_range": [
+      0.892,
+      1.271
+    ]
+  },
+  "family_G4": {
+    "G": 4,
+    "n_actions_used": 5,
+    "simul_K9": 0.864,
+    "simul_ceiling64": 0.972,
+    "deficit": 0.112,
+    "h_mu_range": [
+      1.253,
+      1.731
+    ]
+  },
+  "family_G12": {
+    "G": 12,
+    "n_actions_used": 14,
+    "simul_K9": 0.527,
+    "simul_ceiling64": 0.919,
+    "deficit": 0.427,
+    "h_mu_range": [
+      1.479,
+      2.118
+    ]
+  },
+  "frontier": {
+    "(G, deficit, simul_K9)": [
+      [
+        2,
+        0.055,
+        0.934
+      ],
+      [
+        4,
+        0.112,
+        0.864
+      ],
+      [
+        12,
+        0.427,
+        0.527
+      ]
+    ]
+  },
+  "headline": "MDL Parsimony-Fidelity Deficit across complexity: G2 deficit 0.055 (simul@K9 0.934, 3 actions); G4 deficit 0.112 (simul@K9 0.864, 5 actions); G12 deficit 0.427 (simul@K9 0.527, 14 actions). Confirms the tension: the CrystalScore 0.938 corner (G2, deficit~0) is the DEGENERATE low-complexity end; as the K-simplex vocabulary grows the K<=9 story CANNOT reproduce the policy and the deficit rises \u2014 a real Pareto frontier (short story vs full fidelity), so no policy scores 1 on both. CRYSTAL-1 is near-ideal only on the low-complexity leg; Axis A is the demanding metric the saturated scalar hid."
+}

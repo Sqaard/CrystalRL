@@ -1,0 +1,60 @@
+{
+  "trajectory": [
+    {
+      "venues_covered": 0,
+      "gate_sees_RETURN": 0.0,
+      "gate_BLIND_to_MDL_deficit": 0.0
+    },
+    {
+      "venues_covered": 1,
+      "gate_sees_RETURN": 0.857,
+      "gate_BLIND_to_MDL_deficit": -0.08
+    },
+    {
+      "venues_covered": 2,
+      "gate_sees_RETURN": 0.954,
+      "gate_BLIND_to_MDL_deficit": -0.03
+    },
+    {
+      "venues_covered": 3,
+      "gate_sees_RETURN": 1.908,
+      "gate_BLIND_to_MDL_deficit": 0.031
+    },
+    {
+      "venues_covered": 4,
+      "gate_sees_RETURN": 2.59,
+      "gate_BLIND_to_MDL_deficit": 0.158
+    },
+    {
+      "venues_covered": 5,
+      "gate_sees_RETURN": 3.568,
+      "gate_BLIND_to_MDL_deficit": 0.264
+    },
+    {
+      "venues_covered": 6,
+      "gate_sees_RETURN": 3.96,
+      "gate_BLIND_to_MDL_deficit": 0.266
+    },
+    {
+      "venues_covered": 7,
+      "gate_sees_RETURN": 4.564,
+      "gate_BLIND_to_MDL_deficit": 0.346
+    },
+    {
+      "venues_covered": 8,
+      "gate_sees_RETURN": 5.115,
+      "gate_BLIND_to_MDL_deficit": 0.48
+    },
+    {
+      "venues_covered": 9,
+      "gate_sees_RETURN": 5.744,
+      "gate_BLIND_to_MDL_deficit": 0.366
+    },
+    {
+      "venues_covered": 10,
+      "gate_sees_RETURN": 6.09,
+      "gate_BLIND_to_MDL_deficit": 0.407
+    }
+  ],
+  "headline": "TENSION-BLINDNESS demonstrated: as the HL loop covers venues 1->10, the RETURN the gate certifies rises 0.857->6.09 while the MDL parsimony-fidelity DEFICIT the gate never checks rises -0.08->0.407. Every step is gate-ACCEPTED (return up) yet the policy walks up the legibility-loss frontier UNCERTIFIED. The HL gate is single-objective; it has no tension axis, so it cannot refuse a return gain that pays in legibility. This is the core architectural flaw the CrystalScore-v2 tension profile exposes."
+}

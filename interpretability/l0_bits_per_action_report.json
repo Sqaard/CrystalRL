@@ -1,0 +1,569 @@
+{
+  "policy": "R6c (original_ppo)",
+  "universe": "Dow-29 (liquid large-cap)",
+  "frozen_window": [
+    "2022-01-03",
+    "2023-02-27"
+  ],
+  "n_frozen_days": 289,
+  "source": "artifacts\\action_vq\\A67_joint_hidden_action_controls_fullenv_from_R6c_v1\\ja67_joint_controls_daily.csv",
+  "units": "bits per action",
+  "method": "entropy-rate / excess-entropy / finite-L causal-state (epsilon-machine) reconstruction",
+  "mirror_of_the_hall": "R6c's OOS edge on Dow-29 is NULL -- these bits/action describe the complexity of a policy explaining a null OOS signal, NOT evidence of a real edge.",
+  "frozen_legality": "scored ONLY on the 289-day frozen 2022-2023 original_ppo log; the clean stage4 code_id stream is dev-window-only (<=2021-12-17) and was deliberately NOT used.",
+  "streams": {
+    "cash_target": {
+      "kind": "continuous",
+      "n_configs": 6,
+      "h_mu_range": [
+        0.2882,
+        0.6276
+      ],
+      "E_range": [
+        1.0872,
+        2.6953
+      ],
+      "C_mu_L1_range": [
+        1.4603,
+        2.9843
+      ],
+      "C_mu_Lstar_range": [
+        1.6405,
+        3.4789
+      ],
+      "structure_present_configs": "6/6",
+      "structure_present": true,
+      "configs": [
+        {
+          "alphabet": 3,
+          "dt": 1,
+          "T": 289,
+          "Lstar": 6,
+          "h_mu": 0.2882,
+          "h_mu_ci95": [
+            0.2312,
+            0.3987
+          ],
+          "H1_iid_bound": 1.4602,
+          "E": 1.2554,
+          "C_mu_L1": 1.4603,
+          "C_mu_Lstar": 1.6405,
+          "null_h_mu_mean": 1.4176,
+          "null_h_mu_p05": 1.3868,
+          "structure_gap": 0.7967,
+          "structure_present": true,
+          "h_curve": {
+            "1": 1.4602,
+            "2": 0.3238,
+            "3": 0.3121,
+            "4": 0.3102,
+            "5": 0.2902,
+            "6": 0.2882
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 289.0
+            },
+            "1": {
+              "H": 1.4602,
+              "mean_count": 96.33
+            },
+            "2": {
+              "H": 1.784,
+              "mean_count": 32.0
+            },
+            "3": {
+              "H": 2.0961,
+              "mean_count": 17.94
+            },
+            "4": {
+              "H": 2.4064,
+              "mean_count": 12.43
+            },
+            "5": {
+              "H": 2.6965,
+              "mean_count": 9.5
+            },
+            "6": {
+              "H": 2.9848,
+              "mean_count": 7.68
+            }
+          }
+        },
+        {
+          "alphabet": 3,
+          "dt": 2,
+          "T": 145,
+          "Lstar": 4,
+          "h_mu": 0.487,
+          "h_mu_ci95": [
+            0.3621,
+            0.649
+          ],
+          "H1_iid_bound": 1.4749,
+          "E": 1.0872,
+          "C_mu_L1": 1.4752,
+          "C_mu_Lstar": 2.351,
+          "null_h_mu_mean": 1.3871,
+          "null_h_mu_p05": 1.3316,
+          "structure_gap": 0.6489,
+          "structure_present": true,
+          "h_curve": {
+            "1": 1.4749,
+            "2": 0.5479,
+            "3": 0.5255,
+            "4": 0.487,
+            "5": 0.4755
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 145.0
+            },
+            "1": {
+              "H": 1.4749,
+              "mean_count": 48.33
+            },
+            "2": {
+              "H": 2.0228,
+              "mean_count": 16.0
+            },
+            "3": {
+              "H": 2.5483,
+              "mean_count": 8.94
+            },
+            "4": {
+              "H": 3.0353,
+              "mean_count": 6.17
+            },
+            "5": {
+              "H": 3.5108,
+              "mean_count": 4.7
+            }
+          }
+        },
+        {
+          "alphabet": 5,
+          "dt": 1,
+          "T": 289,
+          "Lstar": 5,
+          "h_mu": 0.3229,
+          "h_mu_ci95": [
+            0.2797,
+            0.4619
+          ],
+          "H1_iid_bound": 2.1931,
+          "E": 2.0211,
+          "C_mu_L1": 2.1922,
+          "C_mu_Lstar": 2.4322,
+          "null_h_mu_mean": 2.1516,
+          "null_h_mu_p05": 2.1235,
+          "structure_gap": 0.8499,
+          "structure_present": true,
+          "h_curve": {
+            "1": 2.1931,
+            "2": 0.4174,
+            "3": 0.3525,
+            "4": 0.3496,
+            "5": 0.3229,
+            "6": 0.3198
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 289.0
+            },
+            "1": {
+              "H": 2.1931,
+              "mean_count": 57.8
+            },
+            "2": {
+              "H": 2.6105,
+              "mean_count": 15.16
+            },
+            "3": {
+              "H": 2.9631,
+              "mean_count": 9.26
+            },
+            "4": {
+              "H": 3.3126,
+              "mean_count": 6.65
+            },
+            "5": {
+              "H": 3.6355,
+              "mean_count": 5.28
+            },
+            "6": {
+              "H": 3.9553,
+              "mean_count": 4.37
+            }
+          }
+        },
+        {
+          "alphabet": 5,
+          "dt": 2,
+          "T": 145,
+          "Lstar": 2,
+          "h_mu": 0.6276,
+          "h_mu_ci95": [
+            0.4856,
+            0.8857
+          ],
+          "H1_iid_bound": 2.1964,
+          "E": 1.5688,
+          "C_mu_L1": 2.1947,
+          "C_mu_Lstar": 2.6792,
+          "null_h_mu_mean": 2.1079,
+          "null_h_mu_p05": 2.0559,
+          "structure_gap": 0.7023,
+          "structure_present": true,
+          "h_curve": {
+            "1": 2.1964,
+            "2": 0.6276,
+            "3": 0.5894
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 145.0
+            },
+            "1": {
+              "H": 2.1964,
+              "mean_count": 29.0
+            },
+            "2": {
+              "H": 2.824,
+              "mean_count": 8.47
+            },
+            "3": {
+              "H": 3.4134,
+              "mean_count": 4.93
+            }
+          }
+        },
+        {
+          "alphabet": 10,
+          "dt": 1,
+          "T": 289,
+          "Lstar": 3,
+          "h_mu": 0.349,
+          "h_mu_ci95": [
+            0.3025,
+            0.4623
+          ],
+          "H1_iid_bound": 2.9789,
+          "E": 2.6953,
+          "C_mu_L1": 2.9798,
+          "C_mu_Lstar": 3.0699,
+          "null_h_mu_mean": 2.9789,
+          "null_h_mu_p05": 2.9789,
+          "structure_gap": 0.8828,
+          "structure_present": true,
+          "h_curve": {
+            "1": 2.9789,
+            "2": 0.4145,
+            "3": 0.349,
+            "4": 0.3453
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 289.0
+            },
+            "1": {
+              "H": 2.9789,
+              "mean_count": 28.9
+            },
+            "2": {
+              "H": 3.3933,
+              "mean_count": 10.29
+            },
+            "3": {
+              "H": 3.7423,
+              "mean_count": 6.67
+            },
+            "4": {
+              "H": 4.0877,
+              "mean_count": 4.93
+            }
+          }
+        },
+        {
+          "alphabet": 10,
+          "dt": 2,
+          "T": 145,
+          "Lstar": 2,
+          "h_mu": 0.6089,
+          "h_mu_ci95": [
+            0.5546,
+            0.8626
+          ],
+          "H1_iid_bound": 2.9827,
+          "E": 2.3738,
+          "C_mu_L1": 2.9843,
+          "C_mu_Lstar": 3.4789,
+          "null_h_mu_mean": 2.9827,
+          "null_h_mu_p05": 2.9827,
+          "structure_gap": 0.7959,
+          "structure_present": true,
+          "h_curve": {
+            "1": 2.9827,
+            "2": 0.6089,
+            "3": 0.5736
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 145.0
+            },
+            "1": {
+              "H": 2.9827,
+              "mean_count": 14.5
+            },
+            "2": {
+              "H": 3.5916,
+              "mean_count": 5.76
+            },
+            "3": {
+              "H": 4.1652,
+              "mean_count": 3.58
+            }
+          }
+        }
+      ],
+      "stream_label": "stance: invested-vs-cash fraction (continuous, binned)",
+      "native_n_unique": 23
+    },
+    "hidden_code_id": {
+      "kind": "discrete",
+      "n_configs": 2,
+      "h_mu_range": [
+        0.5168,
+        0.9799
+      ],
+      "E_range": [
+        0.9634,
+        1.6441
+      ],
+      "C_mu_L1_range": [
+        1.9439,
+        1.9479
+      ],
+      "C_mu_Lstar_range": [
+        2.697,
+        2.9126
+      ],
+      "structure_present_configs": "2/2",
+      "structure_present": true,
+      "configs": [
+        {
+          "alphabet": 6,
+          "dt": 1,
+          "T": 289,
+          "Lstar": 5,
+          "h_mu": 0.5168,
+          "h_mu_ci95": [
+            0.4199,
+            0.6487
+          ],
+          "H1_iid_bound": 1.9415,
+          "E": 1.6441,
+          "C_mu_L1": 1.9439,
+          "C_mu_Lstar": 2.9126,
+          "null_h_mu_mean": 1.8805,
+          "null_h_mu_p05": 1.8495,
+          "structure_gap": 0.7252,
+          "structure_present": true,
+          "h_curve": {
+            "1": 1.9415,
+            "2": 0.6132,
+            "3": 0.5917,
+            "4": 0.565,
+            "5": 0.5168,
+            "6": 0.4467
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 289.0
+            },
+            "1": {
+              "H": 1.9415,
+              "mean_count": 48.17
+            },
+            "2": {
+              "H": 2.5547,
+              "mean_count": 16.0
+            },
+            "3": {
+              "H": 3.1464,
+              "mean_count": 9.57
+            },
+            "4": {
+              "H": 3.7114,
+              "mean_count": 6.65
+            },
+            "5": {
+              "H": 4.2282,
+              "mean_count": 5.09
+            },
+            "6": {
+              "H": 4.675,
+              "mean_count": 4.24
+            }
+          }
+        },
+        {
+          "alphabet": 6,
+          "dt": 2,
+          "T": 145,
+          "Lstar": 2,
+          "h_mu": 0.9799,
+          "h_mu_ci95": [
+            0.7093,
+            1.1657
+          ],
+          "H1_iid_bound": 1.9433,
+          "E": 0.9634,
+          "C_mu_L1": 1.9479,
+          "C_mu_Lstar": 2.697,
+          "null_h_mu_mean": 1.8238,
+          "null_h_mu_p05": 1.7664,
+          "structure_gap": 0.4627,
+          "structure_present": true,
+          "h_curve": {
+            "1": 1.9433,
+            "2": 0.9799,
+            "3": 0.8646
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 145.0
+            },
+            "1": {
+              "H": 1.9433,
+              "mean_count": 24.17
+            },
+            "2": {
+              "H": 2.9231,
+              "mean_count": 8.0
+            },
+            "3": {
+              "H": 3.7877,
+              "mean_count": 4.77
+            }
+          }
+        }
+      ],
+      "stream_label": "latent code: KMeans cluster of the 64-d final policy latent",
+      "native_n_unique": 6
+    },
+    "action_token_code": {
+      "kind": "discrete",
+      "n_configs": 2,
+      "h_mu_range": [
+        0.8162,
+        3.0613
+      ],
+      "E_range": [
+        0.0,
+        2.1727
+      ],
+      "C_mu_L1_range": [
+        2.9899,
+        3.0639
+      ],
+      "C_mu_Lstar_range": [
+        3.0639,
+        3.5652
+      ],
+      "structure_present_configs": "1/2",
+      "structure_present": true,
+      "configs": [
+        {
+          "alphabet": 14,
+          "dt": 1,
+          "T": 289,
+          "Lstar": 2,
+          "h_mu": 0.8162,
+          "h_mu_ci95": [
+            0.6531,
+            0.97
+          ],
+          "H1_iid_bound": 2.9889,
+          "E": 2.1727,
+          "C_mu_L1": 2.9899,
+          "C_mu_Lstar": 3.5652,
+          "null_h_mu_mean": 2.9889,
+          "null_h_mu_p05": 2.9889,
+          "structure_gap": 0.7269,
+          "structure_present": true,
+          "h_curve": {
+            "1": 2.9889,
+            "2": 0.8162,
+            "3": 0.7789
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 289.0
+            },
+            "1": {
+              "H": 2.9889,
+              "mean_count": 20.64
+            },
+            "2": {
+              "H": 3.8051,
+              "mean_count": 6.13
+            },
+            "3": {
+              "H": 4.584,
+              "mean_count": 3.59
+            }
+          }
+        },
+        {
+          "alphabet": 14,
+          "dt": 2,
+          "T": 145,
+          "Lstar": 1,
+          "h_mu": 3.0613,
+          "h_mu_ci95": [
+            1.1702,
+            3.3827
+          ],
+          "H1_iid_bound": 3.0613,
+          "E": 0.0,
+          "C_mu_L1": 3.0639,
+          "C_mu_Lstar": 3.0639,
+          "null_h_mu_mean": 3.0613,
+          "null_h_mu_p05": 3.0613,
+          "structure_gap": -0.0,
+          "structure_present": false,
+          "h_curve": {
+            "1": 3.0613,
+            "2": 1.3053
+          },
+          "depth_table": {
+            "0": {
+              "H": 0.0,
+              "mean_count": 145.0
+            },
+            "1": {
+              "H": 3.0613,
+              "mean_count": 10.36
+            },
+            "2": {
+              "H": 4.3666,
+              "mean_count": 3.06
+            }
+          }
+        }
+      ],
+      "stream_label": "action token: discrete controller-action code (incl -1 = no token)",
+      "native_n_unique": 14
+    }
+  }
+}

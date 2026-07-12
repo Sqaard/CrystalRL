@@ -1,0 +1,44 @@
+{
+  "50000": {
+    "simul_iid": 0.001,
+    "regime_r2": 0.445,
+    "action_gain": 0.059,
+    "complexity_PR": 0.433,
+    "policy_width": 1.04
+  },
+  "100000": {
+    "simul_iid": 0.001,
+    "regime_r2": 0.421,
+    "action_gain": 0.075,
+    "complexity_PR": 0.361,
+    "policy_width": 1.072
+  },
+  "150000": {
+    "simul_iid": 0.001,
+    "regime_r2": 0.391,
+    "action_gain": 0.087,
+    "complexity_PR": 0.359,
+    "policy_width": 1.113
+  },
+  "200000": {
+    "simul_iid": 0.0,
+    "regime_r2": 0.409,
+    "action_gain": 0.099,
+    "complexity_PR": 0.461,
+    "policy_width": 1.149
+  },
+  "250000": {
+    "simul_iid": 0.001,
+    "regime_r2": 0.422,
+    "action_gain": 0.109,
+    "complexity_PR": 0.434,
+    "policy_width": 1.187
+  },
+  "300000": {
+    "simul_iid": 0.001,
+    "regime_r2": 0.411,
+    "action_gain": 0.116,
+    "complexity_PR": 0.397,
+    "policy_width": 1.228
+  }
+}

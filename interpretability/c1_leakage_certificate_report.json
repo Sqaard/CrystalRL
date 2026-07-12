@@ -1,0 +1,34 @@
+{
+  "substrate": "src/series_g/corner_ppo_n1.zip (Series-G corner PPO, K=2 polygon, deterministic-argmax)",
+  "obs_layout": "[2*belief-1, 2*t/T-1, 2*inv/I_max-1, burst_flag] \u2014 belief is the ONLY named channel; burst is the only raw observable",
+  "n_probes": 195,
+  "fidelity": {
+    "A_burst_consistent": 0.769,
+    "B_burst_contradicting_OFFMANIFOLD_STRESS": 0.672,
+    "neutral_burst_ablated": 0.749,
+    "note": "Arm B is only 38% on-manifold (belief is a deterministic Bayes fn of burst history), so it UNDERstates causality; treat as a stress test."
+  },
+  "leakage_all_probes_inflated": {
+    "tv_mean": 0.1146,
+    "tv_max": 0.676,
+    "argmax_flip_frac": 0.118
+  },
+  "leakage_ON_MANIFOLD_honest": {
+    "tv_mean": 0.0673,
+    "argmax_flip_frac": 0.053,
+    "n_mixed_probes": 75,
+    "meaning": "burst residual authority where both burst values occur naturally = the number to trust"
+  },
+  "belief_governs_frac": 0.833,
+  "gate": {
+    "fid_A>=0.67": true,
+    "B_no_collapse(>=A-0.15)": true,
+    "burst_ablation_no_raise": true
+  },
+  "PASS": true,
+  "verdict": "PASS \u2014 the named belief write is CAUSAL: it lands (fid_A>=0.67) and neutralizing burst does not raise compliance. Residual authority remains in the raw `burst` observable \u2014 measured ON-MANIFOLD (belief bins where both burst values occur) at TV_mean=0.0673 / argmax-flip 0.053. The K-simplex write is a command with a small, honest residual leak; Arm B (contradicting burst) is a partly OFF-MANIFOLD stress test (only 38% of its probes are reachable) so fid_B UNDERstates causality; the on-manifold leak is the number to trust.",
+  "caveats": [
+    "K=2 polygon only; deterministic-argmax (sampled-behavior leakage unmeasured); leakage in the ACTION DISTRIBUTION, closure of it in RETURN is the separate C-4 result."
+  ],
+  "c4_directive": "Belief+book tree head (burst-free) should CLOSE the residual leak in return; test in C-4."
+}

@@ -1,0 +1,48 @@
+{
+  "debt1_joint_manifold_governor": {
+    "natural_belief_mean_entropy": 0.367,
+    "n_c5_corners": 24,
+    "box_governor_flagged_off": 0,
+    "manifold_governor_flagged_off": 24,
+    "manifold_thr_knn_L1": 0.126,
+    "reading": "the box governor flags 0/24 C-5 corners; the kNN manifold governor flags 24/24 \u2014 closing the joint-manifold gap the sign-epistasis was demonstrated in."
+  },
+  "debt2_calibrated_epsilon_bound": {
+    "eps_bound_stand_in_was": 0.5,
+    "global_p95_abs_eps_logit": 6.613,
+    "global_max_abs_eps_logit": 8.624,
+    "per_pair_bounds": {
+      "0-1": {
+        "p95": 6.847,
+        "max": 7.55,
+        "n": 36
+      },
+      "0-2": {
+        "p95": 5.981,
+        "max": 7.196,
+        "n": 36
+      },
+      "0-3": {
+        "p95": 5.591,
+        "max": 6.639,
+        "n": 36
+      },
+      "1-2": {
+        "p95": 6.928,
+        "max": 7.541,
+        "n": 36
+      },
+      "1-3": {
+        "p95": 5.548,
+        "max": 6.201,
+        "n": 36
+      },
+      "2-3": {
+        "p95": 7.156,
+        "max": 8.624,
+        "n": 36
+      }
+    },
+    "recommendation": "replace eps_bound=0.5 with a per-pair table (p95 shown); the global p95=6.613 and max=8.624 are >> the 0.5 stand-in, so the ledger's worst-case charge was UNDER-conservative on magnitude \u2014 the N_live<=K cap was doing the real work. Use the per-pair p95 as the charged bound, max as the hard-refuse trip."
+  }
+}

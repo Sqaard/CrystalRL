@@ -1,0 +1,30 @@
+{
+  "run": "csi500_pit_p22",
+  "model": "GENUINE P22 two-agent (Beta-budget PM + latent-action Trader)",
+  "N": 343,
+  "window": {
+    "train": [
+      "2018-01-02",
+      "2021-12-31"
+    ],
+    "frozen": [
+      "2022-01-04",
+      "2023-02-28"
+    ]
+  },
+  "n_frozen_days": 277,
+  "book_dispersion": 1.3605,
+  "behavioral_complexity": 0.4545,
+  "mean_cash": 0.666,
+  "policy_frozen_sharpe": -0.132,
+  "ew_frozen_sharpe": -0.066,
+  "excess_sharpe_vs_ew": 0.017,
+  "mean_excess_95ci": [
+    -0.000919,
+    0.000924
+  ],
+  "deflated_bar_sharpe": 0.811,
+  "beats_ew_deflated": false,
+  "firewall_verdict": "DOES NOT beat equal-weight (deflated/frozen)",
+  "codebook": "csi500-NATIVE (K-means clusters), not the Dow-30 P22 anti-collapse codebook"
+}

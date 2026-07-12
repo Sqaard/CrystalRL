@@ -1,0 +1,35 @@
+{
+  "run": "csi500_pit_r6c",
+  "N": 343,
+  "n_val_days": 277,
+  "budget": 100000,
+  "window": {
+    "train": [
+      "2018-01-02",
+      "2021-12-31"
+    ],
+    "frozen": [
+      "2022-01-04",
+      "2023-02-28"
+    ]
+  },
+  "book_dispersion": 1.2039,
+  "behavioral_complexity": 0.4023,
+  "mean_cash": 0.996,
+  "val_sharpe": -0.578,
+  "val_total_return": -0.0005,
+  "dow30_family_dispersion_max": 0.17,
+  "complexity_verdict": "GENUINE SELECTION \u2014 book_dispersion ABOVE the Dow-30 collapse band \u2192 high-complexity anchor",
+  "ew_frozen_sharpe": -0.066,
+  "policy_frozen_sharpe": -0.578,
+  "excess_sharpe_vs_ew": 0.064,
+  "mean_excess_95ci": [
+    -0.001329,
+    0.001299
+  ],
+  "deflated_bar_sharpe": 0.811,
+  "n_frozen_days": 277,
+  "beats_ew_deflated": false,
+  "firewall_verdict": "DOES NOT beat equal-weight (no selection alpha on csi300, deflated/frozen-confirmed)",
+  "honest_note": "book_dispersion = concentration (complexity for the curve), NOT skill; gates OFF (Dow-30-specific); n=1 seed"
+}

@@ -1,0 +1,111 @@
+{
+  "experiment": "E-21 transparency & controllability audit (deployed v9 model)",
+  "T1_belief_legibility": {
+    "bal_acc_8leaf": 0.948,
+    "bal_acc_64leaf": 0.846,
+    "mdl_deficit": 0.0,
+    "armed_base_rate": 0.3412
+  },
+  "T2_naming_faithfulness": {
+    "monotone_frac": 1.0,
+    "mean_dPbear_per_+10VIXpts": 0.5,
+    "n_windows": 40
+  },
+  "T3_multiseed_stability": {
+    "K_choices": {
+      "2": 10
+    },
+    "pairwise_belief_corr_mean": 1.0,
+    "pairwise_belief_corr_min": 1.0,
+    "decision_agreement_vs_seed0_mean": 1.0
+  },
+  "C1_rediscovery": [
+    {
+      "tag": "rediscovery_step0.15",
+      "accepts": 7,
+      "gate_counts": {
+        "REJECTED_NO_FRONTIER_GAIN": 24,
+        "REJECTED_DOMINATED": 5,
+        "ACCEPTED_RISKMODE": 7,
+        "REJECTED_HOLDOUT": 3,
+        "REFUSED_INERT_ON_WINDOW": 1
+      },
+      "final": {
+        "t1": 0.3,
+        "t2": 0.56,
+        "lvl_reduced": 1.0,
+        "lvl_defensive": 0.665,
+        "H": 10.0
+      },
+      "dist_to_certified_norm": 0.208
+    },
+    {
+      "tag": "rediscovery_step0.2",
+      "accepts": 7,
+      "gate_counts": {
+        "REJECTED_NO_FRONTIER_GAIN": 23,
+        "REJECTED_DOMINATED": 4,
+        "REJECTED_HOLDOUT": 6,
+        "ACCEPTED_RISKMODE": 7
+      },
+      "final": {
+        "t1": 0.3,
+        "t2": 0.657,
+        "lvl_reduced": 1.0,
+        "lvl_defensive": 0.738,
+        "H": 10.0
+      },
+      "dist_to_certified_norm": 0.0
+    },
+    {
+      "tag": "rediscovery_step0.25",
+      "accepts": 5,
+      "gate_counts": {
+        "REJECTED_NO_FRONTIER_GAIN": 27,
+        "REJECTED_DOMINATED": 5,
+        "ACCEPTED_RISKMODE": 5,
+        "REJECTED_HOLDOUT": 3
+      },
+      "final": {
+        "t1": 0.3,
+        "t2": 0.576,
+        "lvl_reduced": 1.0,
+        "lvl_defensive": 0.752,
+        "H": 10.0
+      },
+      "dist_to_certified_norm": 0.163
+    }
+  ],
+  "C2_repair": {
+    "tag": "repair_from_overdefensive",
+    "accepts": 3,
+    "gate_counts": {
+      "REJECTED_NO_FRONTIER_GAIN": 28,
+      "REJECTED_DOMINATED": 4,
+      "REJECTED_HOLDOUT": 5,
+      "ACCEPTED_RISKMODE": 3
+    },
+    "final": {
+      "t1": 0.3,
+      "t2": 0.4,
+      "lvl_reduced": 1.0,
+      "lvl_defensive": 0.07,
+      "H": 10.0
+    },
+    "dist_to_certified_norm": 0.843,
+    "dist_start": 0.679
+  },
+  "scorecard": {
+    "transparency": {
+      "belief_mdl_deficit": 0.0,
+      "naming_faithfulness_monotone": 1.0,
+      "seed_stability_decision_agreement": 1.0
+    },
+    "controllability": {
+      "rediscovery_certify_rate": 1.0,
+      "rediscovery_mean_dist": 0.124,
+      "repair_improved_distance": false,
+      "repair_accepts": 3
+    }
+  }
+}

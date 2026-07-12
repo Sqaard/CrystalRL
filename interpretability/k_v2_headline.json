@@ -1,0 +1,125 @@
+{
+  "R6c csi500 (cash)": {
+    "n": 272,
+    "baseline": 0.00017,
+    "Lstar": 0.0,
+    "structure_frac": 0.975,
+    "curve": {
+      "0.02": {
+        "ratio": 0.002,
+        "diameter": 0.0,
+        "set_size": 1
+      },
+      "0.05": {
+        "ratio": 0.004,
+        "diameter": 0.076,
+        "set_size": 2
+      },
+      "0.1": {
+        "ratio": 0.006,
+        "diameter": 0.105,
+        "set_size": 3
+      },
+      "0.25": {
+        "ratio": 0.006,
+        "diameter": 0.105,
+        "set_size": 3
+      },
+      "0.5": {
+        "ratio": 0.012,
+        "diameter": 0.122,
+        "set_size": 6
+      }
+    },
+    "canonical": {
+      "K": 8,
+      "features": [
+        "l1"
+      ],
+      "oos_loss": 0.0,
+      "stability_ari": 0.831
+    }
+  },
+  "P22 csi500 (cash)": {
+    "n": 272,
+    "baseline": 1e-05,
+    "Lstar": 1e-05,
+    "structure_frac": 0.014,
+    "curve": {
+      "0.02": {
+        "ratio": 0.048,
+        "diameter": 0.086,
+        "set_size": 24
+      },
+      "0.05": {
+        "ratio": 0.442,
+        "diameter": 0.11,
+        "set_size": 221
+      },
+      "0.1": {
+        "ratio": 0.794,
+        "diameter": 0.127,
+        "set_size": 397
+      },
+      "0.25": {
+        "ratio": 0.98,
+        "diameter": 0.132,
+        "set_size": 490
+      },
+      "0.5": {
+        "ratio": 1.0,
+        "diameter": 0.136,
+        "set_size": 500
+      }
+    },
+    "canonical": {
+      "K": 2,
+      "features": [
+        "r1"
+      ],
+      "oos_loss": 1e-05,
+      "stability_ari": 1.0
+    }
+  },
+  "R6c Dow (cash_target)": {
+    "n": 284,
+    "baseline": 0.00649,
+    "Lstar": 0.00102,
+    "structure_frac": 0.843,
+    "curve": {
+      "0.02": {
+        "ratio": 0.002,
+        "diameter": 0.0,
+        "set_size": 1
+      },
+      "0.05": {
+        "ratio": 0.008,
+        "diameter": 0.1,
+        "set_size": 4
+      },
+      "0.1": {
+        "ratio": 0.016,
+        "diameter": 0.103,
+        "set_size": 8
+      },
+      "0.25": {
+        "ratio": 0.03,
+        "diameter": 0.136,
+        "set_size": 15
+      },
+      "0.5": {
+        "ratio": 0.062,
+        "diameter": 0.235,
+        "set_size": 31
+      }
+    },
+    "canonical": {
+      "K": 9,
+      "features": [
+        "l1"
+      ],
+      "oos_loss": 0.00107,
+      "stability_ari": 0.935
+    }
+  }
+}

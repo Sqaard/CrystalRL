@@ -1,0 +1,81 @@
+{
+  "primary_env_config": {
+    "spread": 2.0,
+    "adverse": 4.0,
+    "aggress_cost": 0.3,
+    "aggress_cost_toxic": 1.5,
+    "hold_cost": 0.05
+  },
+  "F1_concept_ablation_HC1": {
+    "belief_blind(ablated)": 2.1,
+    "belief_aware": 8.0156,
+    "oracle(perfect_info)": 12.8663,
+    "ablation_value_drop": 5.9156,
+    "fraction_of_perfect_info_VoI_captured": 0.549,
+    "PASS": true,
+    "claim": "HC-1: toxicity posterior is load-bearing (drop) AND sufficient (belief-MDP optimum)"
+  },
+  "F2_beat_ZI_per_state": {
+    "per_state_gap_min": -0.0,
+    "per_state_gap_median": 5.2796,
+    "per_state_gap_max": 14.3958,
+    "start_state_margin_vs_ZIc": 8.1552,
+    "PASS": true,
+    "claim": "optimal beats the constrained-ZI floor in EVERY reachable state (not just aggregate)"
+  },
+  "F3_belief_to_noise": {
+    "policy_on_true_belief(sanity~VI)": 8.0114,
+    "policy_on_NOISE_belief": 0.5682,
+    "belief_blind": 2.1,
+    "fraction_of_VoI_lost_under_noise": 1.259,
+    "collapsed_to_<=blind": true,
+    "PASS": true,
+    "claim": "HX null ii: decorrelating the regime belief collapses performance to the no-info baseline"
+  },
+  "F4_cross_family_HC3_and_costflip_HC2": {
+    "HC3_cross_parameter_transfer": {
+      "transfers": [
+        {
+          "train": "fam1_primary",
+          "test": "fam2_stickier_toxic",
+          "transfer_value": 11.856,
+          "test_aware": 12.331,
+          "test_blind": 10.0957,
+          "VoI_retained_frac": 0.787
+        },
+        {
+          "train": "fam1_primary",
+          "test": "fam3_common_toxic",
+          "transfer_value": 2.0136,
+          "test_aware": 2.4625,
+          "test_blind": -0.0,
+          "VoI_retained_frac": 0.818
+        }
+      ],
+      "PASS": true,
+      "scope_note": "cross-PARAMETER-regime transfer; true cross-MODEL-FAMILY (GCMG/Brock-Hommes) needs the alternate generators (methodology must-build)"
+    },
+    "HC2_cost_sign_flip": {
+      "flip_fraction": 0.262,
+      "example_flip": {
+        "t": 15,
+        "belief": 0.083,
+        "I": 1,
+        "no_cost_action": "PROVIDE",
+        "with_cost_action": "AGGRESS"
+      },
+      "short_tree_accuracy_by_depth": {
+        "1": 0.71,
+        "2": 0.794,
+        "3": 0.866,
+        "5": 0.948
+      },
+      "depth1_under_0.90": true,
+      "PASS": true,
+      "claim": "native costs FLIP the optimal action; a single-threshold tree cannot reproduce the optimum"
+    },
+    "PASS": true
+  },
+  "ALL_PASS": true,
+  "PHASE1_VERDICT": "ALL FOUR FALSIFIERS PASS \u2014 the complexity is real (belief load-bearing + sufficient, beats ZI per-state, collapses under belief-noise, transfers across parameter regimes, cost-induced sign-flip non-trivial). Proceed to Phase 2 (train the 2-level policy)."
+}

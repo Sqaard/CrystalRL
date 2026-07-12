@@ -1,0 +1,100 @@
+{
+  "env": "Phase-1 gated (config B + toxic-unwind enrichment)",
+  "flat_fidelity_by_budget": {
+    "3": 0.7907,
+    "4": 0.8102,
+    "5": 0.8528,
+    "6": 0.8528,
+    "8": 0.9267,
+    "10": 0.9367,
+    "12": 0.9523,
+    "16": 0.9701
+  },
+  "hierarchical_fidelity_by_budget": {
+    "4": 0.6357,
+    "5": 0.7907,
+    "6": 0.8102,
+    "8": 0.8202,
+    "10": 0.8523,
+    "12": 0.8627,
+    "16": 0.8729
+  },
+  "best_hierarchical": {
+    "fidelity": 0.8729,
+    "total_budget": 16,
+    "manager_leaves": 6,
+    "worker_leaves": 10
+  },
+  "compactness_dominance": [
+    {
+      "budget": 4,
+      "hier_fid": 0.6357,
+      "flat_fid_same_budget": 0.8102,
+      "flat_budget_to_match": 3,
+      "hier_more_compact": false
+    },
+    {
+      "budget": 5,
+      "hier_fid": 0.7907,
+      "flat_fid_same_budget": 0.8528,
+      "flat_budget_to_match": 3,
+      "hier_more_compact": false
+    },
+    {
+      "budget": 6,
+      "hier_fid": 0.8102,
+      "flat_fid_same_budget": 0.8528,
+      "flat_budget_to_match": 4,
+      "hier_more_compact": false
+    },
+    {
+      "budget": 8,
+      "hier_fid": 0.8202,
+      "flat_fid_same_budget": 0.9267,
+      "flat_budget_to_match": 5,
+      "hier_more_compact": false
+    },
+    {
+      "budget": 10,
+      "hier_fid": 0.8523,
+      "flat_fid_same_budget": 0.9367,
+      "flat_budget_to_match": 5,
+      "hier_more_compact": false
+    },
+    {
+      "budget": 12,
+      "hier_fid": 0.8627,
+      "flat_fid_same_budget": 0.9523,
+      "flat_budget_to_match": 8,
+      "hier_more_compact": false
+    },
+    {
+      "budget": 16,
+      "hier_fid": 0.8729,
+      "flat_fid_same_budget": 0.9701,
+      "flat_budget_to_match": 8,
+      "hier_more_compact": false
+    }
+  ],
+  "H3_PASS": false,
+  "H3_verdict": "FAIL \u2014 flat distillation matches the hierarchical fidelity at equal-or-lower budget: the hierarchy bought nothing here (H3 not supported on this env).",
+  "per_level_FSMs": {
+    "total_budget": 16,
+    "manager_leaves": 6,
+    "worker_leaves": 10,
+    "manager_<=7_rules": true,
+    "worker_<=7_rules": false,
+    "manager_rules(belief,t->stance)": "|--- belief <= 0.19 | |   |--- time <= 18.50 | |   |   |--- belief <= 0.15 | |   |   |   |--- belief <= 0.10 | |   |   |   |   |--- class: 0 | |   |   |   |--- belief >  0.10 | |   |   |   |   |--- class: 0 | |   |   |--- belief >  0.15 | |   |   |   |--- time <= 6.50 | |   |   |   |   |--- class: 0 | |   |   |   |--- time >  6.50 | |   |   |   |   |--- class: 1 | |   |--- time >  18.50 | |   |   |--- class: 1 | |--- belief >  0.19 | |   |--- class: 1 | ",
+    "worker_rules(stance,I,t->action)": "|--- stance <= 5.50 | |   |--- inventory <= 0.50 | |   |   |--- class: 1 | |   |--- inventory >  0.50 | |   |   |--- time <= 17.50 | |   |   |   |--- inventory <= 1.50 | |   |   |   |   |--- class: 1 | |   |   |   |--- inventory >  1.50 | |   |   |   |   |--- class: 2 | |   |   |--- time >  17.50 | |   |   |   |--- class: 2 | |--- stance >  5.50 | |   |--- inventory <= 0.50 | |   |   |--- class: 0 | |   |--- inventory >  0.50 | |   |   |--- inventory <= 1.50 | |   |   |   |--- time <= 3.50 | |   |   |   |   |--- class: 2 | |   |   |   |--- time >  3.50 | |   |   |   |   |--- time <= 11.50 | |   |   |   |   |   |--- stance <= 9.50 | |   |   |   |   |   |   |--- class: 0 | |   |   |   |   |   |--- stance >  9.50 | |   |   |   |   |   |   |--- class: 2 | |   |   |   |   |--- time >  11.50 | |"
+  },
+  "rollout_log": {
+    "path": "phase2_optimal_rollout.csv",
+    "n_steps": 1600,
+    "n_episodes": 80,
+    "action_counts": {
+      "PROVIDE": 564,
+      "AGGRESS": 564,
+      "ABSTAIN": 472
+    }
+  }
+}

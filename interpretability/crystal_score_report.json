@@ -1,0 +1,307 @@
+{
+  "title": "CrystalScore v1 -- R6c (frozen 2022-2023)",
+  "policy": "R6c_root_K20_stock_K5_PD_mild_slice_group_riskaware_top8_sell12 (fold_2021 frozen rollout)",
+  "n_steps": 289,
+  "latent_layer": "policy_net.5.ReLU",
+  "K_budget": 9,
+  "K_grid": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "inputs_present": {
+    "latent_and_action": true,
+    "decodability": true,
+    "code_dict": true,
+    "code_assign": true,
+    "crisp_search": true,
+    "steering": true,
+    "control_report": true,
+    "code_manifest": true
+  },
+  "submetrics": {
+    "faithfulness": {
+      "value": 1.0,
+      "note": "2/2 steered codes move cash in their labeled direction monotonically",
+      "detail": {
+        "code_0_to_high_cash": {
+          "alpha_cash_spearman": 1.0,
+          "labeled_direction": "up",
+          "sign_match": true,
+          "monotonic": true,
+          "pass": true
+        },
+        "code_6_to_low_cash": {
+          "alpha_cash_spearman": -1.0,
+          "labeled_direction": "down",
+          "sign_match": true,
+          "monotonic": true,
+          "pass": true
+        }
+      }
+    },
+    "simulatability": {
+      "continuous_ceiling": 0.82,
+      "headline_discrete": 0.24403820693933165,
+      "note": "headline = 9-cluster-mean predictor of cash_target (discrete/parsimony reading); continuous_ceiling = final_64->cash cv_r2_shuffled",
+      "value": 0.24403820693933165
+    },
+    "completeness": {
+      "stance": {
+        "2": 0.07316206836104966,
+        "3": 0.2041318422820808,
+        "4": 0.1745174635397866,
+        "5": 0.11751235891967804,
+        "6": 0.1775366372608047,
+        "7": 0.12820740788766294,
+        "8": 0.11877780312444353,
+        "9": 0.24403820693933165
+      },
+      "selection": {
+        "2": 0.024256656322633297,
+        "3": 0.038871745061551666,
+        "4": 0.054563419957499026,
+        "5": 0.04976905298339096,
+        "6": 0.07253852125012827,
+        "7": 0.13844278976034452,
+        "8": 0.1776824390471744,
+        "9": 0.14094319234218322
+      },
+      "selection_raw_confounded": {
+        "2": 0.005046746039334193,
+        "3": 0.00415229913184656,
+        "4": 0.00873521488128659,
+        "5": 0.22298108578284614,
+        "6": 0.14822757485779892,
+        "7": 0.16454361816189322,
+        "8": 0.27769999575335025,
+        "9": 0.33988114649166257
+      },
+      "exposure_var_share_of_rawW": 27.822,
+      "note": "stance=cash_target; SELECTION=within-book composition (renormalised, exposure removed); selection_raw_confounded=raw 29-d weights (variance dominated by gross exposure ~ stance, reported only to show the confound)."
+    },
+    "controllability": {
+      "cash": 0.2,
+      "selection": 0.0,
+      "components": {
+        "steering_success": 1.0,
+        "monotonicity_mean_abs": 1.0,
+        "empirical_fidelity_spearman": 0.2,
+        "commanded_dial_spread": 0.158,
+        "selection_hhi_flat_across_steering": true
+      },
+      "note": "cash uses EMPIRICAL fidelity (commanded-vs-empirical cash spearman ~0.20), NOT the near-tautological commanded dial. selection=0 because commanded_risky_hhi is FLAT (cash is controllable, selection is NOT)."
+    },
+    "stability": {
+      "value": 0.619,
+      "manifest_ari_at_K9": 0.619,
+      "recomputed_ari_at_K9": 0.619,
+      "available": true,
+      "note": "cross-seed ARI of K=9 KMeans code clusters (manifest value is primary; recomputed is a check)"
+    }
+  },
+  "crystalscore": {
+    "stance": {
+      "value": 0.15105965009544628,
+      "value_no_stability": 0.24403820693933165,
+      "formula": "Faithfulness x Simulatability(cash,K<=9) x Stability",
+      "factors": {
+        "Faithfulness": 1.0,
+        "Simulatability_cash": 0.24403820693933165,
+        "Stability": 0.619
+      }
+    },
+    "selection": {
+      "value": 0.08724383605981141,
+      "value_no_stability": 0.14094319234218322,
+      "formula": "Faithfulness x Completeness_selection(K<=9) x Stability",
+      "factors": {
+        "Faithfulness": 1.0,
+        "Completeness_selection": 0.14094319234218322,
+        "Stability": 0.619
+      }
+    },
+    "controllability_coequal_axis": {
+      "cash": 0.2,
+      "selection": 0.0,
+      "note": "reported alongside, NOT multiplied into CrystalScore (commanded dial is near-tautological)"
+    }
+  },
+  "pareto": {
+    "stance": {
+      "auc_raw": 1.0793,
+      "auc_normalized": 0.1542,
+      "at_K9": 0.244,
+      "points": [
+        [
+          2,
+          0.0732
+        ],
+        [
+          3,
+          0.2041
+        ],
+        [
+          4,
+          0.1745
+        ],
+        [
+          5,
+          0.1175
+        ],
+        [
+          6,
+          0.1775
+        ],
+        [
+          7,
+          0.1282
+        ],
+        [
+          8,
+          0.1188
+        ],
+        [
+          9,
+          0.244
+        ]
+      ]
+    },
+    "selection": {
+      "auc_raw": 0.6145,
+      "auc_normalized": 0.0878,
+      "at_K9": 0.1409,
+      "points": [
+        [
+          2,
+          0.0243
+        ],
+        [
+          3,
+          0.0389
+        ],
+        [
+          4,
+          0.0546
+        ],
+        [
+          5,
+          0.0498
+        ],
+        [
+          6,
+          0.0725
+        ],
+        [
+          7,
+          0.1384
+        ],
+        [
+          8,
+          0.1777
+        ],
+        [
+          9,
+          0.1409
+        ]
+      ]
+    },
+    "x": "K (codes / description length)",
+    "y": "completeness@K"
+  },
+  "complexity_curve": {
+    "stance": [
+      [
+        0.0732,
+        0.0453
+      ],
+      [
+        0.2041,
+        0.1264
+      ],
+      [
+        0.1745,
+        0.108
+      ],
+      [
+        0.1175,
+        0.0727
+      ],
+      [
+        0.1775,
+        0.1099
+      ],
+      [
+        0.1282,
+        0.0794
+      ],
+      [
+        0.1188,
+        0.0735
+      ],
+      [
+        0.244,
+        0.1511
+      ]
+    ],
+    "selection": [
+      [
+        0.0243,
+        0.015
+      ],
+      [
+        0.0389,
+        0.0241
+      ],
+      [
+        0.0546,
+        0.0338
+      ],
+      [
+        0.0498,
+        0.0308
+      ],
+      [
+        0.0725,
+        0.0449
+      ],
+      [
+        0.1384,
+        0.0857
+      ],
+      [
+        0.1777,
+        0.11
+      ],
+      [
+        0.1409,
+        0.0872
+      ]
+    ],
+    "x": "behavioral complexity captured (completeness@K)",
+    "y": "CrystalScore(K)",
+    "honest_caveat": "ONE policy only -> the true (complexity, CrystalScore) curve needs MORE policies. This within-policy K-sweep is a placeholder proxy, not the cross-policy curve."
+  },
+  "provenance": {
+    "FAITHFULNESS": "reports\\firewall_upgrade\\r6c_code_control\\code_steering_curve.csv",
+    "SIMULATABILITY_continuous": "reports\\firewall_upgrade\\r6c_latent_probe\\latent_decodability.csv",
+    "SIMULATABILITY_discrete": "r6c_frozen_hidden_activations.npz + frozen_test_behavior_log_daily.csv",
+    "COMPLETENESS": "r6c_frozen_hidden_activations.npz[policy_net.5.ReLU] + frozen_test_behavior_log_daily.csv[cash_target, executed_weight_* (within-book renorm)]",
+    "CONTROLLABILITY": "reports\\firewall_upgrade\\r6c_code_control\\code_control_report.json + reports\\firewall_upgrade\\r6c_code_control\\code_steering_curve.csv",
+    "STABILITY": "reports\\firewall_upgrade\\r6c_code_layer\\r6c_code_layer_manifest.json",
+    "K_grid_parsimony": "reports\\firewall_upgrade\\r6c_code_layer\\crisp_primitives_search.csv"
+  },
+  "plot": {
+    "plotted": true,
+    "files": [
+      "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\interpretability\\crystal_pareto_curve.png",
+      "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\interpretability\\crystal_complexity_curve.png"
+    ]
+  },
+  "interpretation": "R6c is CRYSTAL-CLEAR on RISK-STANCE (cash) and EMPTY-BECAUSE-TRIVIAL on SELECTION. Faithfulness is perfect (every steered code moves cash monotonically in its labeled direction); cash is steerable but only at the EMPIRICAL fidelity level (~0.20, not the near-tautological commanded dial). The selection book is near-equal-weight (within-book risky HHI ~0.039 vs equal-weight 0.0345; mean L1 to equal-weight ~0.19), so there is almost no within-book tilt to explain: true within-book SELECTION completeness@9 is only ~0.14, and selection is NOT controllable (commanded_risky_hhi is flat across steering). The naive raw-29d weight completeness (~0.34) is an EXPOSURE ARTIFACT -- its variance is ~28x dominated by the gross long exposure (= 1 - cash), so it merely restates the STANCE; we therefore measure selection on the exposure-removed within-book composition. Net: STANCE CrystalScore is the meaningful axis, SELECTION CrystalScore is ~0 because selection is trivial. This ALIGNS the no-alpha null with the interpretability thesis: R6c has little selection alpha precisely because it does little selection -- it is a transparent cash-timing controller, and CrystalScore says so."
+}

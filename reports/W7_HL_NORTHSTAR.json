@@ -1,0 +1,278 @@
+{
+  "artifact": "W7_HL_NORTHSTAR",
+  "version": 2,
+  "date": "2026-07-11",
+  "generated_by": "interpretability/exp_w7_product_metrics.py",
+  "status": "UNCALIBRATED_RESEARCH \u2014 objective contract for the HL/HCS loop; no client probability; nothing here is a forecast or a recommendation",
+  "objective_rule": "HL/HCS optimizes THIS VECTOR \u2014 never a single backtest return. calibration/constraints/stability are guards (must not degrade); hypervolume + goal metrics are the growth axes.",
+  "north_star": {
+    "calibration_gate_fraction": 0.7,
+    "calibration_abs_coverage_error": 0.0888333333333333,
+    "proper_score_delta": 0.0009074999999999986,
+    "certified_frontier_hypervolume": 0.0,
+    "research_frontier_hypervolume": 0.023295658145119594,
+    "goal_P_goal": 0.3785,
+    "goal_E_shortfall_given_miss": 0.443837491739518,
+    "goal_CVaR10_shortfall": 0.7901724767731337,
+    "constraint_violations": null,
+    "dp_regret_pp": 6.556666666666666,
+    "estimated_execution_cost": null,
+    "policy_stability": null,
+    "crystal_reduced_score": null
+  },
+  "directions": {
+    "calibration_gate_fraction": "maximize (guard: never trade away)",
+    "calibration_abs_coverage_error": "minimize",
+    "proper_score_delta": "minimize; must be <=0 against baseline",
+    "certified_frontier_hypervolume": "maximize; zero until W8 certification",
+    "research_frontier_hypervolume": "diagnostic only, never client-facing",
+    "goal_P_goal": "maximize (jointly with shortfall, per Investor Contract lambda)",
+    "goal_E_shortfall_given_miss": "minimize (the W4.1 structural pairing)",
+    "goal_CVaR10_shortfall": "minimize",
+    "constraint_violations": "hard guard: must be 0 post-shield (W6)",
+    "dp_regret_pp": "minimize (challenger only earns capital path at ~0)",
+    "estimated_execution_cost": "minimize at matched intent",
+    "policy_stability": "maximize; N/A blocks W7 completion",
+    "crystal_reduced_score": "maximize only at fixed behavioral complexity; N/A today"
+  },
+  "provenance": {
+    "calibration_gate_fraction": "exp_w3_calibration_report.json: 7/10 gates true (US+CN x G1/G2/G3/G4/TEETH)",
+    "calibration_abs_coverage_error": "exp_w3_calibration_report.json",
+    "proper_score_delta": "exp_w3_calibration_report.json",
+    "certified_frontier_hypervolume": "0 \u2014 no CERTIFIED_FOR_PROFILE_GRID artifact exists",
+    "research_frontier_hypervolume": "das_ostrov kernels under W3_FORECAST_V1_3, 5-book RESEARCH menu, ref [0.0, -0.6]",
+    "goal_P_goal": "simulate() on shipped das_ostrov_double_10y CSV, 4000 fresh paths, as_of 2026-07-07",
+    "goal_E_shortfall_given_miss": "same simulation",
+    "goal_CVaR10_shortfall": "same simulation",
+    "constraint_violations": "exp_w6_shield_replay_report.json; schema + exact 9-gate set validated",
+    "dp_regret_pp": "personal_invest_w5_report.json: mean over seeds, contract 0 ([7.87, 10.4, 1.4])",
+    "estimated_execution_cost": "exp_w6_shield_replay_report.json",
+    "policy_stability": "N/A \u2014 no cross-training-seed DP policy assignments",
+    "crystal_reduced_score": "N/A \u2014 Faithfulness and true Stability missing"
+  },
+  "candidate_types": [
+    {
+      "type": "scenario_calibration",
+      "example_levers": [
+        "ensemble members",
+        "prequential member weights",
+        "conformal wrappers",
+        "CMA anchors"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "variance-matched noise member",
+        "wrong-direction": "anti-signal member",
+        "OOD": "held-out regimes/universe origins",
+        "dose": "member-weight scaling",
+        "ghost": "locked forecast ledger scored without acting"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; prequential proper score improves with no new stress undercoverage"
+    },
+    {
+      "type": "goal_state",
+      "example_levers": [
+        "funding-ratio transforms",
+        "DD/peak features",
+        "cash-flow features"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "obs-dim/noise-placebo-matched twin (the text-twin capacity lesson)",
+        "wrong-direction": "sign-flipped feature",
+        "OOD": "unseen profile/horizon grid",
+        "dose": "feature-noise scaling",
+        "ghost": "feature computed but masked from the policy"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; lift survives the capacity-matched twin"
+    },
+    {
+      "type": "reward",
+      "example_levers": [
+        "lambda shortfall weight",
+        "switch-cost terms",
+        "utility shape"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "scale-matched random reward perturbation",
+        "wrong-direction": "sign-flipped term",
+        "OOD": "unseen w0/T contracts",
+        "dose": "monotone response along the lambda sweep",
+        "ghost": "term logged, not optimized"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; shaped-reward gains must reappear in the independent wealth evaluator"
+    },
+    {
+      "type": "constraint",
+      "example_levers": [
+        "capacity filters",
+        "DD budgets",
+        "turnover caps"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "random book exclusion of equal count",
+        "wrong-direction": "loosened constraint must not IMPROVE the guarded metric",
+        "OOD": "stress regimes",
+        "dose": "budget sweep",
+        "ghost": "shadow-constraint accounting"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; violation rate measured pathwise, not in shaped reward"
+    },
+    {
+      "type": "dp_teacher",
+      "example_levers": [
+        "teacher grid",
+        "trajectory thinning",
+        "BC curriculum"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "shuffled-label teacher",
+        "wrong-direction": "anti-teacher",
+        "OOD": "held-out states",
+        "dose": "BC epochs/coverage sweep",
+        "ghost": "teacher predictions logged, not distilled"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; student must not regress vs DP beyond the pre-specified regret tolerance"
+    },
+    {
+      "type": "architecture_action",
+      "example_levers": [
+        "SoftTree depth",
+        "action-space granularity",
+        "asset sleeves"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "parameter-count-matched random architecture (capacity-fair twin)",
+        "wrong-direction": "deliberately degraded architecture",
+        "OOD": "unseen contracts",
+        "dose": "depth/width sweep",
+        "ghost": "head attached but disconnected"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; gains must survive the capacity-fair twin AND keep legibility-at-complexity"
+    },
+    {
+      "type": "primitive_intervention",
+      "example_levers": [
+        "belief writes",
+        "code-level promote/suppress",
+        "latent steering"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "matched-random code/latent write",
+        "wrong-direction": "opposite write",
+        "OOD": "unseen regimes",
+        "dose": "graded write magnitude (nats)",
+        "ghost": "intervention logged in a ghost book before wiring"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; the work-order names this suite MANDATORY verbatim for primitive interventions"
+    },
+    {
+      "type": "safety_execution",
+      "example_levers": [
+        "shield projections",
+        "fallback triggers",
+        "anti-churn pacing"
+      ],
+      "required_controls": [
+        "matched-random",
+        "wrong-direction",
+        "OOD",
+        "dose",
+        "ghost"
+      ],
+      "control_instantiation": {
+        "matched-random": "random-trigger shield",
+        "wrong-direction": "inverted trigger",
+        "OOD": "adversarial replay: gaps/limits/suspensions",
+        "dose": "threshold sweep",
+        "ghost": "shield decisions logged in a ghost book before wiring"
+      },
+      "gate": "no lever demonstration is causal without the full control suite; zero hard-rule violations in adversarial replay; shield must not launder a weak policy"
+    }
+  ],
+  "governance": {
+    "control_rule": "no lever demonstration is causal without the full control suite",
+    "llm_capital_path": "FORBIDDEN \u2014 the LLM parses/explains/proposes offline; it never writes weights, capacity, reward or live orders",
+    "skill_gate_changes": "every skills/gates change goes through SkillLens audit -> held-out SkillOpt before adoption",
+    "replay_truth_calibration": {
+      "rows": [
+        {
+          "candidate": "w5_seed0",
+          "cheap_proxy_bc_accuracy": 0.816,
+          "retrain_truth_regret_pp": 7.87
+        },
+        {
+          "candidate": "w5_seed1",
+          "cheap_proxy_bc_accuracy": 0.816,
+          "retrain_truth_regret_pp": 10.4
+        },
+        {
+          "candidate": "w5_seed2",
+          "cheap_proxy_bc_accuracy": 0.849,
+          "retrain_truth_regret_pp": 1.4
+        }
+      ],
+      "n_completed_candidates": 3,
+      "n_distinct_candidate_ids": 3,
+      "candidate_ids": [
+        "w5_seed0",
+        "w5_seed1",
+        "w5_seed2"
+      ],
+      "independent_candidate_ids": [],
+      "n_distinct_independent_candidates": 0,
+      "independence_note": "three W5 seeds are replicates of one policy family, not candidates",
+      "spearman_rank": 0.8660254037844387,
+      "minimum_required": 10,
+      "calibrated_for_promotion": false,
+      "status": "THIN_DIAGNOSTIC_ONLY"
+    }
+  }
+}

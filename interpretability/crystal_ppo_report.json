@@ -1,0 +1,140 @@
+{
+  "experiment": "E-27 real CRYSTAL-1 PPO (soft-tree actor) with risk-targeted reward heads",
+  "governance_status": "RESEARCH_ONLY_SINGLE_SEED_SOFT_TREE_PPO_RISK_DIAL_PROTOTYPE",
+  "eligible_for_client_menu": false,
+  "identity": "SoftTreeActorCriticPolicy depth-3; obs=[P(bear), prev_ex, dd_state]; 5 exposure levels; belief = frozen v9 macro HMM; train 2010-2018 only; OOS quarantined (heads = PENDING)",
+  "heads": {
+    "pure_return": {
+      "cfg": {
+        "budget": null,
+        "lam": 0.0
+      },
+      "train_seconds": 158.5,
+      "hold_ann": 0.0475,
+      "hold_maxDD": -0.159,
+      "hold_dsd_bp": 54.96,
+      "mean_exposure": 0.75,
+      "exposure_changes": 0,
+      "vs_bh": {
+        "z_dsd": 10.57,
+        "ni_z": 1.45,
+        "dsd_gain_bp": 18.58
+      },
+      "vs_carry_twin": {
+        "z_dsd": 0.0,
+        "ni_z": 933.12
+      },
+      "inference_placebo_z_dsd": 10.57,
+      "belief_load_bearing": false,
+      "leaf_argmax_actions": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    "dd12": {
+      "cfg": {
+        "budget": 0.12,
+        "lam": 2.0
+      },
+      "train_seconds": 129.7,
+      "hold_ann": 0.0475,
+      "hold_maxDD": -0.159,
+      "hold_dsd_bp": 54.96,
+      "mean_exposure": 0.75,
+      "exposure_changes": 0,
+      "vs_bh": {
+        "z_dsd": 10.57,
+        "ni_z": 1.45,
+        "dsd_gain_bp": 18.58
+      },
+      "vs_carry_twin": {
+        "z_dsd": 0.0,
+        "ni_z": 933.12
+      },
+      "inference_placebo_z_dsd": 10.57,
+      "belief_load_bearing": false,
+      "leaf_argmax_actions": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3
+      ]
+    },
+    "dd08": {
+      "cfg": {
+        "budget": 0.08,
+        "lam": 2.0
+      },
+      "train_seconds": 126.8,
+      "hold_ann": 0.0475,
+      "hold_maxDD": -0.159,
+      "hold_dsd_bp": 54.96,
+      "mean_exposure": 0.75,
+      "exposure_changes": 0,
+      "vs_bh": {
+        "z_dsd": 10.57,
+        "ni_z": 1.45,
+        "dsd_gain_bp": 18.58
+      },
+      "vs_carry_twin": {
+        "z_dsd": 0.0,
+        "ni_z": 933.12
+      },
+      "inference_placebo_z_dsd": 10.57,
+      "belief_load_bearing": false,
+      "leaf_argmax_actions": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    "dd05": {
+      "cfg": {
+        "budget": 0.05,
+        "lam": 2.0
+      },
+      "train_seconds": 147.2,
+      "hold_ann": 0.0412,
+      "hold_maxDD": -0.0481,
+      "hold_dsd_bp": 17.93,
+      "mean_exposure": 0.25,
+      "exposure_changes": 0,
+      "vs_bh": {
+        "z_dsd": 10.57,
+        "ni_z": 0.34,
+        "dsd_gain_bp": 55.73
+      },
+      "vs_carry_twin": {
+        "z_dsd": 0.0,
+        "ni_z": 309.48
+      },
+      "inference_placebo_z_dsd": 10.57,
+      "belief_load_bearing": false,
+      "leaf_argmax_actions": [
+        1,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}
