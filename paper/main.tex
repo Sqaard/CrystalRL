@@ -17,11 +17,14 @@
 \newcommand{\ivan}[1]{\todo[color=orange!30,size=\scriptsize]{Ivan: #1}}
 \newcommand{\joseph}[1]{\todo[color=blue!20,size=\scriptsize]{Joseph: #1}}
 \newcommand{\gap}[1]{\todo[color=red!25,size=\scriptsize]{GAP: #1}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\ind}{\mathbf{1}}
 
 \title{CrystalRL --- Crystal Clear Reinforcement Learning}
 
 \author{Ivan Pavliuk \and Joseph Lynch}
-\date{Draft v0.1 --- July 2026}
+\date{Draft v0.2 --- July 2026}
 
 \begin{document}
 \maketitle
@@ -29,68 +32,71 @@
 \begin{abstract}
 Post-hoc explanation of a trading policy answers the wrong question: it tells a story
 \emph{about} a black box while the box goes on being one. We report the construction of an agent
-that is legible \emph{by} construction --- and, critically, the measurement discipline that keeps
-``legible'' from being a vibe. The paper traces one concrete journey: from \textbf{CHRL}, a
-constrained hierarchical PPO trader whose three decision layers are readable but whose core is a
-64-dimensional unnamed latent with ${\sim}214$ tuning knobs, to \textbf{CRYSTAL-1}, whose memory is
-a \emph{named} probability vector over market regimes (a K-simplex the operator can write to), whose
-policy head \emph{is} an ${\le}8$-leaf soft decision tree at full return parity (gap $-0.018$,
-paired $p{\approx}0.84$), and whose entire command surface is five named levers under a certified
-write-governance stack. On the identical scalar --- $\textsc{CrystalScore} = \text{Faithfulness}
-\times \text{Simulatability} \times \text{Stability}$ at parsimony budget $K{\le}9$ --- the journey
-moves the agent from $0.15$ to $0.94$, and the entire gap is Simulatability: a short named story
-reproduces CRYSTAL-1's behavior and cannot compress CHRL's latent. We catalogue the four families of
-behavioral influence the design admits (reward shaping, teachers, belief interventions,
-architecture), each with a measured outcome and one honest refusal. We state the nulls that bound
-the claims: the tension between return and legibility is \emph{certified} on hard substrates;
-CRYSTAL-1's command surface is polygon-proven while its predecessor still leads as a deployed
-system; and composition of commands is non-additive with sign flips, which is why governance is
-machinery, not policy. The paper closes with a research program of twelve falsifiable hypotheses
-for the interpretability track.
+that is legible \emph{by} construction --- and the measurement discipline that keeps ``legible''
+from being a vibe. The paper traces one concrete journey: from \textbf{CHRL}, a constrained
+hierarchical PPO trader whose three decision layers are readable but whose core is a
+64-dimensional unnamed latent with ${\sim}214$ tuning knobs, to \textbf{CRYSTAL-1}, whose memory
+is a \emph{named} regime posterior $b_t = \Prob(\text{bear} \mid \mathcal{F}_t)$ computed by an
+explicit Bayes filter, whose policy is a readable rule (a small decision tree) at full
+performance parity, and whose command surface is five named levers. All evidence is evaluated
+\textbf{on real market data}: on the six-asset US universe the readable dynamic policy beats the
+best static portfolio by $+10.5$\,pp goal probability; an LLM-driven improvement loop lifts the
+conservative investor's goal probability from $1\%$ to $52\%$ at an unchanged risk budget (65
+cycles, all 15 accepted changes confirmed on held-out data); the quoted $80\%$ floors held in
+$5/5$ US profiles across 576 point-in-time cells; and one certified readable rule ---
+``$b_t > 0.66 \Rightarrow$ exposure $0.74$'' --- ran on 629 untouched days at Sharpe $1.46$ vs
+$1.39$ buy-and-hold with max drawdown $-12.9\%$ vs $-15.5\%$. On the identical scalar,
+$\textsc{CrystalScore} = \text{Faithfulness}\times\text{Simulatability}\times\text{Stability}$,
+the journey moves the agent from $0.15$ to $0.92$ on real data, and the entire gap is
+Simulatability. A separate section asks a question the real market cannot answer --- \emph{can
+one design a market that rewards only a clean mind?} --- and uses a synthetic environment purely
+as instrument calibration, fenced off from every market claim by an explicit value-of-information
+gate. We close with twelve falsifiable hypotheses for the interpretability track.
 \end{abstract}
 
 \section{Introduction: the question behind ``explainable''}
 \label{sec:intro}
 
-When a reinforcement-learning agent trades real money, ``why did it do that?'' is not a curiosity
---- it is a regulatory demand, a debugging requirement, and (in our companion work on
+When a reinforcement-learning agent trades real money, ``why did it do that?'' is not a
+curiosity --- it is a regulatory demand, a debugging requirement, and (in our companion work on
 self-improving systems) a safety precondition: \emph{an agent that changes itself may only be
 allowed to do so to the degree it can be read}. The dominant practice answers with post-hoc
-explanation: train a black box, then probe it --- saliency, surrogate models, cluster the latent.
-\citet{rudin2019} names the flaw: for high-stakes decisions, do not explain the black box; build
-the model interpretable in the first place. The critique is well known. What is scarcer is a
-\emph{worked example with a measurement discipline}: an agent built legible by construction, on a
-task where the black-box baseline is strong, with the legibility difference expressed as a number
-that both architectures can be scored on --- and with the costs stated.
+explanation: train a black box, then probe it. \citet{rudin2019} names the flaw: for high-stakes
+decisions, do not explain the black box; build the model interpretable in the first place. The
+critique is well known. What is scarcer is a \emph{worked example with a measurement
+discipline}: an agent built legible by construction, evaluated on real market data against a
+strong black-box predecessor, with the legibility difference expressed as a number both
+architectures can be scored on --- and with the costs stated.
 
 This paper is that worked example. It has the shape of a journey because we walked it in order:
-we first built the transparent-\emph{layers} agent (CHRL), measured where its transparency stops,
-and then rebuilt the core so that the stopping point disappears (CRYSTAL-1). The destination is
-summarized in one scalar (Figure~\ref{fig:crystalscore}), but the scalar is the least of it; the
-contribution is the discipline that makes each factor of that scalar a measured, attackable claim.
+we first built the transparent-\emph{layers} agent (CHRL, \S\ref{sec:chrl}), measured where its
+transparency stops, then rebuilt the core so the stopping point disappears (CRYSTAL-1,
+\S\ref{sec:crystal}). Everything that counts as evidence is computed on real data
+(\S\ref{sec:data}--\S\ref{sec:results}); the one synthetic environment we built is used for
+instrument calibration only, behind an explicit gate (\S\ref{sec:polygon}).
 
 Contributions:
 \begin{enumerate}
-  \item \textbf{A final CHRL${\to}$CRYSTAL-1 comparison} (\S\ref{sec:chrl},~\S\ref{sec:crystal},
-        Table~\ref{tab:final}) --- architecture, control surface, and behavior, on identical
-        metrics; the predecessor is treated honestly (it still leads as a \emph{deployed} system).
-  \item \textbf{CrystalScore and its measurement protocol} (\S\ref{sec:metrics}): faithfulness as
-        \emph{proved causal} command-following (against an exogenous optimum, not a correlation),
-        simulatability as a parity-constrained short story, stability as multi-seed replication ---
-        plus the MDL deficit as the non-saturating companion.
-  \item \textbf{A taxonomy of behavioral influence} (\S\ref{sec:levers}): reward shaping, teachers
-        (behavior cloning / warm starts), belief interventions, and architecture --- each exercised
-        on CRYSTAL-1 with a measured outcome, including the intervention the safety bar
-        \emph{refused}.
-  \item \textbf{Governed composition} (\S\ref{sec:compose}): commands interact non-additively with
-        sign flips (216-cell factorial); we describe the ledger, co-activation cap, manifold
-        governor and writ ladder that turn this from a hazard into an operating envelope, with the
-        first estimate of the machine's own false-accept rate ($\alpha_{\text{machine}}$).
-  \item \textbf{The honest nulls} (\S\ref{sec:nulls}): the certified return${\leftrightarrow}$%
-        legibility tension; the polygon${\to}$market gap and the VoI gate that fences it; what
-        post-hoc interpretability \emph{did} deliver on CHRL (it was not nothing).
-  \item \textbf{A think-big research program} (\S\ref{sec:program}): twelve falsifiable hypotheses,
-        each with a kill test, for the interpretability track.
+  \item \textbf{A final CHRL${\to}$CRYSTAL-1 comparison on real data}
+        (Table~\ref{tab:final}): architecture, control surface, behavior, and one shared
+        legibility scalar.
+  \item \textbf{CrystalScore and its measurement protocol} (\S\ref{sec:metrics}): faithfulness
+        as intervention-following (Eq.~\ref{eq:faith}), simulatability as a parity-constrained
+        short story (Eq.~\ref{eq:simul}), stability as seed replication --- with the MDL deficit
+        (Eq.~\ref{eq:mdl}) as the non-saturating companion.
+  \item \textbf{A fully specified data and metrics section} (\S\ref{sec:data}): the US
+        universe, its provenance and point-in-time discipline, and every evaluation formula.
+  \item \textbf{A taxonomy of behavioral influence with equations and real-data outcomes}
+        (\S\ref{sec:levers}): reward shaping, teachers, belief interventions, architecture ---
+        including the intervention the safety bar \emph{refused}.
+  \item \textbf{Real-data results} (\S\ref{sec:results}): the $+10.5$\,pp readable champion;
+        the $1\%\to52\%$ per-profile improvement loop; $5/5$ US profiles holding their quoted
+        floors; a certified readable rule on untouched data; the transparency audit.
+  \item \textbf{The designed-market experiment} (\S\ref{sec:polygon}): \emph{can a market be
+        built that rewards only a clean mind?} --- with the VoI gate that keeps its results out
+        of market claims.
+  \item \textbf{A think-big research program} (\S\ref{sec:program}): twelve falsifiable
+        hypotheses, each with a kill test.
 \end{enumerate}
 
 \section{The predecessor: CHRL, or how far ``transparent layers'' go}
@@ -98,38 +104,43 @@ Contributions:
 
 CHRL (Constrained Hierarchical RL) was our best answer to interpretability \emph{within} the
 standard recipe. Decisions are factored into three readable layers --- a risk layer choosing
-cash-vs-risky exposure on a ${\sim}$20-day rhythm, a group layer routing capital through stock
+cash-vs-risky exposure on a ${\sim}20$-day rhythm, a group layer routing capital through stock
 clusters, and a stock layer picking names weekly --- wrapped in explicit guardrails: exposure
-pacing, confidence-scaled trade sizing, event triggers, top-$K$ routing, and a buy gate requiring
-recovery evidence. Hierarchy as a legibility device has a long RL lineage
-\citep{sutton1999options,bacon2017option}; the PPO core is standard \citep{schulman2017ppo}.
+pacing, confidence-scaled sizing, event triggers, top-$K$ routing, and a buy gate. Hierarchy as
+a partial legibility device has a long RL lineage \citep{sutton1999options,bacon2017option}.
+The core is a PPO policy \citep{schulman2017ppo} trained with the clipped surrogate
+\begin{equation}
+L^{\text{CLIP}}(\theta) = \E_t\!\left[\min\!\big(\rho_t(\theta)\hat{A}_t,\;
+\text{clip}(\rho_t(\theta),\,1{-}\epsilon,\,1{+}\epsilon)\,\hat{A}_t\big)\right],
+\qquad \rho_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)},
+\label{eq:ppo}
+\end{equation}
+whose state $s_t$ passes through a 64-dimensional \emph{unnamed} latent.
 
-It works as a trader: in four-fold walk-forward validation the champion variant delivered mean
-validation return $10.05\%$, Sharpe $1.09$, max drawdown $-7.34\%$, mean cash weight $41.24\%$,
-and $0.84\%$/day L1 turnover. And its \emph{post-hoc} interpretability program delivered real
-results: self-supervised primitive discovery over the frozen policy found behavioral motifs whose
-targeted edits improved a frozen 2022--23 rollout without retraining --- promoting a
-context-specific primitive added $+0.54\%$ return / $+0.049$ Sharpe on the frozen test, with
-control-adjusted checks. Post-hoc analysis is not nothing; we state this against our own thesis.
+It works as a trader: in four-fold walk-forward validation on the real US panel the champion
+variant delivered mean validation return $10.05\%$, Sharpe $1.09$, max drawdown $-7.34\%$, mean
+cash weight $41.24\%$, and $0.84\%$/day L1 turnover. Its \emph{post-hoc} interpretability
+program also delivered: self-supervised primitive discovery over the frozen policy found
+behavioral motifs whose targeted edits improved a frozen real 2022--23 rollout without
+retraining ($+0.54\%$ return / $+0.049$ Sharpe for the best control-adjusted counterfactual).
+Post-hoc analysis is not nothing; we state this against our own thesis.
 
-But every question we most cared about hit the same wall, and the wall has coordinates. The core
-of CHRL --- and of R6c, the line's frozen-tested champion --- is a 64-dimensional \emph{unnamed}
-latent. Memory is smeared through the network, so no bound exists on what a state change can
-touch. The control surface is ${\sim}214$ engineering knobs, none of which is a semantic command.
-Steering means forcing the latent toward a post-hoc K-means centroid and checking that behavior
-moves \emph{consistently} --- a correlation, not a proof. There is no likelihood, so a command
-cannot be checked against the world (no way to ask ``is this belief a \emph{lie}?''). And when we
-later scored both architectures on the same simulatability metric, a $K{\le}9$ story reproduced
-only $0.244$ of R6c's stance behavior --- the latent is genuinely incompressible at that budget
-(\S\ref{sec:metrics}). Transparent layers, opaque core (Figure~\ref{fig:arch}).
+But every question we most cared about hit the same wall. Memory is smeared through the
+network, so no bound exists on what a state change can touch. The control surface is
+${\sim}214$ engineering knobs, none a semantic command. Steering means forcing the latent
+toward a post-hoc K-means centroid and checking that behavior moves \emph{consistently} --- a
+correlation, not an intervention. And when we scored the deployed agent's own stance log on the
+simulatability metric of \S\ref{sec:metrics}, a $K{\le}9$ story reproduced only $0.244$ of its
+behavior: the latent is genuinely incompressible at a human-story budget. Transparent layers,
+opaque core (Figure~\ref{fig:arch}).
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig_architectures.png}
-  \caption{The journey in one picture. CHRL/R6c factors decisions into readable layers but keeps
-  an unnamed 64-d latent core with ${\sim}214$ knobs, explained only after training. CRYSTAL-1
-  makes the explanation the mechanism: a named belief simplex as the sole memory channel, a soft
-  tree as the policy itself, and five named command levers under certified governance.}
+  \caption{The journey in one picture. CHRL/R6c factors decisions into readable layers but
+  keeps an unnamed 64-d latent core with ${\sim}214$ knobs, explained only after training.
+  CRYSTAL-1 makes the explanation the mechanism: a named belief as the sole memory channel, a
+  readable rule as the policy itself, and five named command levers.}
   \label{fig:arch}
 \end{figure}
 
@@ -138,22 +149,43 @@ only $0.244$ of R6c's stance behavior --- the latent is genuinely incompressible
 
 CRYSTAL-1 rebuilds the core around three commitments.
 
-\paragraph{1. Memory is a named probability vector.} The agent's only recurrent state is a belief
-$b_t$ on a $K$-simplex over market regimes --- ``$P(\text{bear})$'' is an actual posterior, in the
-POMDP sense of a belief state \citep{kaelbling1998}, over Hamilton-style regimes
-\citep{hamilton1989}. \emph{Named} is load-bearing: because coordinates have meanings, a write to
-the belief is a sentence (``believe bear at 0.8''), and because the belief is a bottleneck --- the
-sole memory channel, with the raw burst feature structurally excluded from the head (total
-variation of the action distribution to the excluded feature $= 0.0$, $0/225$ flips) --- the blast
-radius of any memory intervention is bounded by construction.
+\paragraph{1. Memory is a named posterior.} The agent's only recurrent state is a belief over
+$K$ market regimes --- a point on the simplex $\Delta^{K-1}$ --- in the POMDP sense of a belief
+state \citep{kaelbling1998}, over Hamilton-style regimes \citep{hamilton1989}. For the $K{=}2$
+US machinery, with regime densities $f_z(r) = \mathcal{N}(r;\mu_z,\sigma_z^2)$,
+$z\in\{\text{bull},\text{bear}\}$, and a sticky transition prior $\pi_{zz'}$, the belief is the
+explicit Hamilton filter
+\begin{align}
+b_t \;=\; \Prob(z_t = \text{bear}\mid \mathcal{F}_t)
+\;&=\; \frac{f_{\text{bear}}(r_t)\,\tilde b_t}
+{f_{\text{bear}}(r_t)\,\tilde b_t + f_{\text{bull}}(r_t)\,(1-\tilde b_t)},
+\label{eq:belief}\\
+\tilde b_t \;&=\; \pi_{BB}\, b_{t-1} + \pi_{GB}\,(1-b_{t-1}),\nonumber
+\end{align}
+where $\mathcal{F}_t$ is the information available at $t$ (\S\ref{sec:data}). \emph{Named} is
+load-bearing: because the coordinate has a meaning, a write to the belief is a sentence
+(``believe bear at $0.8$''), and because $b_t$ is the sole memory channel, the blast radius of
+any memory intervention is bounded by construction.
 
-\paragraph{2. The policy head is the story.} The actor is a soft decision tree
-\citep{frosst2017} over [belief, inventory, time] with at most 8 leaves, trained jointly (not
-distilled as an afterthought). The honest history: trained cold, the tree cost return (gap
-$-2.57$); with annealing $-0.27$; with a behavior-cloning warm start the gap is $-0.018$ ---
-\textbf{full parity} with the MLP head (paired $p \approx 0.84$). This is the difference between a
-\emph{probe} (post-hoc tree that approximates the policy) and a \emph{constitution} (the tree IS
-the policy): there is no residual black box for behavior to hide in.
+\paragraph{2. The policy head is the story.} The decision layer is a small tree over
+$[\,b_t,\ \text{inventory},\ \text{time}\,]$. In the soft form \citep{frosst2017} each inner
+node $i$ routes by a sigmoid gate and each leaf $\ell$ holds a distribution over actions:
+\begin{align}
+p_i(x) &= \sigma\!\big(\beta(w_i^{\top}x + c_i)\big), \qquad
+P^{\ell}(x) = \prod_{i \in \text{path}(\ell)} p_i(x)^{\ind[\ell \swarrow i]}
+\big(1-p_i(x)\big)^{\ind[i \searrow \ell]},
+\label{eq:tree}\\
+\pi(a\mid x) &= \sum_{\ell} P^{\ell}(x)\, Q^{\ell}_a ,\nonumber
+\end{align}
+with the inverse temperature $\beta$ annealed so the trained tree is effectively hard. The
+constraint is that the tree \emph{is} the policy --- there is no residual network for behavior
+to hide in --- and it must pay no performance tax (\S\ref{sec:results}). At the limit the
+readable rule degenerates to a sentence; the certified US rule of \S\ref{sec:cert} is literally
+\begin{equation}
+e_t \;=\; \begin{cases} 0.74, & b_t > 0.66\\[2pt] 1.00, & \text{otherwise,}\end{cases}
+\label{eq:rule}
+\end{equation}
+where $e_t$ is the equity exposure.
 
 \paragraph{3. Commands are few, named, and governed.} The ${\sim}214$-knob surface collapses to
 \textbf{five agent-facing levers}:
@@ -162,60 +194,360 @@ the policy): there is no residual black box for behavior to hide in.
 \texttt{GROUP\_CONCENTRATION\_CAP}\\
 \texttt{ABSTAIN\_FLOOR} \,\textperiodcentered\, \texttt{DRAWDOWN\_BUDGET}
 \end{center}
-(the concentration cap is \emph{hard}, fixing the predecessor's soft-cap failure). Everything else
-is engineering-fenced. Commands compile to \emph{certified writes} through a governance stack
-described in \S\ref{sec:compose}.
+(the concentration cap is \emph{hard}, fixing the predecessor's soft-cap failure). Everything
+else is engineering-fenced. A write is the \emph{do}-operator of \citet{pearl2009} made
+concrete: $\texttt{SET\_BELIEF}(b^{*}, w)$ realizes
+\begin{equation}
+b_t \;\leftarrow\; (1-w)\, b_t + w\, b^{*}, \qquad w \in [0,1],
+\label{eq:write}
+\end{equation}
+and a \emph{dose} nudge of $\delta$ nats acts in log-odds,
+$\operatorname{logit}(b_t) \leftarrow \operatorname{logit}(b_t) + \delta$. Writes must pass a
+non-inferiority bar on the certified objective before they are allowed to persist
+(\S\ref{sec:levers}).
 
-Two further properties come free from the design and are impossible for the predecessor. Because
-CRYSTAL-1 carries a world model with a likelihood, a commanded belief can be \emph{checked against
-evidence}: a sharp-but-wrong belief shows excess predictive NLL $0.43$ vs ${\approx}0$ for
-uncertain-but-right, detection $0.71$ at $5\%$ false alarms --- and the na\"ive alternative, an
-entropy gate, points \emph{backwards} (it would trust the confident lie). Authority tracks
-evidence, not confidence. And because writes are barycentric on the simplex, they are valid by
-construction: the refusal rate of the write primitive is $0$, where the predecessor needed an OOD
-gate that shrinks or refuses off-manifold steps.
+\section{Data and evaluation metrics}
+\label{sec:data}
+
+Everything quantitative in \S\ref{sec:results} is computed on the following real data, under
+the following formulas. (The same universe and discipline underlie the companion paper
+\emph{Hello Crystal}; this section makes the paper self-contained.)
+
+\subsection{The US universe and its provenance}
+\label{sec:universe}
+
+Daily total-return series, 2000--2026 where listed, for six liquid US-listed assets plus cash:
+\begin{center}\small
+\begin{tabular}{llll}
+\toprule
+ticker & asset class & role in the menu & listed since \\
+\midrule
+SPY & US large-cap equities & the growth engine & 1993 \\
+EFA & developed ex-US equities & diversifier & 2001 \\
+IEF & 7--10y US Treasuries & duration hedge & 2002 \\
+TLT & 20y+ US Treasuries & convex duration & 2002 \\
+TIP & inflation-linked Treasuries & real-rate hedge & 2003 \\
+GLD & gold & crisis diversifier & 2004 \\
+\textasciicircum IRX & 13-week T-bill rate & the cash leg & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+Prices are split- and dividend-adjusted daily closes from a public quote API, converted to
+total-return relatives $R_t = P^{\text{adj}}_t / P^{\text{adj}}_{t-1}$; the cash leg accrues the
+annualized T-bill rate day-counted as $r^{f}_t = y_t/252$. The exposure-rule experiments
+(\S\ref{sec:levers}, \S\ref{sec:cert}) additionally use the lab's Dow-30 daily panel
+(2000--2026). Every panel enters through a signed data gate: the file hash, source URL and
+vintage are recorded before any experiment may read it, and panels are ground-truthed against an
+independent source --- a discipline bought by experience (a Chinese panel once passed every
+internal consistency check while carrying a mixed clock; only external ground-truthing caught
+it).
+
+\textbf{Point-in-time (PIT) discipline.} A decision or forecast issued at time $t$ may use only
+$\mathcal{F}_t = \sigma(\{x_s : s \le t\})$, with publication lags respected (e.g., inflation
+enters with its release delay). Evaluation ``stands at'' historical origins: at origin $\tau$
+the machinery sees data only up to $\tau$, quotes its decision or promise, and is then scored on
+the realized continuation --- never re-fit on it.
+
+\subsection{Scenario kernels for the goal planner}
+\label{sec:kernels}
+
+The dynamic planner of \S\ref{sec:dp} requires return scenarios. Futures are spliced from real
+history by the stationary bootstrap of \citet{politis1994}: blocks of consecutive daily returns
+with geometric length, $\Prob(L=\ell) = p(1-p)^{\ell-1}$, $\E[L] = 1/p = 63$ days, resampled
+with shared block indices across assets (preserving cross-asset correlation). The cash leg is
+\emph{not} level-resampled: interest rates are persistent, so sampled paths resample rate
+\emph{changes} and cumulate from the current rate,
+\begin{equation}
+r^{f}_{t} = \max\!\Big(0,\; r^{f}_{0} + \sum\nolimits_{s\le t} \Delta r^{f}_{\iota(s)}\Big),
+\label{eq:persistentrate}
+\end{equation}
+with $\iota(s)$ the shared block indices --- the v1.4 repair whose absence made zero-rate-era
+cash promises structurally overconfident (\S\ref{sec:backtest}). An ensemble member re-centers
+paths on building-block expected returns, a stress member keeps a crash in the left tail, and a
+parameter-uncertainty layer widens with horizon; member weights are learned prequentially (each
+member weighted by errors of forecasts it locked \emph{before} the realizations arrived). The
+engine's own calibration harness is the subject of the companion paper; every probability below
+inherits its \textsc{uncalibrated research estimate} label until those gates close.
+
+\subsection{Evaluation metrics}
+\label{sec:evalmetrics}
+
+For a wealth path $W_t$ over horizon $H$ years with goal ratio $G$:
+\begin{align}
+\text{max drawdown} &= \min_{t}\Big(\frac{W_t}{\max_{s\le t} W_s} - 1\Big), \qquad
+\text{Sharpe} = \frac{\sqrt{252}\,\overline{x}}{\hat\sigma(x)},
+\label{eq:mdd}\\[4pt]
+F_{q} &= Q_{0.20}\!\left[(W_H/W_0)^{1/H} - 1\right],
+\label{eq:floor}\\[4pt]
+\text{exceedance} &= \frac{1}{|\mathcal{C}|}\sum_{(\tau,d)\in\mathcal{C}}
+\ind\!\left[\text{realized}_{\tau,d} \ge F_q^{(\tau,d)}\right],
+\label{eq:exceed}\\[4pt]
+J &= \Prob(W_H \ge G) \;-\; \lambda\,\E\!\left[\max(0,\, G - W_H)\right],
+\label{eq:J}
+\end{align}
+where $x_t$ in Eq.~\ref{eq:mdd} is the daily excess return; $F_q$ (Eq.~\ref{eq:floor}) is the
+\emph{promise} --- the 20th-percentile annualized outcome, exceeded with $80\%$ probability by
+construction; the exceedance (Eq.~\ref{eq:exceed}) is scored over the PIT cells
+$\mathcal{C} = \text{origins} \times \text{capacity budgets}$; and $\lambda$ in Eq.~\ref{eq:J}
+is the user's miss-magnitude weight. An $80\%$-confidence floor is \emph{honest} iff
+its exceedance is $\ge 0.80$; Eq.~\ref{eq:exceed} is therefore the flagship test --- it
+backtests the \emph{promises}, not the returns.
+
+\subsection{The readable champion: dynamic programming on the funding ratio}
+\label{sec:dp}
+
+Given scenario kernels, the planner solves the goal problem exactly by backward induction on
+(funding ratio $\times$ time) \citep{das2020goals}. With $V_T(W) = U(W/G)$,
+$U(w) = \ind[w\ge1] - \lambda\max(0,1-w)$, and a capacity-filtered menu $\mathcal{P}$
+(portfolios whose drawdown tail exceeds the user's budget are excluded from the action set):
+\begin{equation}
+V_t(W) \;=\; \max_{p\,\in\,\mathcal{P}}\;
+\E\big[\,V_{t+1}\!\big(W\cdot R^{(p)}_{t+1} + c_t\big)\,\big],
+\label{eq:bellman}
+\end{equation}
+where $R^{(p)}$ is the scenario gross return of portfolio $p$ and $c_t$ scheduled
+contributions. The resulting policy is a \emph{table} --- one action per state --- read out
+loud as ``behind the goal $\to$ full allowed equity; at the goal $\to$ lock it in''
+\citep{browne1999}. This table is the object most of our interpretability metrics live on.
 
 \section{CrystalScore: measuring ``legible'' so it can lose}
 \label{sec:metrics}
 
 A legibility claim that cannot lose is marketing. We use
-\[
-\textsc{CrystalScore} \;=\; \text{Faithfulness} \times \text{Simulatability} \times
-\text{Stability},
-\]
-at a fixed parsimony budget $K \le 9$, with each axis operationalized so that it \emph{could
-have} come out low \citep{doshivelez2017,jacovi2020,lipton2018}:
+\begin{equation}
+\textsc{CrystalScore} \;=\; F \times S \times S\!t,
+\label{eq:cs}
+\end{equation}
+at a fixed parsimony budget $K \le 9$ (at most nine named rules/leaves), with each axis
+operationalized so that it \emph{could have} come out low
+\citep{doshivelez2017,jacovi2020,lipton2018}:
+\begin{align}
+F \text{ (faithfulness)} &= \E\Big[\ind\big[\pi\big(b \leftarrow \operatorname{do}(b^{*})\big)
+= \pi^{*}(b^{*})\big]\Big],
+\label{eq:faith}\\[3pt]
+S \text{ (simulatability)} &= \operatorname{acc}\big(\text{story}_{K},\, \pi\big)
+\ \ \text{s.t.}\ \ \big|\mathcal{R}(\text{story}_K) - \mathcal{R}(\pi)\big| \le \varepsilon,
+\label{eq:simul}\\[3pt]
+S\!t \text{ (stability)} &= \frac{1}{n}\sum_{i=1}^{n}
+\ind\big[\text{mechanism replicates on seed } i\big].
+\label{eq:stab}
+\end{align}
+Faithfulness (Eq.~\ref{eq:faith}): \emph{do}-writes must land, judged against a reference
+optimum, not against the policy's own habits. Simulatability (Eq.~\ref{eq:simul}): a $K$-rule
+story must match the policy \emph{at performance parity} $\mathcal{R}$. Stability
+(Eq.~\ref{eq:stab}): the mechanism must replicate across independent training seeds.
+The parity constraint in Eq.~\ref{eq:simul} matters: a story that reproduces a lobotomized
+policy is cheating. The non-saturating companion is the \textbf{MDL deficit}
+\citep{rissanen1978},
+\begin{equation}
+\Delta_{\text{MDL}} \;=\; \operatorname{Acc}(\pi) - \operatorname{Acc}(\text{story}_{K}),
+\label{eq:mdl}
+\end{equation}
+the accuracy lost by forcing the explanation to be short; $0$ means a short story loses
+nothing.
 
-\begin{itemize}
-  \item \textbf{Faithfulness} $=$ does a belief write \emph{causally} control action? Not a
-        correlation: agreement with an \emph{exogenous} belief-MDP optimum after the write ---
-        $0.80$ for the corner PPO head, $0.835$ for the soft-tree head; the read-side certificate
-        additionally bounds the leak around the bottleneck (on-manifold TV $0.067$, i.e.\ $5.3\%$;
-        belief governs $83\%$ of contexts). Interventional, in the spirit of \citet{pearl2009}.
-  \item \textbf{Simulatability} $=$ can a $K{\le}9$ named story reproduce the policy at
-        \emph{return parity}? (A story that reproduces a lobotomized policy is cheating; parity is
-        part of the metric.)
-  \item \textbf{Stability} $=$ does the mechanism replicate across training seeds? (3/3 mechanism
-        replication; 10-seed behavioral stability $1.0$ on the current substrate.)
-\end{itemize}
-
-The companion metric is the \textbf{MDL deficit} \citep{rissanen1978}: the accuracy lost by
-forcing the explanation to be short. Unlike the product score it does not saturate; CRYSTAL-1's
-current MDL deficit is $0.0$ --- a short story loses nothing --- which is precisely why hardening
-this number across substrates is the first task of the research program (\S\ref{sec:program}).
+\textbf{Real-data values.} On its own deployed-panel stance log, R6c scores $F{=}1.00$ (latent
+steering does move behavior --- faithfulness alone cannot distinguish the designs),
+$S{=}0.244$, $S\!t{=}0.619$: $\textsc{CrystalScore}{=}0.151$. CRYSTAL-1's axes on the real US
+machinery: $S{=}0.92$ (an 8-leaf tree reproduces the DP champion's policy table,
+\S\ref{sec:dp}); $S\!t{=}1.00$ (the certified rule's behavior replicates on 10/10 training
+seeds); $F{=}1.00$ (belief-write fidelity on the real daily panel, \S\ref{sec:levers});
+$\Delta_{\text{MDL}}{=}0.0$: $\textsc{CrystalScore}{=}0.92$ (Figure~\ref{fig:crystalscore}).
+The entire $6\times$ gap is Simulatability --- exactly what ``born legible'' buys.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=.9\linewidth]{figures/fig_crystalscore.png}
-  \caption{The identical scalar on both architectures. Faithfulness is 1.0 for both ---
-  \emph{steering works on a black box too}; that axis alone cannot distinguish the designs.
-  The 6$\times$ gap ($0.151 \to 0.938$) is entirely Simulatability: a $K{\le}9$ named story
-  reproduces CRYSTAL-1's policy and cannot compress R6c's 64-d latent stance (0.244). Alpha does
-  not enter the score; the two axes are orthogonal by design.}
+  \caption{The identical scalar on both architectures, real data only: R6c is scored on its own
+  deployed-panel stance log; CRYSTAL-1 on the US goal machinery (tree-vs-champion
+  simulatability) and the certified Dow rule (10-seed stability, write fidelity). Faithfulness
+  is 1.0 for both --- steering works on a black box too; the discriminating axis is whether a
+  $K{\le}9$ named story can reproduce behavior at parity. Alpha does not enter the score.}
   \label{fig:crystalscore}
 \end{figure}
 
-Table~\ref{tab:final} is the final comparison the journey was walked for.
+\section{The behavioral-influence toolbox: four levers, each with an equation and a measured outcome}
+\label{sec:levers}
+
+A legible agent is only useful if you can \emph{change} it on purpose. We exercised four
+families of influence on CRYSTAL-1's PPO heads, all on the real US daily panel (train 2010--18,
+held-out evaluation after), and report one measured outcome per lever
+(Figure~\ref{fig:levers}).
+
+\paragraph{R --- reward shaping.} The risk-targeted reward
+\begin{equation}
+r_t \;=\; e_t\, x_t \;-\; \lambda_{R}\,\max\big(0,\ \text{DD}_t - D^{*}\big),
+\label{eq:reward}
+\end{equation}
+($e_t$ exposure, $x_t$ the asset return, $\text{DD}_t$ running drawdown, $D^{*}$ the budget)
+moves the drawdown dial reliably \citep{ng1999shaping}: a $5\%$ budget delivers $-4.81\%$
+held-out max drawdown; a $10\%$ budget $-10.4\%$. The honesty rider: the cold heads converge to
+near-\emph{constant} exposure dials ($0.25/0.5/0.75$) --- a drawdown-matched twin shows
+$z = 0.00$ timing skill. On this substrate reward shaping bought \emph{risk placement}, not
+timing, and cold PPO re-derived from scratch what the goal machinery already knew: the dial
+beats timing.
+
+\paragraph{T --- teachers.} The cautionary tale first: the cold heads' argmax behavior looked
+sensible while the underlying preferences were nearly flat --- an effectively untrained network
+masked by deterministic evaluation. (For a behavioral scientist: inferring function from the
+argmax of a flat tuning curve.) The cure is a teacher: behavior cloning from the certified
+readable rule (Eq.~\ref{eq:rule}),
+\begin{equation}
+L_{\text{BC}}(\theta) \;=\; -\,\E_{(s,a^{*})}\big[\log \pi_\theta(a^{*}\mid s)\big],
+\label{eq:bc}
+\end{equation}
+reaching $87\%$ agreement, used as a warm start --- after which PPO fine-tuning \emph{keeps}
+the teacher's behavior (warm $=$ BC). The same mechanism closed the soft-tree parity gap
+(cold $-2.57 \to$ annealed $-0.27 \to$ BC-warm-started $-0.018$, paired $p\approx0.84$ --- full
+parity): imitation as initialization, optimization as refinement
+\citep{ross2011dagger,rusu2016distillation}.
+
+\paragraph{I --- interventions.} Belief writes (Eq.~\ref{eq:write}) are exercised directly on
+the real-panel machinery: write fidelity $1.0$ (the commanded belief is the realized belief),
+and a $\pm2$-nat dose slides the agent between named behavior codes. The result we are proudest
+of is a refusal: a $+1$-nat promotion whose fine-tuned policy failed the non-inferiority test
+on the certified objective,
+\begin{equation}
+\text{accept the write} \iff \widehat{J}_{\text{post}} \ \ge\ \widehat{J}_{\text{pre}} -
+\delta_{\text{NI}},
+\label{eq:ni}
+\end{equation}
+was \emph{blocked}. An intervention surface that cannot say no is a jailbreak surface.
+
+\paragraph{A --- architecture.} Tree depth is a legibility dial set \emph{before} training:
+depth-2 yields a 4-leaf policy, depth-3 the 8-leaf one --- story size traded against
+expressiveness ahead of time, not reconstructed after.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_levers.png}
+  \caption{The four levers on the real daily panel, one panel each. R (Eq.~\ref{eq:reward}):
+  realized held-out max drawdown lands on the budget written into the reward. T
+  (Eq.~\ref{eq:bc}): cold PPO's flat-preference argmax (agreement $0.02$) is cured by the
+  certified-rule teacher ($0.87$) and \emph{persists} through PPO fine-tuning. I
+  (Eqs.~\ref{eq:write},~\ref{eq:ni}): writes land with fidelity 1.0; the $+1$-nat promotion is
+  REFUSED by the non-inferiority bar. A: depth as a pre-training legibility dial.}
+  \label{fig:levers}
+\end{figure}
+
+\section{Real-data results}
+\label{sec:results}
+
+\subsection{The readable champion beats the best static portfolio}
+\label{sec:champion}
+
+On the flagship goal task (double the wealth in ten years, US universe, Eq.~\ref{eq:bellman}),
+the dynamic readable policy beats the \emph{best static} portfolio by $+10.5$\,pp goal
+probability (CI90 $[+9.3,+11.7]$, stable across folds; Figure~\ref{fig:dplift}). An 8-leaf tree
+reproduces the champion's table at $0.92$ (Eq.~\ref{eq:simul}) --- a human can simulate it. A
+dedicated gate checks that the lift is not bought with deeper misses; on Chinese data it
+correctly caught exactly that (the digital-option behavior of goal-reaching policies), which
+moved $\lambda$ into the user contract --- the tension between goal probability and miss depth
+is structural, so the \emph{user} must own it. A conditional PPO challenger (behavior-cloned
+from the DP teacher, hard-shielded on capacity \citep{achiam2017,schaul2015}) currently
+\emph{loses} to exact DP on the same action space (regret $6.6$\,pp); we report this because
+the field's default is the opposite claim.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=.75\linewidth]{figures/fig_dp_lift.png}
+  \caption{The readable dynamic policy vs the best static portfolio on the same menu, after
+  costs (US universe; the CN panel shown for the separate-verdict discipline). The lift is
+  $+10.5$\,pp goal probability on the flagship task.}
+  \label{fig:dplift}
+\end{figure}
+
+\subsection{The improvement loop, profile by profile: $1\% \to 52\%$ at unchanged risk}
+\label{sec:ablation}
+
+The outer layer (the subject of the companion paper) is a loop in which an LLM coding agent
+proposes typed machinery changes that must survive a control battery --- matched-random
+(placebo), wrong-direction, half-dose, out-of-time --- plus a one-shot held-out read.
+Here it matters as CRYSTAL-1's \emph{real-data adaptation record}: 65 iterative cycles across
+five investor profiles on the US universe, acceptance on the user's declared objective $J$
+(Eq.~\ref{eq:J}), every accept immediately re-read on a held-out seed.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+profile & accepts/13 & $J$: cycle 0 & $J$: final (hold) & $\Prob(\text{goal})$: $0 \to$ final \\
+\midrule
+conservative       & 5 & $-0.007$ & $+0.497$ & $0.01 \to 0.52$ \\
+mod-conservative   & 2 & $+0.114$ & $+0.398$ & $0.18 \to 0.46$ \\
+moderate           & 4 & $+0.008$ & $+0.429$ & $0.06 \to 0.48$ \\
+mod-aggressive     & 2 & $-0.154$ & $+0.229$ & $0.00 \to 0.35$ \\
+aggressive         & 2 & $+0.079$ & $+0.252$ & $0.08 \to 0.25$ \\
+\bottomrule
+\end{tabular}
+\caption{The per-profile improvement loop on real US data: 15 of 65 candidates accepted, all 15
+confirmed on held-out data (dev $\approx$ hold; no development-seed overfitting visible). The
+largest gains land exactly where the capacity filter bites hardest: the conservative profile's
+goal probability rises from $1\%$ to $52\%$ at an \emph{unchanged} risk budget. All numbers are
+research-tier scenario estimates under \S\ref{sec:kernels}.}
+\label{tab:ablation}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_ablation_J.png}
+  \caption{Learning curves on real US data: the contract objective $J$ (Eq.~\ref{eq:J}) vs loop
+  cycle, per profile. The leftmost point (cycle 0) is the no-agent baseline; solid =
+  development seed, dashed = held-out. Plateaus are honest rejections; steps are accepted
+  candidates.}
+  \label{fig:ablation}
+\end{figure}
+
+\subsection{The promise backtest: do the quoted floors come true?}
+\label{sec:backtest}
+
+For each profile we sweep the capacity budget across its band and, at every point-in-time
+origin (semi-annual from 2010), quote the promise $F_q$ (Eq.~\ref{eq:floor}), then run the
+\emph{same policy} on the realized subsequent years and score Eq.~\ref{eq:exceed}. The first
+run failed the conservative profile at $48.5\%$ --- and the failure was the finding: the
+promise there is cash-dominated, and level-resampled rates let pre-crisis $4$--$5\%$ yields
+leak into zero-rate-era promises. The persistent-rate repair (Eq.~\ref{eq:persistentrate})
+lifted exactly the diagnosed cells: conservative exceedance $48.5\% \to 84.2\%$, and \textbf{all
+five US profiles now clear the $80\%$ bar} across 576 PIT cells; the risk (drawdown) promises
+held in $100\%$ of all 936 cells on both markets (Figure~\ref{fig:exceedance}). China ---
+evaluated separately, never averaged --- passes $1/5$ with three diagnosed mechanisms and named
+fixes queued. \emph{Evidence tier, stated plainly:} the v1.4 pass re-uses the windows whose
+failures motivated the fix --- development-tier by our own taxonomy; the genuine forward test
+is pre-registered (first scoring read 2027-07-12; an untouched multi-year fold matures 2029).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_backtest_exceedance.png}
+  \caption{Promise exceedance (Eq.~\ref{eq:exceed}) per profile against the $80\%$ bar. Left:
+  US after the persistent-rate fix --- $5/5$ profiles pass. Right: China, reported separately;
+  three failures with diagnosed mechanisms. Risk promises: $100\%$ of all 936 cells.}
+  \label{fig:exceedance}
+\end{figure}
+
+\subsection{A certified readable rule on untouched data}
+\label{sec:cert}
+
+The loop's frozen gate has certified exactly one real-data policy to date --- and it is a
+sentence (Eq.~\ref{eq:rule}). It entered with 7 accepts and \textbf{0} placebo accepts, and
+held one-shot on 629 untouched trading days: Sharpe $1.46$ vs $1.39$ buy-and-hold, max drawdown
+$-12.9\%$ vs $-15.5\%$, risk-adjusted improvement $z = +2.06$. The claim is a \emph{risk} claim
+(same return, meaningfully less pain), certified as such; a written return-improvement rule was
+separately tested and \emph{closed} ($-8.8\%$). A fully autonomous lifetime run then refined
+this rule under the same gates: 40 proposals $\to$ 4 certified refinements, with the evidence
+budget self-sustaining ($0.20 \to 0.40$).
+
+\subsection{The transparency audit}
+\label{sec:audit}
+
+The certified rule's machinery was audited on the real panel: naming faithfulness $1.0$ (the
+state called ``bear'' is the state in which de-risking is optimal under the world model);
+10-seed behavioral stability $1.0$; rule re-discovery from scratch $3/3$; belief MDL deficit
+$0.0$ (Eq.~\ref{eq:mdl}). These are the CRYSTAL-1 entries of Figure~\ref{fig:crystalscore} and
+Table~\ref{tab:final}. Their honest scope: measured on one substrate and one rule family ---
+hardening them across substrates, seeds and profiles is Month~1 of the research program
+(\S\ref{sec:program}).
+\joseph{H1 asks whether the machine-simulatability 0.92 predicts \emph{human}
+simulatability --- your psychophysics.}
 
 \begin{table}[h]
 \centering\small
@@ -223,229 +555,198 @@ Table~\ref{tab:final} is the final comparison the journey was walked for.
 \toprule
  & \textbf{CHRL / R6c} & \textbf{CRYSTAL-1} \\
 \midrule
-Memory & 64-d unnamed latent, smeared; blast radius unboundable & named $K$-simplex belief; sole channel; burst-blind (TV $=0$) \\
-Policy legibility & post-hoc codes over a continuous latent & the head \emph{is} an 8-leaf tree at parity ($-0.018$, $p{\approx}0.84$) \\
-Steering primitive & force latent toward a K-means centroid & named barycentric belief write \\
-Causality of a command & correlation demo & \emph{proved} vs exogenous optimum ($0.80/0.835$) \\
-Command validation & none (no likelihood) & lie-detector: authority tracks NLL, not sharpness \\
-Refusals / OOD & OOD gate; can refuse to zero authority & $0$ refusals by construction + kNN manifold governor \\
-Control surface & ${\sim}214$ knobs & 5 named levers + writ ladder + ledger \\
-Composition governance & none live & measured sign-epistasis $\to$ calibrated ledger, $N_{\text{live}}{\le}K$ \\
-\textsc{CrystalScore} ($K{\le}9$) & $\mathbf{0.151}$ (F 1.00 / S 0.244 / St 0.619) & $\mathbf{0.938}$ (F 1.00 / S 0.938 / St 1.00) \\
-Deployment status & \textbf{deployed}: real panels, live firewall, operating history & polygon-proven; real-market use fenced by the VoI gate \\
+Memory & 64-d unnamed latent, smeared; blast radius unboundable & named posterior $b_t$
+(Eq.~\ref{eq:belief}); the sole memory channel \\
+Policy legibility & post-hoc codes over a continuous latent; story acc.\ $0.244$ & the policy
+\emph{is} a table/rule; 8-leaf story acc.\ $0.92$ at parity \\
+Steering primitive & force the latent toward a K-means centroid (correlation) & named
+\emph{do}-write (Eq.~\ref{eq:write}), fidelity $1.0$ \\
+Refusals & OOD gate shrinks or zeroes steps & the NI bar (Eq.~\ref{eq:ni}) refused a $+1$-nat
+promotion \\
+Control surface & ${\sim}214$ knobs & 5 named levers \\
+Seed stability & $0.619$ & $1.00$ (10 seeds) \\
+\textsc{CrystalScore} (Eq.~\ref{eq:cs}) & $\mathbf{0.151}$ & $\mathbf{0.92}$ \\
+Flagship real-data result & walk-forward validation: Sharpe $1.09$, maxDD $-7.34\%$ & certified
+rule, 629 untouched days: Sharpe $1.46$ vs $1.39$, maxDD $-12.9\%$ vs $-15.5\%$; DP champion
+$+10.5$\,pp \\
+Deployment status & deployed: live firewall, operating history & the goal machinery live on the
+US universe (paper track); client certification still \emph{refused}, with dated unlocks \\
 \bottomrule
 \end{tabular}
-\caption{The final comparison. The split verdict is part of the result: CRYSTAL-1 wins every
-command-surface axis \emph{on the polygon}; R6c still leads as a deployed real-market system. The
-gap between them is exactly one port, and it is fenced by an honest gate, not by embarrassment
-(\S\ref{sec:nulls}).}
+\caption{The final comparison, real data only. The honest split survives in refined form: R6c
+remains the longer-operating deployed system; CRYSTAL-1 wins every legibility and control axis
+\emph{and} now carries its own real-data results, while its client-facing certification
+correctly refuses until the pre-registered reads mature.}
 \label{tab:final}
 \end{table}
 
-\section{The behavioral-influence toolbox: four levers, each measured}
-\label{sec:levers}
+\section{The designed-market experiment: can a market reward only a clean mind?}
+\label{sec:polygon}
 
-A legible agent is only useful if you can \emph{change} it on purpose. We exercised four distinct
-families of influence on CRYSTAL-1's PPO heads --- reward, teachers, interventions, architecture
---- and report one measured outcome per lever (Figure~\ref{fig:levers}).
+Real markets have very noisy logic: the regime is largely priced, so the honest value of even a
+perfect regime belief can be zero --- and a null result on real data cannot distinguish ``the
+instrument is broken'' from ``there was nothing to detect.'' This motivates one deliberately
+synthetic experiment, asked as a question: \emph{can one build a market that rewards only a
+``clean'' mind --- an environment where the belief information carries value by construction,
+so that command-surface machinery can be calibrated at all?}
+
+We built such an environment (a regime market whose returns are generated from latent states
+the belief can, in principle, track) and used it strictly as \textbf{instrument calibration} ---
+none of the following is market-performance evidence. On it: belief writes were \emph{proved}
+causal against an exogenous belief-MDP optimum (agreement $0.80$ corner head / $0.835$
+tree head); a likelihood-based \emph{lie detector} separates sharp-but-wrong commands from
+uncertain-but-right ones (excess predictive NLL $0.43$ vs ${\approx}0$; detection $0.71$ at
+$5\%$ false alarms), while the na\"ive entropy gate points \emph{backwards} (it trusts the
+confident lie); a 216-cell factorial showed command composition is non-additive with
+\emph{sign-flipping} cross-terms (median $|\varepsilon| = 2.66$, both signs observed, surviving
+raw logits) --- which is why the write surface is governed by a calibrated ledger,
+$D = \sum{|\alpha_i|\tau_i} + \sum{|\varepsilon_{ij}|\tau}$, a co-activation cap
+$N_{\text{live}} \le K$, a kNN manifold governor ($24/24$ engineered off-manifold corners
+flagged at $1.2\%$ held-out FPR) and a writ ladder whose own false-accept rate has a first
+estimate ($0/48$; $\lesssim 6\%$ by the rule of three). On a \emph{hard} designed substrate the
+gate also certified a genuine return$\leftrightarrow$legibility \emph{tension} --- legibility
+is not free everywhere, and anyone claiming otherwise is measuring easy tasks.
+
+The bridge back to reality is an explicit \textbf{value-of-information gate}
+(Figure~\ref{fig:polygon}): the designed market shows VoI $= 5.92$ ($+282\%$ of a belief-blind
+baseline) and the gate \emph{opens}; on a real book the measured VoI is $0$ and the gate
+\emph{closes} --- so nothing calibrated on the designed market is allowed to generate a
+real-market claim. The one real-panel port of this command surface (a belief-driven exposure
+mode) exists behind that gate and an enable table, and is deliberately \emph{not} cited as
+evidence anywhere in \S\ref{sec:results}.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{figures/fig_levers.png}
-  \caption{The four levers, one panel each. R: the risk-targeted reward
-  $r = \text{pnl} - \lambda\,\max(0, \text{DD} - \text{budget})$ moves realized drawdown onto its
-  budget (a 5\% budget delivers $-4.81\%$ hold max drawdown; a 10\% budget $-10.4\%$; dotted lines
-  = budgets). T: cold PPO produced an argmax over nearly flat preferences --- competent-looking
-  behavior from an effectively untrained net --- cured by behavior cloning from a certified rule
-  (87\% agreement) that \emph{persists} through PPO fine-tuning. I: \texttt{SET\_BELIEF} writes
-  land with fidelity 1.0 and a $\pm2$-nat nudge slides behavior between named codes, while a
-  $+1$-nat promotion was \emph{refused} by the non-inferiority bar --- the honest outcome. A:
-  tree depth is a legibility dial (depth-2 $=$ a 4-leaf story).}
-  \label{fig:levers}
+  \includegraphics[width=.72\linewidth]{figures/fig_polygon.png}
+  \caption{The designed-market experiment and its fence. Left: the environment built to reward
+  a clean mind --- the belief information is worth $+282\%$ of blind by construction, so
+  command machinery (causal writes, the lie detector, composition governance) can be
+  calibrated. Right: the same measurement on a real book returns zero, and the gate closes ---
+  designed-market results are instrument calibration, never market evidence.}
+  \label{fig:polygon}
 \end{figure}
-
-\paragraph{R --- reward shaping.} The risk-targeted reward moves the drawdown dial reliably
-\citep{ng1999shaping}: heads trained at different budgets deliver their budgets on held-out data.
-The honesty rider: the cold heads converge to near-\emph{constant} exposure dials
-($0.25/0.5/0.75$) --- a drawdown-matched twin shows $z = 0.00$ timing skill. Reward shaping bought
-\emph{risk placement}, not timing; on this substrate a dial is the optimum, and cold PPO
-re-discovered that from scratch (60k steps found no ${\sim}2\sigma$ timing).
-
-\paragraph{T --- teachers.} The cautionary tale first: the cold heads' argmax behavior looked
-sensible while the underlying preferences were nearly flat --- the network was effectively
-untrained, and deterministic evaluation masked it. (For a behavioral scientist: inferring function
-from the argmax of a flat tuning curve.) The cure is a teacher: behavior cloning from the
-certified readable rule (87\% agreement), used as a warm start, after which PPO fine-tuning
-\emph{keeps} the teacher's behavior (warm $=$ BC). The same mechanism closed the soft-tree parity
-gap ($-2.57 \to -0.018$, \S\ref{sec:crystal}) --- imitation as initialization, optimization as
-refinement \citep{ross2011dagger,rusu2016distillation}.
-
-\paragraph{I --- interventions.} Writes to the named belief are the \emph{do}-operator made
-concrete \citep{pearl2009}: fidelity $1.0$ (the commanded belief is the realized belief), a sharp
-monotone dose-response (threshold $\approx 0.26$ on the polygon), and $\pm2$-nat
-promote/suppress nudges that slide the agent between named behavior codes. The result we are
-proudest of is a refusal: a $+1$-nat promotion that would have degraded the certified objective
-was \emph{blocked by the non-inferiority bar}. An intervention surface that cannot say no is a
-jailbreak surface.
-
-\paragraph{A --- architecture.} Tree depth is a legibility dial: depth-2 yields a 4-leaf policy
-that remains legible end-to-end. Depth trades story size against expressiveness \emph{ahead} of
-training --- the one lever that changes what the agent \emph{can} become rather than what it does.
-
-\section{Composition: commands interact, so governance is machinery}
-\label{sec:compose}
-
-Single commands behaving well does not imply command \emph{programs} behave well. A 216-cell
-factorial over pairs of belief-dimension writes measured the interaction term directly:
-non-additivity is large (median $|\varepsilon| = 2.66$; 87\% of cells material) and the cross-term
-\emph{flips sign} across contexts (both $+$ and $-$ observed on two output channels; the effect
-survives raw pre-softmax logits, so it is not a renormalization artifact). Honest scope: the
-factorial explored corners \emph{off} the visited joint manifold.
-
-Consequently the write surface is governed by machinery, not etiquette: a per-principal
-\textbf{ledger} charges $D = \sum{|\alpha|\tau}$ plus a worst-case $\sum{|\varepsilon|\tau}$
-(with $|\varepsilon|$ calibrated from the factorial --- the default underestimated it
-${\sim}13\times$), a co-activation cap $N_{\text{live}} \le K$, a kNN \textbf{manifold governor}
-(flags 24/24 off-manifold corners at 1.2\% held-out false-positive rate), and a \textbf{writ
-ladder} C0--C6 under which any version bump voids certification back to C1 --- salami-slicing a
-big write into many small ones is caught by the ledger. The stack's own error rate has a first
-estimate: behavioral $\alpha_{\text{machine}} = 0.0$ ($0/48$; $\lesssim 6\%$ by the rule of
-three, power $70.8\%$) --- a proxy on the C1/C2 core, not yet the full-firewall quantity.
-\joseph{this $\alpha_{\text{machine}}$ proxy is H9 in your program --- the full-firewall estimate
-is open.}
 
 \section{What did not work, and what bounds the claims}
 \label{sec:nulls}
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=.85\linewidth]{figures/fig_frontier.png}
-  \caption{The honest frontier. CRYSTAL-1's ceiling metrics are real \emph{and} measured on a
-  substrate where legibility is cheap. The certified G12 result is that on harder substrates the
-  return--legibility trade-off is a genuine tension, not an engineering artifact: that arrow is
-  the interpretability track's open frontier, not a footnote.}
-  \label{fig:frontier}
-\end{figure}
-
-\paragraph{The certified tension.} On the hard G12 substrate, raising legibility \emph{costs}
-return and vice versa --- certified as a null through the project's gate (return and legibility in
-strict tension). Anyone claiming interpretability is free on all tasks is measuring easy tasks.
-
-\paragraph{The polygon${\to}$market gap.} Every command-surface number in \S\ref{sec:crystal}--%
-\S\ref{sec:compose} is polygon-proven ($K{=}2$, Series-G). On real daily markets the value of the
-belief information is honestly gated: the VoI gate opens on an engineered-positive substrate
-(VoI $5.92$, $+282\%$ of blind) and \emph{closes} on a real book (crypto VoI $0$) --- the regime
-is priced. Until a real VoI${>}0$ substrate is found, CRYSTAL-1 on real markets is a transparency
-and monitoring object; its one real-panel deployment (a belief-driven exposure mode) roughly
-halves Dow drawdown but is enable-table-conditional. R6c keeps the deployed-system crown
-(Table~\ref{tab:final}); the split verdict \emph{is} the honest result.
-
-\paragraph{Post-hoc was not worthless.} CHRL's primitive-discovery program produced certified
-frozen-test lifts (\S\ref{sec:chrl}) and, more importantly, the concept inventory (motifs,
-codes, counterfactual replay) that CRYSTAL-1 promoted from probes into architecture. The right
-summary is not ``post-hoc failed'' but ``post-hoc found the load-bearing concepts, and building
-them in made them 6$\times$ more compressible.''
-
-\paragraph{Assorted falsifications.} The na\"ive entropy gate for command validation points
-backwards (trusts confident lies). A single-Gaussian manifold governor failed (multimodal cloud);
-kNN replaced it. The first $\alpha_{\text{machine}}$ estimate conflated effect-wrongness with
-optimality-wrongness and was corrected by adversarial review. Each is in the experiment logbook
-with its command and seed.
+A paper about honest machinery should list its own falsifications; each cost us a believed
+hypothesis, and the machinery that killed them is the contribution. (i) A famous valuation
+indicator (\textbf{CAPE}): made real-data forecasts worse $\to$ falsified, reverted. (ii) The
+\textbf{PPO challenger} loses to the readable table on real data (regret $6.6$\,pp) $\to$
+reported, not hidden. (iii) A \textbf{Nasdaq-tracking sleeve} dominated every Chinese profile
+$\to$ red-flagged \emph{by the agent itself}: its edge is one untestable sample era. (iv) The
+\textbf{conservative promise failed its first backtest} ($48.5\%$ vs $80\%$) $\to$ the
+diagnosis became Eq.~\ref{eq:persistentrate} and repaired exactly the diagnosed cells
+($\to 84.2\%$). (v) A \textbf{written return-improvement rule} was tested and closed
+($-8.8\%$) --- the certified claim is risk-shaped, not alpha-shaped. (vi) On a hard
+\emph{designed} substrate, \textbf{legibility is provably not free} (the certified tension of
+\S\ref{sec:polygon}) --- the open frontier of the interpretability track. (vii) Post-hoc
+interpretability on CHRL \textbf{was not worthless}: it found the load-bearing concepts
+(motifs, codes, counterfactual replay) that CRYSTAL-1 promoted from probes into architecture
+--- the right summary is that building them in made the story $\sim\!4\times$ more compressible
+($0.244 \to 0.92$ at the same budget).
 
 \section{Related work}
 \label{sec:related}
-Interpretability-by-construction vs post-hoc explanation \citep{rudin2019,lipton2018}; rigor and
-evaluation of interpretability \citep{doshivelez2017,hoffman2018}; faithfulness as a criterion
-\citep{jacovi2020}. Belief-state control \citep{kaelbling1998} and regime models
-\citep{hamilton1989} supply the named memory; soft trees \citep{frosst2017} the legible head; MDL
-\citep{rissanen1978} the non-saturating ruler; interventional causality \citep{pearl2009} the
-faithfulness protocol. Hierarchical RL as partial legibility \citep{sutton1999options,%
-bacon2017option}; PPO and constrained variants \citep{schulman2017ppo,achiam2017}; goal-conditioned
-value functions \citep{schaul2015}. Influence machinery: reward shaping \citep{ng1999shaping},
-imitation-then-optimize \citep{ross2011dagger,rusu2016distillation}. The self-improvement layer
-that motivates all of this --- LLM proposers over verified evaluators \citep{romera2024funsearch,%
-novikov2025alphaevolve,ma2023eureka,wang2023voyager} and the statistics of adaptive search over
-noisy financial evaluators \citep{baileylopez2014dsr} --- is treated in the companion paper
-(\emph{Hello Crystal}); this paper builds the object those loops are allowed to modify.
-\gap{position vs concept-bottleneck models (Koh et al.\ 2020) and vs recent transformer
-interpretability (circuits) --- one paragraph each, Joseph's lit pass.}
+Interpretability-by-construction vs post-hoc explanation \citep{rudin2019,lipton2018}; rigor
+and evaluation of interpretability \citep{doshivelez2017,hoffman2018}; faithfulness as a
+criterion \citep{jacovi2020}. Belief-state control \citep{kaelbling1998} and regime models
+\citep{hamilton1989} supply the named memory; soft trees \citep{frosst2017} the legible head;
+MDL \citep{rissanen1978} the non-saturating ruler; interventional causality \citep{pearl2009}
+the faithfulness protocol. Discretized latent-action behavior generation \citep{lee2024vqbet}
+pursues the complementary direction --- learned discrete codes for \emph{expressiveness} ---
+where CrystalRL fixes the codes to \emph{named} coordinates for legibility; goal-based
+planning \citep{das2020goals,browne1999}; hierarchical RL as partial legibility
+\citep{sutton1999options,bacon2017option}; PPO and constrained variants
+\citep{schulman2017ppo,achiam2017}; goal-conditioned value functions \citep{schaul2015};
+imitation-then-optimize \citep{ross2011dagger,rusu2016distillation}; reward shaping
+\citep{ng1999shaping}; the stationary bootstrap \citep{politis1994}. The self-improvement layer
+--- LLM proposers over verified evaluators \citep{romera2024funsearch,novikov2025alphaevolve,%
+ma2023eureka,wang2023voyager} and the statistics of adaptive search over noisy financial
+evaluators \citep{baileylopez2014dsr} --- is treated in the companion paper (\emph{Hello
+Crystal}); this paper builds the object those loops are allowed to modify.
+\gap{position vs concept-bottleneck models (Koh et al.\ 2020) and vs circuit-style transformer
+interpretability --- one paragraph each, Joseph's lit pass.}
 
 \section{The research program: twelve hypotheses, each with a kill test}
 \label{sec:program}
 
-This section is deliberately ambitious --- the point of a legible, steerable, self-modifying agent
-is not one trading policy but a \emph{general method for keeping evolving systems readable}. Each
-hypothesis is falsifiable; each names the observation that kills it.
+This section is deliberately ambitious --- the point of a legible, steerable, self-modifying
+agent is not one trading policy but a \emph{general method for keeping evolving systems
+readable}. Each hypothesis is falsifiable; each names the observation that kills it.
 \joseph{this program is yours to reshape: pick one hypothesis per month, or replace them with
 better ones --- the kill-test discipline is the only non-negotiable.}
 
 \begin{enumerate}
-  \item \textbf{H1 --- Machine simulatability predicts human simulatability.} The 0.94 tree
-        agreement is machine-measured. \emph{Test:} psychophysics --- humans predict the policy's
-        action in unseen cells. \emph{Kill:} human accuracy at chance while machine
-        simulatability stays at ceiling.
-  \item \textbf{H2 --- A legibility scaling law.} Vocabulary size $K$ tracks substrate behavioral
-        complexity (the observed $C^* \approx K$ pattern) across substrates --- a
-        ``Kolmogorov frontier'' for policies. \emph{Kill:} substrates where optimal $K$ is
-        unrelated to measured complexity.
+  \item \textbf{H1 --- Machine simulatability predicts human simulatability.} The $0.92$ story
+        accuracy is machine-measured. \emph{Test:} psychophysics --- humans predict the
+        policy's action in unseen cells of the real DP tables. \emph{Kill:} human accuracy at
+        chance while machine simulatability stays at ceiling.
+  \item \textbf{H2 --- A legibility scaling law.} Optimal vocabulary size $K$ tracks substrate
+        behavioral complexity across real universes --- a ``Kolmogorov frontier'' for policies.
+        \emph{Kill:} substrates where optimal $K$ is unrelated to measured complexity.
   \item \textbf{H3 --- The return${\leftrightarrow}$legibility tension is a substrate property,
-        not an architecture property.} Prediction: the tension vanishes on VoI${>}0$ substrates
-        and is maximal where the regime is fully priced. \emph{Kill:} tension persists on an
-        engineered VoI${>}0$ polygon.
+        not an architecture property.} Prediction: the tension is maximal where the regime is
+        fully priced and vanishes where belief information carries value. \emph{Kill:} tension
+        persists on a designed VoI${>}0$ environment.
   \item \textbf{H4 --- Interpretability drift.} Under the self-improvement loop, naming
-        faithfulness decays unless actively re-certified (``semantic drift'' of the belief
-        coordinates). \emph{Test:} track faithfulness across accepted loop generations.
-        \emph{Kill:} faithfulness stays at 1.0 over $\ge$20 accepted changes with no
-        re-certification.
+        faithfulness decays unless actively re-certified (semantic drift of the belief
+        coordinates). \emph{Test:} track Eq.~\ref{eq:faith} across accepted loop generations on
+        the real machinery. \emph{Kill:} faithfulness stays at $1.0$ over $\ge$20 accepted
+        changes with no re-certification.
   \item \textbf{H5 --- Motif conservation across architectures.} CHRL's discovered primitives
-        re-emerge as CRYSTAL-1 tree leaves (homologous behaviors across ``species'').
-        \emph{Test:} match Stage-7 primitives to leaf semantics. \emph{Kill:} no better-than-chance
-        correspondence.
-  \item \textbf{H6 --- The write protocol is pharmacological.} \texttt{SET\_BELIEF} dose-response
-        curves are monotone and saturating everywhere (polygon threshold 0.26 generalizes).
-        \emph{Kill:} non-monotone dose regions on any certified substrate.
-  \item \textbf{H7 --- Sign-epistasis survives the deployed manifold.} The C-5 factorial explored
-        off-manifold corners. \emph{Test:} re-measure within the visited manifold (L1 $\le$ 0.30).
-        \emph{Kill (of the governance premise):} on-manifold interactions are additive --- then the
-        ledger's $\varepsilon$ term is precautionary overhead.
-  \item \textbf{H8 --- The lie-detector generalizes.} Authority-tracks-NLL discriminates
+        re-emerge as CRYSTAL-1 rule clauses (homologous behaviors across ``species'').
+        \emph{Test:} match the frozen-test primitives to leaf semantics on the same real
+        windows. \emph{Kill:} no better-than-chance correspondence.
+  \item \textbf{H6 --- The write protocol is pharmacological.} \texttt{SET\_BELIEF}
+        dose-response on the real panel is monotone and saturating. \emph{Kill:} non-monotone
+        dose regions on any certified substrate.
+  \item \textbf{H7 --- Composition governance is necessary on real data.} Sign-flipping command
+        interactions (so far shown only on the designed market, off-manifold) appear on the
+        real panel's visited manifold. \emph{Kill (of the premise):} on-manifold real-data
+        interactions are additive --- then the ledger's $\varepsilon$ term is precautionary
+        overhead.
+  \item \textbf{H8 --- The lie detector generalizes.} Authority-tracks-NLL discriminates
         wrong-but-sharp commands on real panels at operationally useful rates. \emph{Kill:}
-        detection at chance off-polygon.
-  \item \textbf{H9 --- $\alpha_{\text{machine}}$, full-firewall.} The 0/48 C1/C2-core proxy holds
-        ($\le 5\%$) when estimated through the complete gate stack. \emph{Kill:} full-stack
-        estimate an order worse.
-  \item \textbf{H10 --- Faithful client-facing explanations.} Every ``why'' sentence shown to a
-        user can be made \emph{measurably} faithful (the explanation gate): perturb the stated
-        reason, behavior must move accordingly. \emph{Kill:} explanations that pass fluency review
-        but fail perturbation faithfulness at scale.
-  \item \textbf{H11 --- Certified vocabulary growth.} \texttt{GROW\_K} can be run as a certified
-        architectural operation: the agent learns a new regime word without semantic drift of the
-        old ones. \emph{Kill:} any old-coordinate faithfulness drop after growth.
-  \item \textbf{H12 --- The score applies to the improver.} CrystalScore's axes (faithfulness /
-        simulatability / stability) transfer to the \emph{coding agent's} own proposals ---
-        interpretability of the improver, not just the improved. \emph{Test:} score proposal
-        rationales against their measured effects. \emph{Kill:} rationale-effect agreement at
-        chance (the LLM's stated reasons are confabulation --- itself a publishable result).
+        detection at chance outside the designed market.
+  \item \textbf{H9 --- $\alpha_{\text{machine}}$, full-firewall.} The $0/48$ core proxy holds
+        ($\le 5\%$) when estimated through the complete real-data gate stack. \emph{Kill:}
+        full-stack estimate an order worse.
+  \item \textbf{H10 --- Faithful client-facing explanations.} Every ``why'' sentence shown to
+        a user can be made \emph{measurably} faithful: perturb the stated reason, behavior must
+        move accordingly. \emph{Kill:} explanations that pass fluency review but fail
+        perturbation faithfulness at scale.
+  \item \textbf{H11 --- Certified vocabulary growth.} \texttt{GROW\_K} can be run as a
+        certified architectural operation: the agent learns a new regime word without semantic
+        drift of the old ones. \emph{Kill:} any old-coordinate faithfulness drop after growth.
+  \item \textbf{H12 --- The score applies to the improver.} CrystalScore's axes transfer to the
+        \emph{coding agent's} own proposals --- interpretability of the improver, not just the
+        improved. \emph{Test:} score proposal rationales against their measured effects.
+        \emph{Kill:} rationale--effect agreement at chance (the LLM's stated reasons are
+        confabulation --- itself a publishable result).
 \end{enumerate}
 
 \section{Limitations}
 \label{sec:limits}
-(i) All command-surface results are $K{=}2$, Series-G polygon; the ceiling metrics are measured
-where legibility is cheap. (ii) Sign-epistasis is demonstrated off the joint manifold (H7 is the
-repair). (iii) $\alpha_{\text{machine}}$ is a core proxy (H9). (iv) The $\varepsilon\to D$ units
-bridge in the ledger is a bookkeeping convention, not a validated equivalence. (v) The VoI-gate
-discrimination is $n{=}1$ engineered-positive vs $n{=}1$ real-negative. (vi) Human simulatability
-is untested (H1) --- the metric that names the property is still machine-only.
-\ivan{decide: does the B3 real-panel exposure mode belong here as a seventh limitation
-(enable-table conditionality) or in \S\ref{sec:nulls} only?}
+(i) The scenario-based probabilities of \S\ref{sec:results} remain \textsc{uncalibrated
+research estimates}; the calibration gates (7/10 green) and their dated forward reads
+(2027-07-12; 2029) live in the companion paper. (ii) The v1.4 promise-backtest pass re-uses the
+windows whose failures motivated the fix --- development-tier evidence. (iii) The real-data
+CrystalScore's simulatability axis is measured on the DP champion and the certified rule family
+--- not yet on every head (Month~1 of the program). (iv) The command-surface \emph{proofs}
+(causal writes vs an exogenous optimum, the lie detector, composition governance) are
+designed-market calibrations (\S\ref{sec:polygon}); their real-data analogues are H6--H9.
+(v) China passes $1/5$ profiles; its named fixes are queued, and no CN number is averaged into
+any US claim. (vi) Execution economics beyond $10$\,bp switching costs (taxes, spreads, gaps)
+are only partially bounded.
 
 \section*{Acknowledgments and drafting discipline}
-Prepared \emph{write-paper-first} \citep{eisner-paper-first}: every margin \texttt{todo} marks a
-real gap. Experiments were run and logged under the repository's honesty contract --- every entry
-names its null, its seed, and its worst caveat --- in the spirit of \citet{feynman1974}:
-\emph{``The first principle is that you must not fool yourself --- and you are the easiest person
-to fool.''} LLM coding agents (Claude, Codex) operated the loops under the stated controls; the
-agents propose, the gates dispose.
+Prepared \emph{write-paper-first} \citep{eisner-paper-first}: every margin \texttt{todo} marks
+a real gap. Experiments were run and logged under the repository's honesty contract --- every
+entry names its null, its seed, and its worst caveat --- in the spirit of \citet{feynman1974}:
+\emph{``The first principle is that you must not fool yourself --- and you are the easiest
+person to fool.''} LLM coding agents (Claude, Codex) operated the loops under the stated
+controls; the agents propose, the gates dispose.
 
 \bibliographystyle{plainnat}
 \bibliography{refs}
