@@ -1,78 +1,40 @@
 # CrystalRL
 
-**Crystal Clear Reinforcement Learning: a trading agent that is legible *by construction* — a
-policy you can read like a table, a memory you can write to like a command line — and the
-measurement discipline that keeps "legible" from being a vibe.**
+Interpretability track of the CrystalRL lab. This repo is self-contained: paper, live demo,
+code, data, and results. This page is your reading order — nothing else.
 
-This repository is the **interpretability-track starter kit** for Joseph Lynch: the paper you
-will drive, an interactive demo you can open in 60 seconds, the skill file for your coding
-agent, and the working protocol of the lab. The full research codebase (data, gates, loops,
-logbook) lives in the mothership repo:
-[Sqaard/self-evolving-trading-bot](https://github.com/Sqaard/self-evolving-trading-bot).
-
----
-
-## Why this exists
-
-Most "explainable RL" trains a black box and then tells stories about it. We walked the other
-road and measured the difference. The journey: **CHRL** — a strong hierarchical PPO trader with
-readable *layers* but a 64-dimensional unnamed latent core and ~214 tuning knobs — was rebuilt
-into **CRYSTAL-1**, whose only memory is a *named* probability (`P(bear)`, writable:
-`SET_BELIEF(bear)=0.8` is a command the policy must obey) and whose policy head *is* an
-≤8-leaf decision tree at full return parity.
-
-Scored on the identical scalar — **CrystalScore = Faithfulness × Simulatability × Stability**
-at a fixed story budget — the journey moves the agent from **0.15 to 0.94**, and the entire
-6× gap is Simulatability: a short named story reproduces CRYSTAL-1's behavior and cannot
-compress the latent. The claim is falsifiable, the costs are stated (on hard substrates
-legibility is provably *not* free), and the honest split verdict is kept: the old agent still
-leads as a *deployed* system.
-
-Why it matters beyond one trading bot: in the companion work (*Hello Crystal*) an LLM coding
-agent improves this system autonomously — and **an agent may evolve itself exactly as far as
-it can be read.** Interpretability is the load-bearing wall, not documentation. That wall is
-your track.
-
-## Try it in 60 seconds
+## 1 · Try it in 60 seconds
 
 Open **[`live/CrystalRL_live_testing.html`](live/CrystalRL_live_testing.html)** in any browser
-(no install, one file). You get both models with their architecture schemas, a 14-knob control
-surface, and a chart with toggleable curves. Two things to try first:
+(one file, no install). Then do two things:
 
-1. Crank **SET_BELIEF write strength** to 100% — CRYSTAL-1 obeys (its memory is a named,
-   writable belief); R6c does not move, because *there is no named memory to write to*.
-2. Drag the shared **drawdown budget** — it is a hard cap for CRYSTAL-1 and only a soft nudge
-   for R6c. Same knob, different coupling.
+1. Crank **SET_BELIEF write strength** to 100% — CRYSTAL-1 obeys, R6c cannot even receive the
+   command (no named memory).
+2. Drag the shared **drawdown budget** — hard cap for CRYSTAL-1, soft nudge for R6c.
 
-That is the whole thesis, in your hands: *different models respond differently to the same
-knobs, and different knobs have different effects.*
+That's the thesis in your hands. Everything below explains how it's built and measured.
 
-## What's in the box
+## 2 · Analyze these files first, in this order
 
-| Path | What it is |
-|---|---|
-| [`paper/main.pdf`](paper/main.pdf) | **The paper** — *CrystalRL: Crystal Clear Reinforcement Learning* (draft v0.1): the CHRL→CRYSTAL-1 journey, the final 10-axis comparison, the CrystalScore protocol, the four behavior-influence levers, the honest nulls, and **twelve falsifiable hypotheses (H1–H12) — your research program**, with `\joseph{…}` margin notes addressed to you. Sources: `main.tex` + `refs.bib` (Overleaf-ready), figures regenerable via `make_crystalrl_figures.py`. |
-| [`live/`](live/) | The interactive demo above (single self-contained HTML + its build script). |
-| [`agent_skill.md`](agent_skill.md) | Drop this into your personal Claude: the lab's honesty contract, your track's guardrails, and the **mandatory log-after-every-experiment protocol**. |
-| [`docs/LOGBOOK_PROTOCOL.md`](docs/LOGBOOK_PROTOCOL.md) | The logbook template, the verdict enum, the honesty rules, and a real filled example. |
-| [`pitch/`](pitch/) | The meeting deck (PDF + PPTX) and its spoken script — the fastest way to reload context. |
+| # | File | Why first |
+|---|---|---|
+| 1 | [`paper/main.pdf`](paper/main.pdf) | The whole story with equations. Read: abstract → §5 (CrystalScore) → §9 (**H1–H12 — your research program**) → the `Joseph:` margin notes. |
+| 2 | [`docs/CODE_MAP.md`](docs/CODE_MAP.md) | The map of everything in this repo: entry points by theme, conventions, what's deliberately not included. |
+| 3 | [`agent_skill.md`](agent_skill.md) | Load this into your Claude before any work — the honesty contract, guardrails, and the mandatory logging protocol. |
+| 4 | [`src/crystal/belief_filter.py`](src/crystal/belief_filter.py) | The named memory: a Bayes filter over market regimes (paper Eq. 2). ~Small file, read fully. |
+| 5 | [`src/crystal/soft_tree_policy.py`](src/crystal/soft_tree_policy.py) | The policy that IS the story (paper Eq. 3). |
+| 6 | [`interpretability/crystal_score.py`](interpretability/crystal_score.py) | How Faithfulness × Simulatability × Stability is actually computed. |
+| 7 | [`interpretability/exp_e21_transparency_audit.py`](interpretability/exp_e21_transparency_audit.py) + [`exp_e28_all_levers.py`](interpretability/exp_e28_all_levers.py) | The audit and the four influence levers on the real panel — incl. the refused intervention. |
+| 8 | [`src/crystal/writ_ladder.py`](src/crystal/writ_ladder.py) + [`contracts/crystal1_knob_registry.yaml`](contracts/crystal1_knob_registry.yaml) | How writes get certified; the 5-lever command surface. |
+| 9 | [`artifacts/stage4/`](artifacts/stage4/) → `R6c_*_for_Joseph/README_R6C_FROZEN_TEST_FOR_JOSEPH.md` | The frozen R6c behavior package prepared for you — the black-box side of every comparison. |
+| 10 | [`data/_personal_invest_registry/dp_policies/`](data/_personal_invest_registry/dp_policies/) | The readable policy tables — the object your first experiment (H1, simulatability psychophysics) lives on. |
+| 11 | [`docs/LOGBOOK_PROTOCOL.md`](docs/LOGBOOK_PROTOCOL.md) | How every run gets logged. An unlogged result does not exist. |
+| 12 | [`reports/CRYSTAL1_CONTROLLABILITY_FINAL_REPORT.md`](reports/CRYSTAL1_CONTROLLABILITY_FINAL_REPORT.md) | The provenance of every number — go here when you doubt a claim. |
 
-## The headline numbers (each traceable to a logged experiment)
+Context reloaders when needed: [`pitch/pitch.pdf`](pitch/pitch.pdf) (the meeting deck),
+[`pitch/SPEECH.md`](pitch/SPEECH.md).
 
-| Claim | Number |
-|---|---|
-| CrystalScore, identical scalar | R6c **0.151** → CRYSTAL-1 **0.938** (gap = Simulatability: 0.24 vs 0.94) |
-| The tree head costs nothing | return-parity gap **−0.018** (paired p≈0.84) after a BC warm start |
-| Commands are causal, not correlational | agreement with an exogenous optimum **0.80 / 0.835**; write fidelity **1.0** |
-| The system can say no | a +1-nat belief promotion **REFUSED** by the non-inferiority bar |
-| Honesty has teeth | a famous indicator (CAPE) falsified; the RL challenger loses to the readable table — both reported |
-| The open frontier | a **certified** return↔legibility tension on hard substrates — H3 in your program |
-
-## The code (clone and continue)
-
-The full interpretability-track codebase is in this repo — verified to import and run from a
-fresh clone (the coding-agent machinery and the *Hello Crystal* product line stay in the
-mothership):
+## 3 · Set up the code (2 minutes)
 
 ```bash
 git clone https://github.com/Sqaard/CrystalRL.git && cd CrystalRL
@@ -81,12 +43,40 @@ python -c "import sys; sys.path[:0]=['.','scripts']; import interpretability.mdl
 # ~30 s: recomputes the frozen-log headline -> your setup works
 ```
 
-What you get: `src/crystal/` (the belief filter, the soft-tree policy, the governor, the writ
-ladder), `src/series_g/` (the designed market of paper §8), `src/hl/` (the legibility-loop
-library), 58 experiment scripts in `interpretability/` **with their result JSONs/CSVs** (every
-number in the paper is reproducible in place), the real US daily panel in
-`data/_dow_extended/`, the readable DP policy tables, the frozen R6c behavior package prepared
-for you in `artifacts/stage4/R6c_*_for_Joseph/`, and the 5-lever command registry in
-`contracts/`. Start with **[`docs/CODE_MAP.md`](docs/CODE_MAP.md)** — entry points by theme,
-conventions, and the short list of deliberately-not-included pieces.
+## 4 · Then let your Claude teach you the rest
 
+Open your Claude in this repo and paste exactly this:
+
+```
+/learn I just cloned the CrystalRL repo — I own its interpretability track. My background is
+neuroscience (explaining behavior patterns of brains), so use neuroscience analogies wherever
+they fit. First read agent_skill.md and docs/CODE_MAP.md yourself, then teach me the system
+one concept at a time, quizzing me before moving on:
+
+1. The named memory: src/crystal/belief_filter.py — the Bayes filter over market regimes, and
+   why a NAMED belief makes interventions possible (paper Eq. 2).
+2. The policy that IS the story: src/crystal/soft_tree_policy.py and the certified rule inside
+   interpretability/crystal_ppo.py (paper Eqs. 3-4).
+3. CrystalScore = Faithfulness x Simulatability x Stability: how each axis is computed in
+   interpretability/crystal_score.py and cross_policy_crystal.py, and why R6c scores 0.15 while
+   CRYSTAL-1 scores 0.92 — using the frozen R6c log in artifacts/stage4/ as the black-box side.
+4. Interventions and refusals: SET_BELIEF and the dose nudges in
+   interpretability/exp_e28_all_levers.py, and the writ ladder in src/crystal/writ_ladder.py —
+   including why the +1-nat promotion was REFUSED (this is the optogenetics analogy).
+5. The designed market and its fence: src/series_g/family_env.py and
+   interpretability/voi_gate.py — why polygon results are instrument calibration, never market
+   evidence.
+
+When I can explain all five back, help me pick ONE hypothesis from H1-H12 in paper/main.tex
+(section "The research program"), draft the cheapest experiment that could kill it, and write
+my first EXPERIMENT_LOGBOOK.md entry skeleton per docs/LOGBOOK_PROTOCOL.md.
+```
+
+## 5 · The one rule
+
+> "The first principle is that you must not fool yourself — and you are the easiest person to
+> fool." — Feynman
+
+Every run → one logbook entry (template in [`docs/LOGBOOK_PROTOCOL.md`](docs/LOGBOOK_PROTOCOL.md)):
+the null you tested, the exact command + seed, the worst caveat, an honest verdict. Questions →
+Sunday sync, or leave a `\joseph{}` note in the paper.
