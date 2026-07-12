@@ -68,16 +68,3 @@ knobs, and different knobs have different effects.*
 | Honesty has teeth | a famous indicator (CAPE) falsified; the RL challenger loses to the readable table — both reported |
 | The open frontier | a **certified** return↔legibility tension on hard substrates — H3 in your program |
 
-## How we work
-
-Weekly Sunday sync (call or recorded video); agenda out 1–2 days ahead — what was done / what's
-blocking / what help is needed / goals. Write the paper first. Every run logged, nulls first.
-One caveat, the worst one. And the lab's first principle, from Feynman's *Cargo Cult Science*:
-
-> "The first principle is that you must not fool yourself — and you are the easiest person to fool."
-
----
-
-*Maintainers: Ivan Pavliuk (model & data) · Joseph Lynch (interpretability). Coding agents:
-Claude, Codex — they propose, the gates dispose. Research code; nothing here is investment
-advice, and every probability in the lab wears its evidence tier on its sleeve.*
