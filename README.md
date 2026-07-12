@@ -68,18 +68,6 @@ knobs, and different knobs have different effects.*
 | Honesty has teeth | a famous indicator (CAPE) falsified; the RL challenger loses to the readable table — both reported |
 | The open frontier | a **certified** return↔legibility tension on hard substrates — H3 in your program |
 
-## Your first afternoon
-
-1. Read the paper's abstract, §"The research program" (H1–H12), and your margin notes (~30 min).
-2. Open the live demo and run the two experiments above (~10 min).
-3. Read [`docs/LOGBOOK_PROTOCOL.md`](docs/LOGBOOK_PROTOCOL.md), then skim the top five entries
-   of the mothership [logbook](https://github.com/Sqaard/self-evolving-trading-bot/blob/research/exec-econ-newhigh-cycle/EXPERIMENT_LOGBOOK.md) (~20 min).
-4. Load `agent_skill.md` into your Claude and clone the mothership repo — its `ONBOARDING.md`
-   gets you a first real result the same day.
-5. Bring to Sunday: which of H1–H12 you would reshape, and three objections. Breaking our
-   explanations is the job — the loop has survived being broken twice, and both times it came
-   out stronger.
-
 ## How we work
 
 Weekly Sunday sync (call or recorded video); agenda out 1–2 days ahead — what was done / what's
