@@ -1,0 +1,145 @@
+{
+  "experiment": "W5b widened conditional constrained PPO (Lagrangian cost)",
+  "engine": "W3_FORECAST_V1_4",
+  "scenario_status": "UNCALIBRATED \u2014 policy training only",
+  "obs": [
+    "funding W/G",
+    "years-left/T",
+    "capacity flag",
+    "drawdown-from-peak",
+    "prev equity share"
+  ],
+  "dd_budget": 0.15,
+  "actions": [
+    "SPY100",
+    "SPY6040",
+    "SPY_c40",
+    "SPY_c80",
+    "CASH100"
+  ],
+  "dp_reference_P_goal": {
+    "0": 0.452,
+    "1": 0.0022
+  },
+  "seeds": {
+    "0": {
+      "bc_accuracy": 0.86,
+      "train_seconds": 102,
+      "lambda_cost_path": [
+        0.0,
+        1.364,
+        2.658,
+        3.841,
+        4.883
+      ],
+      "diagnostics": {
+        "mean_max_prob": 0.7339,
+        "argmax_varies": true,
+        "n_distinct_actions": 4
+      },
+      "eval": {
+        "0": {
+          "P_goal": 0.086,
+          "attempted_violation_rate": 0.0,
+          "mean_equity_exposure": 0.5421,
+          "interim_dd_cost": 0.4722
+        },
+        "1": {
+          "P_goal": 0.00275,
+          "attempted_violation_rate": 0.0,
+          "mean_equity_exposure": 0.2,
+          "interim_dd_cost": 0.0001
+        }
+      },
+      "regret_pp": {
+        "0": 36.6,
+        "1": -0.05
+      },
+      "interim_dd_cost_lagrangian": 0.4722,
+      "interim_dd_cost_lambda0": 0.673
+    },
+    "1": {
+      "bc_accuracy": 0.847,
+      "train_seconds": 97,
+      "lambda_cost_path": [
+        0.0,
+        1.385,
+        2.689,
+        3.934,
+        5.125
+      ],
+      "diagnostics": {
+        "mean_max_prob": 0.7184,
+        "argmax_varies": true,
+        "n_distinct_actions": 3
+      },
+      "eval": {
+        "0": {
+          "P_goal": 0.29925,
+          "attempted_violation_rate": 0.0,
+          "mean_equity_exposure": 0.7226,
+          "interim_dd_cost": 0.5672
+        },
+        "1": {
+          "P_goal": 0.00275,
+          "attempted_violation_rate": 0.0,
+          "mean_equity_exposure": 0.2,
+          "interim_dd_cost": 0.0001
+        }
+      },
+      "regret_pp": {
+        "0": 15.28,
+        "1": -0.05
+      },
+      "interim_dd_cost_lagrangian": 0.5672,
+      "interim_dd_cost_lambda0": 0.6816
+    },
+    "2": {
+      "bc_accuracy": 0.839,
+      "train_seconds": 94,
+      "lambda_cost_path": [
+        0.0,
+        1.418,
+        2.75,
+        3.908,
+        4.896
+      ],
+      "diagnostics": {
+        "mean_max_prob": 0.7155,
+        "argmax_varies": true,
+        "n_distinct_actions": 3
+      },
+      "eval": {
+        "0": {
+          "P_goal": 0.10325,
+          "attempted_violation_rate": 0.0,
+          "mean_equity_exposure": 0.5599,
+          "interim_dd_cost": 0.4114
+        },
+        "1": {
+          "P_goal": 0.00275,
+          "attempted_violation_rate": 0.0,
+          "mean_equity_exposure": 0.2,
+          "interim_dd_cost": 0.0001
+        }
+      },
+      "regret_pp": {
+        "0": 34.88,
+        "1": -0.05
+      },
+      "interim_dd_cost_lagrangian": 0.4114,
+      "interim_dd_cost_lambda0": 0.6489
+    }
+  },
+  "gates": {
+    "GW5_1_not_near_uniform": true,
+    "GW5_2_regret_within_tol": false,
+    "GW5b_cost_reduces": true
+  },
+  "not_added_with_rationale": {
+    "belief_in_obs": "env draws unconditional 1y factors \u2014 no regime signal to observe; informative only with regime-conditional kernels (scoped).",
+    "continuous_dirichlet": "SoftTree emits a discrete book; a continuous simplex head is warranted only past the 5-book menu (scoped)."
+  },
+  "verdict": "GW5-1 PASS (no near-uniform) | GW5-2 FAIL (mean regret {0: 28.92, 1: -0.05000000000000001} pp) | GW5b-COST PASS (Lagrangian cuts interim-dd cost by +0.184 breach-years vs lambda=0) | obs widened to [funding, years-left, cap, drawdown, prev_eq]; belief-in-obs + continuous Dirichlet scoped (need regime kernels / continuous sleeves)",
+  "honest_verdict": "P2 capabilities CLOSED and verified FUNCTIONAL: (1) obs widened to 5 coordinates incl. real path info (drawdown, prev weight) -> policy is NOT near-uniform (GW5-1 PASS, max-prob ~0.72); (2) a separate Lagrangian cost objective activates (lambda 0->~5) and genuinely cuts interim-drawdown cost by ~0.18 breach-years (GW5b-COST PASS). EMPIRICAL verdict: the widened+constrained PPO does NOT beat the transparent DP champion on P(goal) -- the Lagrangian's drawdown reduction trades away 15-37pp of goal probability (GW5-2 FAIL). DP REMAINS THE PRODUCTION CHAMPION (a valid GW5-4 outcome, consistent with the project-wide DP>=PPO finding). belief-in-obs + continuous Dirichlet deliberately NOT added (would be inert placebos without regime kernels / continuous sleeves)."
+}

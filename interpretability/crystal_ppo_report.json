@@ -1,140 +1,814 @@
 {
-  "experiment": "E-27 real CRYSTAL-1 PPO (soft-tree actor) with risk-targeted reward heads",
+  "experiment": "E-27 real CRYSTAL-1 PPO (soft-tree actor), risk-targeted heads: cold vs teacher-warm",
+  "identity": "SoftTreeActorCriticPolicy depth-3; obs=[P(bear), prev_ex, dd_state]; 5 exposure levels; belief = frozen v9 macro HMM; train 2010-2018 only; OOS quarantined (heads = PENDING)",
+  "teacher_bc_accuracy": 0.866,
+  "near_uniform_finding": {
+    "cold_mean_max_prob": 0.2099,
+    "warm_mean_max_prob": 0.7259,
+    "note": "cold PPO collapses to a near-uniform tie-break dial (audit finding CONFIRMED); teacher warm-start resolves it iff warm mean_max_prob >> cold. Budget adherence per head above."
+  },
   "governance_status": "RESEARCH_ONLY_SINGLE_SEED_SOFT_TREE_PPO_RISK_DIAL_PROTOTYPE",
   "eligible_for_client_menu": false,
-  "identity": "SoftTreeActorCriticPolicy depth-3; obs=[P(bear), prev_ex, dd_state]; 5 exposure levels; belief = frozen v9 macro HMM; train 2010-2018 only; OOS quarantined (heads = PENDING)",
   "heads": {
     "pure_return": {
-      "cfg": {
-        "budget": null,
-        "lam": 0.0
+      "cold": {
+        "train_seconds": 86.8,
+        "hold_ann": 0.0475,
+        "hold_maxDD": -0.159,
+        "hold_dsd_bp": 54.96,
+        "mean_exposure": 0.75,
+        "exposure_changes": 0,
+        "vs_bh": {
+          "z_dsd": 10.57,
+          "ni_z": 1.45,
+          "dsd_gain_bp": 18.58
+        },
+        "vs_carry_twin": {
+          "z_dsd": 0.0,
+          "ni_z": 933.12
+        },
+        "inference_placebo_z_dsd": 10.57,
+        "belief_load_bearing": false,
+        "leaf_argmax_actions": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.2208,
+          "mean_entropy": 1.6053,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": false,
+          "leaf_action_probs": [
+            [
+              0.1698,
+              0.1983,
+              0.2089,
+              0.2175,
+              0.2056
+            ],
+            [
+              0.1688,
+              0.1973,
+              0.2088,
+              0.2188,
+              0.2064
+            ],
+            [
+              0.1681,
+              0.1974,
+              0.2088,
+              0.2196,
+              0.2061
+            ],
+            [
+              0.1641,
+              0.1937,
+              0.2079,
+              0.2261,
+              0.2083
+            ],
+            [
+              0.1685,
+              0.1969,
+              0.2089,
+              0.2195,
+              0.2062
+            ],
+            [
+              0.1706,
+              0.1986,
+              0.2089,
+              0.2167,
+              0.2051
+            ],
+            [
+              0.175,
+              0.2017,
+              0.2092,
+              0.2111,
+              0.2029
+            ],
+            [
+              0.1724,
+              0.2,
+              0.2091,
+              0.2146,
+              0.2039
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": null,
+          "lam": 0.0
+        },
+        "budget_respected": null
       },
-      "train_seconds": 158.5,
-      "hold_ann": 0.0475,
-      "hold_maxDD": -0.159,
-      "hold_dsd_bp": 54.96,
-      "mean_exposure": 0.75,
-      "exposure_changes": 0,
-      "vs_bh": {
-        "z_dsd": 10.57,
-        "ni_z": 1.45,
-        "dsd_gain_bp": 18.58
-      },
-      "vs_carry_twin": {
-        "z_dsd": 0.0,
-        "ni_z": 933.12
-      },
-      "inference_placebo_z_dsd": 10.57,
-      "belief_load_bearing": false,
-      "leaf_argmax_actions": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
-      ]
+      "warm": {
+        "train_seconds": 86.1,
+        "hold_ann": 0.0412,
+        "hold_maxDD": -0.1661,
+        "hold_dsd_bp": 58.41,
+        "mean_exposure": 0.849,
+        "exposure_changes": 26,
+        "vs_bh": {
+          "z_dsd": 5.95,
+          "ni_z": 1.41,
+          "dsd_gain_bp": 15.07
+        },
+        "vs_carry_twin": {
+          "z_dsd": 2.43,
+          "ni_z": 3.3
+        },
+        "inference_placebo_z_dsd": 4.6,
+        "belief_load_bearing": true,
+        "leaf_argmax_actions": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          3
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.7259,
+          "mean_entropy": 0.6082,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": true,
+          "leaf_action_probs": [
+            [
+              0.1228,
+              0.1198,
+              0.1242,
+              0.2061,
+              0.4271
+            ],
+            [
+              0.1485,
+              0.146,
+              0.1485,
+              0.1918,
+              0.3651
+            ],
+            [
+              0.1272,
+              0.1239,
+              0.1284,
+              0.2084,
+              0.4121
+            ],
+            [
+              0.0689,
+              0.0679,
+              0.0723,
+              0.2026,
+              0.5882
+            ],
+            [
+              0.0953,
+              0.0934,
+              0.0998,
+              0.2144,
+              0.4971
+            ],
+            [
+              0.0033,
+              0.0033,
+              0.0034,
+              0.0046,
+              0.9855
+            ],
+            [
+              0.063,
+              0.0619,
+              0.0631,
+              0.1163,
+              0.6957
+            ],
+            [
+              0.0019,
+              0.0019,
+              0.0019,
+              0.9113,
+              0.0831
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": null,
+          "lam": 0.0
+        },
+        "budget_respected": null
+      }
     },
     "dd12": {
-      "cfg": {
-        "budget": 0.12,
-        "lam": 2.0
+      "cold": {
+        "train_seconds": 82.9,
+        "hold_ann": 0.0475,
+        "hold_maxDD": -0.159,
+        "hold_dsd_bp": 54.96,
+        "mean_exposure": 0.75,
+        "exposure_changes": 0,
+        "vs_bh": {
+          "z_dsd": 10.57,
+          "ni_z": 1.45,
+          "dsd_gain_bp": 18.58
+        },
+        "vs_carry_twin": {
+          "z_dsd": 0.0,
+          "ni_z": 933.12
+        },
+        "inference_placebo_z_dsd": 10.57,
+        "belief_load_bearing": false,
+        "leaf_argmax_actions": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2,
+          3
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.2064,
+          "mean_entropy": 1.6091,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": false,
+          "leaf_action_probs": [
+            [
+              0.1964,
+              0.1948,
+              0.2036,
+              0.2054,
+              0.1999
+            ],
+            [
+              0.1963,
+              0.1958,
+              0.2029,
+              0.205,
+              0.2
+            ],
+            [
+              0.1962,
+              0.1944,
+              0.2034,
+              0.2058,
+              0.2002
+            ],
+            [
+              0.1955,
+              0.1904,
+              0.2039,
+              0.2084,
+              0.2018
+            ],
+            [
+              0.1958,
+              0.1932,
+              0.2039,
+              0.2065,
+              0.2005
+            ],
+            [
+              0.1962,
+              0.1936,
+              0.2042,
+              0.2059,
+              0.2
+            ],
+            [
+              0.1971,
+              0.1964,
+              0.2043,
+              0.2039,
+              0.1983
+            ],
+            [
+              0.1961,
+              0.1931,
+              0.205,
+              0.206,
+              0.1998
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": 0.12,
+          "lam": 2.0
+        },
+        "budget_respected": false
       },
-      "train_seconds": 129.7,
-      "hold_ann": 0.0475,
-      "hold_maxDD": -0.159,
-      "hold_dsd_bp": 54.96,
-      "mean_exposure": 0.75,
-      "exposure_changes": 0,
-      "vs_bh": {
-        "z_dsd": 10.57,
-        "ni_z": 1.45,
-        "dsd_gain_bp": 18.58
-      },
-      "vs_carry_twin": {
-        "z_dsd": 0.0,
-        "ni_z": 933.12
-      },
-      "inference_placebo_z_dsd": 10.57,
-      "belief_load_bearing": false,
-      "leaf_argmax_actions": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        2,
-        3
-      ]
+      "warm": {
+        "train_seconds": 82.5,
+        "hold_ann": 0.0418,
+        "hold_maxDD": -0.1661,
+        "hold_dsd_bp": 58.4,
+        "mean_exposure": 0.849,
+        "exposure_changes": 26,
+        "vs_bh": {
+          "z_dsd": 5.96,
+          "ni_z": 1.43,
+          "dsd_gain_bp": 15.09
+        },
+        "vs_carry_twin": {
+          "z_dsd": 2.43,
+          "ni_z": 3.35
+        },
+        "inference_placebo_z_dsd": 4.6,
+        "belief_load_bearing": true,
+        "leaf_argmax_actions": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          3
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.7266,
+          "mean_entropy": 0.6079,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": true,
+          "leaf_action_probs": [
+            [
+              0.1223,
+              0.1202,
+              0.1244,
+              0.2063,
+              0.4268
+            ],
+            [
+              0.148,
+              0.1462,
+              0.1486,
+              0.1918,
+              0.3653
+            ],
+            [
+              0.1266,
+              0.1243,
+              0.1286,
+              0.2086,
+              0.4119
+            ],
+            [
+              0.0689,
+              0.0687,
+              0.073,
+              0.2046,
+              0.5848
+            ],
+            [
+              0.095,
+              0.0943,
+              0.1004,
+              0.2156,
+              0.4947
+            ],
+            [
+              0.0033,
+              0.0033,
+              0.0035,
+              0.0047,
+              0.9852
+            ],
+            [
+              0.0627,
+              0.0619,
+              0.0633,
+              0.1164,
+              0.6957
+            ],
+            [
+              0.0018,
+              0.0019,
+              0.0019,
+              0.9126,
+              0.0819
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": 0.12,
+          "lam": 2.0
+        },
+        "budget_respected": false
+      }
     },
     "dd08": {
-      "cfg": {
-        "budget": 0.08,
-        "lam": 2.0
+      "cold": {
+        "train_seconds": 82.7,
+        "hold_ann": 0.0475,
+        "hold_maxDD": -0.159,
+        "hold_dsd_bp": 54.96,
+        "mean_exposure": 0.75,
+        "exposure_changes": 0,
+        "vs_bh": {
+          "z_dsd": 10.57,
+          "ni_z": 1.45,
+          "dsd_gain_bp": 18.58
+        },
+        "vs_carry_twin": {
+          "z_dsd": 0.0,
+          "ni_z": 933.12
+        },
+        "inference_placebo_z_dsd": 10.57,
+        "belief_load_bearing": false,
+        "leaf_argmax_actions": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.2079,
+          "mean_entropy": 1.6091,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": false,
+          "leaf_action_probs": [
+            [
+              0.1991,
+              0.2032,
+              0.1976,
+              0.2079,
+              0.1922
+            ],
+            [
+              0.1991,
+              0.203,
+              0.1975,
+              0.2075,
+              0.193
+            ],
+            [
+              0.1989,
+              0.2032,
+              0.1975,
+              0.2079,
+              0.1925
+            ],
+            [
+              0.1983,
+              0.2037,
+              0.197,
+              0.208,
+              0.193
+            ],
+            [
+              0.1987,
+              0.2036,
+              0.1975,
+              0.2081,
+              0.1921
+            ],
+            [
+              0.1991,
+              0.2033,
+              0.1978,
+              0.208,
+              0.1918
+            ],
+            [
+              0.2,
+              0.2029,
+              0.1984,
+              0.2074,
+              0.1914
+            ],
+            [
+              0.199,
+              0.2037,
+              0.198,
+              0.2083,
+              0.1909
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": 0.08,
+          "lam": 2.0
+        },
+        "budget_respected": false
       },
-      "train_seconds": 126.8,
-      "hold_ann": 0.0475,
-      "hold_maxDD": -0.159,
-      "hold_dsd_bp": 54.96,
-      "mean_exposure": 0.75,
-      "exposure_changes": 0,
-      "vs_bh": {
-        "z_dsd": 10.57,
-        "ni_z": 1.45,
-        "dsd_gain_bp": 18.58
-      },
-      "vs_carry_twin": {
-        "z_dsd": 0.0,
-        "ni_z": 933.12
-      },
-      "inference_placebo_z_dsd": 10.57,
-      "belief_load_bearing": false,
-      "leaf_argmax_actions": [
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3,
-        3
-      ]
+      "warm": {
+        "train_seconds": 82.0,
+        "hold_ann": 0.0418,
+        "hold_maxDD": -0.1661,
+        "hold_dsd_bp": 58.4,
+        "mean_exposure": 0.849,
+        "exposure_changes": 26,
+        "vs_bh": {
+          "z_dsd": 5.96,
+          "ni_z": 1.43,
+          "dsd_gain_bp": 15.09
+        },
+        "vs_carry_twin": {
+          "z_dsd": 2.43,
+          "ni_z": 3.35
+        },
+        "inference_placebo_z_dsd": 4.6,
+        "belief_load_bearing": true,
+        "leaf_argmax_actions": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          3
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.7263,
+          "mean_entropy": 0.6128,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": true,
+          "leaf_action_probs": [
+            [
+              0.1215,
+              0.1233,
+              0.1232,
+              0.2056,
+              0.4264
+            ],
+            [
+              0.1467,
+              0.1475,
+              0.1475,
+              0.1914,
+              0.3669
+            ],
+            [
+              0.1253,
+              0.1275,
+              0.1273,
+              0.2077,
+              0.4122
+            ],
+            [
+              0.0723,
+              0.0736,
+              0.0735,
+              0.2106,
+              0.57
+            ],
+            [
+              0.0982,
+              0.1001,
+              0.1002,
+              0.2188,
+              0.4827
+            ],
+            [
+              0.0037,
+              0.0037,
+              0.0037,
+              0.0052,
+              0.9837
+            ],
+            [
+              0.062,
+              0.0632,
+              0.0624,
+              0.1152,
+              0.6972
+            ],
+            [
+              0.0019,
+              0.002,
+              0.0019,
+              0.9124,
+              0.0818
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": 0.08,
+          "lam": 2.0
+        },
+        "budget_respected": false
+      }
     },
     "dd05": {
-      "cfg": {
-        "budget": 0.05,
-        "lam": 2.0
+      "cold": {
+        "train_seconds": 82.3,
+        "hold_ann": 0.0412,
+        "hold_maxDD": -0.0481,
+        "hold_dsd_bp": 17.93,
+        "mean_exposure": 0.25,
+        "exposure_changes": 0,
+        "vs_bh": {
+          "z_dsd": 10.57,
+          "ni_z": 0.34,
+          "dsd_gain_bp": 55.73
+        },
+        "vs_carry_twin": {
+          "z_dsd": 0.0,
+          "ni_z": 309.48
+        },
+        "inference_placebo_z_dsd": 10.57,
+        "belief_load_bearing": false,
+        "leaf_argmax_actions": [
+          1,
+          1,
+          1,
+          3,
+          1,
+          1,
+          1,
+          1
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.2044,
+          "mean_entropy": 1.6093,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": false,
+          "leaf_action_probs": [
+            [
+              0.1964,
+              0.2045,
+              0.1991,
+              0.2025,
+              0.1975
+            ],
+            [
+              0.1964,
+              0.2041,
+              0.1989,
+              0.2021,
+              0.1985
+            ],
+            [
+              0.196,
+              0.2045,
+              0.1989,
+              0.2029,
+              0.1977
+            ],
+            [
+              0.1953,
+              0.2042,
+              0.198,
+              0.2059,
+              0.1966
+            ],
+            [
+              0.1961,
+              0.2046,
+              0.1988,
+              0.2035,
+              0.1971
+            ],
+            [
+              0.1968,
+              0.2043,
+              0.1993,
+              0.2024,
+              0.1971
+            ],
+            [
+              0.1981,
+              0.2036,
+              0.2,
+              0.2007,
+              0.1976
+            ],
+            [
+              0.1966,
+              0.205,
+              0.1995,
+              0.2029,
+              0.196
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": 0.05,
+          "lam": 2.0
+        },
+        "budget_respected": true
       },
-      "train_seconds": 147.2,
-      "hold_ann": 0.0412,
-      "hold_maxDD": -0.0481,
-      "hold_dsd_bp": 17.93,
-      "mean_exposure": 0.25,
-      "exposure_changes": 0,
-      "vs_bh": {
-        "z_dsd": 10.57,
-        "ni_z": 0.34,
-        "dsd_gain_bp": 55.73
-      },
-      "vs_carry_twin": {
-        "z_dsd": 0.0,
-        "ni_z": 309.48
-      },
-      "inference_placebo_z_dsd": 10.57,
-      "belief_load_bearing": false,
-      "leaf_argmax_actions": [
-        1,
-        1,
-        1,
-        3,
-        1,
-        1,
-        1,
-        1
-      ]
+      "warm": {
+        "train_seconds": 82.4,
+        "hold_ann": 0.0418,
+        "hold_maxDD": -0.1661,
+        "hold_dsd_bp": 58.4,
+        "mean_exposure": 0.849,
+        "exposure_changes": 26,
+        "vs_bh": {
+          "z_dsd": 5.96,
+          "ni_z": 1.43,
+          "dsd_gain_bp": 15.09
+        },
+        "vs_carry_twin": {
+          "z_dsd": 2.43,
+          "ni_z": 3.35
+        },
+        "inference_placebo_z_dsd": 4.6,
+        "belief_load_bearing": true,
+        "leaf_argmax_actions": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          3
+        ],
+        "action_prob_diagnostics": {
+          "mean_max_prob": 0.7248,
+          "mean_entropy": 0.6189,
+          "max_entropy": 1.6094,
+          "argmax_varies_over_grid": true,
+          "leaf_action_probs": [
+            [
+              0.123,
+              0.1231,
+              0.1231,
+              0.2053,
+              0.4255
+            ],
+            [
+              0.1473,
+              0.1474,
+              0.1473,
+              0.1914,
+              0.3666
+            ],
+            [
+              0.1271,
+              0.1272,
+              0.1271,
+              0.2073,
+              0.4113
+            ],
+            [
+              0.0765,
+              0.0762,
+              0.0766,
+              0.2127,
+              0.558
+            ],
+            [
+              0.102,
+              0.1014,
+              0.1019,
+              0.2181,
+              0.4766
+            ],
+            [
+              0.0041,
+              0.0041,
+              0.0041,
+              0.0057,
+              0.982
+            ],
+            [
+              0.0632,
+              0.0634,
+              0.0633,
+              0.1158,
+              0.6943
+            ],
+            [
+              0.002,
+              0.0021,
+              0.002,
+              0.9115,
+              0.0825
+            ]
+          ],
+          "note": "mean_max_prob ~ 1/n_levels + entropy ~ log(n_levels) = near-uniform policy; treat its deterministic dial as a tie-break artifact, not a learned dial"
+        },
+        "cfg": {
+          "budget": 0.05,
+          "lam": 2.0
+        },
+        "budget_respected": false
+      }
     }
   }
 }

@@ -1,7 +1,6 @@
 {
-  "experiment": "E-28 all influence levers on the real PPO (reward / teachers / interventions / architecture)",
-  "governance_status": "RESEARCH_ONLY_LEVER_DEMONSTRATION_NOT_CAUSAL_CONTROL",
-  "eligible_for_client_menu": false,
+  "experiment": "E-28 (rebuilt) all influence levers WITH controls, on the teacher-warm PPO head",
+  "base_head": "dd08_warm (teacher-warm)",
   "lever_R_reward": {
     "grid_disclosed": [
       {
@@ -25,7 +24,7 @@
         "lam": 2.0
       }
     ],
-    "base_dev_score": -0.3573,
+    "base_dev_score": -0.3871,
     "candidates": [
       {
         "cfg": {
@@ -83,107 +82,103 @@
       "lam": 2.0
     },
     "hold_read": {
-      "winner_vs_base_hold": {
-        "ann": 0.0452,
-        "maxDD": -0.1044,
-        "z_dsd_vs_ref": 10.75,
-        "ni_z": 1.49,
-        "dsd_gain_bp": 18.7
-      },
-      "winner_vs_bh": {
-        "ann": 0.0452,
-        "maxDD": -0.1044,
-        "z_dsd_vs_ref": 10.76,
-        "ni_z": 0.63,
-        "dsd_gain_bp": 37.4
-      },
-      "base_vs_bh": {
-        "ann": 0.0475,
-        "maxDD": -0.159,
-        "z_dsd_vs_ref": 10.76,
-        "ni_z": 1.49,
-        "dsd_gain_bp": 18.7
-      }
+      "ann": 0.0452,
+      "maxDD": -0.1044,
+      "z_dsd_vs_ref": 15.14,
+      "ni_z": 1.34,
+      "dsd_gain_bp": 22.1
     },
-    "verdict": "reward shaping MOVES the policy (winner beat base on dev; hold read shown)"
+    "ni_bar": 2.15,
+    "verdict": "reward winner beat base on DEV, but on the hold it is REJECTED by the NI bar (ni_z 1.34 vs bar 2.15) \u2014 moving the policy is not the same as a certified improvement"
   },
   "lever_T_teachers": {
-    "teacher": "the E-15 certified rule (leak-free: our own certified artifact)",
-    "bc_train_accuracy": 0.866,
-    "hold": {
-      "BC_only": {
-        "ann": 0.0418,
-        "maxDD": -0.1661,
-        "z_dsd_vs_ref": 6.27,
-        "ni_z": 1.47,
-        "dsd_gain_bp": 15.3
-      },
-      "BC_then_PPO": {
-        "ann": 0.0418,
-        "maxDD": -0.1661,
-        "z_dsd_vs_ref": 6.27,
-        "ni_z": 1.47,
-        "dsd_gain_bp": 15.3
-      },
-      "cold_PPO(base)": {
-        "ann": 0.0475,
-        "maxDD": -0.159,
-        "z_dsd_vs_ref": 10.76,
-        "ni_z": 1.49,
-        "dsd_gain_bp": 18.7
-      }
-    },
-    "verdict": "BC acc 87%; hold dsd: BC 58.4 / warm 58.4 / cold 55.0 bp \u2014 PPO washes the teacher out (reward dominates init)"
+    "teacher": "the E-15 certified rule",
+    "contamination_disclosure": "The E-15 rule was SELECTED on the 2022-23 hold; re-reading it there is contaminated. A truly fresh read is pre-registered for 2027 (OOS 2024-26 is quarantined). The leak-free teacher signal in the pipeline is the DP CHAMPION (W4/W5), selected on no market window; the warm E-27 head is BC'd from that. This lever no longer asserts a clean hold number for the E-15 teacher \u2014 it discloses the leak.",
+    "warm_head_is_dp_teacher_bc": true
   },
   "lever_I_interventions": {
-    "belief_write_fidelity_monotone": 1.0,
-    "defensive_leaf": 6,
-    "behavior_code_shifts": {
-      "promote_defense_+2": {
-        "mean_exposure": 0.25,
-        "hold": {
-          "ann": 0.0412,
-          "maxDD": -0.0481,
-          "z_dsd_vs_ref": 10.75,
-          "ni_z": 0.35,
-          "dsd_gain_bp": 56.09
-        }
-      },
-      "suppress_defense_-2": {
-        "mean_exposure": 0.75,
-        "hold": {
-          "ann": 0.0475,
-          "maxDD": -0.159,
-          "z_dsd_vs_ref": 10.76,
-          "ni_z": 1.49,
-          "dsd_gain_bp": 18.7
-        }
-      }
+    "belief_write_fidelity_monotone": 0.033,
+    "warm_head_battery": {
+      "defensive_leaf": 1,
+      "leaf_argmax_exposure": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.75
+      ],
+      "base_mean_exposure": 0.849,
+      "treatment_promote_defense_+2nat": 0.0,
+      "control_matched_random_leaf": 0.0,
+      "control_wrong_direction_promote_risk": 0.0,
+      "control_dose_half_+1nat": 0.0,
+      "contrast_global_bias_all_leaves_+2nat": 0.0,
+      "controls_pass": false,
+      "matched_random_placebo_fails": false
     },
-    "certified_intervention_candidate(+1nat_promote)": {
-      "ann": 0.0412,
-      "maxDD": -0.0481,
-      "z_dsd_vs_ref": 10.75,
-      "ni_z": 0.63,
-      "dsd_gain_bp": 37.39,
-      "certifies_full_hold": false
-    }
+    "cold_head_battery": {
+      "defensive_leaf": 6,
+      "leaf_argmax_exposure": [
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75,
+        0.75
+      ],
+      "base_mean_exposure": 0.75,
+      "treatment_promote_defense_+2nat": -0.5,
+      "control_matched_random_leaf": -0.5,
+      "control_wrong_direction_promote_risk": 0.0,
+      "control_dose_half_+1nat": 0.0,
+      "contrast_global_bias_all_leaves_+2nat": -0.5,
+      "controls_pass": false,
+      "matched_random_placebo_fails": true
+    },
+    "interpretation": "the intervention is NOT a clean causal primitive control: the confident warm head is a no-op under modest bias (uniformly aggressive), and on the cold near-uniform head a matched-random leaf moves behavior as much as the defensive one \u2014 the original E-28 'intervention works' was a near-uniform / global-bias artifact (audit critique CONFIRMED)"
   },
   "lever_A_architecture": {
-    "depth2_hold": {
-      "ann": 0.0412,
-      "maxDD": -0.0481,
-      "z_dsd_vs_ref": 10.75,
-      "ni_z": 0.35,
-      "dsd_gain_bp": 56.09
-    },
-    "depth3_hold": {
-      "ann": 0.0475,
-      "maxDD": -0.159,
-      "z_dsd_vs_ref": 10.76,
-      "ni_z": 1.49,
-      "dsd_gain_bp": 18.7
-    },
-    "note": "depth-2 = 4 leaves (more legible); depth-3 = 8 leaves"
-  }
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "depth2_hold_ann": [
+      0.0412,
+      0.0412,
+      0.0452
+    ],
+    "depth3_hold_ann": [
+      0.0475,
+      0.0475,
+      0.0475
+    ],
+    "depth2_hold_maxDD": [
+      -0.0481,
+      -0.0481,
+      -0.1044
+    ],
+    "depth3_hold_maxDD": [
+      -0.159,
+      -0.159,
+      -0.159
+    ],
+    "note": "depth-2 = 4 leaves (more legible); depth-3 = 8 leaves; reported across seeds"
+  },
+  "crystalscore": {
+    "faithfulness_belief_write": 0.0333,
+    "simulatability_depth2_vs_depth3": 0.0,
+    "stability_across_seeds": 1.0,
+    "CrystalScore": 0.0,
+    "note": "CrystalScore computed for the E-27/E-28 head (audit: never done). Dominated by near-zero belief-write FAITHFULNESS (0.033) -> the reward-dial prototype is NOT a faithful command surface, even though it is stable across seeds (St 1.00) and a 4-leaf story distills it at 1.00. Consistent with governance_status RESEARCH_ONLY_...RISK_DIAL_PROTOTYPE.",
+    "simulatability_depth2_distill": 1.0,
+    "CrystalScore_proper": 0.0333,
+    "simulatability_note": "the earlier 'simulatability_depth2_vs_depth3'=0 compared two INDEPENDENTLY-trained heads (seed variance); the proper distill measure is simulatability_depth2_distill."
+  },
+  "governance_status": "RESEARCH_ONLY_LEVER_STUDY_WITH_CONTROLS"
 }

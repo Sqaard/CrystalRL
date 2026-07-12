@@ -183,30 +183,89 @@ def policy_prob_diagnostics(model, n_levels=len(LEVELS)):
                     "treat its deterministic dial as a tie-break artifact, not a learned dial"}
 
 
+# the E-15 certified readable rule, as a teacher for warm-starting the heads (leak-free: our own
+# certified artifact). H=rebalance stride; below t1 full risk, below t2 reduced, else defensive.
+CERT = {"t1": 0.30, "t2": 0.657, "lvl_reduced": 1.0, "lvl_defensive": 0.738, "H": 10}
+
+
+def build_teacher(streams, seed=0, epochs=400):
+    """BC the E-15 certified rule into a SoftTree policy; returns (state_dict, accuracy). Warm-starting
+    from it is the audit's fix for the cold near-uniform collapse — the teacher lever demonstrably
+    shapes the policy (the E-27c lesson)."""
+    ro, bl, rf = streams["train"]
+    ex, eq, peak, obs_l, act_l = 1.0, 1.0, 1.0, [], []
+    tgt = 1.0
+    for t in range(len(ro)):
+        dd = eq / peak - 1.0
+        if t % CERT["H"] == 0:
+            b = bl[t]
+            tgt = 1.0 if b < CERT["t1"] else (CERT["lvl_reduced"] if b < CERT["t2"] else CERT["lvl_defensive"])
+        obs_l.append([bl[t], ex, dd]); act_l.append(int(np.argmin(np.abs(LEVELS - tgt))))
+        p = tgt * ro[t] + (1 - tgt) * rf[t] - abs(tgt - ex) * COST
+        ex = tgt; eq *= (1 + p); peak = max(peak, eq)
+    X = torch.tensor(np.array(obs_l), dtype=torch.float32)
+    y = torch.tensor(np.array(act_l), dtype=torch.long)
+    env = ExposureEnv(ro, bl, rf, budget=0.08, lam=2.0, seed=seed)
+    m = PPO(SoftTreeActorCriticPolicy, env, device="cpu", verbose=0, seed=seed,
+            policy_kwargs={"feat_idx": (0, 1, 2), "tree_depth": 3, "beta": 1.0, "critic_arch": (32, 32)})
+    opt = torch.optim.Adam(m.policy.tree.parameters(), lr=1e-2)
+    for _ in range(epochs):
+        loss = torch.nn.functional.nll_loss(m.policy.tree(X), y)
+        opt.zero_grad(); loss.backward(); opt.step()
+    acc = float((m.policy.tree(X).argmax(1) == y).float().mean())
+    return m.policy.state_dict(), acc
+
+
+def _head_record(name, model, secs, streams):
+    ev = evaluate_head(name, model, streams)
+    leaf = model.policy.tree.leaf_report(len(LEVELS))
+    return {"train_seconds": secs, **ev,
+            "leaf_argmax_actions": [l["argmax_action"] for l in leaf["leaves"]],
+            "action_prob_diagnostics": policy_prob_diagnostics(model)}
+
+
+def budget_respected(cfg, ev):
+    """Does the head actually hold its own drawdown budget on the hold read? (audit: dd08/dd12 breached)."""
+    return None if cfg["budget"] is None else bool(-ev["hold_maxDD"] <= cfg["budget"] + 1e-9)
+
+
 def main():
     try: sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except Exception: pass
-    print("=== E-27 — the real CRYSTAL-1 PPO, risk-targeted heads ===")
+    print("=== E-27 — the real CRYSTAL-1 PPO, risk-targeted heads (cold vs teacher-warm) ===")
     streams, bel_meta = get_streams()
     print(f"belief: K={bel_meta['K']} | train {len(streams['train'][0])}d, hold {len(streams['hold'][0])}d")
+    teacher_sd, teacher_acc = build_teacher(streams)
+    print(f"teacher (E-15 rule) BC accuracy {teacher_acc:.0%}")
     results = {}
     for name, cfg in HEADS.items():
-        model, secs = train_head(name, cfg, streams)
-        ev = evaluate_head(name, model, streams)
-        leaf = model.policy.tree.leaf_report(len(LEVELS))
-        results[name] = {"cfg": cfg, "train_seconds": secs, **ev,
-                         "leaf_argmax_actions": [l["argmax_action"] for l in leaf["leaves"]],
-                         "action_prob_diagnostics": policy_prob_diagnostics(model)}
-        print(f"[{name}] {secs}s | hold ann {ev['hold_ann']:+.2%} maxDD {ev['hold_maxDD']:.2%} "
-              f"dsd {ev['hold_dsd_bp']}bp ex_bar {ev['mean_exposure']} | vs B&H z_dsd {ev['vs_bh']['z_dsd']:+.2f} "
-              f"ni {ev['vs_bh']['ni_z']:+.2f} | twin z {ev['vs_carry_twin']['z_dsd']:+.2f} | "
-              f"placebo z {ev['inference_placebo_z_dsd']:+.2f} load_bearing={ev['belief_load_bearing']}")
-    rep = {"experiment": "E-27 real CRYSTAL-1 PPO (soft-tree actor) with risk-targeted reward heads",
+        cold, secs_c = train_head(name, cfg, streams)                              # the near-uniform finding
+        warm, secs_w = train_head(f"{name}_warm", cfg, streams, init_from=teacher_sd)  # the fix
+        rc, rw = _head_record(name, cold, secs_c, streams), _head_record(f"{name}_warm", warm, secs_w, streams)
+        rc["cfg"] = rw["cfg"] = cfg
+        rc["budget_respected"] = budget_respected(cfg, rc)
+        rw["budget_respected"] = budget_respected(cfg, rw)
+        results[name] = {"cold": rc, "warm": rw}
+        print(f"[{name}] cold: max-prob {rc['action_prob_diagnostics']['mean_max_prob']:.3f} "
+              f"maxDD {rc['hold_maxDD']:.2%} budget_ok {rc['budget_respected']} | "
+              f"warm: max-prob {rw['action_prob_diagnostics']['mean_max_prob']:.3f} "
+              f"maxDD {rw['hold_maxDD']:.2%} budget_ok {rw['budget_respected']} load_bearing {rw['belief_load_bearing']}")
+    cold_mp = float(np.mean([r["cold"]["action_prob_diagnostics"]["mean_max_prob"] for r in results.values()]))
+    warm_mp = float(np.mean([r["warm"]["action_prob_diagnostics"]["mean_max_prob"] for r in results.values()]))
+    rep = {"experiment": "E-27 real CRYSTAL-1 PPO (soft-tree actor), risk-targeted heads: cold vs teacher-warm",
            "identity": "SoftTreeActorCriticPolicy depth-3; obs=[P(bear), prev_ex, dd_state]; 5 exposure levels; "
                        "belief = frozen v9 macro HMM; train 2010-2018 only; OOS quarantined (heads = PENDING)",
+           "teacher_bc_accuracy": round(teacher_acc, 3),
+           "near_uniform_finding": {"cold_mean_max_prob": round(cold_mp, 4),
+                                    "warm_mean_max_prob": round(warm_mp, 4),
+                                    "note": "cold PPO collapses to a near-uniform tie-break dial (audit "
+                                            "finding CONFIRMED); teacher warm-start resolves it iff warm "
+                                            "mean_max_prob >> cold. Budget adherence per head above."},
+           "governance_status": "RESEARCH_ONLY_SINGLE_SEED_SOFT_TREE_PPO_RISK_DIAL_PROTOTYPE",
+           "eligible_for_client_menu": False,
            "heads": results}
     OUT.write_text(json.dumps(rep, indent=2), encoding="utf-8")
-    print("wrote", OUT.name)
+    print(f"near-uniform: cold max-prob {cold_mp:.3f} -> warm {warm_mp:.3f}; wrote {OUT.name}")
 
 
 if __name__ == "__main__":

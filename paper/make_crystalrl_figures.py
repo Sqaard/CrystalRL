@@ -68,45 +68,54 @@ fig.tight_layout(); fig.savefig("figures/fig_architectures.png", dpi=150); plt.c
 # M6 warm-start lesson, NI-bar refusal.
 fig, axes = plt.subplots(1, 4, figsize=(12.8, 3.5))
 
-ax = axes[0]  # R: reward shaping moves the drawdown dial (hold data)
-budgets = ["5%", "10%", "15%"]
-realized = [4.81, 10.4, 15.5]
-bars = ax.bar(budgets, realized, color=[BLUE, BLUE, LIGHTBLUE], width=0.55)
-for b, v in zip(bars, realized):
-    ax.text(b.get_x() + b.get_width() / 2, v + 0.25, f"−{v}%", ha="center", fontsize=10,
-            fontweight="bold", color=INK)
-ax.plot([-0.4, 2.4], [5, 5], ls=":", c=MUT, lw=1); ax.plot([-0.4, 2.4], [10, 10], ls=":", c=MUT, lw=1)
-ax.plot([-0.4, 2.4], [15, 15], ls=":", c=MUT, lw=1)
-ax.set_ylim(0, 18); ax.set_xlabel("drawdown budget in the reward")
+ax = axes[0]  # R: the reward penalty holds only the 5% budget; 8%/12% breach
+budgets = ["5%", "8%", "12%"]
+realized = [4.81, 15.9, 15.9]
+obeys = [True, False, False]
+bars = ax.bar(budgets, realized, color=[GREEN, RED, RED], width=0.55)
+for b, v, ok in zip(bars, realized, obeys):
+    ax.text(b.get_x() + b.get_width() / 2, v + 0.4, f"−{v}%\n{'holds' if ok else 'BREACH'}",
+            ha="center", fontsize=9, fontweight="bold", color=GREEN if ok else RED)
+for bl, x0, x1 in [(5, -0.4, 0.4), (8, 0.6, 1.4), (12, 1.6, 2.4)]:
+    ax.plot([x0, x1], [bl, bl], ls=":", c=MUT, lw=1.2)
+ax.set_ylim(0, 20); ax.set_xlabel("drawdown budget written into the reward")
 ax.set_ylabel("realized max drawdown (hold)")
-ax.set_title("R · reward shaping:\nthe budget is obeyed", fontsize=11)
+ax.set_title("R · reward penalty:\nbudget NOT enforced (only 5%)", fontsize=11)
 
-ax = axes[1]  # T: teacher cures near-uniformity
-cats = ["cold\nPPO", "BC\nteacher", "PPO\nfine-tune"]
-vals = [0.02, 0.87, 0.87]
-bars = ax.bar(cats, vals, color=[RED, BLUE, BLUE], width=0.55)
+ax = axes[1]  # T: teacher warm-start cures the cold near-uniform collapse
+cats = ["cold\nPPO", "teacher\nwarm"]
+vals = [0.21, 0.73]
+bars = ax.bar(cats, vals, color=[RED, GREEN], width=0.5)
 for b, v in zip(bars, vals):
     ax.text(b.get_x() + b.get_width() / 2, v + 0.02, f"{v:.2f}", ha="center", fontsize=10,
             fontweight="bold", color=INK)
-ax.set_ylim(0, 1.05); ax.set_ylabel("agreement with the certified rule")
-ax.set_title("T · teacher/BC:\ncures fake competence", fontsize=11)
+ax.axhline(0.20, ls=":", c=MUT, lw=1)
+ax.text(1.42, 0.22, "1/5 = near-uniform", ha="right", fontsize=8, color=MUT)
+ax.set_ylim(0, 0.85); ax.set_ylabel("mean max action-probability")
+ax.set_title("T · teacher warm-start:\ncures the near-uniform collapse", fontsize=11)
 
-ax = axes[2]  # I: interventions — write fidelity + honest refusal
-bars = ax.bar(["write\nfidelity", "±2-nat\nslide", "+1-nat\n(NI bar)"],
-              [1.0, 1.0, 0.0], color=[BLUE, BLUE, RED], width=0.55)
-ax.text(bars[0].get_x() + 0.275, 1.02, "100%", ha="center", fontsize=10, fontweight="bold")
-ax.text(bars[1].get_x() + 0.275, 1.02, "works", ha="center", fontsize=10, fontweight="bold")
-ax.text(bars[2].get_x() + 0.275, 0.04, "REFUSED", ha="center", fontsize=10, fontweight="bold", color=RED)
-ax.set_ylim(0, 1.15); ax.set_ylabel("intervention outcome")
-ax.set_title("I · belief writes (SET_BELIEF):\nobeyed — and refusable", fontsize=11)
+ax = axes[2]  # I: the control battery — the intervention is an artifact; only the refusal survives
+labs = ["defensive\nleaf", "matched-\nrandom", "NI\nrefusal"]
+vals = [0.50, 0.50, 1.0]
+cols = [AMBER, AMBER, GREEN]
+bars = ax.bar(labs, vals, color=cols, width=0.6)
+ax.text(bars[0].get_x() + 0.3, 0.53, "moves", ha="center", fontsize=9, fontweight="bold", color=INK)
+ax.text(bars[1].get_x() + 0.3, 0.53, "= moves\n(placebo\nfails)", ha="center", fontsize=8,
+        fontweight="bold", color=RED)
+ax.text(bars[2].get_x() + 0.3, 1.02, "REFUSED", ha="center", fontsize=9, fontweight="bold", color=GREEN)
+ax.set_ylim(0, 1.2); ax.set_ylabel("|Δ mean exposure| (cold head)")
+ax.set_title("I · intervention under controls:\nartifact — only refusal survives", fontsize=11)
 
-ax = axes[3]  # A: architecture depth = legibility dial
-bars = ax.bar(["depth-2\n(4 leaves)", "depth-3\n(8 leaves)"], [4, 8], color=[BLUE, LIGHTBLUE], width=0.5)
-for b, v in zip(bars, [4, 8]):
-    ax.text(b.get_x() + b.get_width() / 2, v + 0.15, f"{v} leaves", ha="center", fontsize=10,
+ax = axes[3]  # A: the head's CrystalScore — simulatable + stable, but not faithful
+labs = ["Faith-\nfulness", "Simulat-\nability", "Stab-\nility", "Crystal\nScore"]
+vals = [0.03, 1.0, 1.0, 0.03]
+cols = [RED, GREEN, GREEN, RED]
+bars = ax.bar(labs, vals, color=cols, width=0.62)
+for b, v in zip(bars, vals):
+    ax.text(b.get_x() + b.get_width() / 2, v + 0.02, f"{v:.2f}", ha="center", fontsize=9,
             fontweight="bold", color=INK)
-ax.set_ylim(0, 9.5); ax.set_ylabel("story size (leaves)")
-ax.set_title("A · architecture:\nlegibility as a dial", fontsize=11)
+ax.set_ylim(0, 1.15); ax.set_ylabel("score")
+ax.set_title("A · the head's CrystalScore:\nlegible dial, not faithful", fontsize=11)
 
 fig.tight_layout(); fig.savefig("figures/fig_levers.png", dpi=150); plt.close(fig)
 

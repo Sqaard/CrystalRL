@@ -351,9 +351,13 @@ steering does move behavior --- faithfulness alone cannot distinguish the design
 $S{=}0.244$, $S\!t{=}0.619$: $\textsc{CrystalScore}{=}0.151$. CRYSTAL-1's axes on the real US
 machinery: $S{=}0.92$ (an 8-leaf tree reproduces the DP champion's policy table,
 \S\ref{sec:dp}); $S\!t{=}1.00$ (the certified rule's behavior replicates on 10/10 training
-seeds); $F{=}1.00$ (belief-write fidelity on the real daily panel, \S\ref{sec:levers});
+seeds); $F{=}1.00$ (the certified readable rule of Eq.~\ref{eq:rule} \emph{is} a faithful command
+surface: writing the bear belief past the threshold changes exposure exactly as named);
 $\Delta_{\text{MDL}}{=}0.0$: $\textsc{CrystalScore}{=}0.92$ (Figure~\ref{fig:crystalscore}).
-The entire $6\times$ gap is Simulatability --- exactly what ``born legible'' buys.
+The entire $6\times$ gap is Simulatability --- exactly what ``born legible'' buys. This score is
+for the transparent \emph{champion}; the RL reward-dial \emph{prototype} of \S\ref{sec:levers} is
+a different object and scores $\textsc{CrystalScore}{=}0.03$ ($F{=}0.03$) --- it is legible and
+stable but \emph{not} a faithful command surface, which is one more reason DP remains champion.
 
 \begin{figure}[t]
   \centering
@@ -370,9 +374,10 @@ The entire $6\times$ gap is Simulatability --- exactly what ``born legible'' buy
 \label{sec:levers}
 
 A legible agent is only useful if you can \emph{change} it on purpose. We exercised four
-families of influence on CRYSTAL-1's PPO heads, all on the real US daily panel (train 2010--18,
-held-out evaluation after), and report one measured outcome per lever
-(Figure~\ref{fig:levers}).
+families of influence on CRYSTAL-1's \emph{PPO reward-dial heads} --- a research prototype, not
+the champion --- all on the real US daily panel (train 2010--18, held-out evaluation after), and
+each with a \emph{control battery} so we report what the levers actually do, not what they appear
+to (Figure~\ref{fig:levers}).
 
 \paragraph{R --- reward shaping.} The risk-targeted reward
 \begin{equation}
@@ -380,53 +385,74 @@ r_t \;=\; e_t\, x_t \;-\; \lambda_{R}\,\max\big(0,\ \text{DD}_t - D^{*}\big),
 \label{eq:reward}
 \end{equation}
 ($e_t$ exposure, $x_t$ the asset return, $\text{DD}_t$ running drawdown, $D^{*}$ the budget)
-moves the drawdown dial reliably \citep{ng1999shaping}: a $5\%$ budget delivers $-4.81\%$
-held-out max drawdown; a $10\%$ budget $-10.4\%$. The honesty rider: the cold heads converge to
-near-\emph{constant} exposure dials ($0.25/0.5/0.75$) --- a drawdown-matched twin shows
-$z = 0.00$ timing skill. On this substrate reward shaping bought \emph{risk placement}, not
-timing, and cold PPO re-derived from scratch what the goal machinery already knew: the dial
-beats timing.
+moves the exposure dial, but --- stated honestly --- the reward penalty \emph{alone does not
+enforce the budget}: only the $5\%$ head holds its budget ($-4.81\%$ held-out max drawdown, by
+parking in cash), while the $8\%$ and $12\%$ heads \emph{breach} theirs ($-15.9\%$). A drawdown
+matched twin shows $z = 0.00$ timing skill: reward shaping buys \emph{risk placement}, not
+timing, and cold PPO re-derives what the goal machinery already knew --- the dial beats timing.
+Enforcing the budget requires a \emph{separate cost objective}: the companion Lagrangian
+constrained head drives the interim-drawdown cost down (dual multiplier $0\to{\sim}5$,
+$-0.18$ breach-years vs $\lambda{=}0$) but trades $15\text{--}37$\,pp of goal probability ---
+another reason the transparent DP champion, which respects capacity by a hard pre-filter, is not
+displaced.
 
-\paragraph{T --- teachers.} The cautionary tale first: the cold heads' argmax behavior looked
-sensible while the underlying preferences were nearly flat --- an effectively untrained network
-masked by deterministic evaluation. (For a behavioral scientist: inferring function from the
-argmax of a flat tuning curve.) The cure is a teacher: behavior cloning from the certified
-readable rule (Eq.~\ref{eq:rule}),
+\paragraph{T --- teachers.} The cautionary tale first: trained cold, the heads' argmax behavior
+looked sensible while the underlying preferences were nearly flat --- an effectively untrained
+network masked by deterministic evaluation (mean max action-probability $0.21 \approx 1/5$; for
+a behavioral scientist: inferring function from the argmax of a flat tuning curve). The cure is
+a teacher: behavior cloning from the certified readable rule (Eq.~\ref{eq:rule}),
 \begin{equation}
 L_{\text{BC}}(\theta) \;=\; -\,\E_{(s,a^{*})}\big[\log \pi_\theta(a^{*}\mid s)\big],
 \label{eq:bc}
 \end{equation}
-reaching $87\%$ agreement, used as a warm start --- after which PPO fine-tuning \emph{keeps}
-the teacher's behavior (warm $=$ BC). The same mechanism closed the soft-tree parity gap
-(cold $-2.57 \to$ annealed $-0.27 \to$ BC-warm-started $-0.018$, paired $p\approx0.84$ --- full
-parity): imitation as initialization, optimization as refinement
-\citep{ross2011dagger,rusu2016distillation}.
+$87\%$ agreement, used as a warm start --- which \emph{resolves the collapse}: mean max
+action-probability $0.21 \to 0.73$, and the belief becomes load-bearing. The same mechanism
+closed the soft-tree parity gap (cold $-2.57 \to$ annealed $-0.27 \to$ BC-warm-started $-0.018$,
+paired $p\approx0.84$) --- imitation as initialization, optimization as refinement
+\citep{ross2011dagger,rusu2016distillation}. (Leakage note: the E-15 teacher was \emph{selected}
+on the 2022--23 hold, so its hold read is contaminated; the leak-free teacher in the pipeline is
+the DP champion, and a fresh read is pre-registered for 2027.)
 
-\paragraph{I --- interventions.} Belief writes (Eq.~\ref{eq:write}) are exercised directly on
-the real-panel machinery: write fidelity $1.0$ (the commanded belief is the realized belief),
-and a $\pm2$-nat dose slides the agent between named behavior codes. The result we are proudest
-of is a refusal: a $+1$-nat promotion whose fine-tuned policy failed the non-inferiority test
-on the certified objective,
+\paragraph{I --- interventions, under controls.} This is where the controls earn their keep, and
+the honest result overturns a first-pass claim. Belief writes (Eq.~\ref{eq:write}) and a
+per-primitive promotion of the \emph{defensive leaf} appear to steer behavior --- but the
+control battery shows that on these reward-dial heads they are \emph{not} a clean causal command
+surface: belief-write fidelity is only $3\%$, the confident teacher-warm head is a \emph{no-op}
+under a modest per-primitive bias, and on the cold near-uniform head a \emph{matched-random}
+leaf moves behavior exactly as much as the defensive one (the placebo fails). The apparent
+``intervention works'' of a first pass was a near-uniform / global-bias artifact --- exactly the
+failure mode the controls exist to catch. One genuine positive survives: the certification
+gate correctly \emph{refuses} a $+1$-nat promotion that fails the non-inferiority test,
 \begin{equation}
 \text{accept the write} \iff \widehat{J}_{\text{post}} \ \ge\ \widehat{J}_{\text{pre}} -
 \delta_{\text{NI}},
 \label{eq:ni}
 \end{equation}
-was \emph{blocked}. An intervention surface that cannot say no is a jailbreak surface.
+and the reward ``winner'' that beat base on development is likewise \emph{rejected} on the hold
+by the NI bar ($z=1.34 < 2.15$). Moving a deterministic output is not the same as a certified,
+causal control --- and the reward-dial head is not the faithful belief-command surface that the
+champion's readable rule (Eq.~\ref{eq:rule}, faithfulness $1.0$ in \S\ref{sec:metrics}) is.
 
-\paragraph{A --- architecture.} Tree depth is a legibility dial set \emph{before} training:
-depth-2 yields a 4-leaf policy, depth-3 the 8-leaf one --- story size traded against
-expressiveness ahead of time, not reconstructed after.
+\paragraph{A --- architecture, and the head's CrystalScore.} Tree depth is a legibility dial set
+\emph{before} training: depth-2 yields a 4-leaf policy, depth-3 the 8-leaf one. Scoring the head
+itself (the audit found this was never done): it is perfectly \emph{simulatable} (a 4-leaf story
+distills the 8-leaf head exactly, $S=1.0$) and \emph{stable} across 3 seeds ($S\!t=1.0$), but its
+\emph{faithfulness} is near zero ($F=0.03$) --- so its $\textsc{CrystalScore}=0.03$. The
+reward-dial head is a legible, stable \emph{dial}, not a faithful belief-driven command surface;
+that surface lives in the DP champion, not the RL prototype.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/fig_levers.png}
-  \caption{The four levers on the real daily panel, one panel each. R (Eq.~\ref{eq:reward}):
-  realized held-out max drawdown lands on the budget written into the reward. T
-  (Eq.~\ref{eq:bc}): cold PPO's flat-preference argmax (agreement $0.02$) is cured by the
-  certified-rule teacher ($0.87$) and \emph{persists} through PPO fine-tuning. I
-  (Eqs.~\ref{eq:write},~\ref{eq:ni}): writes land with fidelity 1.0; the $+1$-nat promotion is
-  REFUSED by the non-inferiority bar. A: depth as a pre-training legibility dial.}
+  \caption{The four levers on the real daily panel, under controls. R (Eq.~\ref{eq:reward}): the
+  reward penalty holds only the $5\%$ budget ($-4.81\%$); the $8\%/12\%$ heads breach ($-15.9\%$)
+  --- the penalty does not enforce the budget (the Lagrangian does, at a goal cost). T
+  (Eq.~\ref{eq:bc}): the teacher warm-start cures the cold near-uniform collapse (mean max
+  action-prob $0.21\to0.73$). I (Eqs.~\ref{eq:write},~\ref{eq:ni}): the control battery shows the
+  intervention is NOT a clean causal control --- a matched-random leaf moves the cold head as much
+  as the defensive one (placebo fails); belief-write fidelity $3\%$; only the NI \emph{refusal}
+  survives. A: the head scores $\textsc{CrystalScore}=0.03$ ($F\,0.03\times S\,1.0\times S\!t\,1.0$)
+  --- a legible, stable dial, not a faithful command surface.}
   \label{fig:levers}
 \end{figure}
 
