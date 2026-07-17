@@ -1,0 +1,20 @@
+{
+  "experiment": "BH1 stage 3 \u2014 metric-blindness check (strict fixed-delta vs contrast-write)",
+  "belief_saturation_frac_in_probe_window": {
+    "0.0": 0.0,
+    "0.5": 0.371,
+    "1.0": 0.24,
+    "2.0": 0.065
+  },
+  "bc_oracle": {
+    "acc": 0.967,
+    "strict_probe": 0.0,
+    "contrast_write_probe": 0.85
+  },
+  "cold_control": {
+    "strict_probe": 0.0,
+    "contrast_write_probe": 0.0
+  },
+  "artifact_proven": true,
+  "verdict": "METRIC ARTIFACT PROVEN: a policy that IS the oracle rule by construction (BC acc 0.97) scores 0.00 on the strict fixed-delta probe but 0.85 on the contrast-write probe, while the constant-dial control stays at 0.00. The strict E-28 probe is BLIND on saturated-belief step policies (fixed +0.2/+0.4 deltas never cross the threshold when bl sits near 0/1). Stage-1's flat fidelity curve is VOID as a reading of the Pressure Hypothesis; fidelity must be measured boundary-aware (contrast-write) alongside behavioral regime gap."
+}

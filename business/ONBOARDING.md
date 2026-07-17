@@ -143,9 +143,18 @@ an OOS alarm) with Ivan. Pick YOUR one bold hypothesis for the autumn.
 - **BH1 — The Pressure Hypothesis** *(bold; the track's centerpiece)*. Belief→action causality
   emerges **iff** the training environment exerts distribution-shift pressure (Richens-Everitt
   applied to markets: a priced regime ⇒ no pressure ⇒ no causal use — which also *explains our VoI
-  gate*). Test: train the same head under a shift-pressure curriculum (regime-switching episodes,
-  shifted eval); fidelity should rise from 0.03 materially. Kill: fidelity stays ≈0 under genuine
-  pressure. Publishable either way.
+  gate*). *STATUS (2026-07-17): first 5-stage pass DONE (`exp_bh1_pressure*.py`) and the naive form
+  is already REFRAMED — read the reports before designing anything.* What the designed 2-regime
+  market established: (i) pressure was real (+282%/yr oracle vs +2% best dial at top contrast) yet
+  **cold PPO discovered none of it** — discovery, not pressure, is the binding constraint; (ii) the
+  strict fixed-delta write probe is **provably blind** on saturated-belief threshold policies — use
+  the contrast-write probe (`exp_bh1_pressure3.py`) + behavioral regime gap; (iii) install rises
+  with pressure (0→0.92) but 30k-step fine-tune is **inert both ways** (no erosion even where the
+  rule pays nothing — transplant test, stage 5). Real-panel payoff already banked: warm-started
+  heads carry **causal** F 0.77–0.83 the old probe missed (paper §6 corrected). YOUR open
+  questions: at what fine-tune scale does erosion begin? what makes cold RL *discover* belief-use
+  (curriculum, transition oversampling, meta-pressure)? Publishable either way — and the metric
+  lesson alone is a paper section.
 - **BH2 — Jump-model belief.** *STATUS: RUN AND KILLED, twice (don't rediscover — read the reports).*
   Our own Nystrup-style variant died in E-24b/KT4 (flips −23.5% vs the −30% bar); the library
   continuous JM (`jumpmodels` pkg, online inference) died on the SAME pre-registered bar on

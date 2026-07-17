@@ -1,0 +1,27 @@
+{
+  "experiment": "BH1 stage 5 \u2014 transplant erosion test (c=2 teacher fine-tuned on c=0)",
+  "preregistration": {
+    "erosion": "drop >= 0.4",
+    "inert": "drop <= 0.15",
+    "control": "same teacher fine-tuned on c=2 stayed 0.92 (stage 4)"
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "bc_acc": 0.967,
+      "fid_teacher": 0.85,
+      "fid_after_c0_finetune": 0.917,
+      "drop": -0.067,
+      "s": 45
+    },
+    {
+      "seed": 1,
+      "bc_acc": 0.97,
+      "fid_teacher": 0.917,
+      "fid_after_c0_finetune": 0.917,
+      "drop": 0.0,
+      "s": 43
+    }
+  ],
+  "verdict": "INERT OPTIMIZER: the rule survives fine-tune even where it pays nothing (0.88 -> 0.92) \u2014 stage 4's flat retention rows were vacuous; the honest BH1 claim is INSTALL-ONLY: pressure governs what a teacher can encode (belief information content), while 30k-step PPO fine-tune is behaviorally conservative either way. The real-panel implication narrows to: warm-start installs causality (E-28 cross-check 0.77-0.83) and short fine-tunes will not remove it \u2014 but they will not create it either."
+}

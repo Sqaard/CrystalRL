@@ -1,0 +1,28 @@
+{
+  "experiment": "BH2 \u2014 library continuous jump model (jumpmodels pkg) vs the frozen HMM belief",
+  "lineage": "re-test of E-24b/KT4 (our Nystrup-style variant KILLED at flips \u221223.5%, bar \u221230%)",
+  "preregistration": {
+    "kill_bar": "flip_cut>=0.30 AND z_dsd>=hmm\u22120.5 AND ni_z>=hmm\u22120.5 (unchanged from KT4)",
+    "penalty_rule": "TRAIN-only: first grid penalty with train flips <= 0.7x HMM",
+    "inference": "predict_proba_online (no look-ahead)"
+  },
+  "jump_penalty_chosen": 10.0,
+  "flips": {
+    "hmm_devhold": 17,
+    "jump_devhold": 9,
+    "flip_cut": 0.471,
+    "bar": 0.3
+  },
+  "hold_legs": {
+    "jump": {
+      "z_dsd": 5.28,
+      "ni_z": 1.17
+    },
+    "hmm": {
+      "z_dsd": 6.14,
+      "ni_z": 1.21
+    }
+  },
+  "survives_kill_bar": false,
+  "verdict": "KILLED on the same bar as KT4 \u2014 the library continuous JM does not rescue the jump-belief hypothesis on this substrate (BH2 closed honestly)"
+}

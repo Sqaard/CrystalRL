@@ -1,0 +1,127 @@
+{
+  "experiment": "BH1 Pressure Hypothesis \u2014 fidelity(contrast) on a designed 2-regime market",
+  "framing": "DESIGNED-market instrument calibration (VoI-fenced); not market evidence",
+  "theory": "Richens & Everitt (ICLR 2024): causal world-model use requires shift pressure",
+  "design": {
+    "sigma": 0.012,
+    "p_stay": 0.97,
+    "contrasts": [
+      0.0,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "seeds": [
+      0,
+      1
+    ],
+    "steps": 30000,
+    "belief": "TRUE Bayes posterior under known params",
+    "fidelity_test": "strict E-28 monotone write test",
+    "placebo": "write to prev-exposure"
+  },
+  "levels": {
+    "0.0": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 0.25,
+          "e_bear": 0.25,
+          "regime_gap": 0.0,
+          "train_s": 59
+        },
+        {
+          "seed": 1,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 0.25,
+          "e_bear": 0.25,
+          "regime_gap": 0.0,
+          "train_s": 49
+        }
+      ],
+      "fidelity_mean": 0.0,
+      "placebo_mean": 0.0,
+      "regime_gap_mean": 0.0
+    },
+    "0.5": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 0.25,
+          "e_bear": 0.25,
+          "regime_gap": 0.0,
+          "train_s": 45
+        },
+        {
+          "seed": 1,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 1.0,
+          "e_bear": 1.0,
+          "regime_gap": 0.0,
+          "train_s": 48
+        }
+      ],
+      "fidelity_mean": 0.0,
+      "placebo_mean": 0.0,
+      "regime_gap_mean": 0.0
+    },
+    "1.0": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 0.5,
+          "e_bear": 0.5,
+          "regime_gap": 0.0,
+          "train_s": 47
+        },
+        {
+          "seed": 1,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 0.25,
+          "e_bear": 0.25,
+          "regime_gap": 0.0,
+          "train_s": 46
+        }
+      ],
+      "fidelity_mean": 0.0,
+      "placebo_mean": 0.0,
+      "regime_gap_mean": 0.0
+    },
+    "2.0": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 0.25,
+          "e_bear": 0.25,
+          "regime_gap": 0.0,
+          "train_s": 43
+        },
+        {
+          "seed": 1,
+          "fidelity": 0.0,
+          "placebo": 0.0,
+          "e_bull": 0.0,
+          "e_bear": 0.0,
+          "regime_gap": 0.0,
+          "train_s": 44
+        }
+      ],
+      "fidelity_mean": 0.0,
+      "placebo_mean": 0.0,
+      "regime_gap_mean": 0.0
+    }
+  },
+  "spearman_fidelity_vs_contrast": NaN,
+  "verdict": "KILLED: fidelity does not rise with pressure \u2014 the weak causality is NOT explained by missing shift pressure (architecture/training must be suspected)"
+}

@@ -1,0 +1,120 @@
+{
+  "experiment": "BH1 stage 2 \u2014 separating optimization collapse from a true pressure null",
+  "arm_a_validity": {
+    "0.0": {
+      "belief_auc": 0.503,
+      "oracle": {
+        "ann": -0.0083,
+        "maxDD": -0.3951,
+        "mean_rew": -1986.737
+      },
+      "best_dial": {
+        "level": "0.0",
+        "ann": 0.0201,
+        "maxDD": -0.0009,
+        "mean_rew": 0.79
+      },
+      "oracle_edge_rew": -1987.527
+    },
+    "0.5": {
+      "belief_auc": 0.817,
+      "oracle": {
+        "ann": 0.504,
+        "maxDD": -0.0435,
+        "mean_rew": 16.507
+      },
+      "best_dial": {
+        "level": "0.0",
+        "ann": 0.0201,
+        "maxDD": -0.0009,
+        "mean_rew": 0.79
+      },
+      "oracle_edge_rew": 15.717
+    },
+    "1.0": {
+      "belief_auc": 0.919,
+      "oracle": {
+        "ann": 1.4651,
+        "maxDD": -0.0326,
+        "mean_rew": 36.3
+      },
+      "best_dial": {
+        "level": "0.0",
+        "ann": 0.0201,
+        "maxDD": -0.0009,
+        "mean_rew": 0.79
+      },
+      "oracle_edge_rew": 35.51
+    },
+    "2.0": {
+      "belief_auc": 0.988,
+      "oracle": {
+        "ann": 2.821,
+        "maxDD": -0.02,
+        "mean_rew": 53.83
+      },
+      "best_dial": {
+        "level": "0.0",
+        "ann": 0.0201,
+        "maxDD": -0.0009,
+        "mean_rew": 0.79
+      },
+      "oracle_edge_rew": 53.04
+    }
+  },
+  "arm_b_warm": [
+    {
+      "seed": 0,
+      "bc_acc": 0.967,
+      "fidelity": 0.0,
+      "placebo": 0.0,
+      "regime_gap": 0.873,
+      "perf": {
+        "ann": 3.1033,
+        "maxDD": -0.0288,
+        "mean_rew": 56.73
+      },
+      "s": 50
+    },
+    {
+      "seed": 1,
+      "bc_acc": 0.97,
+      "fidelity": 0.033,
+      "placebo": 0.0,
+      "regime_gap": 0.897,
+      "perf": {
+        "ann": 3.0689,
+        "maxDD": -0.0277,
+        "mean_rew": 56.375
+      },
+      "s": 46
+    }
+  ],
+  "arm_c_cold90k": [
+    {
+      "seed": 0,
+      "fidelity": 0.0,
+      "placebo": 0.0,
+      "regime_gap": 0.0,
+      "perf": {
+        "ann": 0.0304,
+        "maxDD": -0.7765,
+        "mean_rew": -5338.411
+      },
+      "s": 125
+    },
+    {
+      "seed": 1,
+      "fidelity": 0.0,
+      "placebo": 0.0,
+      "regime_gap": 0.0,
+      "perf": {
+        "ann": 0.0092,
+        "maxDD": -0.6935,
+        "mean_rew": -5017.993
+      },
+      "s": 129
+    }
+  ],
+  "verdict": "MIXED: edge 53.04, warm fidelity 0.02, cold-90k 0.00 \u2014 needs more seeds."
+}

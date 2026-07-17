@@ -1,0 +1,112 @@
+{
+  "experiment": "BH1 stage 4 \u2014 retention(pressure) with the boundary-aware probe",
+  "preregistration": {
+    "supported": "Spearman>0 AND fid(c=2)-fid(c=0) >= 0.4",
+    "killed": "|fid(c=2)-fid(c=0)| < 0.15",
+    "probe": "contrast-write (0.2 vs 0.8), validated in stage 3"
+  },
+  "levels": {
+    "0.0": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "bc_acc": 1.0,
+          "fid_teacher": 0.0,
+          "fid_after": 0.0,
+          "retention": 0.0,
+          "regime_gap": 0.0,
+          "s": 51
+        },
+        {
+          "seed": 1,
+          "bc_acc": 1.0,
+          "fid_teacher": 0.0,
+          "fid_after": 0.0,
+          "retention": 0.0,
+          "regime_gap": 0.0,
+          "s": 49
+        }
+      ],
+      "fid_after_mean": 0.0,
+      "fid_teacher_mean": 0.0,
+      "gap_mean": 0.0
+    },
+    "0.5": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "bc_acc": 0.909,
+          "fid_teacher": 0.383,
+          "fid_after": 0.383,
+          "retention": 0.0,
+          "regime_gap": -0.022,
+          "s": 48
+        },
+        {
+          "seed": 1,
+          "bc_acc": 0.907,
+          "fid_teacher": 0.917,
+          "fid_after": 0.917,
+          "retention": 0.0,
+          "regime_gap": 0.288,
+          "s": 48
+        }
+      ],
+      "fid_after_mean": 0.65,
+      "fid_teacher_mean": 0.65,
+      "gap_mean": 0.133
+    },
+    "1.0": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "bc_acc": 0.941,
+          "fid_teacher": 0.917,
+          "fid_after": 0.917,
+          "retention": 0.0,
+          "regime_gap": 0.634,
+          "s": 49
+        },
+        {
+          "seed": 1,
+          "bc_acc": 0.946,
+          "fid_teacher": 0.917,
+          "fid_after": 0.917,
+          "retention": 0.0,
+          "regime_gap": 0.728,
+          "s": 47
+        }
+      ],
+      "fid_after_mean": 0.917,
+      "fid_teacher_mean": 0.917,
+      "gap_mean": 0.681
+    },
+    "2.0": {
+      "per_seed": [
+        {
+          "seed": 0,
+          "bc_acc": 0.967,
+          "fid_teacher": 0.85,
+          "fid_after": 0.917,
+          "retention": 0.067,
+          "regime_gap": 0.873,
+          "s": 48
+        },
+        {
+          "seed": 1,
+          "bc_acc": 0.97,
+          "fid_teacher": 0.917,
+          "fid_after": 0.917,
+          "retention": 0.0,
+          "regime_gap": 0.897,
+          "s": 47
+        }
+      ],
+      "fid_after_mean": 0.917,
+      "fid_teacher_mean": 0.883,
+      "gap_mean": 0.885
+    }
+  },
+  "spearman": 0.949,
+  "verdict": "SUPPORTED: pressure governs whether belief-use survives optimization \u2014 post-PPO contrast-write fidelity 0.00@c=0 -> 0.92@c=2 (Spearman +0.95). Richens-Everitt holds on the designed market: belief->action causality is kept where shift pressure makes it pay and eroded where it does not. Bridge implication for the real panel: the 3%-fidelity head is what a no-pressure substrate makes; raise pressure (or oversample transitions) before blaming the architecture."
+}

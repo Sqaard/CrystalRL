@@ -1,0 +1,39 @@
+{
+  "experiment": "E-28 cross-check after the stage-3 metric-blindness finding",
+  "heads": {
+    "pure_return": {
+      "strict": 0.0,
+      "contrast_write": 0.0
+    },
+    "dd12": {
+      "strict": 0.0,
+      "contrast_write": 0.0
+    },
+    "dd08": {
+      "strict": 0.0,
+      "contrast_write": 0.0
+    },
+    "dd05": {
+      "strict": 0.0,
+      "contrast_write": 0.0
+    },
+    "pure_return_warm": {
+      "strict": 0.033,
+      "contrast_write": 0.833
+    },
+    "dd12_warm": {
+      "strict": 0.033,
+      "contrast_write": 0.833
+    },
+    "dd08_warm": {
+      "strict": 0.033,
+      "contrast_write": 0.783
+    },
+    "dd05_warm": {
+      "strict": 0.033,
+      "contrast_write": 0.767
+    }
+  },
+  "any_jump": true,
+  "verdict": "E-28 NUMBER NEEDS A CORRECTION NOTE: at least one real-panel head shows substantial contrast-write fidelity the strict probe missed \u2014 re-derive CrystalScore F with the boundary-aware probe and amend paper section 6."
+}
