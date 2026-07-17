@@ -131,8 +131,8 @@ champion rule?); write it up — this becomes a paper section.
 
 **Week 3 — the belief upgrade and the objectives account.**
 Read: Shu/Mulvey jump models; MacDermott (MEG); SYMPOL.
-Do: BH2 (jump-model belief swap — the cheapest real experiment, `pip install jumpmodels`) through
-the existing gate; compute MEG for the dd05 head (BH4).
+Do: reproduce the BH2 kill (`interpretability/exp_bh2_jumpmodels.py` — already run and KILLED; your
+job is to explain the mechanism, see BH2 below); compute MEG for the dd05 head (BH4).
 **Week 4 — humans and the bridge.**
 Read: DEXTER + Mallen (anomaly detection); Kohler (simulatability proxies).
 Do: design the human-simulatability protocol (BH6/H1) on the DP tables; sketch BH3 (belief-NLL as
@@ -146,9 +146,14 @@ an OOS alarm) with Ivan. Pick YOUR one bold hypothesis for the autumn.
   gate*). Test: train the same head under a shift-pressure curriculum (regime-switching episodes,
   shifted eval); fidelity should rise from 0.03 materially. Kill: fidelity stays ≈0 under genuine
   pressure. Publishable either way.
-- **BH2 — Jump-model belief.** Replace the 2-state Gaussian HMM with a (continuous) statistical
-  jump model; the belief becomes more persistent and the certified rule's NI improves through the
-  frozen gate. Kill: no NI improvement / gate rejects. (Cheapest first experiment; PyPI package.)
+- **BH2 — Jump-model belief.** *STATUS: RUN AND KILLED, twice (don't rediscover — read the reports).*
+  Our own Nystrup-style variant died in E-24b/KT4 (flips −23.5% vs the −30% bar); the library
+  continuous JM (`jumpmodels` pkg, online inference) died on the SAME pre-registered bar on
+  2026-07-17 (`interpretability/exp_bh2_jumpmodels.py`): the persistence promise is REAL (armed
+  flips −47%) but it costs hold-leg quality beyond tolerance (z_dsd 5.28 vs HMM 6.14, allowed −0.5).
+  The honest residue for you: WHY does smoothing the belief hurt the legs? If you can answer that
+  mechanistically, you'll know whether any smoother can ever pass — that's a better question than
+  another variant.
 - **BH3 — The belief is an OOS alarm** *(the bridge to Ivan's track)*. Drift/NLL of the *named*
   belief predicts strategy failure windows better than raw world-model surprise (DEXTER's negative
   result is the bar to beat). Kill: belief-based alarms no better than volatility baselines.
