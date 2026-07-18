@@ -108,11 +108,16 @@ probability-like claim (G2 — contracts stay on the bootstrap machinery).
 
 ## 6. Phased build plan (cheap-first, each phase gated by the previous)
 
-- **W0 (probe, ~1 week):** single-level JEPA (L1) on the v2 panel, SIGReg, KT-A. The Fin-JEPA
-  null is the honest prior: representations learnable, no alpha expected — value is measured in
-  representation space first.
-- **W1:** add L2 (crisp K-simplex head) + L3; run **KT-B** — the hierarchy signature. This is the
-  program's first publishable read either way (support or falsification of T5-on-markets).
+- **W0 (probe): EXECUTED 2026-07-18 — KT-A = SPLIT** (`interpretability/exp_w0_jepa_kta_v4.py`,
+  after a four-iteration harness arc that caught three new artifact classes — see the logbook
+  entry). The L1 level has real, modest, LINEAR predictable structure in representation space
+  (tuned PCA+ridge margin +0.22 hold z 2.2 / +0.35 OOS z 2.6 over the fair null); a small
+  nonlinear JEPA adds nothing over PCA at this data scale (placebo clean). Consequence: **L1 is
+  linear until proven otherwise.**
+- **W1 (amended per W0):** build L2 (crisp K-simplex head) + L3 on TOP of the LINEAR L1
+  representation; run **KT-B** — the hierarchy signature. Nonlinear encoders return only with
+  more data/features and must beat the linear L1 first. This is the program's first publishable
+  read either way (support or falsification of T5-on-markets).
 - **W2:** action-conditioning + the paper-trade probe loop (§4); detour tests; KT-C.
 - **W3:** memory integration (episodic store + first gated semantic consolidations via the HL
   loop); KT-D over a 1-year walk-forward.
