@@ -19,6 +19,16 @@ industrializes that sentence: an interpretable agent (CrystalRL) + an LLM coding
 loop under experimental controls (Hello Crystal), wrapped in calibration, pre-registration and
 fail-closed governance.
 
+**The end goal, reframed (Ivan, 2026-07-18):** the bot is not a self-evolving trader for its own
+sake — it is a system that **accurately represents and enriches the economic world picture** that
+underlies its knowledge. Trading is the probe by which the picture is tested and enriched, not the
+product. The intellectual foundation (LeCun's JEPA/energy-based program, multi-hierarchical
+representations, the abstraction-horizon principle, and their economics analogies from Hayek to
+Hamilton) lives in [CRYSTAL_WORLD_THEORY.md](CRYSTAL_WORLD_THEORY.md); the build spec for the
+resulting model, **CRYSTAL-WORLD**, with its pre-registered kill tests, in
+[CRYSTAL_WORLD_METHODOLOGY.md](CRYSTAL_WORLD_METHODOLOGY.md). The audited world picture is the
+"trust made auditable" asset in its most general form.
+
 ## 2. The stack (four parts, and which are frozen)
 
 ```
