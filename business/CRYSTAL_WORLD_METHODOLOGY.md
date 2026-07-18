@@ -114,10 +114,14 @@ probability-like claim (G2 — contracts stay on the bootstrap machinery).
   (tuned PCA+ridge margin +0.22 hold z 2.2 / +0.35 OOS z 2.6 over the fair null); a small
   nonlinear JEPA adds nothing over PCA at this data scale (placebo clean). Consequence: **L1 is
   linear until proven otherwise.**
-- **W1 (amended per W0):** build L2 (crisp K-simplex head) + L3 on TOP of the LINEAR L1
-  representation; run **KT-B** — the hierarchy signature. Nonlinear encoders return only with
-  more data/features and must beat the linear L1 first. This is the program's first publishable
-  read either way (support or falsification of T5-on-markets).
+- **W1 (amended per W0): EXECUTED 2026-07-18 — KT-B = FULL PASS** under the identified protocol
+  (`interpretability/exp_w1_ktb_v2.py`; the v1 run was invalidated by review on BOTH sides — the
+  register's first two-sided invalidation — and the v2 protocol fixed per the referee's
+  prescription): **reach(L1)=40d < reach(L2)=84d**, pooled-L2 beats its flat twin, placebo guard
+  auto-excluded the mechanical mean-null cells, and OOS confirms every significant cell (z 6.5-10.7).
+  The hierarchy-horizon principle has direct market evidence beyond the regime data point. Caveats
+  in the logbook (protocol-after-peek → the clean confirmation is a pre-registered third-window
+  read; flat-twin point comparison without a z). L3 has no statistical content at n=8.
 - **W2:** action-conditioning + the paper-trade probe loop (§4); detour tests; KT-C.
 - **W3:** memory integration (episodic store + first gated semantic consolidations via the HL
   loop); KT-D over a 1-year walk-forward.

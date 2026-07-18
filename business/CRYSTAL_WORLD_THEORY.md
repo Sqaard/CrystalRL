@@ -157,6 +157,17 @@ prediction is null — is currently better evidence for the hierarchy-horizon pr
 than anything the JEPA literature itself has produced.* H-JEPA remains an undemonstrated proposal
 (V-JEPA 2 plans at T=1 receding horizon; hierarchical planning is listed as future work).
 
+**UPDATE 2026-07-18 — KT-B executed: FULL PASS.** The hierarchy signature now has direct
+experimental evidence on this substrate (`interpretability/exp_w1_ktb_v2.py`, after a two-sided
+harness invalidation): reach(L1-week) = 40d < reach(L2-month) = 84d over a strong dev-chosen null
+family with placebo guards, the pooled month-level representation beats a capacity-matched flat
+twin (the Nachum control — part of the dividend is representational, not just target smoothing),
+and every significant cell confirms out-of-sample (z 6.5–10.7). Caveats: the identified protocol
+was fixed after a referee had probed the data (clean confirmation path = a pre-registered
+third-window read), and the flat-twin comparison lacks a z on the difference. T5's status on
+markets upgrades from "our regime result is the local evidence" to "directly measured, twice
+confirmed, pending one clean-window replication".
+
 **Hard qualifications** (these go into every design decision):
 1. **Lorenz 1969 / Palmer et al. 2014 — the real butterfly effect**: with a shallow enough
    cross-scale energy spectrum, fine-scale errors cascade *upscale* and impose a finite
