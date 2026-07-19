@@ -1,0 +1,342 @@
+{
+ "preregistration": {
+  "bar": "hold margin(+CAND) >= BASE + 0.02 AND > max of 3 noise twins, at k=1 or k=4",
+  "protocol": "WP-1 identified harness; D_aug=12 uniform; within-block means; no raw levels",
+  "wg2_note": "credit adj-returns embed carry - information test only; deployable use faces the carry battery"
+ },
+ "candidates": {
+  "credit": {
+   "1": {
+    "base": {
+     "alpha": 0.1,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.2434,
+      "z": 2.74,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3071,
+      "z": 3.48,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 1,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.2288,
+      "z": 2.72,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2885,
+      "z": 3.41,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.2314,
+     0.2204,
+     0.2361
+    ],
+    "adds": false
+   },
+   "4": {
+    "base": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.1649,
+      "z": 4.98,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2687,
+      "z": 12.7,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.1237,
+      "z": 3.72,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2289,
+      "z": 9.46,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.1579,
+     0.1166,
+     0.1556
+    ],
+    "adds": false
+   }
+  },
+  "stockbond": {
+   "1": {
+    "base": {
+     "alpha": 0.1,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.2434,
+      "z": 2.74,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3071,
+      "z": 3.48,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 0.1,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.2712,
+      "z": 3.3,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3392,
+      "z": 4.07,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.2385,
+     0.2252,
+     0.2325
+    ],
+    "adds": true
+   },
+   "4": {
+    "base": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.1649,
+      "z": 4.98,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2687,
+      "z": 12.7,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.2229,
+      "z": 5.57,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3712,
+      "z": 14.62,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.1628,
+     0.1305,
+     0.2099
+    ],
+    "adds": true
+   }
+  },
+  "plumbing": {
+   "1": {
+    "base": {
+     "alpha": 0.1,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.2434,
+      "z": 2.74,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3071,
+      "z": 3.48,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 10,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.2431,
+      "z": 2.9,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2976,
+      "z": 2.84,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.2326,
+     0.2128,
+     0.2057
+    ],
+    "adds": false
+   },
+   "4": {
+    "base": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.1649,
+      "z": 4.98,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2687,
+      "z": 12.7,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.131,
+      "z": 3.63,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2125,
+      "z": 8.89,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.1336,
+     0.1089,
+     0.1309
+    ],
+    "adds": false
+   }
+  },
+  "complacency": {
+   "1": {
+    "base": {
+     "alpha": 0.1,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.2434,
+      "z": 2.74,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3071,
+      "z": 3.48,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 0.1,
+     "null": "sh0.75",
+     "hold": {
+      "margin": 0.1907,
+      "z": 2.2,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2435,
+      "z": 2.86,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.1782,
+     0.2182,
+     0.2172
+    ],
+    "adds": false
+   },
+   "4": {
+    "base": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.1649,
+      "z": 4.98,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2687,
+      "z": 12.7,
+      "n": 122
+     }
+    },
+    "cand": {
+     "alpha": 1000,
+     "null": "sh0.25",
+     "hold": {
+      "margin": 0.0505,
+      "z": 1.36,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2072,
+      "z": 7.17,
+      "n": 122
+     }
+    },
+    "noise_hold": [
+     0.0994,
+     0.1253,
+     0.1399
+    ],
+    "adds": false
+   }
+  }
+ },
+ "survivors": [
+  "stockbond"
+ ],
+ "verdict": "SURVIVOR (escalation-corrected): stockbond at k=4 only - robust vs 8 noise twins + strong OOS; k=1 fragile, not claimed. credit/plumbing/complacency: no-add.",
+ "runtime_s": 8,
+ "ESCALATION": {
+  "protocol": "CL-1b style: 5 extra noise seeds pooled with the original 3 (8 total), on the non-degenerate margin statistic",
+  "k1": {
+   "real": 0.2712,
+   "noise_8": [
+    0.2314,
+    0.2204,
+    0.2361,
+    0.2409,
+    0.2381,
+    0.2348,
+    0.2139,
+    0.2691
+   ],
+   "verdict": "FRAGILE - real 0.2712 vs max noise 0.2691: inside the noise envelope, NOT claimed"
+  },
+  "k4": {
+   "real": 0.2229,
+   "noise_8": [
+    0.1579,
+    0.1166,
+    0.1556,
+    0.108,
+    0.1521,
+    0.1489,
+    0.1634,
+    0.1042
+   ],
+   "verdict": "ROBUST - clears max noise 0.1634 by +0.06; OOS confirms 0.3712 vs base 0.2687 (z 14.6 vs 12.7)"
+  },
+  "final": "stockbond enters the state FOR THE 20d CELL (k=4): the inflation-regime flag operates at the monthly horizon, matching the corpus atom; k=1 not claimed"
+ }
+}
