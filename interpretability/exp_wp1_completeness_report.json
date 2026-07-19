@@ -1,0 +1,83 @@
+{
+ "preregistration": {
+  "bar": "hold margin(+BREADTH) >= BASE + 0.02 AND > max noise-twin margin, at k=1 or k=4",
+  "block": "frac_above_50dma, frac_hi20, frac_lo20, xdisp, up_frac (within-block means)",
+  "protocol": "identified (dev-tuned alpha, strong nulls, purged, capacity-fair noise twins x3)"
+ },
+ "cells": {
+  "1": {
+   "base": {
+    "alpha": 0.1,
+    "null": "sh0.75",
+    "hold": {
+     "margin": 0.2434,
+     "z": 2.74,
+     "n": 100
+    },
+    "oos": {
+     "margin": 0.3071,
+     "z": 3.48,
+     "n": 122
+    }
+   },
+   "breadth": {
+    "alpha": 0.1,
+    "null": "sh0.75",
+    "hold": {
+     "margin": 0.1975,
+     "z": 3.25,
+     "n": 100
+    },
+    "oos": {
+     "margin": 0.1572,
+     "z": 2.28,
+     "n": 122
+    }
+   },
+   "noise_hold_margins": [
+    0.2132,
+    0.1878,
+    0.179
+   ],
+   "adds_information": false
+  },
+  "4": {
+   "base": {
+    "alpha": 1000,
+    "null": "sh0.25",
+    "hold": {
+     "margin": 0.1649,
+     "z": 4.98,
+     "n": 100
+    },
+    "oos": {
+     "margin": 0.2687,
+     "z": 12.7,
+     "n": 122
+    }
+   },
+   "breadth": {
+    "alpha": 1000,
+    "null": "sh0.25",
+    "hold": {
+     "margin": 0.1245,
+     "z": 3.53,
+     "n": 100
+    },
+    "oos": {
+     "margin": 0.1763,
+     "z": 8.64,
+     "n": 122
+    }
+   },
+   "noise_hold_margins": [
+    0.1645,
+    0.0972,
+    0.1184
+   ],
+   "adds_information": false
+  }
+ },
+ "verdict": "INCREMENTALLY COMPLETE w.r.t. breadth: the cross-sectional block adds nothing beyond capacity-fair noise on this substrate \u2014 the 10-feature state already spans what breadth carries at these horizons (a real answer to the sufficiency question, not a failure).",
+ "runtime_s": 2
+}
