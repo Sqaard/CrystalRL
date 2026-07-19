@@ -1,0 +1,326 @@
+{
+ "preregistration": {
+  "reach": "max horizon with margin>0 AND z>=2.0 AND placebo<0.5x",
+  "ctx_grid": [
+   2,
+   4,
+   6,
+   12
+  ],
+  "null_family": "pers/mean/shrunk(.25/.5/.75)/ewma(2/4)",
+  "purge": "train fits use targets ending inside TRAIN",
+  "outcomes": "FULL PASS / MECHANICAL / KILL; L3 reported only"
+ },
+ "levels": {
+  "L1": {
+   "1": {
+    "horizon_days": 5,
+    "real": {
+     "alpha": 0.1,
+     "null": "shrunk.75",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.2434,
+      "z": 2.74,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3055,
+      "z": 3.17,
+      "n": 102
+     }
+    },
+    "placebo_hold": {
+     "margin": -1.2622,
+     "z": -9.22,
+     "n": 100
+    },
+    "significant": true
+   },
+   "2": {
+    "horizon_days": 10,
+    "real": {
+     "alpha": 0.1,
+     "null": "shrunk.5",
+     "ctx": 4,
+     "hold": {
+      "margin": 0.0758,
+      "z": 0.96,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2777,
+      "z": 4.16,
+      "n": 102
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.7629,
+     "z": -7.45,
+     "n": 100
+    },
+    "significant": false
+   },
+   "4": {
+    "horizon_days": 20,
+    "real": {
+     "alpha": 1000,
+     "null": "shrunk.25",
+     "ctx": 4,
+     "hold": {
+      "margin": 0.1649,
+      "z": 4.98,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2502,
+      "z": 10.7,
+      "n": 102
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.2917,
+     "z": -8.87,
+     "n": 100
+    },
+    "significant": true
+   },
+   "8": {
+    "horizon_days": 40,
+    "real": {
+     "alpha": 1000,
+     "null": "shrunk.25",
+     "ctx": 6,
+     "hold": {
+      "margin": 0.0889,
+      "z": 2.44,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2265,
+      "z": 7.61,
+      "n": 102
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.3134,
+     "z": -9.05,
+     "n": 100
+    },
+    "significant": true
+   },
+   "16": {
+    "horizon_days": 80,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.1451,
+      "z": 9.07,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.2396,
+      "z": 14.47,
+      "n": 102
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.1023,
+     "z": 6.0,
+     "n": 100
+    },
+    "significant": false
+   },
+   "24": {
+    "horizon_days": 120,
+    "real": {
+     "alpha": 10000,
+     "null": "mean",
+     "ctx": 4,
+     "hold": {
+      "margin": 0.0157,
+      "z": 3.17,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.0592,
+      "z": 9.02,
+      "n": 102
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.0496,
+     "z": 6.18,
+     "n": 100
+    },
+    "significant": false
+   }
+  },
+  "L2": {
+   "1": {
+    "horizon_days": 21,
+    "real": {
+     "alpha": 100,
+     "null": "shrunk.25",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.1887,
+      "z": 3.89,
+      "n": 24
+     },
+     "oos": {
+      "margin": 0.2595,
+      "z": 6.52,
+      "n": 22
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.2818,
+     "z": -5.91,
+     "n": 24
+    },
+    "significant": true
+   },
+   "2": {
+    "horizon_days": 42,
+    "real": {
+     "alpha": 100,
+     "null": "shrunk.25",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.0464,
+      "z": 0.73,
+      "n": 24
+     },
+     "oos": {
+      "margin": 0.1695,
+      "z": 3.47,
+      "n": 22
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.2398,
+     "z": -7.24,
+     "n": 24
+    },
+    "significant": false
+   },
+   "4": {
+    "horizon_days": 84,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.0557,
+      "z": 4.83,
+      "n": 24
+     },
+     "oos": {
+      "margin": 0.1047,
+      "z": 9.03,
+      "n": 22
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.0104,
+     "z": -0.83,
+     "n": 24
+    },
+    "significant": true
+   },
+   "8": {
+    "horizon_days": 168,
+    "real": {
+     "alpha": 10000,
+     "null": "mean",
+     "ctx": 6,
+     "hold": {
+      "margin": -0.0228,
+      "z": -5.33,
+      "n": 24
+     },
+     "oos": {
+      "margin": -0.0031,
+      "z": -0.54,
+      "n": 22
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.0507,
+     "z": -1.9,
+     "n": 24
+    },
+    "significant": false
+   }
+  },
+  "L3": {
+   "1": {
+    "horizon_days": 63,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "ctx": 4,
+     "hold": {
+      "margin": -0.0221,
+      "z": -2.28,
+      "n": 8
+     },
+     "oos": {
+      "margin": 0.0295,
+      "z": 2.32,
+      "n": 8
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.0066,
+     "z": -0.33,
+     "n": 8
+    },
+    "significant": false
+   },
+   "2": {
+    "horizon_days": 126,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "ctx": 6,
+     "hold": {
+      "margin": -0.015,
+      "z": -0.7,
+      "n": 8
+     },
+     "oos": {
+      "margin": -0.0312,
+      "z": -2.99,
+      "n": 8
+     }
+    },
+    "placebo_hold": {
+     "margin": -0.0814,
+     "z": -1.72,
+     "n": 8
+    },
+    "significant": false
+   }
+  }
+ },
+ "reach_days": {
+  "L1": 40,
+  "L2": 84,
+  "L3": 0
+ },
+ "flat_twin": {
+  "k": 4,
+  "pooled_hold_margin": 0.0557,
+  "flat_hold": {
+   "margin": 0.0448,
+   "z": 1.71,
+   "n": 24
+  }
+ },
+ "verdict": "FULL PASS \u2014 reach(L1)=40d < reach(L2)=84d under the identified protocol, and the pooled L2 arm beats its capacity-matched flat twin: the hierarchy dividend is real in both target and representation. T5-on-markets supported beyond the regime data point (L3 underpowered, reported only).",
+ "runtime_s": 7
+}

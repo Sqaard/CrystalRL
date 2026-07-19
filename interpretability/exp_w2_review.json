@@ -1,0 +1,52 @@
+{
+ "date": "2026-07-19",
+ "reviewed": [
+  "exp_w2_probe_loop.py",
+  "exp_w2_ktc_l2_swap.py"
+ ],
+ "review": {
+  "findings": [
+   {
+    "severity": "minor",
+    "what": "KT-C verdict string overstates: 'viable substitute command surface' with no OOS qualifier, while the confirmation read is consistently ADVERSE (probe: L2 oos twin z -1.12..-1.27 vs HMM +0.95..+1.13 across block 10/20/40 x 4 seeds — a stable ~2.2z gap on 2.5y fresh data, worse than L2's own exposure-matched twin). The pre-registered hold-only bar is met, so the PASS token stands, but the honest one-line claim is 'hold-bar pass, OOS-degrading substitute', not unqualified viability.",
+    "why_it_matters": "Downstream W3 memory work will cite the verdict string, not the JSON internals; building on L2 as a 'viable substitute' when its most recent 2.5y degrade relative to a constant dial repeats the exact optimism pattern this project's referees exist to refuse."
+   },
+   {
+    "severity": "minor",
+    "what": "L2_k1 TARIFF z=1.38e13 in exp_w2_probe_loop_report.json is a degenerate SE, confirmed by probe: n=2 samples, block=max(2, min(4, 2//2))=2, so starts=arange(0, n-block+1) has exactly 1 element — every bootstrap draw is identical, SE=0+1e-12, z=mean/1e-12. The value ships unflagged in the report (only n<2 is guarded, line 124; n==block is not). It does not feed the verdict (n_break_hits reads L1_k1 only), but the unused det_pass aggregate (lines 159-161) counts it and would score the degenerate z as a hit if ever wired in.",
+    "why_it_matters": "This project's standing rule (CL-1b) is that a number produced by a degenerate statistic must not appear as a result; the guard should null z whenever n - block + 1 < 2, and the dead det_pass variable should be deleted before someone reuses it."
+   },
+   {
+    "severity": "minor",
+    "what": "The DETOUR interpretation 'the compare step detects schema violations' is mostly generic novelty, not model-specific surprise: probe shows the trivial persistence null's surprise ratio is elevated nearly identically in all three break windows (COVID 57x, RATES 4.2x, TARIFF 4.7x vs the ridge's 117x/4.4x/5.5x), and the pred-vs-null error ratio barely moves (0.73 calm -> 0.79-1.03 in breaks). Any error measure, including do-nothing persistence, fires the same trigger.",
+    "why_it_matters": "As an enrichment TRIGGER the preregistered criterion is met and useful, but the claim that the trained predictor's comparison step carries the detection is not supported — the elevation is input-shift/vol, and future work should not credit the L1 predictor with break detection it does not uniquely provide (the stored null_energy field already enables the correct normalized read)."
+   },
+   {
+    "severity": "minor",
+    "what": "KT-C's printed claim 'swapped into the certified rule' is inaccurate: derive_and_read re-derives (tau, e_def) per belief on DEV — the HMM arm itself lands (0.74, 0.95), not the certified E-15 config (0.66, 0.74). Both arms also hit the grid EDGE on both parameters (tau=0.9 is TAUS max for L2; e_def=0.95 is EDEFS max for both), so the dev optimum may lie outside the searched grid.",
+    "why_it_matters": "The comparison is internally fair (identical grid and protocol, and probe confirms tau=0.9 is nowhere near the coverage-guard edge — defensive share 0.619), but 'certified rule' language implies the frozen deployed config was tested, which it was not; grid-edge optima also mean the reported twin z's are lower bounds on a tuning surface that was not fully explored."
+   },
+   {
+    "severity": "note",
+    "what": "KT-C hold-bar pass is robust in direction but thin in margin: PASS in all 12 probe variations (block 10/20/40 x seeds 0/1/2/6), with margins over the bar of 0.00-0.24 at block=40 (l2 2.02 vs bar 2.02; 1.91 vs 1.90) vs the headline 0.11 at the shipped block=20/seed=6.",
+    "why_it_matters": "The verdict does not flip under bootstrap choice — the direction is sound — but the pass sits within one rounding step of the bar at longer blocks, so any re-run with a different belief seed or panel refresh could legitimately land on either side; treat the 'substitute' status as provisional."
+   },
+   {
+    "severity": "note",
+    "what": "L2 card should state the re-encoding read bluntly: probe shows R2=0.63 against the HMM belief and 89.2% decision-level agreement at the frozen thresholds (defensive shares 35.5% vs 33.7%) — L2 is largely a noisy re-encode of the HMM decision, and its ~11% of disagreement days is exactly where the hold-similar/OOS-collapsed asymmetry lives; corr(VIX)=0.587 additionally suggests the non-HMM part is substantially vol.",
+    "why_it_matters": "The card reports corr 0.796 openly but leaves the inference to the reader; W3's decision whether to improve L2 or discard it turns on whether L2 carries independent content (evidence here: very little, and what is independent degrades OOS)."
+   },
+   {
+    "severity": "note",
+    "what": "The action-conditioning INERT read is weak-by-construction, as the hunt suspected: the exposure path is a deterministic coarse function (threshold + 10d hold) of the eyes4 belief built from the same macro panel the ridge context encodes via PCA, and the augmented arm reuses the alpha tuned for the plain design (a capacity handicap). L1_k4 margin -0.0008 at z=-1.99 shows the channel mildly HURTS, consistent with noise columns.",
+    "why_it_matters": "The preregistration honestly expected NULL and frames the interface as the deliverable, so nothing flips — but the result should be cited as 'consistent with expectation, uninformative about causal footprint', never as affirmative evidence that actions carry no information; the calm-baseline contamination check also came back conservative (leftover 2020 tail / 2022 H2 inflate the calm median, biasing AGAINST the detour PASS, not toward it)."
+   },
+   {
+    "severity": "note",
+    "what": "DETOUR '3/3' is mildly fragile at the block-choice margin: TARIFF (n=9) z spans 1.93-2.90 across block 2-5 x 4 seeds, dipping below 2 at block=2; COVID (min 2.84) and RATES (min 4.47) are robust, so the worst probed case is 2/3 — still clearing the preregistered >=2/3 bar; no look-ahead found in the surprise pipeline (ridge fit purged-train only, alpha fixed, break windows preregistered; DEV-span COVID caveat already disclosed).",
+    "why_it_matters": "The PASS token is safe in both directions, but the report should print '>=2/3 (TARIFF marginal, z 1.9-2.9 by block)' rather than a flat 3/3, since the third hit does not survive all defensible bootstrap choices."
+   }
+  ],
+  "verdict": "MINOR_ISSUES"
+ }
+}

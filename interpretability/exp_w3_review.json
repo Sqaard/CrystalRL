@@ -1,0 +1,32 @@
+{
+ "date": "2026-07-19",
+ "reviewed": [
+  "exp_w3_l2_improve.py",
+  "exp_w3_ktd_memory.py"
+ ],
+ "review": {
+  "findings": [
+   {
+    "severity": "invalidating",
+    "what": "KT-D KILL is measured through a growing arm handicapped by construction: annual KMeans recompute permutes/churns cluster identity while ridge coefficients stay frozen to mem-2018 channel order. Proven: index-aligned corr(F18,FY) per similarity channel reaches -0.89; the nearest-centroid map is non-bijective (new clusters at distance 38/25 have no representable channel); the store's own centroid_norms show 39.12/27.34 wandering across indices. Hungarian-aligning channels alone cuts the pooled k=1 kill from margin -0.0075 z -1.78 to -0.0035 z -1.06; a semantics-fixed growth operator (mem18 centroids frozen, only per-schema forward stats grow with data <= Y-1) PASSES the preregistered bar at k=4: pooled margin +0.0006 z +2.99, positive in all 5 years (k=1 flat z -0.02).",
+    "why_it_matters": "The printed 'KT-D KILL — enrichment at this scale/operator adds nothing' (also stamped into semantic_store_v0.json as ktd_status) mischaracterizes what was measured: the test conflates enrichment with channel-semantics scrambling, roughly half the kill z is a permutation artifact, and the most literal implementation of the preregistration's own 'only the MEMORY CONTENT grows' flips the read to PASS under the preregistered criterion. Honest verdict: KT-D UNINFORMATIVE at the recompute-all operator, with post-hoc evidence of small consistent enrichment under a semantics-stable operator that deserves its own preregistered confirmation before any PASS is claimed."
+   },
+   {
+    "severity": "minor",
+    "what": "KT-D kill criterion is asymmetric: PASS requires pooled z >= 1.28 with positive margin, but KILL fires on any margin <= 0 with no significance requirement (printed pooled z -1.78 at k=1 and -0.42 at k=4, neither past 1.96; k=4 margin -0.0001 is exactly the 'flat' case).",
+    "why_it_matters": "Even absent the permutation artifact, labeling a sub-significant negative as KILL (rather than null/inconclusive) overstates the evidence in the same direction the week's lesson warns about — a KILL is as manufacturable as a PASS, here partly by criterion design."
+   },
+   {
+    "severity": "minor",
+    "what": "Referee question (c) on KT-D partially allayed: the memory columns are not strictly inert — ablating the F18 features inside the frozen reg1 (train-mean impute) costs margin +0.0145 z +1.83 on 2022-26, above the study's own 1.28 bar — while the separately-tuned memory-vs-none secondary shows ~0 (z 0.39/1.08) because the no-memory arm compensates with a different alpha (0.1 vs 10).",
+    "why_it_matters": "The growing-vs-frozen comparison is not vacuous-two-inert-arms, so 'KT-D UNINFORMATIVE' should rest on the channel-permutation handicap (finding 1), not on inertness; the report's memory-vs-none framing hides that the schema features carry redundant-with-context but nonzero signal."
+   },
+   {
+    "severity": "note",
+    "what": "L2 DISCARD verified GENUINE on all three referee questions: (a) the bear identification is mathematically correct (pca.components_[:,0] reconstructs standardized ret_sum from PCA-8 coords) and the identified state is legitimately bear on train (corr 0.769 with the certified belief); the failure is causal-filter OOD lock-in, occupancy 0.98/0.98/1.0/1.0/1.0 over 2022-26 with median emission logp falling -8.0 (train) to -14.3 (hold/oos), driven by the 10Y-yield LEVEL feature at mean z +2.23 hold / +3.85 oos against the frozen 2010-18 scaler; (b) the trivial CL-1c-style fix (bear by max corr with the certified belief on train) selects the SAME state in both variants and reproduces the printed numbers exactly — DISCARD does not rest on a broken arm, and no threshold rescues a posterior pinned at 1.000; (c) combined-evidence discard is defensible: two independent constructions failed OOS for different real reasons and the branch taken is the conservative no-op (certified HMM stays the command surface).",
+    "why_it_matters": "Confirms the L2 verdict is a measured failure, not a manufactured kill. Two report hygiene points: the dev-only [5%,95%] coverage guard is a real harness gap that admitted a config degenerate outside dev (the OOS bar caught it this time), and the verdict text should name the mechanism (rates-regime level shift saturating a frozen-scaler HMM) instead of the vaguer 'lacks independent OOS content' — that mechanism also warns any future L2 rebuild to exclude raw level features."
+   }
+  ],
+  "verdict": "VERDICT_INVALIDATING_BUG"
+ }
+}

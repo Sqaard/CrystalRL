@@ -1,0 +1,448 @@
+{
+  "schema_version": "w6-shield-replay.v1",
+  "experiment": "W6 adversarial safety/execution replay",
+  "shield_version": "SHIELD_V1",
+  "evidence_status": "OPERATIONAL_MECHANICS_ONLY",
+  "scenario_probability_status": "NOT_USED",
+  "gates": {
+    "GW6_1_zero_preventable_hard_violations": true,
+    "GW6_2_every_residual_explained_and_bounded": false,
+    "GW6_3_champion_goal_probability_not_destroyed": false,
+    "GW6_4_fallback_on_ood_missing_calibration_market_alarm": true,
+    "GW6_5_cost_aware_pacing": true,
+    "GW6_6_full_audit_replay_and_hash_chain": true,
+    "GW6_7_weak_policy_not_laundered": true,
+    "GW6_8_invalid_inputs_halt": true,
+    "GW6_9_paper_book_identity_and_replay": true
+  },
+  "adversarial_cases": [
+    {
+      "name": "negative_and_leveraged_target",
+      "status": "EXECUTED",
+      "fallback_used": false,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "concentration cap 0.6: SPY 1.400000 -> 0.6",
+        "negative weight clipped: IEF -0.200000 -> 0",
+        "estimated transaction cost: 0.0002000000 (one-way turnover 0.200000, 10bp)"
+      ]
+    },
+    {
+      "name": "restricted_instrument",
+      "status": "EXECUTED",
+      "fallback_used": false,
+      "preventable": 0,
+      "residuals": [
+        {
+          "type": "transaction_cost_budget",
+          "magnitude": 0.00010000000000000005,
+          "bound": 0.00075,
+          "bound_type": "long_only_full_turnover_cost_ceiling",
+          "economic_loss_bound": 0.001,
+          "duration_days_bound": 0,
+          "cause": "hard-rule liquidation takes priority over the soft cost budget",
+          "action": "attribute excess cost to safety; never to policy skill"
+        }
+      ],
+      "reasons": [
+        "restricted instrument IEF: 0.600000 -> 0",
+        "turnover cap: L1 1.000000 > 0.5, partial move x0.500000",
+        "restricted instrument IEF: 0.100000 -> 0",
+        "estimated transaction cost: 0.0003500000 (one-way turnover 0.350000, 10bp)"
+      ]
+    },
+    {
+      "name": "concentration",
+      "status": "EXECUTED",
+      "fallback_used": false,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "concentration cap 0.6: SPY 0.950000 -> 0.6",
+        "estimated transaction cost: 0.0002000000 (one-way turnover 0.200000, 10bp)"
+      ]
+    },
+    {
+      "name": "wealth_floor",
+      "status": "EXECUTED",
+      "fallback_used": false,
+      "preventable": 0,
+      "residuals": [
+        {
+          "type": "transaction_cost_budget",
+          "magnitude": 0.00015000000000000007,
+          "bound": 0.00075,
+          "bound_type": "long_only_full_turnover_cost_ceiling",
+          "economic_loss_bound": 0.001,
+          "duration_days_bound": 0,
+          "cause": "hard-rule liquidation takes priority over the soft cost budget",
+          "action": "attribute excess cost to safety; never to policy skill"
+        }
+      ],
+      "reasons": [
+        "concentration cap 0.6: SPY 0.800000 -> 0.6",
+        "wealth-floor cap: risky 0.800000 -> 0.300000 (cushion 0.100000, m=3)",
+        "turnover cap: L1 0.800000 > 0.5, partial move x0.625000",
+        "wealth-floor cap: risky 0.450000 -> 0.300000 (cushion 0.100000, m=3)",
+        "estimated transaction cost: 0.0004000000 (one-way turnover 0.400000, 10bp)"
+      ]
+    },
+    {
+      "name": "manual_frozen_restricted",
+      "status": "EXECUTED",
+      "fallback_used": false,
+      "preventable": 0,
+      "residuals": [
+        {
+          "type": "restricted_position",
+          "sleeve": "IEF",
+          "magnitude": 0.2,
+          "bound": 0.2,
+          "bound_type": "current_position_weight",
+          "economic_loss_bound": null,
+          "duration_days_bound": null,
+          "cause": "untradeable/liquidity-limited existing position",
+          "action": "hold/fallback and retry when marketable"
+        }
+      ],
+      "reasons": [
+        "data-guard freeze: IEF held at 0.200000 (target 0.000000 not tradeable)",
+        "restricted IEF is guard-frozen at 0.200000: liquidation deferred",
+        "turnover cap: L1 0.600000 > 0.5, partial move x0.833333",
+        "restricted IEF is guard-frozen at 0.200000: liquidation deferred",
+        "estimated transaction cost: 0.0002500000 (one-way turnover 0.250000, 10bp)"
+      ]
+    },
+    {
+      "name": "gap_alarm",
+      "status": "EXECUTED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fallback selected: DP/static champion",
+        "data-quality/marketability alarm -> fallback selected",
+        "data guard froze SPY: gap",
+        "data-guard freeze: SPY held at 0.500000 (target 0.200000 not tradeable)",
+        "estimated transaction cost: 0.0002000000 (one-way turnover 0.200000, 10bp)"
+      ]
+    },
+    {
+      "name": "stale_alarm",
+      "status": "EXECUTED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fallback selected: DP/static champion",
+        "data-quality/marketability alarm -> fallback selected",
+        "data guard froze IEF: stale",
+        "data-guard freeze: IEF held at 0.200000 (target 0.000000 not tradeable)",
+        "turnover cap: L1 0.600000 > 0.5, partial move x0.833333",
+        "estimated transaction cost: 0.0002500000 (one-way turnover 0.250000, 10bp)"
+      ]
+    },
+    {
+      "name": "missing_today_alarm",
+      "status": "EXECUTED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fallback selected: DP/static champion",
+        "data-quality/marketability alarm -> fallback selected",
+        "data guard froze IEF: missing",
+        "data guard froze SPY: missing",
+        "data-guard freeze: IEF held at 0.200000 (target 0.000000 not tradeable)",
+        "data-guard freeze: SPY held at 0.500000 (target 0.200000 not tradeable)",
+        "estimated transaction cost: 0.0000000000 (one-way turnover 0.000000, 10bp)"
+      ]
+    },
+    {
+      "name": "limit_lock_alarm",
+      "status": "EXECUTED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fallback selected: DP/static champion",
+        "data-quality/marketability alarm -> fallback selected",
+        "data guard froze SPY: limit",
+        "data-guard freeze: SPY held at 0.500000 (target 0.200000 not tradeable)",
+        "estimated transaction cost: 0.0002000000 (one-way turnover 0.200000, 10bp)"
+      ]
+    },
+    {
+      "name": "liquidity_blocks_floor_repair",
+      "status": "EXECUTED",
+      "fallback_used": false,
+      "preventable": 0,
+      "residuals": [
+        {
+          "type": "wealth_floor_position_cap",
+          "sleeve": null,
+          "magnitude": 0.5499999999999998,
+          "bound": 0.7,
+          "bound_type": "blocked_position_weight",
+          "economic_loss_bound": null,
+          "duration_days_bound": null,
+          "cause": "required de-risking blocked by marketability/liquidity",
+          "action": "no new risk; liquidate blocked sleeves when available"
+        }
+      ],
+      "reasons": [
+        "wealth-floor cap: risky 0.200000 -> 0.150000 (cushion 0.050000, m=3)",
+        "turnover cap: L1 1.100000 > 0.5, partial move x0.454545",
+        "wealth-floor cap: risky 0.450000 -> 0.150000 (cushion 0.050000, m=3)",
+        "estimated transaction cost: 0.0005500000 (one-way turnover 0.550000, 10bp)",
+        "execution limited sell SPY: 0.000000/0.550000 (sell not marketable, trade cap 0.300000)"
+      ]
+    },
+    {
+      "name": "ood_fallback",
+      "status": "EXECUTED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fallback selected: DP/static champion",
+        "OOD: funding_ratio=4.0 outside envelope [0.1, 3.0]",
+        "turnover cap: L1 1.000000 > 0.5, partial move x0.500000",
+        "estimated transaction cost: 0.0002500000 (one-way turnover 0.250000, 10bp)"
+      ]
+    },
+    {
+      "name": "calibration_fallback",
+      "status": "EXECUTED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fallback selected: DP/static champion",
+        "calibration alarm: status 'UNCALIBRATED_RESEARCH_ESTIMATES' not in ['CALIBRATED', 'CALIBRATED_V1'] (UNCALIBRATED_RESEARCH_ESTIMATES) -> fallback allowed; fallback policy IS the DP champion table, so fallback == champion (no-op today)",
+        "turnover cap: L1 1.000000 > 0.5, partial move x0.500000",
+        "estimated transaction cost: 0.0002500000 (one-way turnover 0.250000, 10bp)"
+      ]
+    },
+    {
+      "name": "nan_target_halts",
+      "status": "HALT_INVALID_INPUT",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fail-closed input rejection: target['SPY'] is not finite: nan"
+      ]
+    },
+    {
+      "name": "unknown_unfed_sleeve_halts",
+      "status": "HALT_INVALID_INPUT",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fail-closed input rejection: unknown/unfed executable sleeves: ['CRYPTO']"
+      ]
+    },
+    {
+      "name": "zero_column_feed_halts",
+      "status": "HALT_DATA_FEED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fail-closed input rejection: price feed must be a non-empty DataFrame"
+      ]
+    },
+    {
+      "name": "alarm_on_unheld_sleeve_holds",
+      "status": "EXECUTED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fallback selected: DP/static champion",
+        "data-quality/marketability alarm -> fallback selected",
+        "data guard froze SPY: stale",
+        "estimated transaction cost: 0.0000000000 (one-way turnover 0.000000, 10bp)"
+      ]
+    },
+    {
+      "name": "malformed_trade_limit_halts",
+      "status": "HALT_INVALID_INPUT",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fail-closed input rejection: unknown/unfed executable sleeves: ['IEF']"
+      ]
+    },
+    {
+      "name": "invalid_broker_state_halts",
+      "status": "HALT_RECONCILIATION_REQUIRED",
+      "fallback_used": true,
+      "preventable": 0,
+      "residuals": [],
+      "reasons": [
+        "fail-closed input rejection: current broker book must sum to 1"
+      ]
+    }
+  ],
+  "residual_summary": {
+    "count": 4,
+    "all_bounded": false,
+    "residuals": [
+      {
+        "type": "transaction_cost_budget",
+        "magnitude": 0.00010000000000000005,
+        "bound": 0.00075,
+        "bound_type": "long_only_full_turnover_cost_ceiling",
+        "economic_loss_bound": 0.001,
+        "duration_days_bound": 0,
+        "cause": "hard-rule liquidation takes priority over the soft cost budget",
+        "action": "attribute excess cost to safety; never to policy skill"
+      },
+      {
+        "type": "transaction_cost_budget",
+        "magnitude": 0.00015000000000000007,
+        "bound": 0.00075,
+        "bound_type": "long_only_full_turnover_cost_ceiling",
+        "economic_loss_bound": 0.001,
+        "duration_days_bound": 0,
+        "cause": "hard-rule liquidation takes priority over the soft cost budget",
+        "action": "attribute excess cost to safety; never to policy skill"
+      },
+      {
+        "type": "restricted_position",
+        "sleeve": "IEF",
+        "magnitude": 0.2,
+        "bound": 0.2,
+        "bound_type": "current_position_weight",
+        "economic_loss_bound": null,
+        "duration_days_bound": null,
+        "cause": "untradeable/liquidity-limited existing position",
+        "action": "hold/fallback and retry when marketable"
+      },
+      {
+        "type": "wealth_floor_position_cap",
+        "sleeve": null,
+        "magnitude": 0.5499999999999998,
+        "bound": 0.7,
+        "bound_type": "blocked_position_weight",
+        "economic_loss_bound": null,
+        "duration_days_bound": null,
+        "cause": "required de-risking blocked by marketability/liquidity",
+        "action": "no new risk; liquidate blocked sleeves when available"
+      }
+    ]
+  },
+  "champion_preservation": {
+    "n_action_transitions": 25,
+    "n_mismatch": 20,
+    "target_execution_identity": 0.19999999999999996,
+    "goal_probability_delta_by_identity": null,
+    "mismatches": [
+      {
+        "from": 0,
+        "to": 1,
+        "executed": {
+          "SPY": 1.0,
+          "CASH": 0.0
+        },
+        "target": {
+          "SPY": 0.45,
+          "EFA": 0.15,
+          "IEF": 0.2,
+          "TLT": 0.1,
+          "TIP": 0.05,
+          "GLD": 0.05,
+          "CASH": 0.0
+        }
+      },
+      {
+        "from": 0,
+        "to": 2,
+        "executed": {
+          "SPY": 1.0,
+          "CASH": 0.0
+        },
+        "target": {
+          "SPY": 0.6,
+          "CASH": 0.4
+        }
+      },
+      {
+        "from": 0,
+        "to": 3,
+        "executed": {
+          "SPY": 1.0,
+          "CASH": 0.0
+        },
+        "target": {
+          "SPY": 0.2,
+          "CASH": 0.8
+        }
+      }
+    ],
+    "goal_probability_test_status": "NOT_RUN_UNDER_SHIPPED_LIMITS",
+    "exit_gate_satisfied": false
+  },
+  "cost_aware_pacing": {
+    "L1_executed": 0.19999999999999996,
+    "estimated_cost": 0.00019999999999999996,
+    "cost_budget": 0.0002
+  },
+  "weak_policy_laundering_control": {
+    "raw_policy_risky_weight": 1.0,
+    "executed_risky_weight": 0.0,
+    "matched_safe_executed_equal": true,
+    "shield_changed_weak_policy": true,
+    "performance_attribution": "SAFETY_SHIELD_ONLY \u2014 no PPO/DP skill credit",
+    "policy_promotable_from_shielded_result": false
+  },
+  "halts": {
+    "nan_target_halts": "HALT_INVALID_INPUT",
+    "unknown_unfed_sleeve_halts": "HALT_INVALID_INPUT",
+    "zero_column_feed_halts": "HALT_DATA_FEED",
+    "malformed_trade_limit_halts": "HALT_INVALID_INPUT",
+    "invalid_broker_state_halts": "HALT_RECONCILIATION_REQUIRED"
+  },
+  "audit_replay": {
+    "schema_version": "w6-audit-replay.v1",
+    "n": 6,
+    "n_mismatch": 0,
+    "ok": true,
+    "last_record_hash": "4e9529fc7b59c0c4a9cd1a5c6f52a6b13e807a8bf2c70b2516e2467f5de16639",
+    "mismatches": [],
+    "fixture_sha256": "ac9c076dbf473f2ed9b49e4324c1b13e77488a956305b7b7e0729abda90d256d",
+    "fixture": "interpretability/w6_audit_fixture.jsonl"
+  },
+  "paper_book": {
+    "book": "interpretability/w6_paper_book_fixture.json",
+    "audit": "interpretability/w6_paper_audit_fixture.jsonl",
+    "book_sha256": "45d4624a16d3707c30c5a1d38a488bbf3472648779402c57f04190a82c7ed5f0",
+    "audit_sha256": "dd8f763f4f175f53cc3cf1e008f90ad953b9e5839b356b17040679980f76eabe",
+    "step": 2,
+    "identity_pinned": true,
+    "wealth_after_costs": 100.0,
+    "replay": {
+      "schema_version": "w6-audit-replay.v1",
+      "n": 2,
+      "n_mismatch": 0,
+      "ok": true,
+      "last_record_hash": "a4c308f02e095ee73d31ede9e21e45f3c59490eb613587b8fb2c9be2e946404f",
+      "mismatches": []
+    },
+    "book_replay": {
+      "schema_version": "w6-paper-book-replay.v1",
+      "ok": true,
+      "n": 2,
+      "last_record_hash": "a4c308f02e095ee73d31ede9e21e45f3c59490eb613587b8fb2c9be2e946404f",
+      "mismatches": []
+    }
+  },
+  "certification_status": "W6_OPERATIONAL_CORE_PASS_EXIT_INCOMPLETE",
+  "recommendable": false,
+  "verdict": "W6 operational core verified but exit gate incomplete; failing gate(s) bind: ['GW6_2_every_residual_explained_and_bounded', 'GW6_3_champion_goal_probability_not_destroyed']"
+}

@@ -1,0 +1,73 @@
+{
+ "names": {
+  "dim1": "+max_dd -VIX +trend",
+  "dim2": "+dVIX -ebp -ret_sum",
+  "dim3": "+y10 -ebp +real_vol",
+  "dim4": "+turb -y10 -VIX",
+  "dim5": "+vrp +ret_sum +max_dd",
+  "dim6": "+ebp +y10 -real_vol",
+  "dim7": "+trend +real_vol +ebp",
+  "dim8": "+dVIX +ret_sum +VIX"
+ },
+ "simulatability": {
+  "S": 0.703,
+  "per_dim_r2": [
+   "0.728",
+   "0.323",
+   "0.765",
+   "0.9",
+   "0.966",
+   "0.921",
+   "0.722",
+   "0.769"
+  ]
+ },
+ "stability": {
+  "St": 0.981,
+  "method": "top-8 subspace overlap across train halves"
+ },
+ "faithfulness": {
+  "F": 1.0,
+  "note": "linear pathway born-faithful by construction; not an achievement"
+ },
+ "crystalscore_L1": 0.69,
+ "frontier": {
+  "2": {
+   "hold_margin": 0.164,
+   "z": 1.61,
+   "null": "shrunk.75",
+   "oos_margin": 0.2661
+  },
+  "4": {
+   "hold_margin": 0.2213,
+   "z": 2.3,
+   "null": "shrunk.75",
+   "oos_margin": 0.3511
+  },
+  "8": {
+   "hold_margin": 0.2199,
+   "z": 2.59,
+   "null": "shrunk.75",
+   "oos_margin": 0.3159
+  },
+  "10": {
+   "hold_margin": 0.2434,
+   "z": 2.74,
+   "null": "shrunk.75",
+   "oos_margin": 0.3073
+  }
+ },
+ "flat_twin_paired_z": {
+  "k": 4,
+  "z": -0.34,
+  "n_hold": 24
+ },
+ "verdict": "W4 battery complete: L1 CrystalScore 0.69 (F 1.0 born-linear x S 0.70 x St 0.98); the frontier shows quality vs parsimony explicitly; the KT-B flat-twin caveat is closed with paired z -0.34 (pooled advantage NOT individually significant - the FULL-PASS reading of KT-B softens to 'ordering PASS + directional representational dividend').",
+ "runtime_s": 2,
+ "POST_REVIEW_CORRECTION": {
+  "review": "interpretability/exp_w4_finale_review.json",
+  "stability_caveat": "St=0.981 is floor-inflated: an 8-of-10-dim subspace has hard floor 0.75, random-subspace chance 0.802 mean / 0.853 p95; real beats chance (representation exists) but as a multiplicative factor it overstates - chance-rescaled ~0.90, and the k=4 read (~0.71) would give CrystalScore ~0.50. Honest range: CrystalScore(L1) = 0.50-0.69 depending on the stability convention; dims 3-8 individually unstable.",
+  "frontier_caveat": "frontier cells carry no placebo guard - cite the SHAPE (knee at D~4), never the z values as certified skill",
+  "clean": "S out-of-sample correct; flat-twin paired z correctly aligned and conservative; frontier internally comparable"
+ }
+}

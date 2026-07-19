@@ -1,0 +1,92 @@
+{
+ "preregistration": {
+  "bar": "hold twin z(L2 swap) >= twin z(HMM) - 0.5; improvement claims need v12",
+  "belief_construction": "trailing 21d block -> train-frozen PCA-8 -> train-fit GMM-2 posterior"
+ },
+ "hmm": {
+  "name": "hmm_eyes4",
+  "tau": 0.74,
+  "e_def": 0.95,
+  "dev_twin_z": 2.25,
+  "hold": {
+   "twin_z": 2.98,
+   "defensive_share": 0.599,
+   "matched_const": 0.97
+  },
+  "oos": {
+   "twin_z": 0.98,
+   "defensive_share": 0.254,
+   "matched_const": 0.987
+  }
+ },
+ "l2": {
+  "name": "l2_gmm",
+  "tau": 0.9,
+  "e_def": 0.95,
+  "dev_twin_z": 2.16,
+  "hold": {
+   "twin_z": 2.59,
+   "defensive_share": 0.619,
+   "matched_const": 0.969
+  },
+  "oos": {
+   "twin_z": -1.23,
+   "defensive_share": 0.238,
+   "matched_const": 0.988
+  }
+ },
+ "ktc_pass": true,
+ "l2_card": {
+  "corr_with_hmm_belief": 0.796,
+  "corr_with_VIX": 0.587,
+  "corr_with_ewma_vol": 0.528,
+  "bear_component_profile": {
+   "ret_sum": 0.01,
+   "real_vol": 0.01,
+   "max_dd": -0.05,
+   "dVIX": 0.43,
+   "VIX": 21.05,
+   "trend": 0.0,
+   "turb": 56.13,
+   "y10": 2.32,
+   "vrp": 0.01,
+   "ebp": 0.13
+  },
+  "bull_component_profile": {
+   "ret_sum": 0.02,
+   "real_vol": 0.01,
+   "max_dd": -0.02,
+   "dVIX": -0.28,
+   "VIX": 14.42,
+   "trend": 0.06,
+   "turb": 25.94,
+   "y10": 2.38,
+   "vrp": 0.01,
+   "ebp": -0.12
+  },
+  "pca_dim1_loadings": {
+   "ret_sum": 0.35,
+   "real_vol": -0.42,
+   "max_dd": 0.46,
+   "dVIX": -0.28,
+   "VIX": -0.43,
+   "trend": 0.42,
+   "turb": -0.11,
+   "y10": 0.07,
+   "vrp": -0.08,
+   "ebp": -0.16
+  },
+  "rule_contrast_write_F": 1.0
+ },
+ "verdict": "HOLD-BAR PASS (provisional), OOS-DEGRADING - see POST_REVIEW",
+ "runtime_s": 28,
+ "POST_REVIEW": {
+  "review": "interpretability/exp_w2_review.json (MINOR_ISSUES, no flips)",
+  "corrected_verdict": "KT-C HOLD-BAR PASS, OOS-DEGRADING SUBSTITUTE - L2 oos twin z -1.12..-1.27 vs HMM +0.95..+1.13 (stable ~2.2z gap on 2.5y fresh data); pass margin over the bar is thin (0.00-0.24 across bootstrap variants) - PROVISIONAL",
+  "corrections": [
+   "claim \"certified rule\" inaccurate: derive_and_read re-derives configs per belief (HMM arm lands 0.74/0.95, not the deployed 0.66/0.74); comparison internally fair; both arms at grid edges (twin z = lower bounds)",
+   "L2 blunt read: R2=0.63 vs the HMM belief, 89.2% decision agreement - largely a noisy re-encode of the HMM decision + vol; the ~11% disagreement days are where the OOS collapse lives; independent content is small and OOS-degrading",
+   "W3 guidance: do NOT build memory work on L2-as-substitute; improve or discard L2 first"
+  ]
+ }
+}

@@ -1,0 +1,708 @@
+{
+ "date": "2026-07-18",
+ "lecture": "LeCun, Objective-Driven AI, Harvard CMSA Ding Shum Lecture 2024-03-28",
+ "threads": [
+  {
+   "thread": "World models in RL and the predict-representation evidence: Ha-Schmidhuber → PlaNet/Dreamer/DreamerV3 → MuZero/value-equivalence → TD-MPC2 → DINO-WM/V-JEPA 2, including where latent-space prediction beats raw-observation prediction for control and where it fails (model exploitation, collapse, hallucination, objective mismatch)",
+   "atoms": [
+    {
+     "claim": "Training a controller entirely inside a learned latent world model works (CarRacing solved for the first time, 906±21 vs prior 591-652), but the policy discovers adversarial policies that exploit model defects: in dream-VizDoom the agent learned to move so that monsters never fire a single fireball, and at low sampling temperature the dream score of 2086 collapsed to 193 in the real environment; injecting uncertainty (raising temperature tau to 1.15) restored transfer (dream 918 → real 1092).",
+     "sources": [
+      "World Models / Recurrent World Models Facilitate Policy Evolution, David Ha & Jürgen Schmidhuber, NeurIPS 2018 (arXiv:1803.10122); interactive version worldmodels.github.io"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Backtest overfitting made mechanical: a strategy trained against an internal market simulator will exploit the simulator's fill/slippage/regime bugs, printing a 2086-vs-193 gap between simulated and live P&L; the tau-knob is deliberate pessimism/noise injection — exactly what the project's frozen gate, placebo policies, and exposure-matched twins implement.",
+     "relevance": "Supports T3 (the analyze→predict→act→compare loop inside one's own model is viable) but supplies its falsification condition: without adversarial regularization the loop optimizes the map, not the territory — 'learning from the difference' degenerates into learning to erase the difference inside the model."
+    },
+    {
+     "claim": "MuZero's latent model predicts only the three decision-relevant quantities — reward, value, and policy — and its hidden state is explicitly NOT required to reconstruct observations or the true environment state; it matched AlphaZero's superhuman play in Go/chess/shogi without being given the rules and set a new Atari SOTA. Grimm et al. formalize why: value-equivalent models (same Bellman updates on the relevant function class) can be far simpler than observation-accurate models without losing planning performance.",
+     "sources": [
+      "Mastering Atari, Go, chess and shogi by planning with a learned model, Schrittwieser, Antonoglou, Hubert, Simonyan, Sifre, Schmitt, Guez, Lockhart, Hassabis, Graepel, Lillicrap, Silver, Nature 588, 2020",
+      "The Value Equivalence Principle for Model-Based Reinforcement Learning, Grimm, Barreto, Singh, Silver, NeurIPS 2020"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "An allocation model needs to predict only what changes the allocation — regime probability, drawdown risk, expected policy — not the whole price tape: the project's certified 'P(bear)>0.66 → exposure 0.74' rule is literally a value-equivalent market model (2 states instead of a generative model of 30 stocks).",
+     "relevance": "Strongly supports T2 and T5 (predict the decision-relevant representation, not raw data). QUALIFIES/partially CONTRADICTS T1: control-optimal models can be decision-sufficient without representing or enriching a world picture — MuZero's latent state is illegible and non-reconstructive — so T1's ambition of an accurate economic world model must be justified by interpretability/certification needs (as in CrystalScore), not by control performance alone."
+    },
+    {
+     "claim": "The most general single-configuration model-based agent — DreamerV3, which outperformed specialized methods across 150+ tasks and was the first to collect Minecraft diamonds from scratch without human data — trains its latent RSSM by RECONSTRUCTING raw observations (decoder with symlog targets): the empirical champion of 'learning in imagination' still uses raw-observation prediction as its representation-shaping signal, with robustness coming from normalization/balancing tricks, not from abandoning reconstruction.",
+     "sources": [
+      "Mastering diverse control tasks through world models (DreamerV3), Hafner, Pasukonis, Lillicrap, Ba, Nature 640, 2025 (arXiv:2301.04104, 2023)",
+      "Learning Latent Dynamics for Planning from Pixels (PlaNet), Hafner et al., ICML 2019"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Fitting the raw return/vol panel (a generative fit) can remain the best scaffold for learning a latent even when the trading decision consumes only the regime belief — 'never model raw prices' is not what the SOTA does when observations are information-dense.",
+     "relevance": "CONTRADICTS the strong reading of T2 ('predict the representation, never the raw data'). The honest reconciliation: plan and act in representation space (all Dreamer versions do), but reconstruction of raw observations remains a competitive — sometimes superior — representation-learning signal when the signal-to-noise ratio of observations is high. T2's advantage is regime-dependent, not universal."
+    },
+    {
+     "claim": "When observations are dominated by task-irrelevant variation, reconstruction-based world models fail in a characteristic way: Dreamer's capacity is consumed reconstructing irrelevant background while losing task-relevant content (TIA), and reconstruction-free objectives (prototypes in DreamerPro, factored noise in Denoised MDPs) restore performance under complex distractors while matching Dreamer on clean tasks; a 2026 probe study across encoder families finds models with strong pixel-decoding quality can have near-zero action recoverability in their latents — temporal prediction structure, not reconstruction fidelity, is what makes latents action-relevant.",
+     "sources": [
+      "Learning Task Informed Abstractions, Fu, Yang, Agrawal, Jaakkola, ICML 2021",
+      "DreamerPro: Reconstruction-Free Model-Based Reinforcement Learning with Prototypical Representations, Deng, Jang, Ahn, ICML 2022",
+      "Denoised MDPs: Learning World Models Better Than the World Itself, Wang, Xiao, Xu, Zhu, Tenenbaum, Gan, ICML 2022",
+      "What Makes Video World Model Latents Action-Relevant: Prediction over Reconstruction, Yeom, Kim, Park, Jung, Lee, Kim, arXiv:2606.07687, 2026"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Markets are the extreme distractor regime: daily price variance is overwhelmingly decision-irrelevant noise, so a model trained to reconstruct the tape spends its capacity on noise — this is the mechanism behind the project's own twin result (daily price-level prediction VoI≈0 while the 2-state regime belief certifies), and it predicts that a market JEPA should drop reconstruction losses entirely.",
+     "relevance": "Supports T2 precisely in the regime that matters for finance, and together with the DreamerV3 atom yields the boundary condition the theory document needs: representation-space prediction beats raw-observation prediction when observations are noise/distractor-dominated, and not otherwise."
+    },
+    {
+     "claim": "Decoder-free self-predictive world models are now competitive at scale: TD-MPC2 plans in the latent space of an implicit world model trained by latent-consistency (no decoder, no reconstruction) and beats baselines across 104 continuous-control tasks with a single hyperparameter set, scaling to a 317M-parameter 80-task agent — but the self-predictive objective is degenerate on its face (constant representation gives zero loss), and avoiding collapse provably depends on optimization tricks: stop-gradient plus a slow EMA target encoder, whose dynamics approximate gradient-based PCA/SVD of the transition structure.",
+     "sources": [
+      "TD-MPC2: Scalable, Robust World Models for Continuous Control, Hansen, Su, Wang, ICLR 2024",
+      "Temporal Difference Learning for Model Predictive Control (TD-MPC), Hansen, Wang, Su, ICML 2022",
+      "Understanding Self-Predictive Learning for Reinforcement Learning, Tang, Guo, Richemond, Pires, et al., ICML 2023"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "A market model trained only to predict its own future embedding can silently collapse to 'every day looks the same' — a degenerate belief that scores perfectly on its own objective; the finance-grade guard is external: exposure-matched twins and placebo gates that detect when a representation carries no decision information (the project's z_dsd-degeneracy lesson is the same failure class), while EMA targets are the ML analogue of anchoring beliefs to slow-moving statistics.",
+     "relevance": "Supports T2 (representation-space prediction works and scales without any raw-data decoding) and T4 (the 'clever compare' of energy-based/JEPA training is exactly the anti-collapse machinery) — while naming the precise failure mode T4 must solve: without an asymmetry (stop-grad/EMA/negative samples), comparing representations to representations collapses."
+    },
+    {
+     "claim": "World models built on FROZEN pretrained representations enable zero-shot planning without reward models or task training: DINO-WM predicts future DINOv2 patch features (no pixel reconstruction) from offline trajectories and solves arbitrarily configured mazes, push manipulation, and multi-particle tasks at test time by optimizing action sequences toward goal features; V-JEPA 2-AC post-trains an action-conditioned head on ~62 hours of unlabeled robot video atop a JEPA encoder pretrained on 1M+ hours of passive internet video, and executes zero-shot pick-and-place on Franka arms in labs it never saw.",
+     "sources": [
+      "DINO-WM: World Models on Pre-trained Visual Features enable Zero-shot Planning, Zhou, Pan, LeCun, Pinto, arXiv:2411.04983, 2024 / ICML 2025",
+      "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning, Assran et al. (Meta AI), arXiv:2506.09985, 2025"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Pretrain a market representation self-supervised on decades of passive cross-asset history, then bolt a small action-conditioned head trained on the fund's own execution/interaction data — decoupling world-representation learning from strategy learning; this is the architectural blueprint the project already gropes toward with the LLM-as-feature-generator → PPO split, and it argues the representation layer should be trained on far more data than the policy layer ever sees.",
+     "relevance": "Supports T2 (predict in embedding space; both systems skip reconstruction), T3 (mostly-passive experience builds the model; a thin acting layer closes the loop), and T6 (watch-first-act-later is the human developmental pattern). Contextual caveats: short-horizon goal reaching, camera-sensitive, and V-JEPA 2 reports degradation over long planning horizons — not yet evidence for long-horizon economic planning."
+    },
+    {
+     "claim": "Better observation-prediction does not imply better control, and model-generated experience is dangerous at depth: one-step prediction likelihood is demonstrably uncorrelated with downstream control performance (objective mismatch); model errors compound with rollout length, so MBPO's gains come from truncating imagination to short branched rollouts from real states; and Dyna-style bootstrapping off model-generated states creates 'hallucinated values' — arbitrary value estimates at unreachable states that leak into and corrupt the real policy.",
+     "sources": [
+      "Objective Mismatch in Model-based Reinforcement Learning, Lambert, Amos, Yadan, Calandra, L4DC (PMLR 120), 2020",
+      "When to Trust Your Model: Model-Based Policy Optimization, Janner, Fu, Zhang, Levine, NeurIPS 2019",
+      "Hallucinating Value: A Pitfall of Dyna-style Planning with Imperfect Environment Models, Jafferjee, Bosch, Talvitie, et al., arXiv:2006.04363, 2020 (extended in JAIR 2024)"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Forecast-MSE leaderboards are not P&L — a better price forecaster is not a better allocator (the project's triple-confirmed daily-prediction null with a certified regime rule on top is a live instance of objective mismatch); and multi-year Monte Carlo paths rolled out from a fitted market generator silently poison downstream risk numbers — the reason the project's personalization contracts bootstrap from historical blocks rather than model rollouts, and why any 'dream training' for a trading agent should use short branched rollouts anchored to real market states.",
+     "relevance": "QUALIFIES T3: the compare-predicted-vs-actual learning loop must be scored in decision space (VoI, Bellman-relevant error), not likelihood space, or it optimizes the wrong difference. Also caps naive T5 optimism: prediction horizon does not extend for free — at any fixed abstraction level, compounding error sets a hard trust horizon, and abstraction is the escape route only if the coarser level is itself validated."
+    },
+    {
+     "claim": "Temporal abstraction empirically extends the usable planning horizon: Director plans inside a learned world model's latent space with a manager that selects internal subgoals at a coarser timescale while a worker executes primitive actions, and thereby solves sparse-reward long-horizon pixel tasks that flat imagination-based agents fail; however, the strong general law 'higher abstraction level ⇒ longer prediction horizon' (LeCun's H-JEPA ladder, quantum→thermodynamics) remains a design principle with scattered empirical support — no controlled study measures horizon as a monotone function of abstraction level.",
+     "sources": [
+      "Deep Hierarchical Planning from Pixels (Director), Hafner, Lee, Fischer, Abbeel, NeurIPS 2022",
+      "A Path Towards Autonomous Machine Intelligence (H-JEPA position paper), Yann LeCun, OpenReview, 2022",
+      "Hierarchical Planning with Latent World Models, arXiv:2604.03208, 2026 (current frontier, early-stage)"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "The project's own ladder is the cleanest finance instance available: daily price level (VoI≈0, horizon ~0) → 2-state regime belief (certified, horizon 10d) → strategic allocation blends (annual contracts) — and it suggests a falsifiable next rung: does an even coarser abstraction (credit/valuation cycle state) certify at a multi-quarter horizon on the same frozen-gate methodology, or does the ladder break?",
+     "relevance": "Supports T5 directionally (mechanism demonstrated in Director: coarse-timescale latent goals unlock long horizons) and supports T3's 'science compresses' (subgoals are compressed plans), but flags for the theory document that T5 as stated is an extrapolated principle, not an established scaling law — it should be written as a falsifiable hypothesis with the cycle-level certification test as its kill condition."
+    }
+   ]
+  },
+  {
+   "thread": "Memory and experience accumulation in agents: episodic memory/retrieval systems (Generative Agents, MemGPT, Voyager), curiosity/prediction-error drives (ICM feature-space curiosity, noisy-TV, Schmidhuber compression progress), and enrichment-loop failure modes (sequential-editing collapse, experience-following error propagation, adversarial memory poisoning)",
+   "atoms": [
+    {
+     "claim": "In Generative Agents, the load-bearing memory component is not raw storage but the recursive 'reflection tree': a natural-language memory stream scored by recency x importance x relevance, from which the LLM periodically synthesizes higher-level insights that are re-stored as memories and can themselves be reflected upon; ablations show believable long-horizon behavior degrades as reflection, then planning, then memory are removed — abstraction-over-episodes, not accumulation of episodes, produces coherent behavior.",
+     "sources": [
+      "Park, O'Brien, Cai, Morris, Liang, Bernstein — 'Generative Agents: Interactive Simulacra of Human Behavior', UIST 2023 (arXiv:2304.03442)"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "An analyst's journal done right: raw daily observations are periodically distilled into standing theses ('credit spreads widening -> cut small-cap beta') that are retrieved by relevance/recency/importance when a decision recurs. The project's HL ledger + MEMORY.md already implements this pattern — the certified-rule text IS the reflection layer over raw backtest logs.",
+     "relevance": "Supports T3 (the analyze->store->retrieve->enrich loop is exactly the memory-stream+reflection cycle) and T5 (reflections are a higher abstraction level, and it is the reflections — not raw observations — that drive longer-horizon coherent behavior)."
+    },
+    {
+     "claim": "MemGPT shows an LLM can manage its own memory hierarchy like an operating system — bounded in-context 'RAM' plus unbounded out-of-context recall/archival storage, with the agent itself issuing paging function calls (core_memory_append, archival_memory_search) — enabling fixed-context agents over unbounded history; but it retains ALL raw messages in recall storage, so the compression happens at retrieval/attention time, not storage time — paging alone does not implement the human 'don't store raw data' principle.",
+     "sources": [
+      "Packer, Wooders, Lin, Fang, Patil, Gonzalez — 'MemGPT: Towards LLMs as Operating Systems', arXiv:2310.08560, 2023 (productionized as Letta)"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "A portfolio manager's desk: working context holds only current positions + today's regime read; the full trade blotter sits in cold storage and is paged in only when a similar episode recurs. Bounded attention over unbounded history — but without a distillation step the archive is a filing cabinet, not a world picture.",
+     "relevance": "Supports T3's infrastructure (memory tiers + self-editing are how an agent 'has memory'); QUALIFIES T3/T6: paging is not abstraction — T3's human-like compression requires a reflection/consolidation step (atom 1) on top, otherwise the system contradicts LeCun's 'humans do not store all raw data'."
+    },
+    {
+     "claim": "Voyager's ever-growing library of self-authored, self-VERIFIED executable code skills is what prevents plateau: the ablation without the skill library stalls in later iterations (~80+), and the library is portable — transplanting Voyager's skills into AutoGPT improved that different agent's zero-shot task success — i.e., experience stored as verified executable procedures compounds and transfers, unlike free-text beliefs; the write-gate is self-verification of each skill before it enters the library.",
+     "sources": [
+      "Wang, Xie, Jiang, Mandlekar, Xiao, Zhu, Fan, Anandkumar — 'Voyager: An Open-Ended Embodied Agent with Large Language Models', arXiv:2305.16291, 2023 (TMLR 2024)"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "A registry of certified trading rules as executable code, composed into larger strategies. The project's E-17 hand-off of the E-15 certified config to the autonomous loop (which then self-sustainingly refined it, wealth 0.20->0.40) is literally the Voyager pattern: accumulation works because every library entry passed an executable verification gate before being stored.",
+     "relevance": "Supports T3 (experience accumulation that compounds) and T1 (skills are actionable world knowledge, not trading for its own sake); qualifies T3: what accumulates SAFELY is verified executable knowledge with a certification write-gate — the project's frozen gate is the finance-hardened version of Voyager's self-verification."
+    },
+    {
+     "claim": "Pathak's ICM computes curiosity as prediction error in a LEARNED FEATURE space — inverse-dynamics features that encode only what the agent's actions influence or are influenced by — which is precisely 'predict the representation, not the pixels', and this feature choice (not the error signal) is what confers robustness to environmental noise; however, Burda et al.'s large-scale follow-up found fixed RANDOM features often match learned inverse-dynamics features, indicating much of the representation's value is dimensionality reduction and stability rather than learned semantics.",
+     "sources": [
+      "Pathak, Agrawal, Efros, Darrell — 'Curiosity-driven Exploration by Self-supervised Prediction', ICML 2017",
+      "Burda, Edwards, Pathak, Storkey, Darrell, Efros — 'Large-Scale Study of Curiosity-Driven Learning', arXiv:1808.04355, 2018 / ICLR 2019"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "For a small trading book the ICM criterion degenerates: the agent's actions move nothing in the market, so 'encode only what your actions influence' would delete the entire market state. The tradable analog is DECISION-relevance — encode what changes your payoff under your policy — which is exactly the project's regime belief P(bear) gating exposure: a feature selected because the agent's decision depends on it, not because the agent controls it.",
+     "relevance": "Supports T2 and T4 (prediction error computed by comparing representations in a learned space is the field-tested version of JEPA/EBM 'clever compare'); QUALIFIES T2: the principle that selects WHICH representation (controllability) does not transfer to markets and must be replaced by decision-relevance — T2 needs a market-native feature-selection principle, not a port of ICM's."
+    },
+    {
+     "claim": "The noisy-TV result: any agent rewarded by raw prediction error is permanently captured by irreducible stochasticity — Burda et al. empirically showed an agent abandoning maze exploration to watch a random-channel TV — because with a perfect model the expected prediction error equals the transition entropy, so maximal 'surprise' sits at pure noise; 'learn from the predicted-vs-actual difference' is therefore NOT a universal learning drive: it fails systematically in noise-dominated domains, and partial observability or model misspecification produces the same trap.",
+     "sources": [
+      "Burda, Edwards, Pathak, Storkey, Darrell, Efros — 'Large-Scale Study of Curiosity-Driven Learning', arXiv:1808.04355, 2018 / ICLR 2019",
+      "Burda, Edwards, Storkey, Klimov — 'Exploration by Random Network Distillation', ICLR 2019"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Daily price direction IS the noisy TV: a prediction-error-driven research loop 'explores' incompressible noise forever and harvests false discoveries as intrinsic reward. The project's triple-confirmed VoI~0 daily null and its two false-GREEN episodes are the market instance of the trap — and the certified value appearing only at the regime level (10d horizon) is the escape route.",
+     "relevance": "CONTRADICTS the naive form of T3 (predict -> act -> compare -> learn-from-difference as a universal engine): in stochastic domains that loop rewards staring at noise. Simultaneously supports T5: the repair is to climb the abstraction ladder until the residual becomes predictable — which is the project's own empirical finding (price-level null, regime-level certified)."
+    },
+    {
+     "claim": "Schmidhuber's formal theory makes the intrinsic reward the FIRST DERIVATIVE of compression — the improvement of an adaptive encoder of the agent's history, not the prediction error and not the compression level — which by construction assigns zero reward both to incompressible noise (no progress possible) and to fully mastered regularity (no progress left); this is the principled repair of the noisy-TV failure and the formalization of 'science compresses' (planetary motion reduced to a few numbers), though direct large-scale empirical validation remains thin.",
+     "sources": [
+      "Schmidhuber — 'Formal Theory of Creativity, Fun, and Intrinsic Motivation (1990-2010)', IEEE Transactions on Autonomous Mental Development 2(3), 2010",
+      "Schmidhuber — 'Driven by Compression Progress', 2009",
+      "(modern partial vindication: 'Beyond Noisy-TVs: Noise-Robust Exploration via Learning Progress Monitoring', arXiv:2509.25438, 2025)"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "Reward the research loop by reduction in description length of market history, not forecast accuracy: a 2-state HMM compressing 15 years of daily returns into a regime narrative is genuine compression progress; forecast-accuracy plateaus are then expected and honest because returns are near-incompressible. The project's L0 bits/action ruler ('low-but-structured') is already a compression-progress measurement, and its certified regime rule is the compressible residue.",
+     "relevance": "Supports T3 literally ('science compresses' is Schmidhuber's postulate made formal) and T5 (each abstraction level is a further compression stage); repairs T3's loop after atom 5's contradiction: the learning signal in the enrichment cycle should be compression IMPROVEMENT, not raw surprise — a concrete, implementable amendment to Ivan's thesis."
+    },
+    {
+     "claim": "Enriching a world picture by writing new facts into model WEIGHTS fails at scale: under sequential ROME/MEMIT edits the edited layers drift away from their original values, producing first gradual forgetting of earlier edits and downstream abilities, then abrupt catastrophic collapse of the whole model — so parametric knowledge editing is a documented dead end for continual enrichment, and durable accumulation routes are non-parametric (episodic stores, skill libraries, retrieval around a frozen core).",
+     "sources": [
+      "Gupta, Rao, Anumanchipalli — 'Model Editing at Scale leads to Gradual and Catastrophic Forgetting', arXiv:2401.07453, 2024"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Continually re-fitting a live model on every new quarter drifts parameters until the model breaks — the project's own CL-1 finding (continual learning underperforms the frozen bar; MAIN PROBLEM NOT SOLVED, twin-corrected) is the same phenomenon observed from the finance side. The evidence favors exactly the project's architecture: frozen certified core + append-only external ledger, with rare, gated core replacements.",
+     "relevance": "QUALIFIES T3: 'enrichment' must be architected as append-only external memory around a frozen core, not weight surgery — the loop's write target matters as much as its learning signal. Indirectly supports T5: slow high-abstraction layers (theories) should change rarely while the fast episodic layer changes often, mirroring the stability hierarchy."
+    },
+    {
+     "claim": "Memory pollution is now empirically characterized on two fronts: (a) benign — LLM agents exhibit 'experience-following' (high input-similarity to a retrieved memory yields highly similar output), so one erroneous stored trajectory propagates and compounds (error propagation), and even nominally successful replays can misguide (misaligned experience replay); quality-gating writes and deleting bad records via an EXTERNAL evaluator restores long-term performance; (b) adversarial — MINJA shows a regular user can implant persistent malicious memories through query-only interaction using plausible 'bridging steps' that evade moderation, and AgentPoison backdoors agent memory/RAG stores — an agent's memory is an attack surface, not just a resource.",
+     "sources": [
+      "Xiong, Lin, Xie, He, Liu, Tang, Lakkaraju, Xiang — 'How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior', arXiv:2505.16067, 2025",
+      "Dong, Xu, He, Li, Tang, Liu, Liu, Xiang — 'A Practical Memory Injection Attack against LLM Agents (MINJA)', arXiv:2503.03704, 2025",
+      "Chen, Xiang, Xiao, Song, Li — 'AgentPoison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases', NeurIPS 2024"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Retrieved past trades used as few-shot exemplars turn one lucky bad trade into a persistent habit — self-reinforced superstition; adversarially, anything permitted to write into the agent's knowledge base (news feeds, social sentiment) can steer the book. Memory writes therefore need the same certification bar as strategy changes: the project's frozen gate + placebo/twin battery is precisely the 'external evaluator curating memory' the empirical study finds necessary, and the E1 red-team -> v12 gate fix is the adversarial case already lived through.",
+     "relevance": "QUALIFIES T3 and T6: a human-like memory inherits human-like pathologies (superstition, rumor contagion, implanted false memories); an enrichment loop without a governed write-gate DEGRADES the world picture rather than enriching it. Memory governance is load-bearing in the thesis, not an implementation detail."
+    }
+   ]
+  },
+  {
+   "thread": "Economics as compressed representation — prices as information aggregators (Hayek), factor models as low-dim cross-section representations, macro/regime variables as thermodynamics-like coarse-grained states, hierarchy theory (Simon), and the honest breaking points of the physics analogy (reflexivity, overlapping-horizon artifacts, adversarial decay). Each atom maps onto LeCun-lecture theses T1-T6 with support, qualification, or contradiction.",
+   "atoms": [
+    {
+     "claim": "The price system is a decentralized compression device: Hayek argued that market prices aggregate dispersed, local, tacit knowledge into a single low-dimensional statistic that agents can act on without ever seeing the underlying data ('a kind of machinery for registering change'); Grossman-Stiglitz then proved the compression must remain LOSSY in equilibrium — if prices encoded all information perfectly, no one would pay to gather information, so no equilibrium with fully-revealing prices exists; equilibrium noise is a feature, not a failure.",
+     "sources": [
+      "The Use of Knowledge in Society — F.A. Hayek, American Economic Review 35(4), 1945",
+      "On the Impossibility of Informationally Efficient Markets — S. Grossman & J. Stiglitz, American Economic Review 70(3), 1980"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "A trading agent should treat the price series itself as an ALREADY-compressed representation of the economy; residual edge lives only in what that compression discards (the Grossman-Stiglitz noise wedge), so re-decoding raw prices ever harder has structurally bounded value — consistent with the project's triple-confirmed daily price-level VoI~0.",
+     "relevance": "Supports T1 and T3: mainstream economics literally models the market as a collective world-model compressor, so 'bot as world-picture enricher' has a 1945 pedigree. Qualifies T2: the observable representation (price) is equilibrium-noisy BY CONSTRUCTION, so predicting the representation inherits an irreducible noise floor."
+    },
+    {
+     "claim": "The equity cross-section admits a genuine low-dimensional representation: thousands of stock returns compress to a handful of latent factors (APT; Fama-French), and Kozak-Nagel-Santosh show that mere absence of near-arbitrage forces the stochastic discount factor to be a function of the few dominant principal components of returns — but the 'factor zoo' critique (Harvey-Liu-Zhu: after multiple-testing correction new factors need t>3.0; a large share of published factors are likely false) shows that representation DISCOVERY without a testing discipline manufactures fake structure.",
+     "sources": [
+      "The Arbitrage Theory of Capital Asset Pricing — S. Ross, Journal of Economic Theory 13, 1976",
+      "Common Risk Factors in the Returns on Stocks and Bonds — E. Fama & K. French, Journal of Financial Economics 33, 1993",
+      "Interpreting Factor Models — S. Kozak, S. Nagel & S. Santosh, Journal of Finance 73(3), 2018",
+      "…and the Cross-Section of Expected Returns — C. Harvey, Y. Liu & H. Zhu, Review of Financial Studies 29(1), 2016"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "The bot's representation layer for a stock panel should be factor-like (few latent components governing comovement) rather than per-asset — which rationalizes the project's own convergence to a near-equal-weight book where all certified value is one regime dial (timing, not selection): the cross-sectional representation on Dow-30 is close to one 'market' factor.",
+     "relevance": "Supports T2 (predict representations — factor exposures and premia — not raw prices; KNS makes low-dimensionality a no-arbitrage consequence, not a modeling convenience). The factor-zoo half QUALIFIES T1/T3 and endorses the project's frozen-gate falsification culture: enriching the world picture with new named abstractions requires a t>3-grade multiple-testing bar or the 'world model' fills with ghosts."
+    },
+    {
+     "claim": "Simon's near-decomposability gives the formal mechanism for 'higher abstraction level = longer prediction horizon': in nearly-decomposable hierarchies, high-frequency dynamics live WITHIN subsystems and low-frequency dynamics BETWEEN them, so aggregate (higher-level) variables evolve slower and can be described with little information loss — and Simon-Ando proved the corresponding aggregation theorem for dynamic systems (short-run intra-block equilibration, long-run inter-block drift).",
+     "sources": [
+      "The Architecture of Complexity — H.A. Simon, Proceedings of the American Philosophical Society 106(6), 1962",
+      "Aggregation of Variables in Dynamic Systems — H.A. Simon & A. Ando, Econometrica 29(2), 1961",
+      "Volatilities of Different Time Resolutions — Analyzing the Dynamics of Market Components — U. Müller, M. Dacorogna, R. Davé, R. Olsen, O. Pictet & J. von Weizsäcker, Journal of Empirical Finance 4, 1997",
+      "A Simple Approximate Long-Memory Model of Realized Volatility — F. Corsi, Journal of Financial Econometrics 7(2), 2009"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Markets empirically show this hierarchy in volatility: the Müller et al. heterogeneous-market cascade (coarse-horizon volatility influences fine-horizon volatility more than the reverse) and Corsi's HAR model — daily/weekly/monthly components mimicking agent classes with different horizons — are the standard industrial instantiation of tick→daily→regime timescale separation.",
+     "relevance": "This IS T5's key property, stated formally 60 years before the LeCun lecture, with an actual theorem (timescale/eigenvalue separation) rather than an analogy — the strongest theoretical support in the whole thread. It also licenses T3's compression claim: Simon's point that hierarchy makes near-lossless aggregate description possible is exactly 'science compresses planetary motion into 6 numbers.'"
+    },
+    {
+     "claim": "Regime-switching models are coarse-grained market state variables that carry forecastable structure absent at the fine-grained level: Hamilton's 2-state Markov chain and its descendants capture persistent shifts in means, volatilities, and correlations (reproducing fat tails, heteroskedasticity, time-varying correlation), and the regime PROBABILITY is predictable over weeks even while daily returns stay near-martingale — but Ang-Timmermann's review is explicit that out-of-sample economic gains from regime timing are modest and concentrated in risk management rather than return prediction.",
+     "sources": [
+      "A New Approach to the Economic Analysis of Nonstationary Time Series and the Business Cycle — J. Hamilton, Econometrica 57(2), 1989",
+      "Regime Changes and Financial Markets — A. Ang & A. Timmermann, Annual Review of Financial Economics 4, 2012"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "The project's certified rule 'P(bear)>0.66 → exposure 0.74, H=10d' is a Hamilton coarse-grained state made actionable — and its RISK-mode (not alpha) character matches the literature exactly: Ang-Timmermann-style regime value shows up as drawdown/variance control, which is precisely where the project's only certified real-data value lives.",
+     "relevance": "Supports T5 directly (the certified-at-regime-level / null-at-daily-level pattern is the market's quantum→thermo) and T2 (the belief state P(bear) IS a predicted representation, not a predicted price). The contextual caveat qualifies T1: the enriched world picture buys risk description, not return foresight — matching the project's E-16 finding that the written return rule fails while the risk-adjusted lane wins."
+    },
+    {
+     "claim": "The flagship exhibit for 'longer horizon = more predictable' — multi-year return forecastability from slow aggregate ratios (dividend yield, CAPE) — is partly a statistical mirage: Boudoukh-Richardson-Whitelaw show that with persistent regressors, overlapping long-horizon estimators are nearly perfectly correlated across horizons under the null (99% between 1y and 2y, 94% between 1y and 5y) and R² rises roughly proportionally with horizon mechanically, so rising long-horizon R² is NOT independent new evidence at the higher abstraction level; the predictability debate survives (Cochrane's dividend-growth argument) but on much thinner effective evidence than the headline regressions suggest.",
+     "sources": [
+      "The Myth of Long-Horizon Predictability — J. Boudoukh, M. Richardson & R. Whitelaw, Review of Financial Studies 21(4), 2008",
+      "The Dog That Did Not Bark: A Defense of Return Predictability — J. Cochrane, Review of Financial Studies 21(4), 2008",
+      "The Dividend-Price Ratio and Expectations of Future Dividends and Discount Factors — J. Campbell & R. Shiller, Review of Financial Studies 1(3), 1988"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Any claim that the bot 'predicts better at the higher/slower level' must be tested on non-overlapping windows against a null that reproduces the mechanical horizon-inflation — the same trap the project already hit with the degenerate z_dsd statistic and now guards with exposure-matched dial twins; a long-horizon R² without an artifact-matched twin is not evidence.",
+     "relevance": "QUALIFIES (partially contradicts) T5: horizon-lengthening with abstraction is not automatic and its classic empirical support is contaminated by an overlapping-observations artifact. This is the single most important falsification-culture atom for a theory document built on T5 — it says T5 in markets must be earned per-level, not assumed from the physics picture."
+    },
+    {
+     "claim": "The thermodynamics analogy for economics is mathematically real but strictly partial: Smith-Foley show neoclassical general equilibrium and classical thermodynamics are built from essentially the same three axioms, with constructible economic analogs of entropy and free energies — yet the correspondence breaks on dynamics (economics lacks conserved quantities and a reversible-transformation structure, and responds differently to path dependence), so the analogy licenses STATE VARIABLES, not equations of motion; the durable physics-grade empirical content of markets is instead the stylized facts catalog (fat tails, volatility clustering, aggregational Gaussianity toward longer timescales — Cont), and even econophysics' leading figure frames the program as methodological reform (data over axioms), not derived laws.",
+     "sources": [
+      "Classical Thermodynamics and Economic General Equilibrium Theory — E. Smith & D. Foley, Journal of Economic Dynamics and Control 32(1), 2008",
+      "Empirical Properties of Asset Returns: Stylized Facts and Statistical Issues — R. Cont, Quantitative Finance 1(2), 2001",
+      "Economics Needs a Scientific Revolution — J.-P. Bouchaud, Nature 455, 1181, 2008"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Use regime/vol aggregates as thermo-like state variables for RISK description (volatility clustering is why EWMA/HAR-class risk models work — cf. the project's PK-1 result that plain EWMA beats Log-HAR on the frozen bar), but never expect a conservation law: nothing plays the role of energy, so no drift-level 'equation of motion' transfers from the analogy — description of the state, yes; prediction of its evolution, only where a mechanism is shown.",
+     "relevance": "Supports T5's layered mapping as coarse-grained DESCRIPTION (Cont's aggregational Gaussianity is literally 'higher timescale = simpler description'), while sharply qualifying its use for prediction: quantum→thermo works in physics because of conservation + ergodicity, both of which Smith-Foley show economics lacks. Also mildly supports T4: stylized-facts matching is a 'compare distributions/representations, not points' criterion in spirit."
+    },
+    {
+     "claim": "Market regularities decay BECAUSE they are represented and shared — McLean-Pontiff measure, across 97 published cross-sectional predictors, returns 26% lower out-of-sample and 58% lower post-publication, with decay strongest where in-sample returns were highest and arbitrage cheapest; Soros's reflexivity makes the mechanism explicit (participants' models feed back into the prices being modeled) and Lo's Adaptive Markets Hypothesis gives it an ecological frame: edges are consumed like resources by an adapting population, not conserved like physical laws.",
+     "sources": [
+      "Does Academic Research Destroy Stock Return Predictability? — R.D. McLean & J. Pontiff, Journal of Finance 71(1), 2016",
+      "Fallibility, Reflexivity, and the Human Uncertainty Principle — G. Soros, Journal of Economic Methodology 20(4), 2013",
+      "The Adaptive Markets Hypothesis — A. Lo, Journal of Portfolio Management 30(5), 2004"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Alpha half-life must be a first-class state variable in the bot's world picture: the project's E-14b finding that the csi500 reversal replicates at HALF magnitude and priced-out net of costs is textbook McLean-Pontiff decay observed in the wild — the world picture should store 'this regularity, this crowdedness, this decay clock,' not 'this law.'",
+     "relevance": "CONTRADICTS the strong reading of T1 and T6: an economic world model cannot be an accurate passive mirror the way a physical world model can, because representing-and-acting changes the territory (planets don't read ephemerides; traders read papers). It simultaneously STRENGTHENS T3's learning loop: precisely because the target drifts adversarially, the analyze→predict→act→compare→update cycle is not optional pedagogy but the only architecture that survives — with the amendment that old experience must depreciate."
+    },
+    {
+     "claim": "Mainstream economics already models the human agent as a lossy compressor: Sims's rational inattention treats decision-makers as finite-capacity information channels, and shows optimal behavior under a bits-per-period constraint reproduces observed sluggish, discrete, noise-carrying macro responses — the economic twin of 'humans do not store raw data'; on the ML side, JEPA-style latent-space prediction for time series now exists at arXiv stage (LaT-PFN predicts state transitions fully in latent space; TS/MTS-JEPA variants report gains and a theoretical link from JEPA latents to Koopman invariants that cluster series BY DYNAMICAL REGIME), but as of mid-2026 there is no peer-reviewed demonstration of net-of-cost trading value from any finance JEPA.",
+     "sources": [
+      "Implications of Rational Inattention — C.A. Sims, Journal of Monetary Economics 50(3), 2003",
+      "A Path Towards Autonomous Machine Intelligence — Y. LeCun, OpenReview position paper, 2022",
+      "LaT-PFN: A Joint Embedding Predictive Architecture for In-context Time-series Forecasting — arXiv:2405.10093, 2024",
+      "MTS-JEPA: Multi-Resolution Joint-Embedding Predictive Architecture (time-series JEPA line, incl. TS-JEPA) — arXiv:2602.04643, 2026"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Concrete build path with an honest prior: a JEPA over the daily panel whose latent is regularized toward a small discrete regime alphabet would be the ML-native reconstruction of the project's causal-HMM belief — and the Koopman/regime-clustering theory says that is what a well-trained temporal JEPA converges to anyway; its value should therefore be certified at the regime horizon (10d class), since the daily-level target is a proven null.",
+     "relevance": "Supports T2, T3 and T6 jointly (compression is the correct model of the market AND of the agent — Sims closes the loop on 'AI maximally similar to humans' with a formal capacity constraint), and T4 via JEPA's energy-style compare-in-latent-space objective. The load-bearing caveat qualifies T2: representation-prediction in finance is architecturally ready but empirically UNPROVEN at any deployable-value bar — the field's status, verified by search, is arXiv-stage; treat finance-JEPA value claims as speculative until gated."
+    }
+   ]
+  },
+  {
+   "thread": "Abstraction-horizon property (T5): is \"higher abstraction → longer prediction horizon\" established, heuristic, or contested? VERDICT: it is a well-supported HEURISTIC/PRINCIPLE that becomes a genuine mechanism in systems with SCALE SEPARATION (renormalizable / decoupled / spectrally structured), but it is NOT a theorem and has documented counterexamples. Three independent physics literatures give it teeth: (1) renormalization group / effective field theory — coarse (low-energy) descriptions are predictable with a handful of parameters, independent of unknown microphysics (Wilson, Georgi); (2) Israeli-Goldenfeld — computationally IRREDUCIBLE cellular automata become predictable and even reducible after coarse-graining (the sharpest formal demonstration); (3) finite-size Lyapunov exponents (Aurell-Boffetta-Crisanti-Vulpiani) — predictability TIME grows with the scale of the feature being predicted, giving a literal \"horizon vs aggregation level\" law. The ML instantiations (LeCun H-JEPA proposal; Clockwork VAE/RNN, HM-RNN empirics) build the same staircase by construction. BUT the falsifiers matter: the \"real butterfly effect\" (Lorenz 1969; Palmer-Doring-Seregin 2014) proves that in multiscale systems with a -5/3 spectrum, small-scale errors cascade UPSCALE in FINITE time and impose an absolute predictability barrier on the LARGE scales regardless of initial accuracy — coarse ≠ unboundedly predictable. And Nachum et al. show the hierarchy benefit in RL is mostly EXPLORATION, not a horizon-extension mechanism. The project already instantiates the supported form: the only certified value lives at the REGIME level (10-day horizon) while daily price-level prediction is a triple-confirmed VoI~0 null — abstraction bought horizon exactly where scale-separation exists (a slow latent state), and bought nothing where it does not (raw price).",
+   "atoms": [
+    {
+     "claim": "Coarse-graining can render a computationally IRREDUCIBLE system predictable — even computationally reducible — at the coarse level: Israeli & Goldenfeld built closed coarse-grained update rules for 240 of the 256 elementary cellular automata, including rules (e.g. Rule 110) that are Turing-universal and irreducible at the fine scale, so the emergent large-scale law needs none of the small-scale detail. This is the sharpest FORMAL demonstration that a higher level of description can be strictly MORE predictable than the substrate it emerges from.",
+     "sources": [
+      "Israeli & Goldenfeld, 'Computational Irreducibility and the Predictability of Complex Physical Systems', Physical Review Letters 92, 074105 (2004), arXiv:nlin/0309047",
+      "Israeli & Goldenfeld, 'Coarse-graining of cellular automata, emergence, and the predictability of complex systems', Physical Review E 73, 026203 (2006), arXiv:nlin/0508033"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Tick-by-tick order flow is effectively irreducible (VoI~0 daily price null in this project), yet a coarse 2-state regime label admits a closed, predictable update rule — exactly the certified 10-day regime belief. Caveat mirrors the paper's honesty: the coarse rule is NOT unique and must be SEARCHED (16 of 256 CA had no non-trivial coarse-graining), so an emergent tradable macro-state is a discovery, not a guarantee — you must prove the coarse map closes on itself out-of-sample.",
+     "relevance": "SUPPORTS T5 and T3 (compression to a few state variables) most directly; qualifies it by showing coarse-grainability is common but not universal and the coarse law is projection-dependent — you can pick a projection under which nothing predictable emerges."
+    },
+    {
+     "claim": "In physics the abstraction-horizon property is not a heuristic but a THEOREM-backed structural fact WHEN scales separate: the Wilson renormalization group / effective field theory shows that integrating out high-energy (fine, fast) degrees of freedom leaves a low-energy (coarse, slow) theory whose predictions depend on only a handful of relevant/marginal parameters, with microphysics contributions suppressed by powers of (scale/cutoff). Low-energy behavior is calculable to high accuracy 'without knowing any details of the theory at high energies' — the formal engine behind LeCun's planets-in-6-numbers claim.",
+     "sources": [
+      "K. G. Wilson, 'The renormalization group and critical phenomena' (Nobel lecture), Reviews of Modern Physics 55, 583 (1983)",
+      "H. Georgi, 'Effective Field Theory', Annual Review of Nuclear and Particle Science 43, 209 (1993)",
+      "T. Cohen, 'As Scales Become Separated: Lectures on Effective Field Theory', arXiv:1903.03622 (2019)"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Decoupling = the reason a slow regime/vol model can forecast 10-day risk without modeling microstructure: fast intraday noise is an 'irrelevant operator' that averages out of the coarse dynamics. The load-bearing precondition is SCALE SEPARATION — if fast and slow scales are strongly coupled (no spectral gap), the effective description leaks and the coarse forecast inherits fine-scale error (see the real-butterfly atom).",
+     "relevance": "SUPPORTS T5 as its physics backbone and T3 (science stores compressed invariants, not raw data). Qualifies T5 by naming the precondition: the horizon extension is real only to the extent scales DECOUPLE."
+    },
+    {
+     "claim": "The predictability TIME is a quantitative function of the scale you are trying to predict: the finite-size Lyapunov exponent (FSLE) lambda(delta) measures error-growth rate as a function of error/feature size delta, and in multiscale turbulence lambda(delta) DECREASES as delta grows (roughly lambda ~ delta^-2 in the inertial range), so large-scale features have systematically LONGER predictability times than small-scale ones. This gives 'higher aggregation -> longer horizon' an explicit, measurable law rather than a slogan.",
+     "sources": [
+      "Aurell, Boffetta, Crisanti, Paladin & Vulpiani, 'Predictability in the large: an extension of the concept of Lyapunov exponent', Journal of Physics A 30, 1 (1997), arXiv:chao-dyn/9606014",
+      "Boffetta, Cencini, Falcioni & Vulpiani, 'Predictability: a way to characterize complexity', Physics Reports 356, 367 (2002)"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "FSLE is the physics version of measuring VoI at each horizon: the project found lambda effectively infinite (no edge) at the 1-day price scale but finite/exploitable at the 10-day regime scale. Build the same curve for the panel — decorrelation/error-doubling time vs holding period — and let it choose the rebalance horizon, rather than assuming daily is tradable.",
+     "relevance": "SUPPORTS T5 with its strongest quantitative statement (a horizon-vs-scale law) AND validates T3's compare-predicted-vs-actual-representation loop as a way to estimate the local horizon empirically."
+    },
+    {
+     "claim": "CONTRADICTION / hard falsifier: coarse scales do NOT always enjoy a longer horizon. The 'real butterfly effect' (Lorenz 1969; formalized by Palmer, Doring & Seregin 2014) shows that in a multiscale fluid with a k^-5/3 energy spectrum, errors injected at small scales cascade UPSCALE and contaminate the largest scales in a FINITE time — imposing an absolute predictability barrier on the coarse features that no improvement in initial-condition accuracy can push back. Because background energy grows with scale, 'very small relative errors at long wavelengths have similar impacts... as large relative errors at short wavelengths.'",
+     "sources": [
+      "E. N. Lorenz, 'The predictability of a flow which possesses many scales of motion', Tellus 21, 289 (1969)",
+      "Palmer, Doring & Seregin, 'The real butterfly effect', Nonlinearity 27, R123 (2014)",
+      "Ge, Du, et al. (Sun), 'Power law error growth in multi-hierarchical chaotic systems — a dynamical mechanism for finite prediction horizon', arXiv:1904.08766 (2019)"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "A liquidity/vol shock born in one microcap can cascade up and break an index-level regime forecast within days regardless of how good your macro state estimate is — a hard ceiling on the 10-day regime bet, and the mechanism behind the register's 2022 'stock-bond hedge broke' lesson. Implication: treat the certified coarse horizon as bounded and REGIME-conditional, never as 'coarse = safe forever'; monitor for upscale contagion (spectrum steepening) as a horizon-collapse signal.",
+     "relevance": "CONTRADICTS the strong reading of T5 ('higher abstraction always buys longer horizon'). Forces the qualified form: horizon extension requires a benign (steep-enough) cross-scale coupling; a shallow spectrum lets fine-scale error set the coarse horizon."
+    },
+    {
+     "claim": "The abstraction-horizon property is the explicit design principle of LeCun's Hierarchical JEPA: a stack of joint-embedding predictors where JEPA-1 makes short-term predictions in low-level (fine, detailed) representations and JEPA-2 makes longer-term predictions in higher-level (coarse, abstract) representations — 'at the low level the world model can only make accurate predictions in the short term, but at a higher level of abstraction it can make long-term predictions.' Critically, JEPA predicts in REPRESENTATION space and discards unpredictable fine detail, which is WHY the abstract level can see further.",
+     "sources": [
+      "Y. LeCun, 'A Path Towards Autonomous Machine Intelligence', OpenReview v0.9.2 (2022)",
+      "Dawid & LeCun, 'Introduction to latent variable energy-based models: a path toward autonomous machine intelligence', J. Stat. Mech. / IOP (2024)"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "This is the blueprint for the project's own stack: a fast head predicting the (near-null) representation of tomorrow's panel, and a slow head predicting the abstract regime representation 10 days out — enrich the world-picture by comparing predicted vs realized REGIME embedding (T3 loop), not predicted vs realized price. Honest status: H-JEPA is an architectural PROPOSAL; the multi-level long-horizon claim is asserted by design, not yet demonstrated at scale, so treat it as a hypothesis to instantiate and test, not a result to cite as proven.",
+     "relevance": "SUPPORTS T2 (predict the representation, not raw price), T5 (level<->horizon by construction) and T4/T6; but its evidence status is a design claim — it should be USED as the project's architecture, then subjected to the same frozen-gate falsification as everything else."
+    },
+    {
+     "claim": "EMPIRICAL ML support: hierarchical latent-dynamics models with SLOWER-ticking upper levels really do buy long-horizon accuracy. The Clockwork VAE (higher latent levels updated at exponentially slower intervals) accurately predicts high-level content — object positions and identities — out to 1000 frames while lower fast levels carry short-term detail, beating flat top models; the lineage (Clockwork RNN's fixed clock-rate modules; HM-RNN's learned multiscale boundaries) shows slow modules capture long-range dependence that same-rate networks miss.",
+     "sources": [
+      "Saxena, Ba & Hafner, 'Clockwork Variational Autoencoders', NeurIPS 2021, arXiv:2102.09532",
+      "Koutnik, Greff, Gomez & Schmidhuber, 'A Clockwork RNN', ICML 2014, arXiv:1402.3511",
+      "Chung, Ahn & Bengio, 'Hierarchical Multiscale Recurrent Neural Networks', ICLR 2017, arXiv:1609.01704"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "A two-clock policy: a slow latent (regime, updated ~biweekly) sets exposure over 10-day horizons while a fast latent handles execution/rebalancing — matching the certified rule's H=10d and the executor's 1-day-lag tolerance. Contextual caveat: these wins are in video/character streams with a genuine slow-varying generative factor; markets may lack a comparably persistent slow factor, so the architecture is necessary-not-sufficient — the slow level only helps if a real slow state EXISTS (which the 2-state regime result suggests it does, weakly).",
+     "relevance": "SUPPORTS T5 empirically and T2/T3 (slow levels store the persistent world-state); qualifies by domain transfer risk — demonstrated where a slow latent factor is known to exist."
+    },
+    {
+     "claim": "QUALIFICATION from RL: temporal-abstraction hierarchy does not necessarily work via horizon extension. Nachum et al. isolate the benefits of hierarchical RL and find most of the observed gain is attributable to improved EXPLORATION (semantically/temporally extended actions inducing better state coverage), not to easier long-horizon credit assignment or the imposed hierarchical structure — flat agents given hierarchy-inspired exploration match HRL. So 'higher/slower level -> longer effective planning horizon' is a CONTESTED mechanism claim in learned systems, even where hierarchy helps.",
+     "sources": [
+      "Nachum, Tang, Lu, Gu & Lee, 'Why Does Hierarchy (Sometimes) Work So Well in Reinforcement Learning?', arXiv:1909.10618 (2019); NeurIPS 2019 DeepRL Workshop"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Before crediting a hierarchical CHRL controller's edge to 'it plans over longer horizons,' run the Nachum test: match a flat policy with the same exploration/temporally-extended action budget. If the flat twin matches, the hierarchy is buying exploration, not horizon — the same capacity-fair-twin discipline the project already uses to kill false GREENs. Prevents attributing a control-surface win to abstraction when it is really search coverage.",
+     "relevance": "CONTRADICTS the naive causal reading of T5 in LEARNED agents (level != horizon-mechanism); reinforces the project's twin/placebo culture — the abstraction-horizon link must be demonstrated with an exposure-matched control, not assumed from the architecture."
+    }
+   ]
+  },
+  {
+   "thread": "NEGATIVE KNOWLEDGE: JEPA/EBM critiques and failure modes, world-model failures in non-stationary/adversarial domains, SSL-on-financial-data pitfalls (incl. reflexivity), the human-like-AI critique, and evidence that representation-prediction skill does not imply downstream value — guardrails for the theory file, keyed to LeCun-lecture theses T1-T6.",
+   "atoms": [
+    {
+     "claim": "The JEPA objective 'predict the representation, not the raw signal' has a trivial degenerate optimum — representation collapse, where encoder and predictor map everything to a constant and achieve zero loss with zero information — and every published JEPA until LeJEPA (2025) prevented it only with ad-hoc, theory-free heuristics (stop-gradient, EMA teacher-student encoders, masking schedules, hand-tuned LR schedules); LeCun's own group concedes this by building LeJEPA specifically to remove the heuristics via an isotropic-Gaussian embedding regularizer (SIGReg).",
+     "sources": [
+      "LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics — Randall Balestriero, Yann LeCun — arXiv:2511.08544, 2025",
+      "Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture (I-JEPA) — Mahmoud Assran, Quentin Duval, Ishan Misra, Piotr Bojanowski, Pascal Vincent, Michael Rabbat, Yann LeCun, Nicolas Ballas — CVPR 2023",
+      "Collapse-Proof Non-Contrastive Self-Supervised Learning — arXiv:2410.04959, 2024"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "A market-state encoder trained on its own prediction error can 'win' by collapsing the belief to one eternal regime that always predicts itself — prediction loss near zero, value of information exactly zero. Concretely: a 2-state regime belief that degenerates to P(bear)=const passes any self-prediction score while destroying the certified risk rule. Guardrail: never score a representation by its own prediction loss; require an external variance/coverage floor and exposure-matched placebo twins (the project's existing twin discipline already implements this).",
+     "relevance": "QUALIFIES T2 and T4 strongly: the core JEPA/EBM mechanism is not self-certifying — the objective alone is broken and needs external anti-collapse regularization. Any theory-file claim that 'representation prediction is the right objective' must carry the collapse caveat as a load-bearing condition, not a footnote."
+    },
+    {
+     "claim": "Non-generative representation models have no intrinsic, tractable goodness metric: energy-based models define probabilities only up to an intractable partition function (so you cannot compute likelihoods or calibrated probabilities without MCMC/score-matching/NCE workarounds), and the standard extrinsic fallback — linear probing — is protocol-sensitive enough that probe choice, input normalization, and SSL weight-decay settings change downstream rankings, so probe accuracy does not reliably predict fine-tuned or task value.",
+     "sources": [
+      "How to Train Your Energy-Based Models — Yang Song, Diederik P. Kingma — arXiv:2101.03288, 2021",
+      "Rethinking Evaluation Protocols of Visual Representations Learned via Self-supervised Learning — Jae-Hun Lee, Doyoung Yoon, ByeongMoon Ji, Kyungyul Kim, Sangheum Hwang — arXiv:2304.03456, 2023",
+      "A Closer Look at Benchmarking Self-supervised Pre-training with Image Classification — Int. J. of Computer Vision / PMC12289721, 2024"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "An energy function over market scenarios can RANK scenarios ('this configuration is unusual') but cannot output P(drawdown ≤ 5%) ≥ 90% — the calibrated probability contracts the personalization product actually sells — without a separate normalization/calibration layer (the block-bootstrap contract machinery). And a probe win ('the latent predicts realized vol, IC 0.15') is not deployable value: the project's capacity-matched-twin lesson showed exactly such probe wins evaporating under fair comparison. Guardrail: decision-level value through the frozen gate is the only admissible metric; probe scores are diagnostics.",
+     "relevance": "QUALIFIES T4 ('clever compare representations' is useful for ranking, not for calibrated claims) and CONTRADICTS the implicit inference T2→T1 that measurable representation quality certifies a better world picture. Directly validates the program's choice of CrystalScore + frozen-gate value tests over representation benchmarks."
+    },
+    {
+     "claim": "Accurate next-step prediction does not imply a coherent internal world model: transformers that near-perfectly predict turn-by-turn NYC taxi directions harbor an implicit street map that is provably incoherent (physically impossible street orientations, flyovers) under Myhill-Nerode-style state-recovery metrics, and their competence shatters under small detours; conversely, Othello-GPT shows a sequence model CAN form an intervenable emergent board-state representation — so the LeCun-vs-LLM debate is empirically unresolved in both directions: architecture (JEPA vs autoregressive) neither guarantees nor precludes a real world model, only targeted structural evaluation can tell.",
+     "sources": [
+      "Evaluating the World Model Implicit in a Generative Model — Keyon Vafa, Justin Y. Chen, Ashesh Rambachan, Jon Kleinberg, Sendhil Mullainathan — NeurIPS 2024",
+      "Emergent World Representations: Exploring a Sequence Model Trained on a Synthetic Task — Kenneth Li, Aspen K. Hopkins, David Bau, Fernanda Viégas, Hanspeter Pfister, Martin Wattenberg — ICLR 2023",
+      "Revisiting the Othello World Model Hypothesis — OpenReview, 2024/2025"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "A bot with excellent one-step representation-prediction skill can carry an 'economic map' as incoherent as the transformer's impossible Manhattan — and it fails exactly on detours, i.e., structural breaks. The project already lived this: 2022 broke the stock-bond hedge and every diversified fan (P-1), a detour no next-step accuracy metric flagged in advance. Guardrail: audit the world model with counterfactual/detour probes (regime-transition stress, intervention tests like the project's belief-write fidelity checks), never with prediction accuracy alone.",
+     "relevance": "CONTRADICTS the T1←T2/T3 inference that prediction skill certifies an enriched world picture; also supplies the honest both-ways verdict on LeCun's anti-LLM argument (T2's motivation): JEPA is not uniquely capable of world models, and JEPA-style predictors are not immune to incoherence."
+    },
+    {
+     "claim": "Markets are performative: a deployed predictive model shifts the very distribution it predicts (Perdomo et al. formalize this; retraining converges at best to 'performative stability', which is generically NOT the best model of the pre-deployment world), and the finance empirics are first-order large — published cross-sectional predictors lose ~26% of returns out-of-sample and ~58% post-publication as capital learns and crowds them (97 predictors, Journal of Finance). The 'this is how science works' analogy for the learn-from-prediction-error loop breaks precisely here: planetary orbits do not change when Kepler publishes; alpha does.",
+     "sources": [
+      "Performative Prediction — Juan C. Perdomo, Tijana Zrnic, Celestine Mendler-Dünner, Moritz Hardt — ICML 2020 (PMLR v119)",
+      "Does Academic Research Destroy Stock Return Predictability? — R. David McLean, Jeffrey Pontiff — Journal of Finance, 2016",
+      "Stochastic Optimization for Performative Prediction — Celestine Mendler-Dünner, Juan C. Perdomo, Tijana Zrnic, Moritz Hardt — NeurIPS 2020"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Alpha decay is the finance instantiation of performativity: any signal the bot trades at size becomes part of the data-generating process it models, so the world model must contain the agent's own footprint (and its competitors') as state — reflexivity is not noise, it is endogenous drift. Guardrail: treat post-deployment error growth as expected performative drift, not as a fixable modeling bug; capacity/crowding terms belong in the world picture; the certified rule's small-capital regime-level claim is partially shielded (risk timing crowds slower than cross-sectional alpha) but not exempt.",
+     "relevance": "QUALIFIES T1 (the 'economic world picture' must include the observer) and PARTIALLY CONTRADICTS T3's science analogy: the predict-act-compare-learn loop faces a target that moves BECAUSE of the act step. Compression survives; the stationarity assumption behind 'science-like' accumulation does not."
+    },
+    {
+     "claim": "Policies optimized inside a learned world model reliably discover and exploit the model's imperfections rather than real structure — Ha & Schmidhuber's agent found adversarial strategies inside its own dream environment and scored hallucinated reward that did not transfer, and their fix (raising the dream's noise temperature to train under pessimism) is an admission that the world-model training loop is adversarial against its own model; offline/model-based RL under distribution shift generalizes the point (value overestimation on model errors is the default failure, requiring explicit pessimism/robustness machinery).",
+     "sources": [
+      "World Models / Recurrent World Models Facilitate Policy Evolution — David Ha, Jürgen Schmidhuber — NeurIPS 2018 (arXiv:1803.10122)",
+      "Distributionally Robust Model-Based Offline Reinforcement Learning with Near-Optimal Sample Complexity — Laixi Shi, Yuejie Chi — arXiv 2022 (JMLR 2024)",
+      "Reinforcement Learning in Financial Decision Making: A Systematic Review of Performance, Challenges, and Implementation Strategies — arXiv:2512.10913, 2025/2026"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "The sim-to-market gap: an RL trader trained inside a backtest/simulator exploits zero-friction fills, survivorship, and lookahead artifacts — hallucinated alpha that inverts live. The project measured this directly: +30% replay lift halved out-of-window, forcing replay-optimism calibration and the pessimistic frozen gate. Guardrail: T3's 'act in the model, compare, learn' loop must train under injected model uncertainty (temperature/pessimism) and be scored only outside the model — which is exactly what the one-way defensive-ratchet gate does.",
+     "relevance": "QUALIFIES T3 and T4: the enrichment loop is sound only if the compare step is adversarially protected; otherwise the agent enriches its ability to game its own world picture, not the picture itself. The project's gate discipline is the implemented countermeasure and should be stated as a necessary condition in the theory file."
+    },
+    {
+     "claim": "Large-scale self-supervised pretraining does not beat the noise floor of financial returns: in a 2026 head-to-head benchmark, pretrained time-series foundation models (Chronos, TimesFM, Moirai) win most task rankings yet deliver gains over the random-walk benchmark that are 'small and sparse' (only 2 model-asset pairs pass Diebold-Mariano significance), locally supervised models still win on specific assets, and the authors conclude TSFMs are 'not universal engines for statistically reliable alpha generation' — because low signal-to-noise, structural breaks, heavy tails, and weak persistence cap predictability regardless of model sophistication.",
+     "sources": [
+      "Pretrained Time-Series Foundation Models for Financial Return Forecasting — Miquel Noguer i Alonso, Rodolfo Pereira Franklin — arXiv:2606.27100, 2026",
+      "Denoised Labels for Financial Time-Series Data via Self-Supervised Learning — Yanqing Ma, Carmine Ventre, Maria Polukarov — ACM ICAIF 2022 (arXiv:2112.10139)",
+      "A Review of Reinforcement Learning in Financial Applications — arXiv:2411.12746, 2024"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Direct: even representation-first pretraining at foundation-model scale cannot manufacture daily price-level edge — which independently corroborates the project's triple-confirmed VoI≈0 null on daily prediction and locates the only certified value at the regime level (10d horizon risk rule). Guardrail: a JEPA layer for the bot should be pitched as a cheap prior / regime-state compressor, never as an alpha engine; any claimed lift must clear the random-walk-equivalent null with significance, not just relative rankings.",
+     "relevance": "QUALIFIES T2: predicting representations does not repeal the SNR floor at the price level. INDIRECTLY SUPPORTS T5: the empirical pattern (price-level null, regime-level value at longer horizon) is the project's own instantiation of 'higher abstraction, longer horizon' — but via the negative result, not the architecture."
+    },
+    {
+     "claim": "The T5 dividend — 'higher abstraction level buys longer prediction horizon' — is a design hypothesis, not a demonstrated property of JEPA systems: Meta's flagship V-JEPA 2 restricts planning to short horizons (effectively T=1 receding-horizon MPC) because autoregressive latent rollouts compound error and the action-search space explodes, and the hierarchical H-JEPA that is supposed to deliver long-horizon abstraction is explicitly listed as future work in LeCun's own 2022 position paper and remains unimplemented at scale four years later (follow-ups like FF-JEPA document subgoal drift as a standing failure mode).",
+     "sources": [
+      "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning — Mahmoud Assran et al. (Meta AI) — arXiv:2506.09985, 2025",
+      "A Path Towards Autonomous Machine Intelligence (Version 0.9.2) — Yann LeCun — OpenReview position paper, 2022",
+      "FF-JEPA: Long-Horizon Planning in World Models with Latent Planners — arXiv:2606.09311, 2026"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "The quantum→thermodynamics horizon ladder is rhetorically beautiful but no JEPA stack has cashed it in even for videos of objects on tables — so a theory file must not assume a market JEPA will cash it for regimes. Honest framing: the project's certified regime rule (abstract 2-state belief, 10d horizon, beating daily-level nulls) is currently BETTER evidence for the abstraction-horizon link in markets than anything in the JEPA literature — it was earned by falsification through a frozen gate, not by architecture. Guardrail: state T5 as an empirical regularity the project has one instance of, with compounding-error in latent rollouts as the known failure mode to test against.",
+     "relevance": "QUALIFIES T5 (its KEY PROPERTY is unproven in the source architecture family) while noting the project's own result is the strongest local support; also QUALIFIES T3 (long-horizon 'enrichment' via imagined rollouts inherits the error-compounding problem)."
+    },
+    {
+     "claim": "'AI should be maximally similar to humans' runs directly against the best-documented empirical regularity in AI research: Sutton's bitter lesson — general methods leveraging computation ultimately beat human-knowledge-laden designs, a trend quantitatively confirmed across 20 years of CVPR proceedings — so human-likeness cannot be justified as a performance principle; it is defensible only as an OPERATIONAL requirement (auditability, trust, regulatory legibility), and the tension cuts both ways because Sutton's pure reward-scaling alternative presumes a trustworthy evaluator, which financial backtests are not.",
+     "sources": [
+      "The Bitter Lesson — Richard Sutton — incompleteideas.net blog essay, 2019",
+      "Learning the Bitter Lesson: Empirical Evidence from 20 Years of CVPR Proceedings — Mojtaba Yousefi, Jack Collins — NLP4Science Workshop, EMNLP 2024",
+      "The Second Bitter Lesson — commentary on scaling-limits of reward-only agency (Sequoia 'Inference' / EA Forum essays, 2024-2025)"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "The project's readable rule 'P(bear)>0.66 → exposure 0.74, H=10d' is human-like in exactly the defensible sense: not because human-similarity improves Sharpe (it doesn't — the bitter lesson predicts a bigger black box would match or beat it given data), but because the evaluator (backtest) cannot be trusted, so every certified claim must be simulatable by a human auditor — interpretability as a certification requirement, not an intelligence theory. Guardrail: in the theory file, replace 'AI should be human-like' with 'AI must be human-AUDITABLE where the evaluator is untrustworthy'; and note the bitter lesson's own limit here — scale cannot buy alpha past the SNR wall (atom 6), so finance is one domain where neither pole wins automatically.",
+     "relevance": "PARTIALLY CONTRADICTS T6 as stated (human-similarity is philosophy, not an engineering theorem, and the empirical record favors the opposite) while SUPPORTING a reformulated T6 that grounds human-likeness in the project's interpretability mandate (CrystalScore: faithfulness × simulatability × stability) — which is also where T1's 'world picture, not trading for its own sake' becomes operational."
+    }
+   ]
+  },
+  {
+   "thread": "Human-likeness grounding: predictive processing, the free-energy principle, prediction-error learning, and complementary memory systems as cognitive-science backing for \"predict a representation, compare with actual, learn from the difference.\" VERDICT: the loop's SKELETON is exceptionally well-grounded — hierarchical predictive coding (Rao-Ballard), dopamine reward-prediction-error (Schultz/Dayan/Montague), and complementary learning systems (McClelland) each independently instantiate a piece of it, and the \"higher abstraction = longer horizon\" thesis (T5) has direct empirical support (Kiebel/Friston, Murray, Hasson) that the project's own regime-vs-price result already reproduces. But three seams are genuinely contested: (1) the brain uses at least TWO different \"prediction errors\" (reward/RL error vs sensory/representational error) that the theses conflate; (2) LeCun's \"predict the representation, not the raw signal\" is a DEPARTURE from classical predictive coding and the FEP, which reconstruct sensations — so T2 is more JEPA than neuroscience; (3) the strong \"this is how humans learn and how science works\" framing rests on the free-energy principle, which leading critics call unfalsifiable, and the dedicated prediction-error neurons the theory needs have not been cleanly found. Support the loop as a well-motivated architecture; do NOT sell it as an empirical law of cognition.",
+   "atoms": [
+    {
+     "claim": "Hierarchical predictive coding provides a concrete, biologically-motivated algorithm matching 'predict -> compare -> learn from the difference': feedback connections carry top-down predictions of lower-level neural activity, feedforward connections carry only the residual prediction error, and learning is driven by that error. Rao & Ballard showed such a network self-organizes simple-cell receptive fields and reproduces extra-classical (end-stopping) effects from natural images — i.e. the loop is not just a metaphor but a working computational model.",
+     "sources": [
+      "Rao, R.P.N. & Ballard, D.H. (1999). 'Predictive coding in the visual cortex: a functional interpretation of some extra-classical receptive-field effects.' Nature Neuroscience 2(1): 79-87",
+      "Clark, A. (2013). 'Whatever next? Predictive brains, situated agents, and the future of cognitive science.' Behavioral and Brain Sciences 36(3): 181-204",
+      "Clark, A. (2016). 'Surfing Uncertainty: Prediction, Action, and the Embodied Mind.' Oxford University Press",
+      "Friston, K. (2010). 'The free-energy principle: a unified brain theory?' Nature Reviews Neuroscience 11(2): 127-138"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "The project's belief-update loop IS this template: a forward model predicts next-period market STATE (regime/vol representation), the agent trades, and only the compressed residual (surprise) — not the whole price tape — updates the belief. This is exactly T3's 'science stores 6 numbers, not the raw orbit': the error signal, not the data, is the currency of learning.",
+     "relevance": "SUPPORTS T2/T3/T4 strongly — it is the literal cognitive-science instantiation of 'predict the representation, compare, learn from the difference,' and the error-minimization compare is an energy-based comparison (T4). Caveat: whether cortex LITERALLY implements this (dedicated error units) is contested — see the critique atom."
+    },
+    {
+     "claim": "The brain contains a literal, physically-measured prediction-error learning signal: midbrain dopamine neurons fire to the temporal-difference reward-prediction error (RPE) — positive for better-than-expected reward, zero when fully predicted, a dip when a predicted reward is omitted — matching the TD-error of Sutton-Barto reinforcement learning. This is among the best-validated computational-neuroscience findings and shows biological learning is genuinely prediction-error-driven.",
+     "sources": [
+      "Schultz, W., Dayan, P. & Montague, P.R. (1997). 'A neural substrate of prediction and reward.' Science 275(5306): 1593-1599",
+      "Schultz, W. (1998). 'Predictive reward signal of dopamine neurons.' Journal of Neurophysiology 80(1): 1-27",
+      "Sutton, R.S. & Barto, A.G. (1998/2018). 'Reinforcement Learning: An Introduction.' MIT Press"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "The project's PPO advantage / TD-error is the same object the dopamine system computes — the RL learner is running the brain's actual credit-assignment mechanism. QUALIFICATION analogy: reward-prediction-error ('did P&L beat expectation?') is NOT representation-prediction-error ('did the market state evolve as my world-model predicted?'). The certified value lives in the belief (a world-model error), but the optimizer is mostly trained on the reward error — the two are routinely conflated.",
+     "relevance": "SUPPORTS T3's 'learn from the difference' with the strongest hard-neuroscience evidence in the whole thread, AND supports T6 (the bot's RL core mirrors a real brain mechanism). QUALIFIES T2/T3: the brain uses at least two distinct prediction errors (RL reward error here; sensory/representational error in the predictive-coding atom). Treating them as one overstates the human-likeness match."
+    },
+    {
+     "claim": "The dopamine RPE code is DISTRIBUTIONAL, not scalar: different dopamine neurons carry a spectrum of pessimistic-to-optimistic prediction errors, so the brain represents future reward as a probability distribution rather than a single expected value. This is direct neural evidence that biological value learning tracks a distribution over outcomes — imported from AI's distributional RL back into neuroscience.",
+     "sources": [
+      "Dabney, W., Kurth-Nelson, Z., Uchida, N., Starkweather, C.K., Hassabis, D., Munos, R. & Botvinick, M. (2020). 'A distributional code for value in dopamine-based reinforcement learning.' Nature 577(7792): 671-675",
+      "Bellemare, M.G., Dabney, W. & Munos, R. (2017). 'A distributional perspective on reinforcement learning.' ICML 2017"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "The certified 2-state regime BELIEF (P(bear)) is exactly a distribution over future states, not a point price forecast — and the risk rule acts on the pessimistic tail (P(bear)>threshold -> cut exposure), mirroring the brain's pessimistic RPE channels. The project's only certified value is distributional/risk-mode, which is precisely the form the brain's value code takes.",
+     "relevance": "SUPPORTS T2 (predict the REPRESENTATION — and specifically a distribution — not the raw price) and T4, and independently validates the project's design choice that the monetizable signal is a regime DISTRIBUTION rather than a price level. Contextual: it is one landmark study with ongoing debate about alternative explanations, so not yet 'Established.'"
+    },
+    {
+     "claim": "Complementary Learning Systems theory holds that intelligent agents need TWO memories: a fast-learning hippocampus that stores specific episodes, and a slow-learning neocortex that extracts generalized structure (schemas/semantic memory) by interleaved replay. The division is not incidental — it is the mathematically-forced solution to catastrophic interference: fast unconstrained updating of a single shared network overwrites prior knowledge.",
+     "sources": [
+      "McClelland, J.L., McNaughton, B.L. & O'Reilly, R.C. (1995). 'Why there are complementary learning systems in the hippocampus and neocortex...' Psychological Review 102(3): 419-457",
+      "Kumaran, D., Hassabis, D. & McClelland, J.L. (2016). 'What learning systems do intelligent agents need? Complementary learning systems theory updated.' Trends in Cognitive Sciences 20(7): 512-534"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Maps directly onto 'frozen slow model (neocortex) + recent-experience replay (hippocampus).' The project's own memory note — 'continual learning UNDERPERFORMS frozen' — is a textbook CLS prediction: naive fast online updating causes catastrophic interference, so value requires slow, interleaved consolidation behind a frozen certification gate rather than greedy retraining.",
+     "relevance": "SUPPORTS T3 (the bot HAS memory/experience storing the economic world-picture, and enrichment is slow consolidation into schema). Also RETRO-JUSTIFIES the frozen-gate architecture: CLS explains WHY the frozen champion beats continual learning, turning an empirical project finding into a principled one."
+    },
+    {
+     "claim": "Schema-consistent information is consolidated dramatically FASTER: in Tse et al.'s rodent studies, new facts congruent with a pre-existing schema were assimilated into neocortex within 48 hours (vs weeks normally) and depended on medial prefrontal cortex. Human work shows congruent information is generally better remembered while strongly INCONGRUENT (schema-violating) information recruits a different, salience/novelty-driven pathway.",
+     "sources": [
+      "Tse, D., Langston, R.F., Kakeyama, M., Bethus, I., Spooner, P.A., Wood, E.R., Witter, M.P. & Morris, R.G.M. (2007). 'Schemas and memory consolidation.' Science 316(5821): 76-82",
+      "van Kesteren, M.T.R., Ruiter, D.J., Fernandez, G. & Henson, R.N. (2012). 'How schema and novelty augment memory formation.' Trends in Neurosciences 35(4): 211-219"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "The 2-state regime belief IS the schema: data congruent with the current regime is assimilated cheaply (small belief update), while a regime break (schema violation) is the expensive, salient event that should trigger relearning — matching the 10-day regime horizon and the 'arming on new-high / regime-change' research leads. Enrichment should be schema-gated, not uniform over every daily bar.",
+     "relevance": "SUPPORTS T3's 'enrichment' claim with a specific mechanism: new experience integrates faster when it fits the world model, and mismatch is what drives structural change. QUALIFIES the naive loop: consolidation is NOT uniform prediction-error minimization — congruent and incongruent errors are routed to different systems, so 'learn from the difference' is conditional on schema fit."
+    },
+    {
+     "claim": "The cortex is organized as a HIERARCHY OF TIMESCALES: intrinsic fluctuation timescales and 'temporal receptive windows' lengthen systematically from sensory areas (tens of milliseconds) to prefrontal/association cortex (seconds and longer). Friston's theory derives this from a generative model whose higher levels encode slower environmental causes; Murray et al. and Hasson et al. confirm it empirically across species and methods — higher abstraction demonstrably pairs with a longer integration/prediction horizon.",
+     "sources": [
+      "Kiebel, S.J., Daunizeau, J. & Friston, K.J. (2008). 'A hierarchy of time-scales and the brain.' PLoS Computational Biology 4(11): e1000209",
+      "Murray, J.D. et al. (2014). 'A hierarchy of intrinsic timescales across primate cortex.' Nature Neuroscience 17(12): 1661-1663",
+      "Hasson, U., Yang, E., Vallines, I., Heeger, D.J. & Rubin, N. (2008). 'A hierarchy of temporal receptive windows in human cortex.' Journal of Neuroscience 28(10): 2539-2550",
+      "LeCun, Y. (2022). 'A Path Towards Autonomous Machine Intelligence (H-JEPA).' OpenReview v0.9.2"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "The project ALREADY instantiates this: price-level DAILY prediction is a triple-confirmed null (fast, high-entropy, like V1), while the only certified value is the REGIME belief at a 10-day horizon (slow, abstract, like prefrontal cortex). The (abstraction level, prediction horizon) pairing isn't an analogy to import — it is the empirical shape of the codebase's own results.",
+     "relevance": "SUPPORTS T5 as the single best-grounded thesis in the thread — the 'higher abstraction = longer horizon' claim is a replicated empirical property of cortex, not a metaphor, and LeCun's H-JEPA independently converges on it as an engineering necessity. Directly licenses building the world-model as a stack of increasingly-abstract, increasingly-long-horizon predictors."
+    },
+    {
+     "claim": "T2's 'predict the REPRESENTATION, not the raw price' aligns with LeCun/JEPA but is a genuine DEPARTURE from classical predictive coding and the free-energy principle, which are GENERATIVE: they reconstruct/predict sensory input, and the error minimized bottoms out at the level of sensations. JEPA deliberately abandons input reconstruction to predict in latent space precisely so it can ignore unpredictable surface detail — a design the brain-theory tradition does not straightforwardly endorse.",
+     "sources": [
+      "LeCun, Y. (2022). 'A Path Towards Autonomous Machine Intelligence.' OpenReview v0.9.2",
+      "Assran, M. et al. (2023). 'Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture (I-JEPA).' CVPR 2023",
+      "Rao, R.P.N. & Ballard, D.H. (1999). Nature Neuroscience 2(1): 79-87 (generative/reconstructive contrast)",
+      "Friston, K. (2010). Nature Reviews Neuroscience 11(2): 127-138 (sensory-prediction objective)"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "This is WHY predicting raw daily returns is a triple-null while predicting the abstract regime representation certifies: the price level is the 'unpredictable pixel detail' JEPA throws away, and the regime is the structural latent worth predicting. But note the honest seam — the brain (per predictive coding) would still try to reconstruct the tick, whereas the project (correctly, per JEPA) refuses to.",
+     "relevance": "QUALIFIES T2/T6: the 'predict a representation' move is better justified by machine-learning engineering (LeCun) than by cognitive science, which mostly predicts sensations. The human-likeness is partial — brains and JEPA disagree on WHAT is predicted — so T2 should cite JEPA as its warrant, not the FEP."
+    },
+    {
+     "claim": "The STRONG framing 'this is how humans learn and how science works' rests on the free-energy principle, which leading critics argue is unfalsifiable and explanatorily hollow as a grand unifying theory, and on prediction-error/prediction NEURONS whose dedicated existence has not been cleanly demonstrated. A sober review — co-authored by predictive-processing champion Andy Clark — concludes the key architectural prediction (separate error vs prediction units) lacks decisive evidence; and 'dark room' arguments show pure surprise-minimization does not by itself explain why agents seek stimulation.",
+     "sources": [
+      "Sanchez-Canizares, J. (2021). 'The Free Energy Principle: Good Science and Questionable Philosophy in a Grand Unifying Theory.' Entropy 23(2): 238",
+      "Colombo, M. & Wright, C. (2021). 'First principles in the life sciences: the free-energy principle, organicism, and mechanism.' Synthese 198(Suppl 14): 3463-3488",
+      "Bowers, J.S. & Davis, C.J. (2012). 'Bayesian just-so stories in psychology and neuroscience.' Psychological Bulletin 138(3): 389-414",
+      "Walsh, K.S., McGovern, D.P., Clark, A. & O'Connell, R.G. (2020). 'Evaluating the neurophysiological evidence for predictive processing as a model of perception.' Annals of the New York Academy of Sciences 1464(1): 242-268",
+      "Sun, Z. & Firestone, C. (2020). 'The Dark Room Problem.' Trends in Cognitive Sciences 24(5): 346-348"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Treat T6/human-likeness as a DESIGN HEURISTIC that supplies architectural priors (hierarchy, prediction-error updating, dual memory), NOT as an empirical warranty — the same way a factor model is a useful lens, not a law of markets. Selling the bot as 'it learns the way humans and science do' is a Bayesian just-so story; the defensible claim is 'it is BUILT on mechanisms for which there is partial neural evidence.'",
+     "relevance": "CONTRADICTS the literal reading of T1/T3/T6 ('this is how humans learn and how science works'). The falsification-culture takeaway: the individual bricks (predictive coding, RPE, CLS, timescale hierarchy) are well-evidenced, but the CATHEDRAL (FEP as one law unifying it all, implemented by error neurons) is not — so the theory document should assert the bricks and flag the cathedral as a motivating conjecture, not a result."
+    }
+   ]
+  },
+  {
+   "thread": "JEPA-style / predictive-in-latent SSL for time series and finance (2023-2026). What exists: TS-JEPA (NeurIPS-24 workshop), LaT-PFN (JEPA+PFN zero-shot), MTS-JEPA (codebook regimes, early warning), LeJEPA/SIGReg (provable anti-collapse), V-JEPA 2 (latent world model + planning, vision), and exactly one direct finance JEPA (Fin-JEPA, SSRN 2026). What worked: latent-space prediction as pretext is competitive on generic TS benchmarks and captures discrete regime structure; collapse is now solved in a principled way. What did NOT work: JEPA prediction-error as a daily equity trading signal (AUC 0.49), off-the-shelf TS foundation-model transfer to finance, and aggressive test-time adaptation on real markets. Untested: EBM proper in finance, JEPA at the multi-asset regime level (exactly the CRYSTAL-WORLD slot: the field validated the representation layer but has not yet monetized or regime-certified it, whereas this project has a certified regime rule but no learned representation layer - the complementarity is the research opening).",
+   "atoms": [
+    {
+     "claim": "Adapting JEPA to time series (patch tokens, high mask ratios >70%, prediction performed in latent space rather than input space) matches or surpasses masked-input and contrastive SSL baselines on standard TS classification AND forecasting benchmarks, with claimed robustness to noise and confounding variables that input-space reconstruction lacks.",
+     "sources": [
+      "Joint Embeddings Go Temporal (TS-JEPA), Sofiane Ennadir, Siavash Golkar, Leopoldo Sarra, NeurIPS 2024 Workshop on Time Series in the Age of Large Models, arXiv:2509.25449"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "The pretext task becomes predicting next month's abstract market-state summary (the analyst's one-line read: risk-off rotation, breadth narrowing) instead of the raw price path - and the summary, unlike the path, is not contaminated by microstructure noise. For the daily Dow panel this argues the SSL target should be the future embedding of the 41-col feature block, not future returns.",
+     "relevance": "Directly supports T2 (predict the representation, not the raw price) - the core TS prior art for a CRYSTAL-WORLD model. Caveat that bounds the support: single workshop paper, generic UCR/ETT-style benchmarks, zero finance data; the strength is inherited from the vision lineage (I-JEPA/V-JEPA), not from TS-native replication."
+    },
+    {
+     "claim": "The first direct JEPA on equities (Fin-JEPA: 367K params, SIGReg anti-collapse, 6,230 US stocks 2010-2026, 2.07M samples) proves daily equity panels contain learnable latent temporal structure (latent prediction beats an identity baseline by 10.1%, MSE 0.2922 vs 0.3249) - yet the prediction error used as a trading signal across 300 stocks / 393K windows is weak-to-negligible (AUC ~0.49, Spearman r ~ 0).",
+     "sources": [
+      "Fin-JEPA: Joint-Embedding Predictive Representation Learning for Financial Time Series, Yihan Wang, SSRN working paper 6855118, 2026 (code: github.com/cedricwyh/fin-jepa)"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "An EMH echo: you can compress the market's state (volatility clusters, factor comovement are real, learnable structure) but the compressible part is already priced - like knowing GARCH structure exists without being able to monetize direction from it. Independent external replication of this project's own triple-confirmed daily price-level VoI~0 null, now at the representation level.",
+     "relevance": "QUALIFIES T1/T2 sharply: latent predictability is NOT tradability - JEPA succeeding as world-picture compression (T1's actual stated goal) while failing as an alpha source. Simultaneously it is the strongest external validation that the project's daily-price null is a property of the substrate, not of its models; any CRYSTAL-WORLD build must aim its VoI claim at a non-price target (regime, risk) from day one."
+    },
+    {
+     "claim": "LaT-PFN shows that combining a JEPA latent (prediction-optimized representation of the generating stochastic process) with a prior-data-fitted network and a NORMALIZED ABSTRACT TIME AXIS yields zero-shot in-context forecasting that beats established baselines at any time granularity and horizon, with emergent discrete patch tokens encoding local structures without explicit training.",
+     "sources": [
+      "LaT-PFN: A Joint Embedding Predictive Architecture for In-context Time-series Forecasting, Stijn Verdenius, Andrea Zerio, Roy L.M. Wang, arXiv:2405.10093, 2024"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "Business-cycle time vs calendar time: recessions are one template stretched over 6-30 months, so a model on an abstract time axis can transfer one learned cycle shape across fast (2020) and slow (2008) instances - the formalization of what macro analysts do when they say 'we are in the 1946 analog, sped up'.",
+     "relevance": "Supports T5 (abstraction extends the usable horizon) via a mechanism the lecture did not name: abstracting the TIME AXIS itself, not just the state. Also supports T2. The emergent discrete tokens are an unplanned echo of MTS-JEPA's codebook and of this project's 6-symbol alphabet - three independent routes converging on discrete codes over market latents."
+    },
+    {
+     "claim": "MTS-JEPA (multi-resolution JEPA with a soft codebook bottleneck) explicitly decouples transient shocks from long-term trends and uses the discrete codebook to capture REGIME TRANSITIONS, achieving state-of-the-art time-series anomaly EARLY-WARNING (precursor detection before the event) while the codebook doubles as anti-collapse regularization.",
+     "sources": [
+      "MTS-JEPA: Multi-Resolution Joint-Embedding Predictive Architecture for Time-Series Anomaly Prediction, Yanan He, Yunshi Wen, Xin Wang, Tengfei Ma, arXiv:2602.04643, 2026"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "A learned, richer regime alphabet over continuous market features - exactly the generalization of this project's certified 2-state P(bear) belief (a hand-built codebook of size 2). Early-warning-before-anomaly is the drawdown-precursor problem: the certified rule fires ON regime evidence; a codebook JEPA is the literature's candidate mechanism for firing BEFORE it.",
+     "relevance": "Supports T3 and T5 together: the discrete code (higher abstraction) is precisely what buys prediction-ahead-of-the-event (longer effective horizon). This is the closest architectural blueprint in the literature to a CRYSTAL-WORLD regime layer - but it is a February 2026 preprint, unreplicated, benchmarked on industrial anomaly suites, not markets."
+    },
+    {
+     "claim": "LeJEPA proves isotropic Gaussian embeddings uniquely minimize worst-case downstream risk and delivers SIGReg, a linear-time regularizer (1D-projection goodness-of-fit tests) that eliminates representation collapse BY DESIGN - removing the EMA teachers, stop-gradients, and schedulers that previously made JEPAs fragile and data-hungry; meanwhile energy-based models proper remain essentially untested in finance (nearest neighbor: ScoreGrad's continuous-EBM probabilistic TS forecaster, on non-financial benchmarks).",
+     "sources": [
+      "LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics, Randall Balestriero, Yann LeCun, arXiv:2511.08544, 2025",
+      "ScoreGrad: Multivariate Probabilistic Time Series Forecasting with Continuous Energy-based Generative Models, Tijin Yan et al., arXiv:2106.10121, 2021"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Replacing an ad-hoc patchwork of risk limits with a single coherent capital rule: one hyperparameter, provable no-collapse. Practically, this is what makes a SMALL-DATA finance JEPA trainable at all - Fin-JEPA's 367K-param model already trains stably with SIGReg on ~2M daily samples, a regime where heuristic-era JEPAs (built for vision-scale data) would collapse.",
+     "relevance": "Supports T4 ('clever compare' is now principled, not folklore) and de-risks any T2 experiment on this project's small daily panels. Negative knowledge for T4's stronger reading: no published EBM inference-by-energy-minimization result exists in finance (2023-2026) - that limb of the lecture is an open, untested bet, not prior art."
+    },
+    {
+     "claim": "V-JEPA 2 (1M+ hours of video, masked prediction in latent space) delivers state-of-the-art physical-world understanding and ZERO-SHOT robot manipulation via model-predictive control executed entirely in the learned embedding space - but long-horizon tasks succeed (65-80%) only when explicitly decomposed into visual SUBGOALS; horizon does not extend for free from the abstraction alone.",
+     "sources": [
+      "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning, Mido Assran et al. (Meta AI), arXiv:2506.09985, 2025"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Portfolio planning as MPC over a learned market-state representation instead of price scenario trees; the subgoal finding maps to glide-path investing - a long-horizon allocation plan only works when decomposed into intermediate abstract milestones ('be defensive before recession confirmation', 'redeploy on regime exit'), not as one long rollout of the world model.",
+     "relevance": "Strongest established support for T1/T3 (a latent world model that closes the analyze-predict-act-compare loop and acts through it) and for T6 (perception-to-planning like humans). CRITICALLY QUALIFIES T5: even at Meta scale, longer horizons required hand-engineered hierarchical subgoals - the 'higher abstraction = longer horizon' property had to be built in, it did not emerge. Expect the same on markets."
+    },
+    {
+     "claim": "On real financial series both halves of the naive transfer story fail: off-the-shelf time-series foundation models underperform in zero-shot AND after fine-tuning (only finance-native pretraining yields forecasting and economic gains - first comprehensive TSFM-in-finance study), and aggressive test-time adaptation of a pretrained forecaster DEGRADES performance on SPY/QQQ/EURUSD across pandemic-inflation-recovery regimes, where a frozen backbone with batch-norm-statistics-only updates is the robust default.",
+     "sources": [
+      "Re(Visiting) Time Series Foundation Models in Finance, Eghbal Rahimikia, Hao Ni, Weiguan Wang, arXiv:2511.18578, 2025",
+      "Test-Time Adaptation for Non-stationary Time Series: From Synthetic Regime Shifts to Financial Markets, Yurui Wu, Qingying Deng, Wonou Chung, Mairui Li, arXiv:2602.00073, 2026",
+      "FinCast: A Foundation Model for Financial Time-Series Forecasting, arXiv:2508.19609, 2025 (consistent)"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Hiring a brilliant physicist to trade: general pattern skill without market-native priors loses to a modestly-sized finance-pretrained model. The adaptation half is this project's own E-15/CL result rediscovered externally: the frozen certified rule beat continual learning, and here frozen-plus-minimal-renormalization beats every aggressive online update on real markets.",
+     "relevance": "QUALIFIES T2/T6 (representation skill is not domain-portable; a CRYSTAL-WORLD model must pretrain on market data, not generic TS corpora) and QUALIFIES T3: the lecture's 'learn from the predicted-vs-actual difference' loop, implemented naively as continuous weight updates, is harmful under market nonstationarity - the difference signal must flow to a slow, gated, structural level (rules through a frozen certification gate), which is exactly the architecture this project already runs."
+    },
+    {
+     "claim": "The TS SSL literature shows a stable division of labor: contrastive pretraining (TS2Vec-family) captures high-level instance semantics and wins at classification but underperforms on fine-grained low-level forecasting, while masked/reconstructive modeling wins the low-level tasks (SimMTM, NeurIPS 2023, its manifold-based multi-mask formulation beating TS2Vec/CoST/TF-C and Ti-MAE/TST, with the smallest representation gap: CKA difference 1.15% vs 13.75% for TS2Vec).",
+     "sources": [
+      "SimMTM: A Simple Pre-Training Framework for Masked Time-Series Modeling, Jiaxiang Dong, Haixu Wu, Haoran Zhang, Li Zhang, Jianmin Wang, Mingsheng Long, NeurIPS 2023, arXiv:2302.00861",
+      "TS2Vec: Towards Universal Representation of Time Series, Zhihan Yue et al., AAAI 2022"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Regime calls vs price fills: classifying which market you are in (bull/bear, risk-on/off) is a high-level-semantics task where contrastive-style representations suffice, while filling in tomorrow's curve is the low-level task - and this project's own ledger (certified value ONLY at the 10d regime-classification level, price-level daily forecasting a confirmed null) says the market pays for exactly the task family that coarse representations serve.",
+     "relevance": "Supports T5 with the field's own task taxonomy: the pretext-paradigm-to-task mapping IS the abstraction-level-to-horizon mapping (coarse/semantic representations serve long-horizon regime questions; fine-grained ones serve short-horizon curve-filling, which in markets has no value). JEPA's pitch - latent prediction spanning both niches - is what TS-JEPA claims and what remains UNTESTED on financial panels; benchmarks here are UCR/ETT-style, not markets."
+    }
+   ]
+  },
+  {
+   "thread": "PRIMARY SOURCES on LeCun's program. Verified against: (a) Dawid & LeCun \"Introduction to Latent Variable EBMs\" (arXiv:2306.02572, J.Stat.Mech 2024) — full text extracted and read verbatim (LeCun-coauthored writeup of the same Les Houches 2022 lecture material as the position paper, incl. Sections 3-4 on EBMs/collapse and 6.2 on H-JEPA); (b) I-JEPA CVPR 2023 abstract/mechanism; (c) V-JEPA (arXiv:2404.08471) full-text quantitative tables; (d) V-JEPA 2 (arXiv:2506.09985) full HTML incl. limitations section; (e) Harvard lecture identified as the 2024 Ding Shum Lecture \"Objective-Driven AI\" (Harvard CMSA, 2024-03-28; the CMSA YouTube video = Ivan's youtu.be/yUmDRxV0krg); (f) counter-sources: arXiv:2505.24187 \"Beyond Exponential Decay\", LessWrong \"Contra LeCun\"; (g) finance transfer: Fin-JEPA (SSRN 2026), LaT-PFN, TS-JEPA. The OpenReview PDF of the 2022 position paper itself is behind a bot-check; all position-paper claims below are grounded in the LeCun-coauthored lecture-notes companion, which is faithful and citable. Net read for the theory doc: the representation-prediction and hierarchy-horizon pillars (T2, T5) are well-grounded and the project's own regime-vs-price results are arguably better evidence for T5 than anything in the JEPA corpus; the anti-generative rhetoric (feeding T2's framing) is the weakest pillar and should be stated in its defensible efficiency form; the enrichment loop (T3) is a training-time story in every deployed JEPA system, not yet an online act-and-learn story; and Fin-JEPA independently reproduces the project's central null (representations learnable, direct alpha absent).",
+   "atoms": [
+    {
+     "claim": "Predicting in learned representation space beats generative pixel reconstruction for learning semantic structure because the encoder is free to discard unpredictable, irrelevant detail: V-JEPA states latent-space prediction has 'the flexibility to eliminate irrelevant or unpredictable pixel-level details from the target representation', and under frozen evaluation beats pixel-reconstruction VideoMAE by +4.0pp (SSv2 69.5 vs 65.5) and +3.0pp (K400 80.8 vs 77.8) with ~2x pretraining speedup and fewer samples (270M vs 410M); I-JEPA learns 'highly semantic' features without augmentations, training ViT-H/14 in <72h on 16 A100s.",
+     "sources": [
+      "Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture (I-JEPA) — Assran, Duval, Misra, Bojanowski, Vincent, Rabbat, LeCun, Ballas; CVPR 2023 (arXiv:2301.08243)",
+      "Revisiting Feature Prediction for Learning Visual Representations from Video (V-JEPA) — Bardes, Garrido, Ponce, Chen, Xu, Rabbat, LeCun, Assran, Ballas; arXiv:2404.08471 / TMLR, 2024",
+      "A Path Towards Autonomous Machine Intelligence v0.9.2 — LeCun; OpenReview, 2022"
+     ],
+     "evidence_status": "Strong-but-Contextual",
+     "finance_analogy": "Do not forecast tomorrow's price vector (dominated by unpredictable microstructure noise, the market's 'blades of grass'); forecast the next market-STATE representation. The project's certified P(bear) regime belief is exactly a low-dim predicted representation, and its 10d risk rule works while raw daily price prediction is a triple-confirmed null — the encoder 'discarded' the unpredictable component.",
+     "relevance": "SUPPORTS T2 directly and T1 (the representation IS the world picture). Qualifier: the win is proven under frozen-eval in vision/video; with full fine-tuning pixel models close much of the gap, so the honest claim is sample/compute-efficiency and semantic abstraction, not universal dominance."
+    },
+    {
+     "claim": "Energy-based models replace normalized probability with a scalar compatibility score: F(x,y) 'capture[s] dependencies between variables x and y by associating a scalar energy to each configuration', inference is y* = argmin_y F(x,y), which (i) natively represents multimodal futures (several y's can share low energy), (ii) frees the loss/scoring choice from likelihood, and (iii) avoids the intractable partition function of continuous high-dim probabilistic models — at the stated price that 'energies are uncalibrated... so combining two separately trained EBMs is not straightforward' and uncertainty is harder to read off.",
+     "sources": [
+      "A Tutorial on Energy-Based Learning — LeCun, Chopra, Hadsell, Ranzato, Huang; in Predicting Structured Data, MIT Press, 2006",
+      "Introduction to Latent Variable Energy-Based Models: A Path Towards Autonomous Machine Intelligence — Dawid, LeCun; arXiv:2306.02572, J. Stat. Mech., 2024 (Sections 3-3.2, quotes verbatim)"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "This is relative-value ranking versus density forecasting: a desk deciding which asset to hold needs the correct ORDERING of scores under current conditions (the source's own chess example: you need the best move, not calibrated move probabilities). Caveat maps too: uncalibrated energies across models = you cannot naively combine two separately-fit signal scores, the same reason the project forces exposure-matched twins rather than comparing raw statistics across differently-scaled rules.",
+     "relevance": "SUPPORTS T4 ('clever compare representations' = D(sx,sy) is the energy; low energy = compatible states). Qualifies T4 with the honest costs LeCun himself lists: no calibrated uncertainty, no cross-model composability without extra design."
+    },
+    {
+     "claim": "Joint-embedding architectures have a degenerate failure mode — collapse — where 'the two encoders are likely to ignore inputs entirely and just produce identical constant outputs'; every model capable of multimodal prediction is susceptible. Two remedy families: contrastive methods (push up energy of generated negatives), which suffer 'bad (even exponential!) scaling... with the data dimension', vs regularized/architectural methods that bound the low-energy volume — VICReg's variance floor + covariance decorrelation + invariance terms, or the asymmetric EMA-target-encoder/stop-gradient route used by BYOL, I-JEPA and V-JEPA. LeCun's program bets on the regularized family.",
+     "sources": [
+      "VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning — Bardes, Ponce, LeCun; ICLR 2022 (arXiv:2105.04906)",
+      "Introduction to Latent Variable Energy-Based Models — Dawid, LeCun; arXiv:2306.02572, 2023/2024 (Sections 4-4.2, 6.1, quotes verbatim)",
+      "Bootstrap Your Own Latent (BYOL) — Grill et al.; NeurIPS 2020"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "The project has already met collapse's RL cousin twice: PPO heads converging to CONSTANT exposure dials (E-27/28), and the degenerate z_dsd statistic that certified everything until dial-twins were mandated. A trading world model trained to predict its own next state will happily learn 'the state is always the same' — VICReg-style variance floors on the belief (does P(bear) actually vary? are belief components decorrelated?) are the direct analogue of the project's exposure-matched-twin rule.",
+     "relevance": "QUALIFIES T2/T4 critically: compare-representations learning fails SILENTLY without explicit anti-collapse machinery — a mandatory falsifier for any JEPA-style bot component. Note the contrastive-scaling claim is contested at scale (CLIP is contrastive and works); tag that sub-claim Plausible, not Established."
+    },
+    {
+     "claim": "H-JEPA's hierarchy-horizon principle: stacked JEPAs where 'a lower-level JEPA-1 is used for short-time predictions based on many details, and a higher-level JEPA-2 makes predictions for the longer term based on fewer details', because detail that enables precise short-term prediction 'may not be needed or be even hurtful for long-term predictions'. Crucially this is still a PROPOSAL: no full H-JEPA has been demonstrated; V-JEPA 2 (the program's flagship) explicitly lists hierarchical planning as future work and needs hand-specified sub-goals for long-horizon tasks, with representation-space rollouts degrading via error accumulation.",
+     "sources": [
+      "A Path Towards Autonomous Machine Intelligence — LeCun; OpenReview, 2022 (Section 4.6)",
+      "Introduction to Latent Variable Energy-Based Models — Dawid, LeCun; arXiv:2306.02572, 2024 (Section 6.2, quotes verbatim)",
+      "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning — Assran et al.; arXiv:2506.09985, 2025 (limitations)"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "The project's headline result IS this principle instantiated: daily price-level prediction = VoI~0 (the 'quantum' level, seconds-horizon in Ivan's T5 phrasing), while the 2-state regime abstraction certifies at H=10d (the 'thermodynamic' level) — arguably stronger evidence for the hierarchy-horizon law on markets than anything in the JEPA corpus, since LeCun's version was never built end-to-end. Econometric cousin: aggregation — Sharpe/vol estimates stabilize at longer horizons while daily direction stays a coin flip.",
+     "relevance": "SUPPORTS T5 (its central claim, near-verbatim from the primary source) but downgrades it from 'established architecture' to 'principle with convergent evidence, unproven engineering'. Also supports T1: the certified value living only at the regime level says the WORLD PICTURE, not the price path, is the object worth predicting."
+    },
+    {
+     "claim": "V-JEPA 2-AC demonstrates the plan-by-comparing-representations loop at deployment scale: pretrain action-free on >1M hours of video, post-train a latent ACTION-CONDITIONED predictor on only 62h of unlabeled robot data, then plan via model-predictive control that 'minimize[s] the L1 distance between the world model's imagined future state representations and its goal representation' (CEM, receding horizon) — zero-shot pick-and-place on Franka arms in unseen labs, ~16 s/action vs ~4 min for the pixel-generative Cosmos world model (~15x). Acknowledged limits: autoregressive representation rollouts accumulate error, camera-pose sensitivity, goals must be given as images.",
+     "sources": [
+      "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning — Assran, Bardes, Rabbat, LeCun, Ballas et al. (Meta); arXiv:2506.09985, 2025"
+     ],
+     "evidence_status": "Established",
+     "finance_analogy": "Portfolio control as MPC in belief space: predict the next market-state representation under each candidate exposure and pick the action minimizing distance to a goal state (e.g., a DD-budget-respecting state) — structurally what the certified rule does each 10d step. The error-accumulation limit is the direct analogue of why the project rebalances on short certified horizons instead of trusting long model rollouts; the 15x speedup is the argument for latent-space (not scenario-price-path) planning.",
+     "relevance": "SUPPORTS T3's analyze->predict-own-representation->act->compare loop and T1 — with one honest qualification: in every deployed JEPA system the predicted-vs-actual comparison happens at TRAINING time; online enrichment of the world model from the agent's own live actions (T3's full loop, and the HL loop's ambition) is not yet demonstrated anywhere in this literature."
+    },
+    {
+     "claim": "LeCun's Harvard-lecture argument that autoregressive LLMs are doomed by exponential error divergence — P(correct) ~ (1-e)^n per token, hence 'Auto-Regressive LLMs fall short' as a path to human-level AI — is REJECTED in its strong form: transformers are not Markov chains (attention re-reads the entire generated history, so per-token errors are neither independent nor irrecoverable), correctness is not binary, models can self-correct within context, and empirically LLMs sustain coherence over thousands of tokens. The defensible residue of his claim is only the efficiency/grounding argument for continuous high-dim signals, not the divergence theorem.",
+     "sources": [
+      "Objective-Driven AI: Towards AI systems that can learn, remember, reason, and plan — LeCun; Ding Shum Lecture, Harvard CMSA, 2024-03-28 (the youtu.be/yUmDRxV0krg lecture)",
+      "Beyond Exponential Decay: Rethinking Error Accumulation in Large Language Models — arXiv:2505.24187, 2025",
+      "Contra LeCun on 'Autoregressive LLMs are doomed' — LessWrong, 2023"
+     ],
+     "evidence_status": "Rejected",
+     "finance_analogy": "Iterated one-step forecasts do compound errors (classic ARMA multi-step degradation), but DIRECT forecasting at the target horizon sidesteps iteration — exactly the project's choice of a native 10d rule over chaining ten 1d forecasts. Also a governance lesson: the project's own improvement loop is LLM-DRIVEN (Heuristic Learning), which works precisely because LeCun's doom argument fails in practice.",
+     "relevance": "CONTRADICTS the anti-generative framing bundled into T2: the theory doc should claim 'representation prediction is more sample/compute-efficient and better abstracted for continuous market signals', NOT 'token/price-level generative prediction is mathematically broken'. Ivan's T2 survives; the lecture's strongest rhetorical support for it does not."
+    },
+    {
+     "claim": "LeCun's data-efficiency argument for world models: a 4-year-old has taken in more sensory data (~1E15 bytes through vision, lecture figure) than the largest LLMs see in text (~1E13-1E14 bytes), yet humans learn robust common sense from it — where common sense is defined as 'the ability to use models of the world to fill in information about the world that is unavailable from perception or memory (e.g., predict the future)'; SSL on prediction is proposed as the central mechanism because it extracts the most bits of learning signal per sample (vs sparse-reward RL and label-limited SL). The bandwidth arithmetic is solid; the inference 'human-level AI therefore requires sensory-grounded world models' remains conjecture.",
+     "sources": [
+      "Objective-Driven AI — LeCun; Ding Shum Lecture, Harvard CMSA, 2024",
+      "Introduction to Latent Variable Energy-Based Models — Dawid, LeCun; arXiv:2306.02572, 2024 (Sections 2.2-2.4 and Conclusion, common-sense quote verbatim)",
+      "A Path Towards Autonomous Machine Intelligence — LeCun; OpenReview, 2022"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "Markets are the extreme small-effective-sample regime — one non-repeatable macro history — so storing raw paths buys little; the value is in compression into a small reusable state (Ivan's 'science compresses: planetary motion in 6 numbers' = describing a decade of market data by P(bear) + vol regime + dial). The 'fill in what perception can't see' definition of common sense is precisely what a regime belief does on days the tape is ambiguous.",
+     "relevance": "SUPPORTS T3 (learning = compression into a world picture, not raw storage) and partially T6 — but qualifies T6: LeCun's actual argument is about DATA EFFICIENCY, not human-likeness for its own sake; 'maximally similar to humans' is philosophy layered on top, and the counter-example (LLMs succeed while being maximally unhuman in learning style) sits in the same lecture hall."
+    },
+    {
+     "claim": "JEPA transfers to financial time series but reproduces the alpha null: Fin-JEPA — first JEPA on financial data (6,230 US equities 2010-2026, 2.07M samples, 367K-param PriceEncoder + causal Transformer predictor, SIGReg anti-collapse regularization from LeCun's 2025 LeJEPA line) — trains stably with no collapse and its latent predictions beat an identity baseline by ~10.1%, yet its prediction-error (VoE) signal tested as a trading signal across 300 stocks is 'weak-to-negligible'. Parallel non-finance evidence (LaT-PFN, TS-JEPA, Phys-JEPA) shows latent-space prediction is a viable general time-series representation strategy.",
+     "sources": [
+      "Fin-JEPA: Joint-Embedding Predictive Representation Learning for Financial Time Series — Yihan Wang; SSRN preprint 6855118 + github.com/cedricwyh/fin-jepa, 2026",
+      "LaT-PFN: A Joint Embedding Predictive Architecture for In-context Time-series Forecasting — Verdenius et al.; arXiv:2405.10093, 2024",
+      "Joint Embeddings Go Temporal (TS-JEPA) — arXiv:2509.25449, 2025"
+     ],
+     "evidence_status": "Plausible",
+     "finance_analogy": "This IS the analogy: an independent group ran LeCun's recipe on equities and landed exactly where the project did — market-state representations are learnable and predictable in latent space, but predictability of the representation does not convert into price-level alpha. It's external replication of the project's VoI~0 daily null AND of its resolution (seek value at the regime/risk level, not the price level).",
+     "relevance": "SUPPORTS T1/T2 feasibility (JEPA-on-markets is buildable today, collapse controllable with published regularizers) while CONTRADICTING any reading of T1-T2 that expects representation prediction to yield direct trading edge. Single unreviewed preprint — treat as a lead to verify, and as the natural architecture candidate if the bot's world-model layer is ever rebuilt JEPA-style."
+    }
+   ]
+  }
+ ]
+}

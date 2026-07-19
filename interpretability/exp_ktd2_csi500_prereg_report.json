@@ -1,0 +1,62 @@
+{
+ "preregistration": "see module docstring (fixed before running)",
+ "cells": {
+  "1": {
+   "alpha": 10,
+   "per_year": {
+    "2024": {
+     "n": 49,
+     "margin": 0.0005,
+     "z": 0.99
+    },
+    "2025": {
+     "n": 48,
+     "margin": 0.0023,
+     "z": 0.65
+    },
+    "2026": {
+     "n": 21,
+     "margin": 0.0052,
+     "z": 2.13
+    }
+   },
+   "pooled": {
+    "margin": 0.0016,
+    "z": 1.6,
+    "n": 118
+   }
+  },
+  "4": {
+   "alpha": 100,
+   "per_year": {
+    "2024": {
+     "n": 49,
+     "margin": 0.0,
+     "z": 0.05
+    },
+    "2025": {
+     "n": 48,
+     "margin": -0.0015,
+     "z": -4.22
+    },
+    "2026": {
+     "n": 21,
+     "margin": -0.0,
+     "z": -0.01
+    }
+   },
+   "pooled": {
+    "margin": -0.0004,
+    "z": -2.37,
+    "n": 118
+   }
+  }
+ },
+ "verdict": "MIXED / HORIZON-CONDITIONAL - see POST_REVIEW_CORRECTION",
+ "runtime_s": 3,
+ "POST_REVIEW_CORRECTION": {
+  "review": "interpretability/exp_w4_finale_review.json",
+  "purge_fix": "fwd_stats had a year-boundary look-ahead (targets realizing inside the eval year); purged read: k=1 z 1.60->1.43 (still above the 1.28 bar, margin +0.00153), k=4 -2.37->-2.41",
+  "corrected_verdict": "KT-D v2 MIXED / HORIZON-CONDITIONAL: PASS at k=1 per the prereg letter (purge-robust) but SIGNIFICANT NEGATIVE at k=4 (z -2.4, driven by 2025) - enrichment helps 5d forward stats and hurts 20d on the clean market. Any consolidation wiring MUST carry a horizon gate (k=1 stats only). Cumulative evidence: Dow post-hoc positive + csi500 preregistered k=1 positive + csi500 k=4 negative."
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "preregistration": {
+  "bar": "HOLD, some k: jepa margin>0 z>=1.28 AND >= linear margin AND placebo < 0.5x",
+  "nulls": "better-on-DEV of {persistence, train-mean} per space",
+  "boot_block": 12,
+  "target_features": "within-block + end levels",
+  "iteration_note": "v1-v3 artifacts documented in docstring; v4 = referee-fixed"
+ },
+ "linear_alpha": {
+  "1": 100,
+  "2": 100
+ },
+ "seeds": {
+  "0": {
+   "collapse": {
+    "min_dim_std": 0.175,
+    "eff_rank": 3.02
+   },
+   "windows": {
+    "hold": {
+     "1": {
+      "jepa_margin": 0.0062,
+      "z": 2.76,
+      "placebo": 0.0004,
+      "linear_margin": 0.2232,
+      "linear_z": 2.17
+     },
+     "2": {
+      "jepa_margin": 0.0036,
+      "z": 0.57,
+      "placebo": 0.0004,
+      "linear_margin": 0.1298,
+      "linear_z": 1.8
+     }
+    },
+    "oos": {
+     "1": {
+      "jepa_margin": 0.0054,
+      "z": 2.0,
+      "placebo": 0.0001,
+      "linear_margin": 0.353,
+      "linear_z": 2.55
+     },
+     "2": {
+      "jepa_margin": 0.0073,
+      "z": 1.23,
+      "placebo": 0.0002,
+      "linear_margin": 0.3335,
+      "linear_z": 2.21
+     }
+    }
+   },
+   "jepa_null": "pers"
+  },
+  "1": {
+   "collapse": {
+    "min_dim_std": 0.146,
+    "eff_rank": 4.31
+   },
+   "windows": {
+    "hold": {
+     "1": {
+      "jepa_margin": 0.0005,
+      "z": 1.58,
+      "placebo": 0.0002,
+      "linear_margin": 0.2232,
+      "linear_z": 2.17
+     },
+     "2": {
+      "jepa_margin": 0.0005,
+      "z": 1.57,
+      "placebo": -0.0001,
+      "linear_margin": 0.1298,
+      "linear_z": 1.8
+     }
+    },
+    "oos": {
+     "1": {
+      "jepa_margin": 0.0007,
+      "z": 1.94,
+      "placebo": -0.0001,
+      "linear_margin": 0.353,
+      "linear_z": 2.55
+     },
+     "2": {
+      "jepa_margin": 0.0003,
+      "z": 1.16,
+      "placebo": -0.0003,
+      "linear_margin": 0.3335,
+      "linear_z": 2.21
+     }
+    }
+   },
+   "jepa_null": "pers"
+  }
+ },
+ "bar_by_k": {
+  "1": {
+   "jepa_margin": 0.0033,
+   "z": 2.17,
+   "placebo": 0.0003,
+   "linear_margin": 0.2232,
+   "pass": false
+  },
+  "2": {
+   "jepa_margin": 0.0021,
+   "z": 1.07,
+   "placebo": 0.0002,
+   "linear_margin": 0.1298,
+   "pass": false
+  }
+ },
+ "kta_pass": false,
+ "verdict": "KT-A SPLIT \u2014 the JEPA arm fails but the tuned LINEAR arm shows positive margin over the fair null on within-block targets: L1 has (modest, linear) predictable structure; the JEPA encoder adds nothing over PCA at this scale. Per the methodology, W1 should build L2 on the LINEAR representation first and revisit nonlinear encoders only with more data or features.",
+ "runtime_s": 8
+}

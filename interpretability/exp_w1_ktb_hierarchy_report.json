@@ -1,0 +1,398 @@
+{
+ "preregistration": {
+  "primary_bar": "reach(L1) < reach(L2) on HOLD; L3 directional only (power)",
+  "outcomes": [
+   "FULL PASS (+pooled>flat)",
+   "MECHANICAL (flat matches)",
+   "KILL"
+  ],
+  "reach_def": "largest horizon days with margin>0 AND z>=1.28, scanned from k=1",
+  "controls": "year-shuffled placebo per level; capacity-matched flat twin; matched-horizon"
+ },
+ "levels": {
+  "L1": {
+   "1": {
+    "horizon_days": 5,
+    "real": {
+     "alpha": 100,
+     "null": "pers",
+     "hold": {
+      "margin": 0.2232,
+      "z": 2.17,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3586,
+      "z": 2.56,
+      "n": 118
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "pers",
+     "hold": {
+      "margin": -0.6704,
+      "z": -5.0,
+      "n": 100
+     },
+     "oos": {
+      "margin": -0.5246,
+      "z": -3.07,
+      "n": 118
+     }
+    }
+   },
+   "2": {
+    "horizon_days": 10,
+    "real": {
+     "alpha": 100,
+     "null": "pers",
+     "hold": {
+      "margin": 0.1298,
+      "z": 1.8,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.3366,
+      "z": 2.21,
+      "n": 118
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "pers",
+     "hold": {
+      "margin": -0.5589,
+      "z": -3.87,
+      "n": 100
+     },
+     "oos": {
+      "margin": -0.3549,
+      "z": -2.12,
+      "n": 118
+     }
+    }
+   },
+   "4": {
+    "horizon_days": 20,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "hold": {
+      "margin": 0.3581,
+      "z": 6.85,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.4864,
+      "z": 14.13,
+      "n": 118
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": 0.0592,
+      "z": 2.71,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.1267,
+      "z": 21.21,
+      "n": 118
+     }
+    }
+   },
+   "8": {
+    "horizon_days": 40,
+    "real": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": 0.1481,
+      "z": 7.28,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.236,
+      "z": 13.88,
+      "n": 118
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": 0.0638,
+      "z": 2.71,
+      "n": 100
+     },
+     "oos": {
+      "margin": 0.1356,
+      "z": 26.52,
+      "n": 118
+     }
+    }
+   }
+  },
+  "L2": {
+   "1": {
+    "horizon_days": 21,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "hold": {
+      "margin": 0.0187,
+      "z": 0.45,
+      "n": 24
+     },
+     "oos": {
+      "margin": 0.1368,
+      "z": 3.36,
+      "n": 22
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.0057,
+      "z": -0.98,
+      "n": 24
+     },
+     "oos": {
+      "margin": -0.0156,
+      "z": -2.15,
+      "n": 22
+     }
+    }
+   },
+   "2": {
+    "horizon_days": 42,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.1068,
+      "z": -2.28,
+      "n": 24
+     },
+     "oos": {
+      "margin": 0.0181,
+      "z": 0.38,
+      "n": 22
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.0125,
+      "z": -1.29,
+      "n": 24
+     },
+     "oos": {
+      "margin": -0.0303,
+      "z": -4.55,
+      "n": 22
+     }
+    }
+   },
+   "4": {
+    "horizon_days": 84,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.1253,
+      "z": -3.03,
+      "n": 24
+     },
+     "oos": {
+      "margin": 0.0085,
+      "z": 0.2,
+      "n": 22
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.0198,
+      "z": -2.93,
+      "n": 24
+     },
+     "oos": {
+      "margin": -0.0194,
+      "z": -6.74,
+      "n": 22
+     }
+    }
+   },
+   "8": {
+    "horizon_days": 168,
+    "real": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.0337,
+      "z": -3.54,
+      "n": 24
+     },
+     "oos": {
+      "margin": -0.0287,
+      "z": -4.07,
+      "n": 22
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.0419,
+      "z": -5.73,
+      "n": 24
+     },
+     "oos": {
+      "margin": -0.0491,
+      "z": -20.97,
+      "n": 22
+     }
+    }
+   }
+  },
+  "L3": {
+   "1": {
+    "horizon_days": 63,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.0228,
+      "z": -2.33,
+      "n": 8
+     },
+     "oos": {
+      "margin": 0.0372,
+      "z": 2.83,
+      "n": 8
+     }
+    },
+    "placebo": {
+     "alpha": 1000,
+     "null": "mean",
+     "hold": {
+      "margin": 0.0245,
+      "z": 0.86,
+      "n": 8
+     },
+     "oos": {
+      "margin": 0.032,
+      "z": 2.98,
+      "n": 8
+     }
+    }
+   },
+   "2": {
+    "horizon_days": 126,
+    "real": {
+     "alpha": 1000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.042,
+      "z": -2.27,
+      "n": 8
+     },
+     "oos": {
+      "margin": -0.0053,
+      "z": -0.42,
+      "n": 8
+     }
+    },
+    "placebo": {
+     "alpha": 10000,
+     "null": "mean",
+     "hold": {
+      "margin": -0.0106,
+      "z": -1.63,
+      "n": 8
+     },
+     "oos": {
+      "margin": -0.0164,
+      "z": -4.12,
+      "n": 8
+     }
+    }
+   }
+  }
+ },
+ "reach_days": {
+  "L1": 40,
+  "L2": 0,
+  "L3": 0
+ },
+ "flat_twins": {
+  "L2": {
+   "alpha": 10000,
+   "null": "mean",
+   "hold": {
+    "margin": -0.0183,
+    "z": -0.61,
+    "n": 24
+   },
+   "oos": {
+    "margin": 0.0674,
+    "z": 3.26,
+    "n": 22
+   }
+  },
+  "L3": {
+   "alpha": 10000,
+   "null": "mean",
+   "hold": {
+    "margin": -0.0168,
+    "z": -2.03,
+    "n": 8
+   },
+   "oos": {
+    "margin": 0.0299,
+    "z": 2.58,
+    "n": 8
+   }
+  }
+ },
+ "matched_horizon": {
+  "L2@21d_vs_L1@20d": {
+   "L2": {
+    "margin": 0.0187,
+    "z": 0.45,
+    "n": 24
+   },
+   "L1": {
+    "margin": 0.3581,
+    "z": 6.85,
+    "n": 100
+   }
+  },
+  "L3@63d_vs_L2@63d": {
+   "L3": {
+    "margin": -0.0228,
+    "z": -2.33,
+    "n": 8
+   },
+   "L2": {
+    "margin": -0.1253,
+    "z": -3.03,
+    "n": 24
+   }
+  }
+ },
+ "verdict": "INVALIDATED BY REVIEW - authoritative read = v2",
+ "runtime_s": 2,
+ "POST_REVIEW_INVALIDATION": {
+  "review": "interpretability/exp_w1_ktb_review.json (VERDICT_INVALIDATING_BUG, both directions)",
+  "summary": "L1 40d reach ~84% frozen-mean-null mechanics under the 2022-23 shift (positive placebo was the symptom); L2 zero reach = capacity starvation (dev prefers CTX=2 -> z 6.7@21d, survives strong nulls); ordering NOT identified by this design",
+  "authoritative_read": "exp_w1_ktb_v2_report.json (FULL PASS under the identified protocol)"
+ }
+}

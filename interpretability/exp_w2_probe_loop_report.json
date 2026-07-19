@@ -1,0 +1,92 @@
+{
+ "preregistration": {
+  "detour_pass": ">=2 of 3 breaks with median>calm and z>=2 on L1 k=1",
+  "action_expectation": "NULL (derived info; gain must match shuffled placebo)",
+  "breaks": {
+   "COVID_dev": [
+    "2020-02-15",
+    "2020-04-30"
+   ],
+   "RATES_hold": [
+    "2022-01-01",
+    "2022-06-30"
+   ],
+   "TARIFF_oos": [
+    "2025-03-15",
+    "2025-05-15"
+   ]
+  },
+  "covid_caveat": "2020 lies in the DEV tuning span"
+ },
+ "detour": {
+  "L1_k1": {
+   "calm_median": 1.414,
+   "n_calm": 327,
+   "COVID_dev": {
+    "n": 10,
+    "median": 117.198,
+    "z": 3.53
+   },
+   "RATES_hold": {
+    "n": 24,
+    "median": 4.383,
+    "z": 4.9
+   },
+   "TARIFF_oos": {
+    "n": 9,
+    "median": 5.484,
+    "z": 2.46
+   }
+  },
+  "L2_k1": {
+   "calm_median": 3.282,
+   "n_calm": 71,
+   "COVID_dev": {
+    "n": 3,
+    "median": 23.769,
+    "z": 1.56
+   },
+   "RATES_hold": {
+    "n": 6,
+    "median": 4.022,
+    "z": 1.9
+   },
+   "TARIFF_oos": {
+    "n": 2,
+    "median": 17.078,
+    "z": null,
+    "note": "z NULLED post-review: degenerate bootstrap SE at n=2 (single start); CL-1b rule"
+   }
+  }
+ },
+ "action_conditioning": {
+  "L1_k1": {
+   "action_margin": -0.002,
+   "z": -1.25,
+   "shuffled_action_margin": -0.0001,
+   "z_plc": -0.06
+  },
+  "L1_k4": {
+   "action_margin": -0.0008,
+   "z": -1.99,
+   "shuffled_action_margin": -0.0,
+   "z_plc": -0.12
+  }
+ },
+ "episodic_store": {
+  "path": "data\\_crystal_world\\episodic_replay.jsonl",
+  "n_records": 822,
+  "schema": "date/level/k/energy/null_energy/surprise_ratio/action_mean_exposure"
+ },
+ "verdict": "DETOUR PASS (3/3 break windows elevated at z>=2 on L1) — the compare step detects schema violations; ACTION CHANNEL INERT as pre-registered (historical a_t is derived info; footprint untestable without live size). Episodic store v0 written (822 records).",
+ "runtime_s": 8,
+ "POST_REVIEW": {
+  "review": "interpretability/exp_w2_review.json (MINOR_ISSUES, no flips)",
+  "corrections": [
+   "DETOUR read corrected: the elevation is GENERIC NOVELTY (persistence-null fires nearly identically: 57x/4.2x/4.7x) - valid as an enrichment TRIGGER, not model-specific detection by the L1 predictor",
+   "TARIFF hit is marginal (z 1.93-2.90 across block choices) - honest count = >=2/3 robust + 1 marginal",
+   "calm baseline contamination checked: biases AGAINST the pass (conservative)",
+   "action read = consistent-with-expectation, UNINFORMATIVE about causal footprint (weak by construction)"
+  ]
+ }
+}

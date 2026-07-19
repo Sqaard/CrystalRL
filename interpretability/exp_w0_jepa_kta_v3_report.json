@@ -1,0 +1,108 @@
+{
+ "preregistration": {
+  "bar": "HOLD, some k in {1,2}: margin>0 z>=1.28 AND >= pca margin AND placebo < 0.5x",
+  "design": "disjoint 5d blocks, ctx=12 blocks, EMA-space eval",
+  "iteration_note": "v1 predictor collapse; v2 EMA/online mismatch + overlap artifact — see docstring"
+ },
+ "seeds": {
+  "0": {
+   "collapse": {
+    "min_dim_std": 0.257,
+    "eff_rank": 3.85
+   },
+   "windows": {
+    "hold": {
+     "1": {
+      "margin": -1.4817,
+      "z": -4.83,
+      "placebo": -1.9139,
+      "pca": -0.0351
+     },
+     "2": {
+      "margin": -0.5701,
+      "z": -3.32,
+      "placebo": -1.1346,
+      "pca": -0.2214
+     }
+    },
+    "oos": {
+     "1": {
+      "margin": -1.3227,
+      "z": -11.31,
+      "placebo": -2.2975,
+      "pca": 0.1126
+     },
+     "2": {
+      "margin": -0.6921,
+      "z": -6.17,
+      "placebo": -1.1225,
+      "pca": -0.0003
+     }
+    }
+   }
+  },
+  "1": {
+   "collapse": {
+    "min_dim_std": 0.269,
+    "eff_rank": 3.9
+   },
+   "windows": {
+    "hold": {
+     "1": {
+      "margin": -0.471,
+      "z": -4.03,
+      "placebo": -3.3356,
+      "pca": -0.0351
+     },
+     "2": {
+      "margin": -0.2704,
+      "z": -2.1,
+      "placebo": -2.2221,
+      "pca": -0.2214
+     }
+    },
+    "oos": {
+     "1": {
+      "margin": -0.4373,
+      "z": -2.44,
+      "placebo": -3.1047,
+      "pca": 0.1126
+     },
+     "2": {
+      "margin": -0.4095,
+      "z": -3.3,
+      "placebo": -1.7917,
+      "pca": -0.0003
+     }
+    }
+   }
+  }
+ },
+ "bar_by_k": {
+  "1": {
+   "mean_margin": -0.9764,
+   "mean_z": -4.43,
+   "mean_placebo": -2.6248,
+   "mean_pca": -0.0351,
+   "pass": false
+  },
+  "2": {
+   "mean_margin": -0.4202,
+   "mean_z": -2.71,
+   "mean_placebo": -1.6783,
+   "mean_pca": -0.2214,
+   "pass": false
+  }
+ },
+ "kta_pass": false,
+ "verdict": "INVALIDATED BY REVIEW - authoritative read = v4 SPLIT",
+ "runtime_s": 6,
+ "POST_REVIEW_INVALIDATION": {
+  "review": "interpretability/exp_w0_review.json (VERDICT_INVALIDATING_BUG)",
+  "findings": [
+   "untuned ridge alpha=1: dev-tuned alpha=100 PASSES the bar (+0.20 z 2.51) but substantially mechanically (trailing-aggregate target features embed context days)",
+   "JEPA arm lost the v2 residual fix - negative margins measured optimization failure (dev-best epoch 7, 6s runtime)"
+  ],
+  "authoritative_read": "exp_w0_jepa_kta_v4_report.json (KT-A SPLIT)"
+ }
+}

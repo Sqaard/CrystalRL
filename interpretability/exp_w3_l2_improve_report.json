@@ -1,0 +1,75 @@
+{
+ "preregistration": {
+  "bar": "hold AND oos twin z >= HMM - 0.5 (tightened where W2 failed)",
+  "variants": "temporal GaussianHMM causal filter; + slow-pooled L1",
+  "on_fail": "DISCARD substitute; keep certified HMM; L2 = KT-B level only"
+ },
+ "baseline_hmm": {
+  "name": "hmm_eyes4",
+  "tau": 0.74,
+  "e_def": 0.95,
+  "dev_twin_z": 2.25,
+  "hold": {
+   "twin_z": 2.98,
+   "defensive_share": 0.599,
+   "matched_const": 0.97
+  },
+  "oos": {
+   "twin_z": 0.98,
+   "defensive_share": 0.254,
+   "matched_const": 0.987
+  }
+ },
+ "variants": {
+  "L2_tHMM": {
+   "K": 3,
+   "result": {
+    "name": "L2_tHMM",
+    "tau": 0.88,
+    "e_def": 0.95,
+    "dev_twin_z": 1.9,
+    "hold": {
+     "twin_z": 0.71,
+     "defensive_share": 0.98,
+     "matched_const": 0.951
+    },
+    "oos": {
+     "twin_z": 0.0,
+     "defensive_share": 1.0,
+     "matched_const": 0.95
+    }
+   },
+   "corr_with_hmm": 0.592,
+   "pass_both_windows": false
+  },
+  "L2_tHMM_L1pool": {
+   "K": 2,
+   "result": {
+    "name": "L2_tHMM_L1pool",
+    "tau": 0.5,
+    "e_def": 0.95,
+    "dev_twin_z": 1.98,
+    "hold": {
+     "twin_z": -0.0,
+     "defensive_share": 1.0,
+     "matched_const": 0.95
+    },
+    "oos": {
+     "twin_z": 0.0,
+     "defensive_share": 1.0,
+     "matched_const": 0.95
+    }
+   },
+   "corr_with_hmm": 0.457,
+   "pass_both_windows": false
+  }
+ },
+ "verdict": "DISCARD L2-AS-SUBSTITUTE (per the binding W2 guidance) — no temporal variant passes the OOS-inclusive bar: the certified HMM belief remains the rule's command surface; L2 stays as the KT-B representation level only; W3 memory work proceeds on L1 representations (never depended on the substitute). Logged honestly as the second confirmation that the month-level substitute lacks independent OOS content.",
+ "runtime_s": 48,
+ "POST_REVIEW": {
+  "verdict_status": "DISCARD CONFIRMED GENUINE by review",
+  "mechanism": "causal-filter OOD lock-in: 10Y-yield LEVEL at mean z +2.23 hold / +3.85 oos vs the frozen 2010-18 scaler pins the posterior (occupancy 0.98-1.0, emission logp -8 -> -14.3); no threshold rescues a pinned posterior; the CL-1c-style state-matching fix selects the SAME state",
+  "harness_gap": "the [5%,95%] coverage guard was dev-only - it admitted configs degenerate outside dev; future harnesses evaluate the guard per window",
+  "l2_rebuild_rule": "exclude raw level features (or adapt scaling) in any future L2"
+ }
+}

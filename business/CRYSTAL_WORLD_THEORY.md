@@ -168,6 +168,18 @@ third-window read), and the flat-twin comparison lacks a z on the difference. T5
 markets upgrades from "our regime result is the local evidence" to "directly measured, twice
 confirmed, pending one clean-window replication".
 
+**UPDATE 2026-07-19 — the program's first full pass complete; T5 final status for this cycle.**
+The clean-window read ran as a PREREGISTERED cross-market replication (csi500, untouched by any
+KT-B analysis): **UNDERPOWERED/UNREPLICATED** — no cell survived the guards (the one candidate
+was correctly placebo-killed as pure generic-shrinkage mechanics). And the W4 battery closed the
+flat-twin caveat: the pooled-representation advantage over the flat twin is directional but NOT
+significant (paired z −0.34). Final honest T5 wording: **the abstraction-horizon ordering is
+measured and robust on Dow (40d < 84d, strong nulls, placebo guards, OOS-confirmed); the
+dividend is certainly carried by target aggregation (Simon), plausibly-but-not-provably by the
+representation hierarchy; and cross-market generality is open at current data scales.** The
+certified regime rule remains the strongest single piece of evidence. Full record:
+`reports/CRYSTAL_WORLD_W0_W4_RESULTS.md`.
+
 **Hard qualifications** (these go into every design decision):
 1. **Lorenz 1969 / Palmer et al. 2014 — the real butterfly effect**: with a shallow enough
    cross-scale energy spectrum, fine-scale errors cascade *upscale* and impose a finite

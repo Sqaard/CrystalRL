@@ -1,0 +1,55 @@
+{
+ "date": "2026-07-18",
+ "reviewed": "exp_w1_ktb_hierarchy.py",
+ "review": {
+  "verdict": "VERDICT_INVALIDATING_BUG",
+  "findings": [
+   {
+    "severity": "invalidating",
+    "what": "L2's reach=0 is a capacity/context artifact, not a property of the abstraction level. The fixed CTX=12 arm (96-dim ridge input on 91 train samples) is dev-suboptimal — dev margin monotonically prefers shorter context (CTX=2: +0.114 vs CTX=12: +0.041). The dev-chosen CTX=2 arm gives L2 hold margins +0.386 z 6.70 @21d, +0.242 z 4.59 @42d, +0.056 z 4.97 @84d, and the 21-42d cells SURVIVE a strong dev-tuned null family (shrunk-persistence: +0.160 z 3.2-4.3 and +0.161 z 2.8-5.1 across bootstrap block lengths 2-8), with clean controls (strong-null year-shuffled placebo strongly negative; pooled beats its flat twin 0.386/0.242 vs 0.274/0.183). The load-bearing zero in the printed KILL disappears under an arm choice dev itself selects.",
+    "why_it_matters": "The KILL verdict rests entirely on L2 k=1 hold z=0.45 from the starved arm. With the fair arm, L2 reaches 84d (orig nulls) / 42d (strong nulls) — the preregistered ordering reach(L1)<reach(L2) can HOLD under the same protocol with one dev-tunable knob the design never scanned. A verdict that flips on an unscanned nuisance parameter is a harness artifact."
+   },
+   {
+    "severity": "invalidating",
+    "what": "L1's printed 40d reach at margin +0.358 z 6.85 is ~84% mechanical null-weakness, not skill: the dev-tuned shrunk-persistence null alone beats the frozen train-mean null by +0.301 (of mean-null error) on hold at k=4, and the positive year-shuffled placebo (+0.059/+0.064, z 2.7) was the visible symptom. Under the strong null family the k=4/8 margins fall to +0.081/+0.049 (z 2.28/2.73) and L1's consecutive-scan reach collapses from 40d to 5d (CTX=12) / 10d (CTX=2).",
+    "why_it_matters": "The headline magnitude and the 20-40d 'horizon dividend' of L1 are artifacts of comparing against a frozen 2010-18 train mean during the 2022-23 level shift. Any theory-file statement quoting margin +0.358 or z 6.85-7.28 as L1 skill is wrong by roughly a factor of 5-7; real L1 skill above a fair null is O(0.03-0.17)."
+   },
+   {
+    "severity": "invalidating",
+    "what": "The reach ORDERING — the preregistered primary bar — is not identified by this experiment: it flips sign across defensible analyst choices. Fair arms + orig nulls + extended L1 k-grid (the original grid caps L1 at 40d by construction; extended, L1 reaches 120d): L1 120d > L2 84d (KILL direction). Fair arms + strong nulls + the preregistered consecutive scan: L1 10d < L2 42d (PASS direction). Strong nulls + max-significant-horizon definition: L1 80d > L2 42d (KILL direction). Adversarial oracle-on-hold nulls: all cells <=0 (flat, undecided).",
+    "why_it_matters": "Both KILL and PASS are reachable from the same data by reasonable choices of null family, context length, k-grid, and reach definition. The honest verdict is UNDECIDED / NOT IDENTIFIED, and the pre-registered 'major theory amendment (death #1)' should not be executed on this run."
+   },
+   {
+    "severity": "minor",
+    "what": "The z jump at L1 k=4/8 (2.17/1.80 -> 6.85/7.28) is a null-switch artifact, confirmed by the same-null table: vs persistence, L1 hold margins DECAY monotonically with horizon (0.223 z2.17, 0.130 z1.80, 0.089 z0.86, 0.041 z0.32); vs frozen mean they are large at ALL horizons (0.563 z7.82 at k=1). Skill vs a live null shrinks with horizon, exactly as theory expects; nothing 'jumps' at 20d.",
+    "why_it_matters": "Any narrative reading of 'skill grows with horizon at L1' from the printed table is wrong; the apparent growth is the dev-chosen null degrading from persistence to frozen-mean at k>=4."
+   },
+   {
+    "severity": "minor",
+    "what": "The reach definition (consecutive scan from k=1, stop at first failure) is brittle to non-monotone significance: under strong nulls L1 fails at k=4 (z 1.02) but is strongly significant at k=8 (z 11.47) and k=16 (z 2.07), so scan-reach reads 10d while max-significant-horizon reads 80d.",
+    "why_it_matters": "An 8x swing in the primary statistic from one borderline intermediate cell makes the bar fragile; a robust rerun should preregister a reach definition that tolerates one non-monotone dip or uses max-significant with multiplicity control."
+   },
+   {
+    "severity": "minor",
+    "what": "L3 hold cells are statistically meaningless at n=8: the block-bootstrap z of -2.33 at k=1 corresponds to a sign-flip two-sided p of 0.139. The design correctly excluded L3 from the bar, but the printed negative z's should not be cited as evidence of anything.",
+    "why_it_matters": "Prevents the 'L3 negative' color from being quoted as a third data point for the inverted-ordering story."
+   },
+   {
+    "severity": "note",
+    "what": "The L2 CTX=12 hold-vs-OOS discrepancy (z 0.45 hold vs 3.36 OOS) is arm-specific, not a power problem: hold 90% CI [-0.069,+0.074] excludes the OOS-sized margin 0.137, and simulated power to detect an OOS-sized effect at n=24 is ~1.00; the k>=2 negative margins at CTX=12 have CIs excluding 0. The over-regularized 96-dim arm genuinely lost on hold while the same abstraction level with a fair arm wins on both windows.",
+    "why_it_matters": "Rules out 'just underpowered' as the explanation for the printed L2 zero — the arm itself was the problem, which is stronger evidence for the capacity-starvation diagnosis."
+   },
+   {
+    "severity": "note",
+    "what": "The matched-horizon secondary read as printed (L1@20d 0.358 vs L2@21d 0.019, 'L1 crushes') compares margins against nulls of very different difficulty in different PCA spaces and different target smoothness. Under fair arms + strong nulls it REVERSES at ~21d (L2 +0.160 z 3.3 vs L1 +0.029 z 1.0) and ties at ~40d (L2 +0.161 vs L1 +0.168).",
+    "why_it_matters": "The sharpest T5 statement in the report currently points the wrong way; the fair matched-horizon read is directional support FOR abstraction at the month scale, not against it."
+   },
+   {
+    "severity": "note",
+    "what": "Mild protocol leaks, immaterial to the verdict: train-sample targets extend up to max(KS) blocks past the TRAIN boundary into DEV (walk-forward bleed affecting alpha/null tuning only); the oracle-on-hold null probe overfits hold with ~20 candidates and is a bound, not an estimate; bootstrap block length is tied to CTX so the fair CTX=2 arm was checked at blocks 2-12 (z stable >=2.8).",
+    "why_it_matters": "Documents residual caveats so the corrected read is not itself over-claimed."
+   }
+  ],
+  "corrected_read": "KT-B as printed (KILL: reach L1=40d > L2=0) is a two-sided harness artifact and must not trigger the preregistered theory amendment. The L1 side is inflated: ~84% of the +0.358 margin at 20d is the frozen train-mean null failing under the 2022-23 level shift (a dev-tuned shrunk-persistence null alone recovers +0.30 of it; the positive placebo was the symptom), the z jump at k=4/8 is a pers-to-mean null switch, and vs a live null L1 skill decays monotonically with horizon (0.22@5d to 0.04@40d). The L2 side is deflated: the fixed 12-block context (96-dim ridge on 91 train samples) is capacity starvation — dev itself prefers CTX=2, and that arm gives L2 hold z 6.7@21d / 4.6@42d / 5.0@84d, surviving a strong null family at 21-42d (margins ~0.16, z 2.8-4.3) with clean placebo and pooled-beats-flat-twin controls. What KT-B honestly shows: real but modest predictability above fair nulls at L1 5-10d and at L2 21-42d (with most, not all, of the L2 dividend coming from target aggregation per the flat twin); a fair matched-horizon read that favors L2 over L1 at ~21d (0.16 z3.3 vs 0.03 z1.0) and ties at ~40d; and an L3 with no statistical content at n=8 (sign-flip p 0.14). The primary reach ordering itself is NOT identified by this design — it flips between KILL and PASS across defensible choices of null family (orig vs shrunk-persistence/EWMA), context length, k-grid extent (the original grid caps L1 at 40d by construction; extended, L1 reaches 80-120d under weak nulls), and reach definition (consecutive scan vs max-significant), and an adversarial oracle-on-hold null zeroes every level. Honest verdict: UNDECIDED — rerun with dev-tuned context per level, the strong null family, a dip-tolerant preregistered reach definition, and symmetric horizon grids before recording any hierarchy verdict."
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "date": "2026-07-19",
+ "reviewed": [
+  "exp_w4_crystalscore.py",
+  "exp_ktb3_csi500_prereg.py",
+  "exp_ktd2_csi500_prereg.py"
+ ],
+ "review": {
+  "verdict": "VERDICT_INVALIDATING_BUG",
+  "findings": [
+   {
+    "severity": "invalidating",
+    "what": "KT-D v2 (interpretability/exp_ktd2_csi500_prereg.py, verdict in exp_ktd2_csi500_prereg_report.json): the printed PASS verdict makes the unqualified claim 'growing per-schema statistics beat frozen memory out of market; wire gated consolidation into the loop', but the measurement is horizon-MIXED: k=1 pooled z +1.60 (margin +0.0016, only 2026 individually significant, n=21) versus k=4 pooled z -2.37 with margin < 0 — individually beyond the preregistered kill-significance bar (-1.96) and driven entirely by 2025 (z -4.22; 2024 and 2026 are ~0). The prereg either-k-PASS / both-k-KILL asymmetry has no branch for 'pass at one horizon, significant harm at the other', so the letter of the rule was followed, but the verdict STRING asserts a general replication that is significantly false at k=4 and issues an action directive on that basis.",
+    "why_it_matters": "Per the review's severity rule this is a printed verdict mischaracterizing what was measured: enrichment helps at 5d and significantly hurts at 20d on the clean market. The honest print is 'PASS at k=1 per the prereg letter; significant NEGATIVE at k=4 — cumulative read MIXED / horizon-conditional', and 'wire gated consolidation into the loop' should at minimum carry a horizon gate. Downstream consumers reading only the verdict line would wire in an operator that measurably degrades the 20d horizon."
+   },
+   {
+    "severity": "minor",
+    "what": "KT-D v2 growing arm has a year-boundary look-ahead: fwd_stats(cutoff) selects samples by context date only (dates <= cutoff), so per-schema delta statistics include targets that realize up to k*5 days INSIDE the evaluation year (e.g. a Dec-2024 sample whose k=4 target lands in Feb-2025 enters the 'grown-through-2024' memory used to predict 2025). Referee probe with a purged mask (target date also <= cutoff) run on the actual data: k=1 z drops 1.60 -> 1.43 (still above the 1.28 pass bar, margin +0.00153), k=4 moves -2.37 -> -2.41.",
+    "why_it_matters": "A genuine prereg-hygiene violation (hunt d), though empirically non-flipping: the k=1 PASS survives the purge but thins from an already razor-thin margin (z 1.43 vs bar 1.28, error reduction 0.15%). It should be recorded as a protocol caveat on any citation of the k=1 cell."
+   },
+   {
+    "severity": "minor",
+    "what": "KT-B3 csi500 (interpretability/exp_ktb3_csi500_prereg.py): the verdict's parenthetical '(declared possible at these sample sizes)' mislabels the L1@5d failure as a power problem. Probe on the actual data: the plain train-mean predictor achieves hold margin +0.1501 (z +2.17) against the dev-chosen ewma4 null — MORE than the real ridge cell (+0.1487, z 3.54) — and shrunk.25 gives +0.1468. The cell has zero incremental skill over mean-mechanics; it was placebo-KILLED (correctly), not underpowered. L2's cells (n=17, z 1.37-1.8) are the genuinely underpowered ones.",
+    "why_it_matters": "Answers hunt b in the direction of the guard being VALID: the year-block-shuffle placebo (0.1305) was if anything lenient relative to the true mechanics floor (0.1501), so no 'fairer placebo' changes the outcome — the UNDERPOWERED/unreplicated conclusion stands and is conservative. But the verdict text attributes the L1 failure to sample size when the data show it is the same frozen-mean-null mechanics that invalidated KT-B v1; the more informative (and stronger) statement is 'L1@5d skill on csi500 is entirely generic shrinkage'."
+   },
+   {
+    "severity": "minor",
+    "what": "W4 stability St=0.981 (interpretability/exp_w4_crystalscore.py) is floor-inflated by construction: an 8-dim subspace of the 10-dim ambient feature space has a hard overlap floor of 0.75; random-subspace baseline is 0.802 mean / 0.853 p95, and a within-half column-shuffled control on the real data gives 0.763. The real-data per-k overlap curve is k=2: 0.832, k=3: 0.698, k=4: 0.706, k=8: 0.981 — top-8 is the single most flattering choice; dims 3-8 are individually unstable.",
+    "why_it_matters": "St=0.981 is genuinely above chance (beats the 0.853 p95), so 'the representation exists' holds, but as a [0,1]-scaled multiplicative CrystalScore factor it overstates stability (chance-rescaled ~0.90; a k=4 read of ~0.71 would give CrystalScore ~0.50 instead of 0.69). The report should print the 0.80 chance floor next to St, or use a lower-k / chance-rescaled statistic."
+   },
+   {
+    "severity": "note",
+    "what": "W4 checks that came back CLEAN: (1) S=0.703 is measured out-of-sample correctly — top-3 feature selection uses train-fit PCA loadings, LinearRegression is fit on train rows only, R2 is computed on dev+hold+oos (m_eval = ~m_tr); (2) the flat-twin paired z is correctly aligned — e_flat and e_pool are restricted to the identical keep-subset hold samples before differencing; the one asymmetry (pooled arm purged at line 114, flat arm trained UNPURGED at line 129, targets crossing train end) slightly advantages the flat arm, i.e. is conservative for the softening direction actually taken (z -0.34, n=24), so the 'FULL PASS softens to ordering PASS + directional dividend' verdict stands; (3) frontier cells at D in {2,4,8,10} share one identical protocol (same samples, CTX=2, k=1, same cell machinery, same shrunk.75 null), so the curve is internally comparable.",
+    "why_it_matters": "Confirms the W4 headline (CrystalScore composition and the softened KT-B reading) is computed as described; the softening direction is the honest one and is robust to the flat-arm purge asymmetry."
+   },
+   {
+    "severity": "note",
+    "what": "W4 frontier caveats: the docstring claims 'KT-A-protocol ... dev-tuned' and 'D in {2,4,8,16}', but CTX is FIXED at 2 (only alpha and the null are dev-tuned) and the actual grid is (2,4,8,10) (the 16->10 cap is honestly noted in-code); frontier cells carry NO placebo guard, and Probe C demonstrates that in this protocol family a dev-chosen null can be beaten by pure mean-mechanics at the full size of the reported margin — so the frontier's absolute margins (0.164-0.243) should be read as a relative quality-vs-parsimony SHAPE, not as certified skill. In exp_ktb3 the dev-side alpha/CTX tuning at large k uses dev samples whose targets extend into hold (k=16: up to 80d past dev end) — a boundary purge gap that only matters for model selection and, given nothing passed, is conservative here. The end-aligned block grid (blocks anchored to the panel's last date) makes the feature partition depend on the data end date — not a value leak, but worth recording. Cosmetic: W4 per_dim_r2 values serialize as strings (np.float32 through default=str).",
+    "why_it_matters": "None of these change a printed verdict, but they bound what the frontier and the csi500 cells can be cited for: the frontier z values (up to 2.74) are not placebo-guarded and should not be quoted as significant cells under the W1 preregistered standard."
+   }
+  ]
+ }
+}

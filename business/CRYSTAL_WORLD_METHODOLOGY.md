@@ -140,8 +140,17 @@ probability-like claim (G2 — contracts stay on the bootstrap machinery).
   positive) → KT-D v2 with that operator is the pre-registered follow-up** at the next data
   refresh / third window. New store rule: enrichment operators must preserve schema-channel
   identity.
-- **W4:** Joseph's interpretability battery on the learned representations; CrystalScore
-  frontier (representation quality vs legibility); paper section.
+- **W4: EXECUTED 2026-07-19 — THE PROGRAM'S FIRST FULL PASS IS COMPLETE** (`exp_w4_crystalscore.py`
+  + the two preregistered closes; final review folded in). Battery: dims auto-named; S=0.70;
+  St=0.98 raw but chance-floor 0.80 → **honest CrystalScore(L1) = 0.50-0.69** (vs 0.03 cold RL
+  head, 0.92 champion); F=1.0 born-linear; **frontier knee at D≈4 named dims ≈ 90% of skill**
+  (shape only — no placebo guard on frontier cells). Flat-twin caveat closed: paired z −0.34 →
+  KT-B softens to "ordering PASS + directional representational dividend". **PREREGS CLOSED:**
+  KT-B third window (csi500) = UNDERPOWERED/UNREPLICATED (the L1@5d cell was generic-shrinkage,
+  correctly placebo-killed; Dow PASS stands, generality open); KT-D v2 = **MIXED /
+  HORIZON-CONDITIONAL** (k=1 PASS, purge-robust z 1.43; k=4 significantly negative z −2.4 —
+  consolidation only with a horizon gate). Full results: `reports/CRYSTAL_WORLD_W0_W4_RESULTS.md`.
+  Forward items: cross-market hierarchy at adequate power; horizon-gated consolidation.
 
 ## 7. Relation to the existing stack
 

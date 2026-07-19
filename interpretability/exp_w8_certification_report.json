@@ -1,0 +1,1044 @@
+{
+  "experiment": "W8 nested validation + certification over the profile grid",
+  "engine": "W3_FORECAST_V1_3",
+  "design": {
+    "h_years": 3,
+    "goal_x": 1.25,
+    "w0": 0.8,
+    "embargo": "origins separated beyond prior 3y end; asserted below",
+    "seeds": [
+      311,
+      421,
+      531
+    ],
+    "mode": "DEVELOPMENT_VALIDATION_ONLY",
+    "independent_outer_evidence": false
+  },
+  "folds": {
+    "US:unconstrained": [
+      {
+        "origin": "2010-01-04",
+        "P_goal_pred_mean": 0.3784,
+        "P_goal_seed_spread": 0.0113,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "dc65abf86ae244afd99d4c3b2ef2420212eda4956776544ef915d95c1c7f5270",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.3264,
+        "best_static_name": "SPY6040",
+        "realized": {
+          "realized_w": 0.9693,
+          "goal_hit": false,
+          "realized_maxDD": -0.0811,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY100": {
+            "realized_w": 1.0965,
+            "goal_hit": true,
+            "realized_maxDD": -0.1864,
+            "capacity_ok": true
+          },
+          "SPY6040": {
+            "realized_w": 1.0864,
+            "goal_hit": true,
+            "realized_maxDD": -0.0811,
+            "capacity_ok": true
+          },
+          "SPY_c40": {
+            "realized_w": 0.9794,
+            "goal_hit": false,
+            "realized_maxDD": -0.113,
+            "capacity_ok": true
+          },
+          "SPY_c80": {
+            "realized_w": 0.8607,
+            "goal_hit": false,
+            "realized_maxDD": -0.0379,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.802,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2013-01-14",
+        "P_goal_pred_mean": 0.4256,
+        "P_goal_seed_spread": 0.0257,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "43a7f1e53b871b4f8ce26ce8aaddff198a17e858a014c4432b8bd9c3c7bd9ed5",
+        "executable_policy_tie_rate": 0.008299,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.3668,
+        "best_static_name": "SPY6040",
+        "realized": {
+          "realized_w": 0.9412,
+          "goal_hit": false,
+          "realized_maxDD": -0.0753,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY100": {
+            "realized_w": 1.1061,
+            "goal_hit": true,
+            "realized_maxDD": -0.1192,
+            "capacity_ok": true
+          },
+          "SPY6040": {
+            "realized_w": 0.9412,
+            "goal_hit": false,
+            "realized_maxDD": -0.0753,
+            "capacity_ok": true
+          },
+          "SPY_c40": {
+            "realized_w": 0.978,
+            "goal_hit": false,
+            "realized_maxDD": -0.0728,
+            "capacity_ok": true
+          },
+          "SPY_c80": {
+            "realized_w": 0.8578,
+            "goal_hit": false,
+            "realized_maxDD": -0.0247,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8009,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2016-01-25",
+        "P_goal_pred_mean": 0.3741,
+        "P_goal_seed_spread": 0.0103,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "a3248bd461accf7f20e02c1521abf0fb8d67e6278a2d4beae939ff787a96f959",
+        "executable_policy_tie_rate": 0.004149,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.3122,
+        "best_static_name": "SPY6040",
+        "realized": {
+          "realized_w": 1.0796,
+          "goal_hit": true,
+          "realized_maxDD": -0.0405,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY100": {
+            "realized_w": 1.1992,
+            "goal_hit": true,
+            "realized_maxDD": -0.1937,
+            "capacity_ok": true
+          },
+          "SPY6040": {
+            "realized_w": 1.0207,
+            "goal_hit": true,
+            "realized_maxDD": -0.1086,
+            "capacity_ok": true
+          },
+          "SPY_c40": {
+            "realized_w": 1.0396,
+            "goal_hit": true,
+            "realized_maxDD": -0.1179,
+            "capacity_ok": true
+          },
+          "SPY_c80": {
+            "realized_w": 0.8941,
+            "goal_hit": false,
+            "realized_maxDD": -0.037,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8267,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2019-02-04",
+        "P_goal_pred_mean": 0.4331,
+        "P_goal_seed_spread": 0.0293,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "bfbc97d03dc0d92872e93f0670eb366dc725e0b1df036355bd78975d8b5cfb84",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.3172,
+        "best_static_name": "SPY6040",
+        "realized": {
+          "realized_w": 0.9869,
+          "goal_hit": false,
+          "realized_maxDD": -0.0663,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY100": {
+            "realized_w": 1.3845,
+            "goal_hit": true,
+            "realized_maxDD": -0.3372,
+            "capacity_ok": true
+          },
+          "SPY6040": {
+            "realized_w": 1.1708,
+            "goal_hit": true,
+            "realized_maxDD": -0.1893,
+            "capacity_ok": true
+          },
+          "SPY_c40": {
+            "realized_w": 1.1416,
+            "goal_hit": true,
+            "realized_maxDD": -0.2128,
+            "capacity_ok": true
+          },
+          "SPY_c80": {
+            "realized_w": 0.9194,
+            "goal_hit": false,
+            "realized_maxDD": -0.0741,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8179,
+            "goal_hit": false,
+            "realized_maxDD": -0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2022-02-14",
+        "P_goal_pred_mean": 0.4453,
+        "P_goal_seed_spread": 0.0397,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "487fc143f671f5345a0232361ff4a2676449ca774059a430edb0b450dc2df0ee",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.3609,
+        "best_static_name": "SPY100",
+        "realized": {
+          "realized_w": 1.0786,
+          "goal_hit": true,
+          "realized_maxDD": -0.2213,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY100": {
+            "realized_w": 1.1578,
+            "goal_hit": true,
+            "realized_maxDD": -0.2213,
+            "capacity_ok": true
+          },
+          "SPY6040": {
+            "realized_w": 0.9557,
+            "goal_hit": false,
+            "realized_maxDD": -0.1899,
+            "capacity_ok": true
+          },
+          "SPY_c40": {
+            "realized_w": 1.0608,
+            "goal_hit": true,
+            "realized_maxDD": -0.1322,
+            "capacity_ok": true
+          },
+          "SPY_c80": {
+            "realized_w": 0.9582,
+            "goal_hit": false,
+            "realized_maxDD": -0.0421,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.9058,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      }
+    ],
+    "US:capacity_dd15": [
+      {
+        "origin": "2010-01-04",
+        "P_goal_pred_mean": 0.0029,
+        "P_goal_seed_spread": 0.0027,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "ac0b329ff4a1ce8fdb1d313c7d6a59d19f5e6fa3967990adc1988545c6ae1503",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.0037,
+        "best_static_name": "SPY_c80",
+        "realized": {
+          "realized_w": 0.8607,
+          "goal_hit": false,
+          "realized_maxDD": -0.0379,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY_c80": {
+            "realized_w": 0.8607,
+            "goal_hit": false,
+            "realized_maxDD": -0.0379,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.802,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2013-01-14",
+        "P_goal_pred_mean": 0.0018,
+        "P_goal_seed_spread": 0.0003,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "6d62c32ef0aa34eaa13f55aaffec52bd85f25f88e2c39926dc578c507bade019",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.0018,
+        "best_static_name": "SPY_c80",
+        "realized": {
+          "realized_w": 0.8578,
+          "goal_hit": false,
+          "realized_maxDD": -0.0247,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY_c80": {
+            "realized_w": 0.8578,
+            "goal_hit": false,
+            "realized_maxDD": -0.0247,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8009,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2016-01-25",
+        "P_goal_pred_mean": 0.0013,
+        "P_goal_seed_spread": 0.0013,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "1b48e723f184b834059c82c84333086e01768fe213fb959584f0c019dd13d872",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.0013,
+        "best_static_name": "SPY_c80",
+        "realized": {
+          "realized_w": 0.8941,
+          "goal_hit": false,
+          "realized_maxDD": -0.037,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY_c80": {
+            "realized_w": 0.8941,
+            "goal_hit": false,
+            "realized_maxDD": -0.037,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8267,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2019-02-04",
+        "P_goal_pred_mean": 0.0017,
+        "P_goal_seed_spread": 0.002,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "17b686cc28b9286751ae77664d89a10d69e27dc7357c28dc04bd16453865fa38",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.0018,
+        "best_static_name": "SPY_c80",
+        "realized": {
+          "realized_w": 0.9194,
+          "goal_hit": false,
+          "realized_maxDD": -0.0741,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY_c80": {
+            "realized_w": 0.9194,
+            "goal_hit": false,
+            "realized_maxDD": -0.0741,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8179,
+            "goal_hit": false,
+            "realized_maxDD": -0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2022-02-14",
+        "P_goal_pred_mean": 0.0018,
+        "P_goal_seed_spread": 0.0003,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "3c1774448da5f34a478ec5883b7eda1e0c83d52926f6e6d4ebf8c22f4855b997",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.0019,
+        "best_static_name": "SPY_c80",
+        "realized": {
+          "realized_w": 0.9582,
+          "goal_hit": false,
+          "realized_maxDD": -0.0421,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "SPY_c80": {
+            "realized_w": 0.9582,
+            "goal_hit": false,
+            "realized_maxDD": -0.0421,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.9058,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      }
+    ],
+    "CN:unconstrained": [
+      {
+        "origin": "2013-01-14",
+        "P_goal_pred_mean": 0.6741,
+        "P_goal_seed_spread": 0.0453,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "1a68df14e0be8f233e84b8c76b8923d4720fdd80d22f5414f05b92b7807d54ae",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.5236,
+        "best_static_name": "CSI500_c40",
+        "realized": {
+          "realized_w": 1.1198,
+          "goal_hit": true,
+          "realized_maxDD": -0.101,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CSI500_TR": {
+            "realized_w": 1.4593,
+            "goal_hit": true,
+            "realized_maxDD": -0.5051,
+            "capacity_ok": true
+          },
+          "CSI500_c40": {
+            "realized_w": 1.2283,
+            "goal_hit": true,
+            "realized_maxDD": -0.3332,
+            "capacity_ok": true
+          },
+          "CSI500_c80": {
+            "realized_w": 0.984,
+            "goal_hit": false,
+            "realized_maxDD": -0.1191,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8648,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2016-01-25",
+        "P_goal_pred_mean": 0.6391,
+        "P_goal_seed_spread": 0.0153,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "217b058195cfc50194996a8daf0a7fa04888c83b37ee8fe4410cd257eba371cd",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.4941,
+        "best_static_name": "CSI500_c40",
+        "realized": {
+          "realized_w": 0.577,
+          "goal_hit": false,
+          "realized_maxDD": -0.384,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CSI500_TR": {
+            "realized_w": 0.5774,
+            "goal_hit": false,
+            "realized_maxDD": -0.3977,
+            "capacity_ok": true
+          },
+          "CSI500_c40": {
+            "realized_w": 0.683,
+            "goal_hit": false,
+            "realized_maxDD": -0.2527,
+            "capacity_ok": true
+          },
+          "CSI500_c80": {
+            "realized_w": 0.7896,
+            "goal_hit": false,
+            "realized_maxDD": -0.0802,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8418,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2019-02-01",
+        "P_goal_pred_mean": 0.6031,
+        "P_goal_seed_spread": 0.0077,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "7c4d955dac194d66a50ff3ba4c899741a2f59645324f640410223c69e81c5327",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.4904,
+        "best_static_name": "CSI500_TR",
+        "realized": {
+          "realized_w": 0.9771,
+          "goal_hit": false,
+          "realized_maxDD": -0.1261,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CSI500_TR": {
+            "realized_w": 1.2534,
+            "goal_hit": true,
+            "realized_maxDD": -0.208,
+            "capacity_ok": true
+          },
+          "CSI500_c40": {
+            "realized_w": 1.0869,
+            "goal_hit": true,
+            "realized_maxDD": -0.1261,
+            "capacity_ok": true
+          },
+          "CSI500_c80": {
+            "realized_w": 0.9215,
+            "goal_hit": false,
+            "realized_maxDD": -0.0401,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8414,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2022-02-14",
+        "P_goal_pred_mean": 0.6314,
+        "P_goal_seed_spread": 0.0243,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "cb62a5d8b1a844156df36542c576d20cb5313cb8dcec04c6a500b6dd0820a2b3",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.5189,
+        "best_static_name": "CSI500_TR",
+        "realized": {
+          "realized_w": 0.7569,
+          "goal_hit": false,
+          "realized_maxDD": -0.3138,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CSI500_TR": {
+            "realized_w": 0.7386,
+            "goal_hit": false,
+            "realized_maxDD": -0.3377,
+            "capacity_ok": true
+          },
+          "CSI500_c40": {
+            "realized_w": 0.7896,
+            "goal_hit": false,
+            "realized_maxDD": -0.2029,
+            "capacity_ok": true
+          },
+          "CSI500_c80": {
+            "realized_w": 0.8251,
+            "goal_hit": false,
+            "realized_maxDD": -0.0585,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8361,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      }
+    ],
+    "CN:capacity_dd15": [
+      {
+        "origin": "2013-01-14",
+        "P_goal_pred_mean": 0.3484,
+        "P_goal_seed_spread": 0.034,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "957f2148e0c9183ad13021198eb13e2c90284bfd794eb674340742603767dd8e",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.3444,
+        "best_static_name": "CSI500_c80",
+        "realized": {
+          "realized_w": 0.984,
+          "goal_hit": false,
+          "realized_maxDD": -0.1191,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CSI500_c80": {
+            "realized_w": 0.984,
+            "goal_hit": false,
+            "realized_maxDD": -0.1191,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8648,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2016-01-25",
+        "P_goal_pred_mean": 0.0,
+        "P_goal_seed_spread": 0.0,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "96d4aea95b43f688c7cf09cf5e71d4a237db7e1033e4f7dc3ba4bae3301f0d45",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.0,
+        "best_static_name": "CASH100",
+        "realized": {
+          "realized_w": 0.8418,
+          "goal_hit": false,
+          "realized_maxDD": 0.0,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CASH100": {
+            "realized_w": 0.8418,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2019-02-01",
+        "P_goal_pred_mean": 0.2393,
+        "P_goal_seed_spread": 0.007,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "46b315ecf8e750fe27e334f13bfd295350a5edbb15a0093ba22f754cca6989c6",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.2556,
+        "best_static_name": "CSI500_c80",
+        "realized": {
+          "realized_w": 0.9215,
+          "goal_hit": false,
+          "realized_maxDD": -0.0401,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CSI500_c80": {
+            "realized_w": 0.9215,
+            "goal_hit": false,
+            "realized_maxDD": -0.0401,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8414,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      },
+      {
+        "origin": "2022-02-14",
+        "P_goal_pred_mean": 0.2202,
+        "P_goal_seed_spread": 0.006,
+        "executable_policy": "cellwise majority of three seed-specific DP tables on the common action set",
+        "executable_policy_sha256": "46b315ecf8e750fe27e334f13bfd295350a5edbb15a0093ba22f754cca6989c6",
+        "executable_policy_tie_rate": 0.0,
+        "P_joint_goal_capacity": null,
+        "joint_probability_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+        "best_static_pred": 0.2468,
+        "best_static_name": "CSI500_c80",
+        "realized": {
+          "realized_w": 0.8251,
+          "goal_hit": false,
+          "realized_maxDD": -0.0585,
+          "capacity_ok": true
+        },
+        "realized_baselines": {
+          "CSI500_c80": {
+            "realized_w": 0.8251,
+            "goal_hit": false,
+            "realized_maxDD": -0.0585,
+            "capacity_ok": true
+          },
+          "CASH100": {
+            "realized_w": 0.8361,
+            "goal_hit": false,
+            "realized_maxDD": 0.0,
+            "capacity_ok": true
+          }
+        }
+      }
+    ]
+  },
+  "goal_brier_by_cell": {
+    "US:unconstrained": 0.2423,
+    "US:capacity_dd15": 0.0,
+    "CN:unconstrained": 0.3193,
+    "CN:capacity_dd15": 0.0568
+  },
+  "joint_brier_by_cell": null,
+  "joint_metric_status": "NOT_COMPUTED_NO_PATHWISE_SCENARIO_CAPACITY",
+  "grid_complete": true,
+  "expected_fold_counts": {
+    "US:unconstrained": 5,
+    "US:capacity_dd15": 5,
+    "CN:unconstrained": 4,
+    "CN:capacity_dd15": 4
+  },
+  "pathwise_cost_tax_fx_access_inputs_present": true,
+  "power_note": "5+4 disjoint development intervals per profile; they are not independent outer evidence and remain a LOW-POWER diagnostic",
+  "conditions": {
+    "C0_untouched_outer_evidence": false,
+    "C1_calibration_10of10": false,
+    "C2_joint_goal_capacity_metrics_stable": false,
+    "C3_zero_capacity_violations": true,
+    "C4_shield_gates": false,
+    "C5_costs_included": false,
+    "C6_monotonicity_consistency": false,
+    "C7_champion_choice_honest": true,
+    "C8_evidence_committed_reproducible": true,
+    "C9_operational_distribution_matches_calibrated_harness": false,
+    "C10_full_nested_profile_horizon_regime_policy_refit": false,
+    "C11_eval_intervals_nonoverlapping": true
+  },
+  "calibration_gates_green": 7,
+  "certification_status": "REJECTED_HONEST",
+  "recommendable": false,
+  "certification_hard_disabled": true,
+  "certified_policy_ids": [],
+  "certified_distribution_ids": [],
+  "profile_grid_hash": null,
+  "binding_constraints": [
+    "C0_untouched_outer_evidence",
+    "C1_calibration_10of10",
+    "C2_joint_goal_capacity_metrics_stable",
+    "C4_shield_gates",
+    "C5_costs_included",
+    "C6_monotonicity_consistency",
+    "C9_operational_distribution_matches_calibrated_harness",
+    "C10_full_nested_profile_horizon_regime_policy_refit"
+  ],
+  "evidence_manifest": {
+    "interpretability/personal_invest_forecast.py": {
+      "exists": true,
+      "sha256": "190f438673e1768d01ae6abc2f8245d89cf7432d42c672e879421c7b21020d16",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "2b860bd43d5161456e5a93ff3de5846979b7ba24",
+      "current_git_blob": "2b860bd43d5161456e5a93ff3de5846979b7ba24"
+    },
+    "interpretability/exp_w3_calibration_report.json": {
+      "exists": true,
+      "sha256": "515d2d40efc6e12a6e72b5c612a8f231a5ef2cb441fdbb6ec63981fc19876de2",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "06120d63a75426f853b94636117f7c14903565b5",
+      "current_git_blob": "06120d63a75426f853b94636117f7c14903565b5"
+    },
+    "interpretability/personal_invest_dp.py": {
+      "exists": true,
+      "sha256": "bafa5be055c3e6fcd0f4ddbe785c824c2ce6438c2b5a4fdd6ff14b093eacc907",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "bf9888e01247d16f67c9198ceb69931fa8007f47",
+      "current_git_blob": "bf9888e01247d16f67c9198ceb69931fa8007f47"
+    },
+    "interpretability/personal_invest_dp_report.json": {
+      "exists": true,
+      "sha256": "6adaca54b412649b18212e07fadcffa9770c9fa78a6e769858d517e5f0fb244d",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "df8377cae2f6b21bdb173309cc74fd338c42bf10",
+      "current_git_blob": "df8377cae2f6b21bdb173309cc74fd338c42bf10"
+    },
+    "interpretability/personal_invest_w5_report.json": {
+      "exists": true,
+      "sha256": "da17fb025bb6e56d57a3db2d637fcfc8891b4a3de34d7ee75814a5fc30c30142",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "68294349518780d0e718214bac469b78e8028368",
+      "current_git_blob": "68294349518780d0e718214bac469b78e8028368"
+    },
+    "interpretability/personal_invest_shield.py": {
+      "exists": true,
+      "sha256": "bbdd2f9fd8a48ae1c8a7d876c8639dfcad014d3c5a1a9e8a40193aa890493666",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "0909dbc8b173816fe3d1d490e25e49c928cae79c",
+      "current_git_blob": "0909dbc8b173816fe3d1d490e25e49c928cae79c"
+    },
+    "interpretability/exp_w6_shield_replay.py": {
+      "exists": true,
+      "sha256": "619cb9b9d3e318d99b24c1b01a6186a67b55505c649679397d6ff490ced23838",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "d7e57f02f3436982f1911255d9881f9fff1053a5",
+      "current_git_blob": "d7e57f02f3436982f1911255d9881f9fff1053a5"
+    },
+    "interpretability/exp_w6_shield_replay_report.json": {
+      "exists": true,
+      "sha256": "636855eb6c7b4409511b2cfc7f0a35bd3405fded1c8f0eeb5ff24081ddbdbfe1",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "b9f98a8dd59555a5925528aa33f0fd820d000200",
+      "current_git_blob": "b9f98a8dd59555a5925528aa33f0fd820d000200"
+    },
+    "interpretability/w6_audit_fixture.jsonl": {
+      "exists": true,
+      "sha256": "ac9c076dbf473f2ed9b49e4324c1b13e77488a956305b7b7e0729abda90d256d",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "b1eac0aeb20879b94b758c69a7bb8b28570326bb",
+      "current_git_blob": "b1eac0aeb20879b94b758c69a7bb8b28570326bb"
+    },
+    "interpretability/w6_paper_book_fixture.json": {
+      "exists": true,
+      "sha256": "45d4624a16d3707c30c5a1d38a488bbf3472648779402c57f04190a82c7ed5f0",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "591487e6d17e980ea790de6ff1253e16b6b72e34",
+      "current_git_blob": "591487e6d17e980ea790de6ff1253e16b6b72e34"
+    },
+    "interpretability/w6_paper_audit_fixture.jsonl": {
+      "exists": true,
+      "sha256": "dd8f763f4f175f53cc3cf1e008f90ad953b9e5839b356b17040679980f76eabe",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "589507effffb1ace61e6e5093662e3c9bc40451d",
+      "current_git_blob": "589507effffb1ace61e6e5093662e3c9bc40451d"
+    },
+    "interpretability/exp_w7_product_metrics.py": {
+      "exists": true,
+      "sha256": "dc0002b8ba7ab906182adc067334d66f3631f56546a7d1f4e11efa8217ec9d81",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "f397a09626b8de8897653e967c9eb554e5e2f43f",
+      "current_git_blob": "f397a09626b8de8897653e967c9eb554e5e2f43f"
+    },
+    "interpretability/exp_w7_product_metrics.json": {
+      "exists": true,
+      "sha256": "d0983826c7e2ca57fd3e6de455a3523c015470ff7e4b7afe389573130c7af070",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "838675907ed8d452bf38fee547b69d7cf86fed4c",
+      "current_git_blob": "838675907ed8d452bf38fee547b69d7cf86fed4c"
+    },
+    "interpretability/personal_hcs_gate.py": {
+      "exists": true,
+      "sha256": "4f8b3ae5b7050351074a7415af08af5841cad1454128d0fce32a3f4e35029940",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "2688ef6432a01a0ede6f5bd01c9989d37270b00b",
+      "current_git_blob": "2688ef6432a01a0ede6f5bd01c9989d37270b00b"
+    },
+    "reports/W7_HL_NORTHSTAR.json": {
+      "exists": true,
+      "sha256": "e529b426f3b76fec94c0544b7c977eb504f015a4fc01346dc5491a26fdd90874",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "3fc6ba9b7de298b2170a2900bcf6a909e344fa21",
+      "current_git_blob": "3fc6ba9b7de298b2170a2900bcf6a909e344fa21"
+    },
+    "reports/W7_HCS_GATE_RESULT.json": {
+      "exists": true,
+      "sha256": "7b15d2c194fcc746fe1bcca6eab607d46740fe0895de53c44636c3bf5101b2df",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "0671934acf6ad1010fe6da34eb2dd8ab28459487",
+      "current_git_blob": "0671934acf6ad1010fe6da34eb2dd8ab28459487"
+    },
+    "reports/W7_SKILLLENS.md": {
+      "exists": true,
+      "sha256": "3825cfbd53b978c18dbb4961a1ae336f9d031c6a2794601d629b95b5777f2c84",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "868c9ffbb22f9b3e4bd7ab6f8a9cbcde6daf7168",
+      "current_git_blob": "868c9ffbb22f9b3e4bd7ab6f8a9cbcde6daf7168"
+    },
+    "reports/preregistration_w8_2027.md": {
+      "exists": true,
+      "sha256": "f925ab8735e9e9a9f55a01332311c2f07ba3fd8d4f0486b20dc7dbe88ec00ca6",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "be343d755b2cc31543ccee6fb5257dcfb1ab2245",
+      "current_git_blob": "be343d755b2cc31543ccee6fb5257dcfb1ab2245"
+    },
+    "reports/W3_FORECAST_LEDGER_MANIFEST.json": {
+      "exists": true,
+      "sha256": "bf65bca1d77d16a4b0f921466f5ce6f4d6aa9b32673930c5d4f1a6eb6b2923ee",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "2da30f8fd0939688f59e175203021a2c530b9999",
+      "current_git_blob": "2da30f8fd0939688f59e175203021a2c530b9999"
+    },
+    "interpretability/exp_w8_certification.py": {
+      "exists": true,
+      "sha256": "ea039b16d714796ef0a95ed93d1dff40c31c550cdcd4d018582ddc73e636cb5a",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "bf5565afeb732bfbde9d828b5cba00f8254b7468",
+      "current_git_blob": "bf5565afeb732bfbde9d828b5cba00f8254b7468"
+    },
+    "data/_personal_invest_registry/approved_daily_returns.csv": {
+      "exists": true,
+      "sha256": "6c30be7b850a7d4d9c5d3e52ca48f97f533e7643bdb049cdac409014df3c9b80",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "6042e1483d24c091affd462b2a769f75f5429c0f",
+      "current_git_blob": "6042e1483d24c091affd462b2a769f75f5429c0f"
+    },
+    "data/_personal_invest_registry/w2_data_gate_audit.json": {
+      "exists": true,
+      "sha256": "814a11ec24e350259eaa282f83a36865b7b55b0ffb7ae990f3e13fa5c1a3d222",
+      "git_tracked": true,
+      "matches_HEAD": true,
+      "git_blob": "bf7ddbeb4ba7f0e8be0632d952f78f69b928950b",
+      "current_git_blob": "bf7ddbeb4ba7f0e8be0632d952f78f69b928950b"
+    }
+  },
+  "intervals": {
+    "US:unconstrained": [
+      [
+        "2010-01-04",
+        "2013-01-04"
+      ],
+      [
+        "2013-01-14",
+        "2016-01-14"
+      ],
+      [
+        "2016-01-25",
+        "2019-01-25"
+      ],
+      [
+        "2019-02-04",
+        "2022-02-04"
+      ],
+      [
+        "2022-02-14",
+        "2025-02-14"
+      ]
+    ],
+    "US:capacity_dd15": [
+      [
+        "2010-01-04",
+        "2013-01-04"
+      ],
+      [
+        "2013-01-14",
+        "2016-01-14"
+      ],
+      [
+        "2016-01-25",
+        "2019-01-25"
+      ],
+      [
+        "2019-02-04",
+        "2022-02-04"
+      ],
+      [
+        "2022-02-14",
+        "2025-02-14"
+      ]
+    ],
+    "CN:unconstrained": [
+      [
+        "2013-01-14",
+        "2016-01-14"
+      ],
+      [
+        "2016-01-25",
+        "2019-01-25"
+      ],
+      [
+        "2019-02-01",
+        "2022-02-01"
+      ],
+      [
+        "2022-02-14",
+        "2025-02-14"
+      ]
+    ],
+    "CN:capacity_dd15": [
+      [
+        "2013-01-14",
+        "2016-01-14"
+      ],
+      [
+        "2016-01-25",
+        "2019-01-25"
+      ],
+      [
+        "2019-02-01",
+        "2022-02-01"
+      ],
+      [
+        "2022-02-14",
+        "2025-02-14"
+      ]
+    ]
+  },
+  "verdict": "HONEST REJECT \u2014 certification is hard-disabled on development outcomes; binding constraints: ['C0_untouched_outer_evidence', 'C1_calibration_10of10', 'C2_joint_goal_capacity_metrics_stable', 'C4_shield_gates', 'C5_costs_included', 'C6_monotonicity_consistency', 'C9_operational_distribution_matches_calibrated_harness', 'C10_full_nested_profile_horizon_regime_policy_refit']. No client recommendation/probability is authorized. The 1y locked-ledger read can begin only after its July-2027 one-year maturities; a genuinely untouched 3y policy outer fold cannot mature before July 2029."
+}

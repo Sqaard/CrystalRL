@@ -1,0 +1,219 @@
+{
+ "preregistration": "see module docstring (fixed before running)",
+ "levels": {
+  "L1": {
+   "1": {
+    "horizon_days": 5,
+    "ctx": 4,
+    "real": {
+     "alpha": 10,
+     "null": "ewma4",
+     "ctx": 4,
+     "hold": {
+      "margin": 0.1487,
+      "z": 3.54,
+      "n": 72
+     },
+     "oos": {
+      "margin": 0.253,
+      "z": 1.99,
+      "n": 34
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.1305,
+     "z": 2.04,
+     "n": 72
+    },
+    "significant": false
+   },
+   "2": {
+    "horizon_days": 10,
+    "ctx": 2,
+    "real": {
+     "alpha": 0.1,
+     "null": "shrunk0.25",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.0025,
+      "z": 0.05,
+      "n": 72
+     },
+     "oos": {
+      "margin": -0.0295,
+      "z": -0.84,
+      "n": 34
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.0138,
+     "z": 0.44,
+     "n": 72
+    },
+    "significant": false
+   },
+   "4": {
+    "horizon_days": 20,
+    "ctx": 2,
+    "real": {
+     "alpha": 10,
+     "null": "shrunk0.25",
+     "ctx": 2,
+     "hold": {
+      "margin": -0.0056,
+      "z": -0.18,
+      "n": 72
+     },
+     "oos": {
+      "margin": 0.076,
+      "z": 1.42,
+      "n": 34
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.0245,
+     "z": 1.06,
+     "n": 72
+    },
+    "significant": false
+   },
+   "8": {
+    "horizon_days": 40,
+    "ctx": 4,
+    "real": {
+     "alpha": 1000,
+     "null": "shrunk0.25",
+     "ctx": 4,
+     "hold": {
+      "margin": 0.0176,
+      "z": 0.51,
+      "n": 72
+     },
+     "oos": {
+      "margin": 0.1059,
+      "z": 2.35,
+      "n": 34
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.015,
+     "z": 0.43,
+     "n": 72
+    },
+    "significant": false
+   },
+   "16": {
+    "horizon_days": 80,
+    "ctx": 2,
+    "real": {
+     "alpha": 100,
+     "null": "shrunk0.25",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.0438,
+      "z": 1.24,
+      "n": 72
+     },
+     "oos": {
+      "margin": 0.0228,
+      "z": 0.46,
+      "n": 34
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.0809,
+     "z": 2.33,
+     "n": 72
+    },
+    "significant": false
+   }
+  },
+  "L2": {
+   "1": {
+    "horizon_days": 21,
+    "ctx": 4,
+    "real": {
+     "alpha": 10,
+     "null": "ewma4",
+     "ctx": 4,
+     "hold": {
+      "margin": 0.1551,
+      "z": 1.37,
+      "n": 17
+     },
+     "oos": {
+      "margin": 0.4005,
+      "z": 3.25,
+      "n": 8
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.2096,
+     "z": 1.84,
+     "n": 17
+    },
+    "significant": false
+   },
+   "2": {
+    "horizon_days": 42,
+    "ctx": 2,
+    "real": {
+     "alpha": 1000,
+     "null": "shrunk0.25",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.1122,
+      "z": 1.8,
+      "n": 17
+     },
+     "oos": {
+      "margin": 0.2217,
+      "z": 2.56,
+      "n": 8
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.0949,
+     "z": 1.58,
+     "n": 17
+    },
+    "significant": false
+   },
+   "4": {
+    "horizon_days": 84,
+    "ctx": 2,
+    "real": {
+     "alpha": 100,
+     "null": "shrunk0.25",
+     "ctx": 2,
+     "hold": {
+      "margin": 0.0422,
+      "z": 0.62,
+      "n": 17
+     },
+     "oos": {
+      "margin": 0.0262,
+      "z": 0.36,
+      "n": 8
+     }
+    },
+    "placebo_hold": {
+     "margin": 0.0994,
+     "z": 1.38,
+     "n": 17
+    },
+    "significant": false
+   }
+  }
+ },
+ "reach_days": {
+  "L1": 0,
+  "L2": 0
+ },
+ "verdict": "UNDERPOWERED — no level has any significant cell on csi500 hold (declared possible at these sample sizes): NOT evidence for or against the hierarchy; the KT-B prereg is closed as underpowered-cross-market and the Dow FULL PASS stands unreplicated.",
+ "runtime_s": 4,
+ "POST_REVIEW_CORRECTION": {
+  "review": "interpretability/exp_w4_finale_review.json",
+  "correction": "the L1@5d cell was NOT underpowered - it was placebo-KILLED correctly: plain train-mean achieves hold margin +0.1501 (> the ridge cell +0.1487) - L1@5d skill on csi500 is ENTIRELY generic shrinkage mechanics. The genuinely underpowered cells are L2 (n=17, z 1.37-1.8). The verdict (prereg closed, Dow PASS unreplicated) stands and is conservative."
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "preregistration": {
+  "ktd_pass": "pooled 2022-26 grow-vs-frozen z >= 1.28 at k=1 or k=4",
+  "design": "coefficients frozen at train/mem-2018; only memory content grows",
+  "prior": "NULL per CL-1c"
+ },
+ "cells": {
+  "1": {
+   "alpha_nomem": 0.1,
+   "alpha_mem": 10,
+   "per_year": {
+    "2022": {
+     "n": 50,
+     "margin_grow_vs_frozen": 0.0131,
+     "z": 1.92,
+     "mem_n": 578
+    },
+    "2023": {
+     "n": 50,
+     "margin_grow_vs_frozen": -0.0364,
+     "z": -3.81,
+     "mem_n": 628
+    },
+    "2024": {
+     "n": 50,
+     "margin_grow_vs_frozen": -0.0133,
+     "z": -1.41,
+     "mem_n": 678
+    },
+    "2025": {
+     "n": 50,
+     "margin_grow_vs_frozen": -0.0105,
+     "z": -1.74,
+     "mem_n": 728
+    },
+    "2026": {
+     "n": 18,
+     "margin_grow_vs_frozen": -0.0317,
+     "z": -1.26,
+     "mem_n": 778
+    }
+   },
+   "pooled": {
+    "margin": -0.0075,
+    "z": -1.78
+   },
+   "memory_vs_nomemory": {
+    "margin": 0.0022,
+    "z": 0.39
+   }
+  },
+  "4": {
+   "alpha_nomem": 1000,
+   "alpha_mem": 1000,
+   "per_year": {
+    "2022": {
+     "n": 50,
+     "margin_grow_vs_frozen": 0.0009,
+     "z": 4.66,
+     "mem_n": 576
+    },
+    "2023": {
+     "n": 50,
+     "margin_grow_vs_frozen": -0.0014,
+     "z": -4.01,
+     "mem_n": 626
+    },
+    "2024": {
+     "n": 50,
+     "margin_grow_vs_frozen": -0.0013,
+     "z": -3.15,
+     "mem_n": 676
+    },
+    "2025": {
+     "n": 50,
+     "margin_grow_vs_frozen": 0.0002,
+     "z": 0.27,
+     "mem_n": 726
+    },
+    "2026": {
+     "n": 18,
+     "margin_grow_vs_frozen": 0.0015,
+     "z": 5.07,
+     "mem_n": 776
+    }
+   },
+   "pooled": {
+    "margin": -0.0001,
+    "z": -0.42
+   },
+   "memory_vs_nomemory": {
+    "margin": 0.0003,
+    "z": 1.08
+   }
+  }
+ },
+ "verdict": "UNINFORMATIVE at this operator - see POST_REVIEW_CORRECTION; semantics-stable variant pending prereg",
+ "semantic_store": "data\\_crystal_world\\semantic_store_v0.json",
+ "runtime_s": 4,
+ "POST_REVIEW_CORRECTION": {
+  "review": "interpretability/exp_w3_review.json (VERDICT_INVALIDATING_BUG on the KILL)",
+  "finding": "the growing arm was handicapped by construction: annual KMeans recompute permutes cluster identity (channel corr down to -0.89) under frozen coefficients; Hungarian alignment halves the kill; a SEMANTICS-STABLE operator (centroids frozen at 2018, only per-schema forward stats grow) PASSES the preregistered bar at k=4: pooled +0.0006 z +2.99, positive all 5 years - POST-HOC, needs its own prereg",
+  "criterion_note": "the KILL criterion was asymmetric (fired on sub-significant negative); memory columns are NOT inert (ablation +0.0145 z 1.83)",
+  "corrected_verdict": "KT-D UNINFORMATIVE at the recompute-all operator; semantics-stable enrichment = PENDING PREREGISTERED CONFIRMATION (next data refresh / third window)"
+ }
+}

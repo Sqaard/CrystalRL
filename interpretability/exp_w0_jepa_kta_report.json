@@ -1,0 +1,155 @@
+{
+ "preregistration": {
+  "bar": "on HOLD, some h in {1,5}: pred>pers z>=1.28 AND jepa margin >= pca margin AND placebo margin < 0.5x real",
+  "dims": 16,
+  "window_days": 60,
+  "seeds": [
+   0,
+   1
+  ],
+  "collapse_guard": "per-dim std + effective rank reported"
+ },
+ "seeds": {
+  "0": {
+   "collapse": {
+    "min_dim_std": 0.937,
+    "mean_dim_std": 1.255,
+    "eff_rank": 6.89
+   },
+   "windows": {
+    "hold": {
+     "1": {
+      "energy_margin_rel": -66.5051,
+      "z": -13.06,
+      "placebo_margin": -107.1709,
+      "pca_margin": 0.8409,
+      "retr_pred": 0.7156,
+      "retr_pers": 0.9967
+     },
+     "5": {
+      "energy_margin_rel": -5.7358,
+      "z": -11.78,
+      "placebo_margin": -10.7649,
+      "pca_margin": 0.854,
+      "retr_pred": 0.7058,
+      "retr_pers": 0.979
+     },
+     "10": {
+      "energy_margin_rel": -1.4752,
+      "z": -7.72,
+      "placebo_margin": -3.7706,
+      "pca_margin": 0.8243,
+      "retr_pred": 0.6721,
+      "retr_pers": 0.9289
+     }
+    },
+    "oos": {
+     "1": {
+      "energy_margin_rel": -97.934,
+      "z": -25.93,
+      "placebo_margin": -152.9659,
+      "pca_margin": 0.8477,
+      "retr_pred": 0.6742,
+      "retr_pers": 0.9971
+     },
+     "5": {
+      "energy_margin_rel": -9.1602,
+      "z": -26.2,
+      "placebo_margin": -18.5727,
+      "pca_margin": 0.873,
+      "retr_pred": 0.6466,
+      "retr_pers": 0.9674
+     },
+     "10": {
+      "energy_margin_rel": -2.6911,
+      "z": -18.96,
+      "placebo_margin": -6.1634,
+      "pca_margin": 0.8539,
+      "retr_pred": 0.6167,
+      "retr_pers": 0.8449
+     }
+    }
+   }
+  },
+  "1": {
+   "collapse": {
+    "min_dim_std": 1.031,
+    "mean_dim_std": 1.435,
+    "eff_rank": 6.13
+   },
+   "windows": {
+    "hold": {
+     "1": {
+      "energy_margin_rel": -56.0005,
+      "z": -12.86,
+      "placebo_margin": -96.4112,
+      "pca_margin": 0.8409,
+      "retr_pred": 0.8252,
+      "retr_pers": 0.9966
+     },
+     "5": {
+      "energy_margin_rel": -5.1112,
+      "z": -11.36,
+      "placebo_margin": -10.9019,
+      "pca_margin": 0.854,
+      "retr_pred": 0.8026,
+      "retr_pers": 0.9795
+     },
+     "10": {
+      "energy_margin_rel": -1.4451,
+      "z": -7.82,
+      "placebo_margin": -3.2466,
+      "pca_margin": 0.8243,
+      "retr_pred": 0.7617,
+      "retr_pers": 0.9404
+     }
+    },
+    "oos": {
+     "1": {
+      "energy_margin_rel": -89.1958,
+      "z": -19.86,
+      "placebo_margin": -119.7221,
+      "pca_margin": 0.8477,
+      "retr_pred": 0.7235,
+      "retr_pers": 0.9971
+     },
+     "5": {
+      "energy_margin_rel": -10.249,
+      "z": -20.49,
+      "placebo_margin": -15.0766,
+      "pca_margin": 0.873,
+      "retr_pred": 0.7085,
+      "retr_pers": 0.9769
+     },
+     "10": {
+      "energy_margin_rel": -3.0983,
+      "z": -17.03,
+      "placebo_margin": -4.4093,
+      "pca_margin": 0.8539,
+      "retr_pred": 0.671,
+      "retr_pers": 0.8986
+     }
+    }
+   }
+  }
+ },
+ "bar_by_h": {
+  "1": {
+   "mean_margin": -61.2528,
+   "mean_z": -12.96,
+   "mean_placebo": -101.7911,
+   "mean_pca_margin": 0.8409,
+   "pass": false
+  },
+  "5": {
+   "mean_margin": -5.4235,
+   "mean_z": -11.57,
+   "mean_placebo": -10.8334,
+   "mean_pca_margin": 0.854,
+   "pass": false
+  }
+ },
+ "kta_pass": false,
+ "verdict": "KT-A KILL \u2014 L1 latent prediction does not beat trivial dynamics on the frozen window (per prereg this is informative, not embarrassing: the daily micro-level is where VoI~0 lives; the program's interesting question moves to L2/KT-B, and the W1 design should build L2 on slower pooled inputs rather than expecting L1 skill).",
+ "runtime_s": 17
+}
