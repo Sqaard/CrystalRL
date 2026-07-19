@@ -122,7 +122,14 @@ probability-like claim (G2 — contracts stay on the bootstrap machinery).
   The hierarchy-horizon principle has direct market evidence beyond the regime data point. Caveats
   in the logbook (protocol-after-peek → the clean confirmation is a pre-registered third-window
   read; flat-twin point comparison without a z). L3 has no statistical content at n=8.
-- **W2:** action-conditioning + the paper-trade probe loop (§4); detour tests; KT-C.
+- **W2: EXECUTED 2026-07-19** (`exp_w2_probe_loop.py`, `exp_w2_ktc_l2_swap.py`; review
+  MINOR_ISSUES — the first phase to survive without an invalidation). Episodic store v0 live
+  (822 records). Detour tests PASS (≥2/3 robust; correction: the surprise elevation is generic
+  novelty — a valid enrichment TRIGGER, not model-specific detection). Action channel inert as
+  pre-registered (interface delivered; footprint untestable on history). **KT-C = hold-bar pass
+  but OOS-DEGRADING and PROVISIONAL: L2 is largely a noisy re-encode of the HMM decision
+  (R²=0.63, 89% agreement) whose independent 11% degrades OOS — W3 must improve or discard L2
+  before building memory on it.**
 - **W3:** memory integration (episodic store + first gated semantic consolidations via the HL
   loop); KT-D over a 1-year walk-forward.
 - **W4:** Joseph's interpretability battery on the learned representations; CrystalScore
