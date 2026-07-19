@@ -130,8 +130,16 @@ probability-like claim (G2 — contracts stay on the bootstrap machinery).
   but OOS-DEGRADING and PROVISIONAL: L2 is largely a noisy re-encode of the HMM decision
   (R²=0.63, 89% agreement) whose independent 11% degrades OOS — W3 must improve or discard L2
   before building memory on it.**
-- **W3:** memory integration (episodic store + first gated semantic consolidations via the HL
-  loop); KT-D over a 1-year walk-forward.
+- **W3: EXECUTED 2026-07-19** (`exp_w3_l2_improve.py`, `exp_w3_ktd_memory.py`; review caught a
+  manufactured kill). **L2-as-substitute DISCARDED, genuine** (mechanism named: causal-filter OOD
+  lock-in on the 10Y-yield level vs the frozen scaler; rule: future L2 rebuilds exclude raw
+  levels). Semantic store v0 live with curated + mechanical entries. **KT-D = UNINFORMATIVE at
+  the recompute-all operator** (channel-permutation handicap under frozen coefficients — a
+  manufactured kill, caught); the referee's probe found a **semantics-stable operator (frozen
+  schemas, growing per-schema statistics) that PASSES the bar post-hoc (z +2.99, all 5 years
+  positive) → KT-D v2 with that operator is the pre-registered follow-up** at the next data
+  refresh / third window. New store rule: enrichment operators must preserve schema-channel
+  identity.
 - **W4:** Joseph's interpretability battery on the learned representations; CrystalScore
   frontier (representation quality vs legibility); paper section.
 
