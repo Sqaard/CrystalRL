@@ -1,0 +1,1155 @@
+{
+ "version": "v1",
+ "date": "2026-07-19",
+ "governance": "appends only with provenance; every entry reversible; consolidation gated (G10); corpus atoms are PRIORS never evidence (corpus_priors_never_evidence); memory entries carry regime fingerprints, cross-boundary retrieval down-weighted (regime_break_invalidates_learned_coefficients)",
+ "curated": [
+  {
+   "type": "named_regime",
+   "name": "bear_month_state",
+   "content": "elevated VIX (~21), rising dVIX (+0.4), turbulence ~56, in-block dd ~-5%",
+   "provenance": "exp_w2_ktc_l2_swap L2 card (GMM bear component)",
+   "evidence": "Strong-but-Contextual"
+  },
+  {
+   "type": "mechanism",
+   "name": "voi_zero_daily",
+   "content": "daily price-level prediction carries ~zero deployable info; certified value is risk-shaped at the regime level (10-20d)",
+   "provenance": "E-15/E-16, LIT-1, CL-1c, W0 KT-A",
+   "evidence": "Established (in-house, multi-confirmed)"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "continual_lt_frozen",
+   "content": "naive continual refitting underperforms the frozen champion (belief AND tails AND config re-derivation)",
+   "provenance": "CL-1c, CL-2; CLS theory retro-justifies",
+   "evidence": "Established (in-house)"
+  },
+  {
+   "type": "decay_clock",
+   "name": "csi500_reversal",
+   "content": "csi500 5d reversal replicated at HALF magnitude on fresh 2024-26 data and is priced out net of costs",
+   "provenance": "E-14b/E-15b",
+   "evidence": "Established (in-house, untouched-data replication)"
+  },
+  {
+   "type": "mechanism",
+   "name": "hierarchy_horizon",
+   "content": "week-level structure predictable to ~40d, month-level to ~84d (strong nulls, placebo-guarded); part representational (pooled>flat)",
+   "provenance": "W1 KT-B v2 (third-window prereg pending)",
+   "evidence": "Strong-but-Contextual"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "memory_channel_semantics",
+   "content": "enrichment operators must preserve schema-channel identity: recompute-all clustering under frozen readout coefficients manufactures a fake KILL (channel permutation); grow statistics WITHIN stable schemas instead",
+   "provenance": "W3 KT-D review (exp_w3_review.json)",
+   "evidence": "Established (in-house, instrumented probe)"
+  },
+  {
+   "type": "mechanism",
+   "name": "l2_ood_lockin",
+   "content": "frozen-scaler HMMs over LEVEL features saturate under regime-level shifts (10Y yield z +3.85 vs the 2010-18 scaler pinned the posterior at 1.0, occupancy 98-100% 2022-26); future L2 rebuilds must exclude raw level features or use adaptive scaling",
+   "provenance": "W3 L2 improve review",
+   "evidence": "Established (in-house, mechanism named)"
+  },
+  {
+   "type": "guardrail",
+   "name": "rolling_window_features_need_placebo_market",
+   "content": "Any knowledge-derived feature that is a LONG ROLLING WINDOW (corr63, long EWMA, etc.) injects mechanical autocorrelation (corr63: 0.94 at lag 5 on pure i.i.d. noise) and can manufacture a completeness PASS that year-shuffle noise twins miss (they preserve the rolling smoothness). Such features MUST pass the i.i.d. placebo-market guard, and no near-persistent rolling statistic may enter both the context and the target. Use within-block (no cross-block window) constructions.",
+   "provenance": "WP-2/WB-1 stockbond invalidation (exp_wb2_placebo_diagnosis, exp_wb3_stockbond_salvage)",
+   "evidence": "Established (in-house, instrumented probe)"
+  }
+ ],
+ "corpus_priors": [
+  {
+   "type": "era_lesson",
+   "name": "profitability_is_a_pipeline_property",
+   "content": "52 years of evidence do not support one universal 'most profitable' model at the center of a bot; durable systems arise when a weak, regime-dependent, fast-decaying signal passes through causally correct data, hard temporal validation, cost-aware allocation, an independent risk veto, realistic execution, and reproducible operations. The three eras (1975-92, 1993-2010, 2011-26) are not three truths but three successive tightenings of the plausibility criterion. Profitability is a property of the whole signal-to-realized-PnL transformation, not of the predictor.",
+   "evidence": "Established",
+   "horizon": "years (doctrine level); enforced per-experiment",
+   "failure_conditions": "Would be revised only by multi-regime live proof that an off-the-shelf model core durably beats modular stacks net of costs; the corpus explicitly says no such evidence exists yet.",
+   "bot_binding": "Baseline-ladder gate, computable from the daily panel: any challenger must beat BOTH (a) 1/N equal-weight buy-and-hold of the Dow-30 panel and (b) the current certified frozen rule, net of the 30bp/change cost budget with rf-accruing cash leg, on the same walk-forward splits. Promotion metric = net PnL difference, never forecast accuracy.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "mechanism",
+   "name": "search_freedom_manufactures_false_alpha",
+   "content": "Unaccounted search freedom makes the 'best found' strategy a selection artifact (White Reality Check; Bailey/Lopez de Prado PBO). Diagnostic indicators: sharp in-sample vs honest-OOS gap, unstable feature importances, sensitivity to the split date. The remedy is a trial ledger, frozen holdouts, and search-penalized thresholds; it breaks when informal post-hoc redesign continues after the 'final' test.",
+   "evidence": "Established",
+   "horizon": "per research cycle (weeks-months)",
+   "failure_conditions": "Breaks when candidates are redesigned after seeing the holdout, or when the trial count N is undercounted (shared-idea variants counted as one trial).",
+   "bot_binding": "Three proxies from the daily panel plus the bot's own trial ledger: (1) IS/OOS gap = Sharpe_IS - Sharpe_OOS on temporal splits of the panel; (2) split-sensitivity = std of OOS Sharpe across K>=4 shifted split dates; (3) acceptance z-threshold deflated by ln(N_trials) from the experiment ledger (the project's frozen gate already implements this).",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "mechanism",
+   "name": "optimizer_amplifies_estimation_error",
+   "content": "Noisy expected returns and covariances are amplified, not absorbed, by unconstrained optimizers; DeMiguel-Garlappi-Uppal show 14 sample-based schemes fail to beat 1/N stably out of sample, and Jagannathan-Ma show constraints act as shrinkage. Indicators: weight flips, leverage spikes, turnover explosions. The allocator must be an absorber of error, not an amplifier of conviction.",
+   "evidence": "Established",
+   "horizon": "every rebalance (days) and every allocation-design decision",
+   "failure_conditions": "Breaks when the allocator trusts point estimates more than their error bars; also note the project's own P-1 result — even 1/N-style diversified fans lost to the certified concentrated chord on 2019-23, so 1/N is a floor, not a ceiling.",
+   "bot_binding": "From the bot's own weight vector on the daily panel: (1) turnover = 0.5*sum|w_t - w_(t-1)| per day, alarm on explosion vs its 63d median; (2) weight-instability = mean daily L1 distance of weights; (3) mandatory 1/N equal-weight benchmark leg run net-of-cost on the same dates; any optimizer output is shrunk toward 1/N with hard per-name caps.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "volume_is_not_absorbing_liquidity",
+   "content": "The SEC/CFTC Flash Crash report states directly that in significant volatility high trading volume is not a reliable indicator of liquidity; volume-as-liquidity and touch-equals-fill are named among the corpus's most repeated false-alpha channels. Automation can improve matching efficiency while worsening the visibility of true liquidity (BIS).",
+   "evidence": "Established",
+   "horizon": "days (measured daily), matters most in stress weeks",
+   "failure_conditions": "The daily proxy is an approximation: Amihud from close*volume misses intraday depth withdrawal; treat it as a warning flag, never as a fill guarantee.",
+   "bot_binding": "Per-ticker daily proxies from OHLCV: (1) Amihud illiquidity = 21d mean(|ret_d| / (close_d*volume_d)); (2) Corwin-Schultz high-low spread estimator from consecutive-day high/low; (3) liquidity-withdrawal flag = volume z-score > 2 AND Amihud z-score > 2 simultaneously (volume spike that does NOT absorb price impact). Down-size or refuse trades on flagged names/days.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "decay_clock",
+   "name": "alpha_half_life_vs_cost_clock",
+   "content": "Short alpha half-life combined with positive costs makes any static target economically false: PnL that exists at mid/close evaporates under realistic friction, and urgency raises the cost further. A production signal must ship with an explicit half-life and the holding horizon must be consistent with it; a high-turnover strategy without its own execution/cost model is undermodeled regardless of its statistical quality.",
+   "evidence": "Strong-but-Contextual",
+   "horizon": "signal-specific, days-to-weeks; re-measured quarterly",
+   "failure_conditions": "Breaks when persistence is overestimated in-sample or impact is treated ex post; locally confirmed by the project's csi500 reversal being real-but-priced-out at 5d.",
+   "bot_binding": "Horizon-IC curve from the daily panel: rank-IC(h) of the signal vs forward returns at h in {1,5,10,21}d; half-life = smallest h where IC(h) <= 0.5*IC(1). Gates: rebalance period >= half-life; turnover-to-edge ratio = (annual turnover * 30bp cost) / gross annual edge, kill if > 0.5; re-run PnL at 1x/2x/3x cost.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "regime",
+   "name": "state_before_direction_regime_gating",
+   "content": "The corpus's medium-confidence claim (deliberately weakened from the earlier 'state estimation is always more important'): state variables are often more useful as a control plane under frictions than as directional forecasts, and signals should be gated by volatility/liquidity regime with capital permission tied to regime. This matches the project's only certified real-data result (P(bear)-gated exposure dial).",
+   "evidence": "Strong-but-Contextual",
+   "horizon": "weeks-months (regime dwell times)",
+   "failure_conditions": "Regime-dependent by construction: cointegration/stat-arb, trend overlays, and vol-gating are listed as context-dependent, not durable knowledge; a gate certified in one regime mix has no claim on unseen mixes.",
+   "bot_binding": "Three daily state channels: (1) the existing 2-state regime belief P(bear); (2) vol state = 21d realized vol of the equal-weight Dow-30 daily return vs its rolling 252d median (binary); (3) liquidity state = cross-sectional median 21d Amihud vs its 252d rolling median. Signals carry a certified-regime tag and receive capital permission only inside their certified cell.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "guardrail",
+   "name": "uncertainty_aware_sizing_with_no_trade_band",
+   "content": "The mature forecast object is not next-bar sign but expected NET utility of an action at a known horizon and cost; a production signal must be a package of score + confidence + half-life + tradability, and weights must see confidence intervals, turnover budgets, and no-trade regions, not point forecasts. Uncertainty itself must enter the decision rule ex ante.",
+   "evidence": "Strong-but-Contextual",
+   "horizon": "every rebalance (days)",
+   "failure_conditions": "Breaks when confidence is estimated on too-short windows (noisy IC-IR whipsaws sizing) or when the no-trade band is tuned post hoc on the holdout.",
+   "bot_binding": "Per signal from the daily panel: confidence = IC-IR = rolling 252d mean(rank-IC) / std(rank-IC); position delta executed only if |target_w - current_w| > no-trade band (band >= 2*assumed cost / expected edge per unit weight); size proportional to clip(IC-IR, 0, cap) * score under hard exposure caps.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "guardrail",
+   "name": "one_oos_band_is_not_proof",
+   "content": "Promoting a strategy on one attractive OOS stripe is a named false-alpha channel; honest validation requires rolling walk-forward splits, regime partitions, cost/capacity perturbation, and a shadow bridge before capital. OOS-as-proof is listed among fragile heuristics alongside accuracy-equals-PnL.",
+   "evidence": "Established",
+   "horizon": "per promotion decision (weeks)",
+   "failure_conditions": "Breaks when the regime partition is itself chosen after seeing results (the project's own eval-grid phase-selection false-GREENs are exactly this failure, twice).",
+   "bot_binding": "Promotion matrix computable from panels + free series: evaluate every candidate on K>=4 rolling walk-forward splits x 2 regime partitions (days with VIX above/below its rolling 252d median), all net-of-cost at 1x/2x/3x the 30bp budget; promote on the MINIMUM cell, never the mean or max; then a mandatory paper/shadow period before capital.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "guardrail",
+   "name": "independent_risk_veto_and_safe_flat",
+   "content": "Risk is an independent authority with the technical power to say no — cut aggressiveness, block orders, flatten — not a variance dashboard (analogized to Rule 15c3-5 pre-trade controls). Operational ambiguity destroys financial truth: stale feeds, silent history healing, unmarked asynchronous merges, and reconciliation breaks make the model learn ETL artifacts; when system state is ambiguous the correct position is safe-flat.",
+   "evidence": "Established",
+   "horizon": "daily pre-trade, every cycle",
+   "failure_conditions": "Breaks when the risk gate is decorative (no wired kill path) or when data checks are skipped for 'known good' feeds — the project's E-10 mixed-clock csi500 panel (close=yesterday, high/low=today) is a local proof of the silent-corruption mechanism.",
+   "bot_binding": "Daily computable pre-trade checks: (1) freshness lock — if max(panel date) < last exchange trading day, exposure := 0; (2) per-row OHLC integrity — high >= max(open,close) and low <= min(open,close), quarantine violators; (3) cross-source clock check — sampled panel closes vs Yahoo chart-API closes, alarm if |diff| > 0.1% on > 5% of names; (4) drawdown brake — flatten/de-gross when running DD breaches the dev-period p95 block-bootstrap DD envelope (pre-registered).",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "era_lesson",
+   "name": "bounded_ai_benchmark_charisma_vs_live_competence",
+   "content": "The corpus's AI verdict is role-specific: supervised ML is mature for regularized cross-sectional ranking; RL is credible mainly in bounded control problems; foundation models are priors, weak in finance off-the-shelf; LLM/agentic layers are bounded copilots, and LiveTradeBench shows a real gap between static-benchmark excellence and live trading outcomes. 'Autonomous LLM trader near production' and 'broad sim-to-live RL transfer' sit explicitly in the LOW-confidence tier, and this late layer carries acknowledged recency/preprint bias — hold it more skeptically than the 1975-2010 lessons.",
+   "evidence": "Strong-but-Contextual",
+   "horizon": "months (paper-track accumulation); architecture-permanent for the authority constraint",
+   "failure_conditions": "Revised only by reproducible multi-market live evidence of autonomous cores beating modular stacks net of costs; until then any AI component with direct order authority and no sandbox is a listed deprecated approach.",
+   "bot_binding": "Two parts: (1) architectural invariant — AI/RL outputs may only set an exposure dial in a pre-registered discrete set behind the frozen gate (already the project's substrate optimum: every lever expresses through the dial); (2) measurable benchmark-vs-live gap = rolling 63d realized paper-track Sharpe minus backtest Sharpe on the identical dates from the daily book, drift alarm at |z| > 2. The autonomy question itself is NOT_MEASURABLE_DAILY beyond this paper/live divergence proxy.",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/52y_te"
+  },
+  {
+   "type": "era_lesson",
+   "name": "system_over_model_doctrine",
+   "content": "The full 1975-2026 corpus finds NO universal 'most profitable model'. Durable profitability is a property of the whole chain — weak, regime-dependent, fast-decaying signal passed through point-in-time data, search-penalized validation, uncertainty/cost-aware allocation, an independent risk veto, realistic execution, and fail-safe operations. The signal is almost always weaker than it looks in-sample; the production layer matters more than the predictor.",
+   "evidence": "Established",
+   "horizon": "years (doctrine level, applies at every decision horizon)",
+   "failure_conditions": "Breaks as a claim only if a single model class is shown to reproducibly beat modular stacks net of costs across regimes in live trading — the corpus explicitly says no such evidence exists through 2026.",
+   "bot_binding": "Promotion gate, computable from the daily panel: a candidate reaches capital only if net-of-cost Sharpe on the FROZEN walk-forward holdout beats both (a) equal-weight buy-and-hold of the same universe and (b) the current champion, with the full trial count recorded. This is already the project's frozen-gate practice; the atom pins it as doctrine, not preference.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "guardrail",
+   "name": "search_penalty_mandatory",
+   "content": "Unaccounted search freedom manufactures false alpha: the best backtest among many candidates is a selection artifact (White Reality Check; Probability of Backtest Overfitting). Indicators: sharp in-sample/OOS gap, unstable feature importances, sensitivity to split choice. The corpus rates this among its highest-confidence conclusions.",
+   "evidence": "Established",
+   "horizon": "process-level; bites at every research iteration",
+   "failure_conditions": "The penalty itself fails when informal post-hoc redesign continues after the 'final' test, or when the trial ledger undercounts hyperparameter sweeps.",
+   "bot_binding": "Computable from the bot's own backtests on the daily panel: maintain a trial ledger of every variant tried; report deflated Sharpe / PBO across the ledger, not the best run; alarm when (in-sample Sharpe − frozen-holdout Sharpe) exceeds the ledger-implied selection bound. No daily market series needed — the panel plus the ledger suffice.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "mechanism",
+   "name": "optimizer_amplifies_estimation_error_1",
+   "content": "Noisy expected returns and covariances fed into an unconstrained optimizer amplify input error into weight flips, leverage spikes and turnover explosions; 14 sample-based optimizers fail to beat 1/N out of sample (DeMiguel-Garlappi-Uppal). The allocator must be an absorber of error (shrinkage, caps, no-trade bands), not an amplifier of conviction.",
+   "evidence": "Established",
+   "horizon": "weeks-months (rebalance cycle)",
+   "failure_conditions": "Constrained allocation loses to optimization only when expected-return estimates are genuinely high-precision (rare in daily equity panels) or when constraints are so tight they block a real, strong signal.",
+   "bot_binding": "Two daily-panel proxies: (1) weight-instability = mean |Δw| per rebalance and gross turnover/yr of the candidate book; alarm on spikes vs its own trailing distribution; (2) standing baseline: net Sharpe of the candidate vs 1/N equal-weight of the identical universe, same costs. R6c's near-equal-weight book means this binds mainly to any future selection-layer proposal.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "decay_clock",
+   "name": "alpha_half_life_vs_cost_breakeven",
+   "content": "Short alpha half-life combined with positive costs makes a static target position economically false: PnL that exists at zero friction disappears once trading speed must pay the spread. Optimal behavior is partial, paced trading toward a moving aim with no-trade bands, and refusing signals whose decay outruns their cost breakeven.",
+   "evidence": "Established",
+   "horizon": "days-weeks (the decay clock of any daily signal)",
+   "failure_conditions": "Fails when persistence is misestimated (regime change shortens the half-life after promotion) or when cost convexity is ignored at larger size.",
+   "bot_binding": "Computable from the daily panel: rank-IC(h) of the signal at horizons 1/5/10/21d; fit half-life from the IC decay curve. Trade only if implied per-trade edge at the achievable holding period exceeds 2x the Corwin-Schultz half-spread + fee. Re-estimate the half-life on a rolling 252d window; de-capitalize when it contracts below the breakeven horizon.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "guardrail",
+   "name": "daily_cost_realism_proxies",
+   "content": "Frictionless backtests are the corpus's most repeated false-alpha channel; 'touch equals fill' and cost-blind promotion rules are listed as deprecated. On daily bars the honest substitute is a range-based spread estimate plus a price-impact proxy, with promotion contingent on surviving inflated costs.",
+   "evidence": "Established",
+   "horizon": "every trade; verdict-changing at promotion time",
+   "failure_conditions": "Range-based spread estimators are biased in extreme-gap or low-variance regimes; the proxy understates true cost for large size (impact is not in daily bars) — so cap assumed capacity, don't extrapolate.",
+   "bot_binding": "Per ticker per day from OHLCV: Corwin-Schultz (or Abdi-Ranaldo) high-low spread estimate; net PnL = gross − turnover × (half-spread + fee). Promotion rule: edge must survive with costs inflated 2x. Directly computable from the Dow-30 and rebuilt csi500 panels.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "volume_is_not_liquidity",
+   "content": "The SEC/CFTC Flash Crash report's core finding, carried through the whole corpus: in significant volatility, high trading volume is NOT a reliable indicator of absorbing liquidity. Sizing or comfort rules keyed on raw volume mistake churn for depth exactly when depth is withdrawing.",
+   "evidence": "Established",
+   "horizon": "days (stress episodes)",
+   "failure_conditions": "The daily proxy version is a stress detector, not an intraday one — it will lag a true intraday liquidity vacuum by up to a day.",
+   "bot_binding": "Daily-computable liquidity-withdrawal flag: per ticker Amihud illiquidity = |ret| / dollar-volume; state trigger when cross-sectional mean Amihud z-score (vs 252d baseline) is high WHILE volume z-score is also high — high-volume + high-impact days mark withdrawal, and the risk layer should throttle rather than treat volume as capacity.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "guardrail",
+   "name": "independent_risk_veto",
+   "content": "Risk control must be a separate subsystem with the technical power to say no — pre-trade hard limits, drawdown brakes, concentration caps, and safe-flat on ambiguous state — not a dashboard on top of the model (anchored in SEC Rule 15c3-5 and the Knight incident). Operational ambiguity destroys financial truth faster than a wrong predictor.",
+   "evidence": "Established",
+   "horizon": "daily; fires rarely but with total authority",
+   "failure_conditions": "E-21's W-G1 lesson applies: a defensive ratchet that can only tighten degrades performance; the veto needs pre-registered release conditions too, or it becomes a one-way brake.",
+   "bot_binding": "All daily-computable: (1) rolling drawdown of the live book vs a pre-registered envelope → exposure throttle; (2) per-name and gross exposure caps checked before order emission; (3) stale-data lock: if the panel's last date < today−1 trading day, or the clock-integrity check fails, emit no new orders (safe-flat). Matches live_executor.py's guard slot.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "decay_clock",
+   "name": "decay_alarm_battery",
+   "content": "Live PnL breaks are preceded by measurable decay, not announced by it: rolling IC decline vs benchmark, feature-distribution drift, slippage/fill drift, and live-vs-backtest divergence. The corpus's monitoring law: every red indicator must map to a pre-defined action (throttle, de-gross, flatten, review) — an alarm without a bound action is decoration.",
+   "evidence": "Strong-but-Contextual",
+   "horizon": "weeks (rolling windows); alarms are leading by design",
+   "failure_conditions": "Short windows produce false alarms in benign vol spikes; thresholds tuned on history are themselves a search surface — pre-register them.",
+   "bot_binding": "Daily-computable battery: (1) rolling 63d rank-IC of each live signal vs its frozen-gate value; (2) PSI on the 41-col feature panel vs the training window; (3) paper-book daily return minus backtest-expected return, cumulated as a divergence z-score. Each with a pre-registered threshold and bound action.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "guardrail",
+   "name": "point_in_time_clock_integrity",
+   "content": "If the pipeline silently heals history, merges asynchronous sources without marking, or carries mixed clocks, the model learns ETL artifacts instead of market structure — the corpus calls PIT discipline one of its most durable truths. This project has already paid this bill once: the csi500 mixed-clock bug (close/volume = yesterday, high/low = today) voided an entire result wave (E-10).",
+   "evidence": "Established",
+   "horizon": "permanent; checked daily at ingest",
+   "failure_conditions": "The cross-check itself fails if the external reference shares the vendor/pipeline of the panel (correlated corruption) — use a genuinely independent source.",
+   "bot_binding": "Daily-computable integrity check: correlate panel close-to-close returns per ticker against an independent source (Yahoo chart API — confirmed reachable) over a trailing window; additionally test whether panel close returns correlate better with the external SAME-day or PREVIOUS-day return (the exact E-10 mixed-clock signature). Any flagged column quarantines the ticker and trips the stale-data lock.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "regime",
+   "name": "signals_are_regime_privileges",
+   "content": "The corpus files every signal family (momentum/trend overlays, reversal, queue/depth alpha, vol-state gating, stat-arb) under regime-dependent knowledge, never universal law: capital permission should be gated by volatility/liquidity regime, and per-regime performance tracked separately, because an unconditional edge estimate blends regimes where the signal is alive and dead.",
+   "evidence": "Strong-but-Contextual",
+   "horizon": "months (regime durations); gating decisions daily",
+   "failure_conditions": "Regime gating adds a fitted layer — with few regime transitions in the sample it is itself a prime overfit surface (this project's phase-selection false-GREEN lesson); gates must be exposure-matched-twin tested.",
+   "bot_binding": "Gating variables all daily-computable: the bot's own 2-state P(bear) belief; 21d realized-vol percentile from the panel; VIX level and VIX3M/VIX term ratio (free series). Binding: report every candidate's net Sharpe conditional on regime state, and grant capital per-regime, not unconditionally.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "benchmark_score_is_not_live_competence",
+   "content": "The late corpus's sharpest addition: LOB forecasting accuracy is not tradability; zero-shot time-series foundation models are weak in finance without domain adaptation; LLM/agentic traders show a proven gap between static benchmark excellence and live decision competence; RL is credible mainly in bounded execution/control, not as an alpha core. High confidence is in the CAUTION, not in the frontier claims.",
+   "evidence": "Strong-but-Contextual",
+   "horizon": "years (technology-adoption clock)",
+   "failure_conditions": "Would be overturned by multi-regime live evidence of an off-the-shelf FM/agentic core beating modular stacks net of costs — the corpus states no such evidence exists through 2026.",
+   "bot_binding": "Bindable as a promotion rule, not a market series: no model class receives capital on benchmark/leaderboard metrics; mandatory shadow/paper phase with the daily live-vs-backtest divergence z (computable from the paper book + panel) passing a pre-registered bar. The frontier claims themselves are NOT_MEASURABLE_DAILY — they are priors on what to even try.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "high_turnover_strategies_undecidable_on_daily_bars",
+   "content": "The corpus's execution layer — OFI, queue state, fill probability, adverse selection, post-fill drift — is the decisive economics for high-turnover strategies, and none of it exists in daily OHLCV. A daily-bar bot therefore cannot validate fast strategies at all: their paper PnL is dominated by fill assumptions the data cannot check ('a high-turnover strategy without its own execution model is undermodeled regardless of signal quality').",
+   "evidence": "Established",
+   "horizon": "structural constraint on the whole strategy space",
+   "failure_conditions": "Ceases to bind only if the bot acquires intraday/LOB data (the CN intraday recorder route); until then any sub-daily-holding-period result is fantasy PnL by construction.",
+   "bot_binding": "Fill/queue/toxicity variables: NOT_MEASURABLE_DAILY (require intraday order-book data). The enforceable daily corollary IS computable: restrict the admissible strategy space to holding periods >= 5d and turnover low enough that total assumed cost error (bounded by the Corwin-Schultz band) stays below the claimed edge — i.e., reject candidates whose edge sits inside the execution-uncertainty band.",
+   "source": "experience/Technical Trading Bot Picture/_codex_notes/inventory.md → deep-read of the corpus's top-of-pyramid syntheses:"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "hcs_year_notes_are_index_not_knowledge",
+   "content": "This file contains NO per-year economic or market lessons despite its title. Mechanical audit: every one of the 476 entries is boilerplate (path, word count, keyword-derived theme tags, a template note drawn from ~9 fixed clauses; the top template repeats 104 times verbatim). Any future compression or memory entry that cites this file as a source of historical facts is fabricating; the actual year lessons live in the underlying docx corpus (Economic World Picture / Technical Trading Bot Picture folders).",
+   "evidence": "Established",
+   "bot_binding": "NOT_MEASURABLE_DAILY — provenance fact for the memory store, not a market quantity. Bindable only as a memory-hygiene rule: semantic-memory entries citing this file must be tagged source_class=index, never source_class=evidence.",
+   "failure_conditions": "None; verifiable by direct inspection (grep shows only header lines are non-boilerplate).",
+   "horizon": "permanent (corpus governance)",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "guardrail",
+   "name": "corpus_priors_never_evidence",
+   "content": "The file's single explicit rule, stated in its header: notes derived from the experience corpus are NOT alpha evidence — they enter the system only as hypothesis priors, failure-memory entries, or HCS skill candidates. The template clauses enforce this downstream: 'add or strengthen validation-firewall checks before candidate promotion' (~80 entries) and 'require ablation vs current R6c' (~150 entries). Nothing narrative-derived may change live behavior without passing the frozen validation gate and an ablation against the current champion.",
+   "evidence": "Established",
+   "bot_binding": "NOT_MEASURABLE_DAILY — a pipeline gate, not a daily series. Concrete enforcement is procedural: every candidate carries an evidence-status tag, and promotion requires (1) frozen out-of-sample gate pass and (2) ablation delta vs the incumbent champion policy on the same replay windows.",
+   "failure_conditions": "Violated whenever a corpus-derived claim (e.g. a year-narrative pattern) is wired directly into a controller or reward without a gated ablation; project history shows such shortcuts repeatedly produced false GREENs.",
+   "horizon": "permanent (process)",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "guardrail",
+   "name": "regime_conditioned_hypothesis_testing",
+   "content": "The most repeated instruction in the corpus (~90% of all 476 entries, and 'regime' is the #1 theme of the Economic corpus at 14,295 hits): treat every macro/history-derived claim as regime-conditioned and test robustness across market regimes before adoption. A rule that only works in one regime must be explicitly regime-scoped, never adopted as unconditional.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Partition all candidate evaluations by the bot's 2-state regime belief (P(bear) > 0.5 vs <= 0.5 days). Panel-only fallback partition: stress = (21d return of the equal-weight Dow-30 close index < 0) AND (cross-sectional std of daily returns > its 63d median). Require the candidate's edge to be sign-stable in both partitions, or ship it with an explicit regime scope condition.",
+   "failure_conditions": "Fails when the regime classifier itself is degenerate (one state absorbing >95% of days) or when the evaluation window contains only one regime — then the test is vacuous and must be deferred, not passed.",
+   "horizon": "weeks-to-months (regime dwell times); rule itself permanent",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "guardrail",
+   "name": "cost_capacity_audit_kills_gross_alpha",
+   "content": "'Force execution/cost/capacity audit; avoid gross-alpha illusions' is the second-most-frequent clause, and liquidity_execution is the DOMINANT theme of the entire Technical corpus (16,620 hits vs risk 7,606). The durable lesson: most apparent edges from historical/technical narratives die net of costs and capacity; the audit is mandatory before any candidate is believed. (Consistent with the project's own kills: 5d reversal real-but-priced-out.)",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Net edge = gross edge − (turnover × 30bp per change). Capacity proxy per ticker = 21d median dollar volume (close × volume) from the daily panel; flag any candidate whose implied daily trade exceeds ~0.5% of that. Kill rule: if the gross-to-net gap exceeds the gross edge, the candidate is a gross-alpha illusion.",
+   "failure_conditions": "30bp is a stated budget, not a measured cost; audit understates reality in stressed/illiquid tapes where realized cost multiplies — the liquidity-stress flag (separate atom) should scale the assumed cost up.",
+   "horizon": "days (every rebalance); rule permanent",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "state_variable",
+   "name": "liquidity_stress_flag",
+   "content": "The corpus's keyword fingerprint shifts in crisis-adjacent years: liquidity_execution rises to the leading theme slot in 1987, 1988, 2004, 2007, 2019 and 2020 entries of the Economic corpus, while calm years lead with regime/constraints. Weak-form reading (all this source supports): crisis periods are described primarily as liquidity/execution phenomena, so the bot should carry an explicit daily liquidity-stress state variable and treat it as the danger channel, distinct from the return-based regime belief.",
+   "evidence": "Plausible",
+   "bot_binding": "Daily liquidity-stress z-score from the Dow-30 panel: cross-sectional median Amihud illiquidity = |daily return| / (close × volume), smoothed 21d, z-scored against a rolling 252d window; combine with cross-sectional median (high − low)/close range. Flag stress when z > 2. Free-series corroborator: VIX level vs its own 252d z-score.",
+   "failure_conditions": "The theme ordering is keyword frequency over Russian-language essays, not measured market data — this atom is a prior to be validated, not a fact; also Amihud on Dow-30 mega-caps is a blunt instrument (denominator huge, moves late).",
+   "horizon": "days-to-weeks (stress episodes)",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "mechanism",
+   "name": "macro_to_timing_technicals_to_selection_routing",
+   "content": "The two sub-corpora have opposite centers of gravity: the Economic corpus is regime-first (regime 14,295 > risk 11,792), the Technical corpus is execution-first (liquidity_execution 16,620 >> regime 5,254). The implied architecture rule, echoed by the 'map to CHRL layer responsibility: allocation, routing, stock selection, or execution' clause: macro/history inputs belong to the regime/allocation layer (market timing, exposure dial), while per-ticker technical inputs belong to selection/execution. Do not ask macro series to pick stocks.",
+   "evidence": "Plausible",
+   "bot_binding": "Routing audit computable from the panel + free series: monthly IC of a macro feature (e.g. 10y−3m slope change, VIX change, EBP) against (a) next-21d equal-weight Dow-30 index return and (b) next-21d cross-sectionally demeaned per-ticker returns. Macro features should show |IC_a| > 0 and IC_b ≈ 0; a macro feature wired into stock selection with IC_b ≈ 0 is misrouted.",
+   "failure_conditions": "Theme counts are indirect support only; the split can break for sector-concentrated macro shocks (e.g. rate shocks hitting financials differentially), where a macro series legitimately carries cross-sectional information.",
+   "horizon": "weeks-to-quarters (timing layer); audit monthly",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "guardrail",
+   "name": "bounded_controller_must_not_hide_weak_policy",
+   "content": "Recurrent clause on constraint-themed files (~100 entries): historical constraint lessons should be implemented as BOUNDED controller skills (caps, clamps, exposure limits), and each such bound carries a mandatory verification that it 'does not hide weak policy' — i.e. that apparent performance is not entirely the bound masking a policy that would lose money unconstrained.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "NOT_MEASURABLE_DAILY from market panels alone — it is a replay procedure: run policy-forward replay with the controller disabled on the same windows; if the full performance gap vs baseline comes from the bound (constrained ≈ constant-dial twin, unconstrained ≈ loss), classify the result as controller-value not policy-value. Daily monitorable half from bot logs only: controller clip rate (fraction of days the bound binds).",
+   "failure_conditions": "Skipping the disabled-controller twin lets a defensive clamp masquerade as alpha; conversely a bound that never binds (clip rate ~0) is dead weight and its 'lesson' unvalidated.",
+   "horizon": "per-candidate evaluation; rule permanent",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "guardrail",
+   "name": "text_provenance_gate_right_to_read",
+   "content": "The clause 'route through right-to-read/right-to-meaning provenance gate' appears on ~250 entries: any narrative, text, or historical-document input must pass a provenance gate (source registry, point-in-time validity) before it may become a feature or influence a decision. Narrative without provenance is treated as inadmissible, not merely weak.",
+   "evidence": "Established",
+   "bot_binding": "NOT_MEASURABLE_DAILY as a market series — it is data-admission governance. Concrete check: every panel feature must carry a point-in-time timestamp field and be reproducible from the archived source as-of that date; a feature whose values change on re-extraction fails the gate.",
+   "failure_conditions": "Established as project doctrine, not as measured market efficacy; the gate's cost is real (it excludes usable-but-unprovenanced signals) and that trade-off is asserted, not proven, by this source.",
+   "horizon": "permanent (data admission)",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "era_lesson",
+   "name": "multi_scale_world_picture_map",
+   "content": "The world-picture corpus the bot can draw on spans 1975–2027 at five nested horizons (1y, 3y, 9y, 18y, 52y; 492 files, ~3.0M words), with per-year essays at the base and progressively compressed syntheses above. The nesting itself is the intended memory architecture: fine-grained lessons roll up into coarse regime narratives, mirroring the bot's 5d/21d block representations rolling into regime beliefs. Note the coverage gaps recorded explicitly: no 2009 or 2022 single-year essay exists in the Economic 1-year folder.",
+   "evidence": "Established",
+   "bot_binding": "NOT_MEASURABLE_DAILY — corpus/memory topology, not a market quantity. Bindable to the memory store as an index schema: episodic entries keyed by (year, horizon-level), with the 2009 and 2022 gaps marked so retrieval never silently substitutes an adjacent year.",
+   "failure_conditions": "File counts verified from this index; the quality of the underlying essays is NOT established by this source, and years labeled 2026-2027 are forward-looking narrative, not history.",
+   "horizon": "years (memory architecture)",
+   "source": "experience/WORLD OF BEST TRADING BOT/_codex_work/hcs_year_by_year_notes_20260621.md (241KB, 3419 lines; verified: a mach"
+  },
+  {
+   "type": "state_variable",
+   "name": "market_weather_vector",
+   "content": "The root risk/cash layer should encode 'market weather' from breadth, stress, and regime information rather than any single price series; the group layer routes capital and the stock layer picks residual opportunity. The economic state engine's core groups are: inflation/real-rate regime, credit expansion/contraction, liquidity and funding stress, volatility/correlation regime, and breadth/concentration.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Daily 4-part weather vector: (1) breadth = fraction of Dow-30 tickers with close > their 50d MA, from the per-ticker panel; (2) cross-sectional dispersion = std of the 30 same-day returns; (3) vol term structure = ^VIX/^VIX3M close ratio (>1 = inverted/stressed); (4) credit stress = latest Fed EBP (monthly, forward-filled, flag staleness) plus 21d log return of the HYG/LQD price ratio from Yahoo.",
+   "horizon": "days-weeks (inputs update daily; regime meaning shifts over months)",
+   "failure_conditions": "Any single component used as a return forecast; breadth is degenerate on only 30 names during narrow-leadership markets; EBP is monthly and revised, so it is stale between releases.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "regime",
+   "name": "regime_gated_exposure_not_forecast",
+   "content": "Regime dependence means the risk layer must be state-dependent, not constant-high-cash, and must be penalized for hiding in cash during constructive regimes. The state engine's output is gates and risk-budget multipliers — it should gate and contextualize strategies, not mechanically forecast returns without validation.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Exposure dial as a monotone map of the existing 2-state P(bear) belief. Cash-shortcut audit, daily-computable: mean invested fraction on 'constructive' days (breadth > 0.6 AND ^VIX below its 252d median) must stay above a preset floor (e.g. 0.7); flag any policy that violates it.",
+   "horizon": "weeks-months (regime persistence scale)",
+   "failure_conditions": "One-regime overfit; belief lag at regime turns; silently converting the gate into a return predictor.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "mechanism",
+   "name": "promise_enforceability_mispricing",
+   "content": "The economy is a layered promise system (money, credit, earnings, collateral, policy backstops, liquidity, narratives); tradable opportunity appears when the market misprices the current ENFORCEABILITY of promises under changing constraints (rates, vol, liquidity, crowding, cost). A trade is valid only if the promise/constraint mismatch is observable at decision time and executable after costs. The source itself flags this theory as rejectable in three ways: it can become too broad (explains everything after the fact), it can hide narrative overfit, and a readable hierarchy is not automatically profitable.",
+   "evidence": "Speculative",
+   "bot_binding": "The general theory is not a daily signal; only named instantiations bind: refinancing-promise stress = Fed EBP (ffilled) plus 21d change of the HYG/IEF price ratio; liquidity/vol-promise stress = ^VIX/^VIX3M > 1.0; policy-rate constraint = 63d change in ^TNX. Every new promise-state hypothesis must name its own point-in-time observable before testing, else reject.",
+   "horizon": "weeks-quarters",
+   "failure_conditions": "Used without a pre-registered observable it degenerates to post-hoc storytelling; macro narrative can mask a weak stock-level signal.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "mechanism",
+   "name": "credit_amplification_late_derisking",
+   "content": "Credit and leverage amplify shocks (Schularick-Taylor anchor): credit stress weakens fragile balance sheets before earnings reflect it. The CHRL translation is a risk-break trigger plus drawdown control, and the named canonical failure is LATE de-risking.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "De-risking trigger, daily-computable: (Fed EBP latest value above the 75th percentile of its published history) OR (21d log return of HYG/IEF < -3%); response = cap the exposure dial, never raise it. EBP monthly staleness must be flagged as data-age in the state.",
+   "horizon": "weeks-months (credit-cycle turns)",
+   "failure_conditions": "2022-style rate-driven selloffs move HYG and IEF together, muting the ratio; EBP revisions; trigger fires late in fast crashes — it is a cycle tool, not a crash detector.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "guardrail",
+   "name": "executability_before_alpha",
+   "content": "Liquidity is endogenous and execution is part of alpha: an edge is real only after fees, slippage, impact, capacity, and turnover. The named failure to avoid is high gross alpha destroyed by costs, so turnover gates and cost stress are mandatory before any promotion.",
+   "evidence": "Established",
+   "bot_binding": "Net edge = gross edge - (daily turnover x cost-per-change, project spec 30bp/change); daily turnover = 0.5 x sum|delta w| from executed weights. Per-ticker liquidity proxy = 21d mean Amihud illiquidity |return|/(close x volume) from the panel. Acceptance requires net-of-cost outperformance vs EW Dow-30 buy-and-hold AND vs T-bill cash (^IRX accrued).",
+   "horizon": "all horizons; binds at every evaluation",
+   "failure_conditions": "Cost model too optimistic; true capacity and impact are not measurable from daily OHLCV alone — treat capacity claims as unverified.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "decay_clock",
+   "name": "alpha_half_life_vs_execution_delay",
+   "content": "Forecast quality is only valuable when the alpha half-life exceeds execution delay plus cost recovery; open crowding reduces future executable alpha. A signal that dies at a 1-day lag is not tradable in this bot's daily-close pipeline.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Half-life curve computable on the panel: measure the signal's edge (next-h return spread or IC) at execution lags 0, 1, 2, 5 days; require the 1-day-lag edge to still clear the cost hurdle. Crowding itself has no daily OHLCV proxy — only the half-life measurement binds.",
+   "horizon": "days (the lag test); signal lifetimes of months-years",
+   "failure_conditions": "Half-life estimates are noisy on short samples; a signal can pass the lag test in one regime and fail in another.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "feature_maximalism_null",
+   "content": "The RL-Based Feature Ablation branch closed as a negative result: adding more feature families, stress reward reweighting, action penalties, and latent/action interventions did NOT reliably improve OOS trading. The bottleneck was likely model structure/stability, not feature quantity; keep compact macro context instead of feature soup, and treat the failed branch as a constraint on future search.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Binds to the evaluation protocol, computable on the panel: any candidate feature family must beat an obs-dimension-matched noise-placebo twin on the frozen OOS window; reject otherwise. No daily market series carries this atom — it prunes the hypothesis space.",
+   "horizon": "research cadence (weeks per experiment)",
+   "failure_conditions": "Over-generalizing: the null is local to this stack and daily data; a genuinely new information source (text, intraday) is outside its scope.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "generic_sentiment_null",
+   "content": "Raw/flat text features HURT the older flat PPO; only compact, semantically aligned text groups helped CHRL, modestly, and the best group was forward-looking/earnings (earnings_pressure, numeric_evidence_density, signal_confidence). Macro text belongs only in risk/regime gates, never as direct stock alpha; results remain fold/seed-limited and some text variants worsen drawdown.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "NOT_MEASURABLE_DAILY — requires the point-in-time text corpus, provenance fields, and LLM extraction pipeline; nothing in the OHLCV panels or free public series carries these features. Binds only as a routing rule if/when text re-enters: company text to stock layer, macro text to the risk gate, quality scores to reliability gates.",
+   "horizon": "n/a (architecture rule)",
+   "failure_conditions": "Treating the modest CHRL text lift as established alpha; it never passed multi-fold, multi-seed validation.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "guardrail",
+   "name": "search_aware_validation_firewall",
+   "content": "Every experiment consumes a trial budget and the best backtest among many trials is suspicious by default (White reality check, PBO). Because the self-evolving loop multiplies tested ideas, the validation firewall must get STRONGER as the loop gets faster. Reject gains concentrated in one fold, one regime, one ticker, or one lucky event, and reject improvements explained only by higher risk or lower cash.",
+   "evidence": "Established",
+   "bot_binding": "Computable battery on the panel: (a) mandatory baselines = EW Dow-30 buy-and-hold, no-trade, and ^IRX-accrued cash; (b) placebo distribution from >=100 date-shuffled/sign-flipped runs of the same rule, require candidate z above the placebo spread; (c) trial-count ledger feeding a deflated-Sharpe correction; (d) frozen holdout touched once.",
+   "horizon": "research cadence; permanent",
+   "failure_conditions": "Firewall weaker than the proposal rate; evaluator itself edited during a strategy loop (explicitly forbidden); placebos not exposure-matched (the project's own z_dsd-degeneracy lesson).",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "guardrail",
+   "name": "independent_risk_shell",
+   "content": "Risk authority must live OUTSIDE the alpha engine: hard deterministic limits (max order, position, gross exposure, daily loss, drawdown, turnover, stale-data tolerance, live/backtest divergence) with graded actions (throttle, reduce, block, safe-flat, rollback). No LLM/RL module gets autonomous capital access, self-modifying trading code, or unlogged model changes without these guardrails (SEC 15c3-5 anchor).",
+   "evidence": "Established",
+   "bot_binding": "All daily-computable from the executed book plus the panel: running drawdown of book equity; daily P&L; daily turnover = 0.5 x sum|delta w|; stale-data = calendar days since the last panel row (block if above tolerance); live/backtest divergence = tracking difference between the paper book and a frozen-replay book on identical dates.",
+   "horizon": "daily, permanent",
+   "failure_conditions": "Shell parameters tunable by the self-improvement loop (must be constitution-frozen); divergence check meaningless before a paper track exists.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "mechanism",
+   "name": "residual_selection_not_stories",
+   "content": "Technology/narrative truth is not investment truth: new cash-flow possibility does not automatically become shareholder capture (example: AI capex pays infrastructure suppliers before adopters capture productivity). The stock layer must therefore encode RESIDUAL opportunity — separating general market movement from idiosyncratic potential — and must not buy merely because the whole market bounced.",
+   "evidence": "Plausible",
+   "bot_binding": "Per-ticker residual return = r_i minus EW Dow-30 return, daily; 21d residual momentum and residual vol per ticker from the panel; audit = stock-layer signal must have low correlation with the market factor. The AI-capex-specific claim is NOT measurable from the Dow-30 OHLCV panel (no capex/fundamental data).",
+   "horizon": "weeks-months",
+   "failure_conditions": "This bot is empirically a cash-timer with a near-equal-weight book, so selection value is unproven here; residuals on 30 names are noisy and sector-confounded.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "era_lesson",
+   "name": "backstop_calm_not_permanent",
+   "content": "Institutions and policy backstops reshape the risk distribution and can manufacture calm regimes that are rescue-driven rather than structural; the named failure is mistaking rescue for permanent calm. Era anchors (Great Inflation, BIS 'Is Price Stability Enough', credit-booms-gone-bust): long price-stable calm can incubate leverage that later amplifies the bust.",
+   "evidence": "Plausible",
+   "bot_binding": "Calm-with-stress divergence flag, daily-computable: (^VIX below its 252d 25th percentile) AND (Fed EBP above its historical 75th percentile OR curve proxy ^TNX minus ^IRX < 0). Emit as a scenario WARNING that tightens risk budget — never as a return forecast.",
+   "horizon": "months-years (slow buildup, fast resolution)",
+   "failure_conditions": "The flag can stay on for years without an event (inversion 2022-23); using it to time entries/exits rather than to size risk budgets.",
+   "source": "experience/WORLD OF BEST TRADING BOT/{F_SELF_EVOLVING_TRADING_BOT_METHODOLOGY.md, CHRL_01_BEST_WORLD_PICTURE_ECONOMIC.md"
+  },
+  {
+   "type": "guardrail",
+   "name": "promotion_discipline_creed",
+   "content": "The previous compression's best distillation, worth keeping verbatim: 'Regime before rule. Timing before signal. Costs before alpha. Liquidity before confidence. Failure conditions before promotion.' Every candidate rule is evaluated in that order, and a rule failing an earlier step never reaches a later one.",
+   "evidence": "Established",
+   "bot_binding": "Enforce as computable gate checks on any backtest from the daily panels: (1) per-regime performance split using the bot's 2-state belief P(bear); (2) signal-lag audit (signal computed at close t, executed t+1 only); (3) net return after turnover x 30bp per change; (4) performance conditioned on a liquidity state (21d Amihud z of traded names); (5) a written failure-condition list filed before promotion.",
+   "failure_conditions": "Becomes ritual if the checks run but never veto. A rule re-tuned on the same window after failing costs is a NEW rule requiring fresh out-of-window validation.",
+   "horizon": "evaluation-time, applies at all trading horizons",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "regime",
+   "name": "calm_leverage_fragility_loop",
+   "content": "The corpus's master cycle: stable regime -> lower perceived risk -> spread compression / leverage / crowding -> shock -> liquidity, funding, and narrative break -> forced adjustment -> new backstop -> risk migrates elsewhere. Long calm is a fragility accumulator, not a safety certificate.",
+   "evidence": "Plausible",
+   "bot_binding": "Calm-spell clock: consecutive days with (a) 21d realized vol of the equal-weight Dow-30 book below its trailing 756d median AND (b) VIX close below its trailing 756d 25th percentile. Use only as a confidence-downgrade input on long-exposure/carry rules, never as a standalone short signal.",
+   "failure_conditions": "Calm spells extend for years (2013-14, 2017); trading the clock as timing loses to carry. Duration/age clocks have repeatedly failed as triggers — the mechanism is real, its timing is not predictable.",
+   "horizon": "months-quarters",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "mechanism",
+   "name": "stress_exit_correlation_spike",
+   "content": "Liquidity is endogenous: a market looks liquid until many participants need the same exit at the same time. In that state forced selling and funding mechanics dominate fundamentals — cross-sectional structure collapses into one market factor and name-level information temporarily stops pricing.",
+   "evidence": "Established",
+   "bot_binding": "Two proxies from the per-ticker panel: (1) 21d mean pairwise correlation of Dow-30 daily returns (equivalently the variance ratio var(EW book return)/mean var(name returns)); (2) same-day down-breadth = fraction of Dow-30 names with return < -1.5 x their own 63d sigma. Spikes mark the forced-flow state: gate OFF stock-selection rules and hand control to the cash/exposure dial.",
+   "failure_conditions": "Mostly contemporaneous, not leading — by the time correlation spikes the first leg has happened. State descriptor and risk gate only, never an entry signal.",
+   "horizon": "days-weeks",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "state_variable",
+   "name": "credit_is_access_not_price",
+   "content": "Credit amplification: credit is not only a spread level but access, collateral, maturity, refinancing need, and trust. Credit stress tends to lead equity stress at monthly horizons because refinancing walls bind before earnings do; deteriorating credit under calm equity vol is a divergence warning.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Daily proxy: 21d change of the HYG/IEF close ratio (Yahoo ETFs) as the credit-spread stand-in; use HYG/LQD to cancel part of the duration component. Slow proxy: the Fed's monthly EBP series with >=1-month publication lag (already present in the bot's panel).",
+   "failure_conditions": "HYG/IEF mixes duration with credit — a pure rate shock (2022-style) moves it without credit stress. EBP is monthly and revised; naive daily credit gates on equities have failed kill tests — treat as state input, not signal.",
+   "horizon": "months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "era_lesson",
+   "name": "inflation_rate_regime_resets_meaning",
+   "content": "1975-1992 lesson: inflation and disinflation change the meaning of valuation, nominal profits, leverage, and historical averages — coefficients estimated in one inflation/rate regime mislead in another. Money is a credibility contract; while credibility is being re-priced, real rates and refinancing dominate price formation.",
+   "evidence": "Established",
+   "bot_binding": "Rate-shock flag from free daily series: 252d change of the 10y yield (^TNX) > +150bp, OR 63d realized vol of daily yield changes in its top trailing-3y decile. When flagged, discount any rule whose calibration window contains no flagged period, and report per-flag performance separately.",
+   "failure_conditions": "The bot's usable daily history contains essentially ONE inflation-shock episode (2021-2023), so per-flag statistics are underpowered — never fit thresholds to that single episode.",
+   "horizon": "quarters-years",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "era_lesson",
+   "name": "tech_truth_is_not_investment_truth",
+   "content": "1993-2010 and the AI era: a real innovation can be overcapitalized, overfinanced, or captured by suppliers, customers, or labor rather than equity holders — adoption, productivity, monetization, and shareholder capture are separate steps. Growth, volume, and recent success are not enough; ask who captures the surplus and who funds the risk.",
+   "evidence": "Established",
+   "bot_binding": "Mostly NOT_MEASURABLE_DAILY (narrative/fundamental layer). Weak crowding descriptor only: z-score of the 252d relative performance of the Dow-30 tech subset (AAPL, MSFT, CSCO, IBM, INTC, CRM) vs the equal-weight remainder — a crowding state marker, explicitly NOT a short signal (proxy itself is Speculative).",
+   "failure_conditions": "Relative-strength stretch persisted for years (2015-2021, 2023-2024 megacap runs); trimming or shorting on stretch alone lost repeatedly.",
+   "horizon": "years",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "forbidden_inference_list",
+   "content": "The compression's second-best block: the bot must never infer that low volatility means low risk, low CPI means financial stability, risk transfer means risk elimination, a factor backtest is a law, a behavioral bias is automatically tradeable alpha, gross return suffices without net-of-cost, a narrative is alpha without a market-structure carrier, or that one instrument/regime pocket justifies promotion.",
+   "evidence": "Established",
+   "bot_binding": "Three items bind as computable vetoes: (1) the risk state must combine vol (VIX or realized) with credit (HYG/IEF 21d change) and breadth (fraction of names above their 50d MA) — never vol alone; (2) the bar is net return at turnover x 30bp, never gross; (3) promotion requires breadth: positive contribution in a majority of Dow-30 names or in both regime states, computed from the per-ticker panel.",
+   "failure_conditions": "The list prunes hypotheses; it does not generate them. Passing all vetoes is necessary, not sufficient.",
+   "horizon": "all horizons (evaluation-time)",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "guardrail",
+   "name": "corpus_provenance_holes",
+   "content": "The inventory proves holes the previous compression only half-declared: there is NO 1-year report for 2009 or 2022, the 2008 file is a 2,702-word stub (about one-third normal length), 1993-1996 and 2012-2013 have duplicate/alternative reports, and 2026-2027 material is scenario, not realized history. Any corpus-derived memory of 2008-09 or 2022 — the two most instructive crash episodes for the bot's dev windows — comes only from the coarser 3/9/18-year summary layers.",
+   "evidence": "Established",
+   "bot_binding": "NOT_MEASURABLE_DAILY — a provenance rule for the memory store: tag corpus-derived semantic memories dated 2008, 2009, 2022, 2026, 2027 as low-provenance or scenario, and never let them outweigh the bot's own panel data, which DOES cover 2022 with real prices.",
+   "failure_conditions": "Untagged, the corpus's weakest years get equal weight with its strongest, and scenario text about 2027 can leak into the world model as fact.",
+   "horizon": "evaluation-time",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "hypothesis_bank_mistargeted",
+   "content": "The previous compression's entire actionable half (HYP-EWP-001..010) is written for Chinese commodity futures — open interest, roll boundaries, day/night sessions, next-open execution. The current bot's world model (daily OHLCV equities) cannot measure open interest, rolls, or sessions at all, so six of ten hypotheses are unbindable as written; this instrument mistargeting is the core reason the compression was judged insufficient.",
+   "evidence": "Established",
+   "bot_binding": "Three hypotheses survive translation and bind: HYP-001 regime-gated trend -> gate trend rules on P(bear) plus breadth (fraction of names above 50d MA); HYP-004 family breadth -> require name-level trend to agree with sector-bucket breadth (Dow-30 sectors / csi500 industry groups from the per-ticker panel); HYP-008 cost-first sparsification -> hysteresis bands + minimum holding period, scored as turnover reduction at matched gross signal. HYP-003/006/007 (open interest, sessions, rolls) = NOT_MEASURABLE_DAILY on this data.",
+   "failure_conditions": "If commodity-futures data ever enters the world model, the six parked hypotheses re-open — park them in memory, do not delete them.",
+   "horizon": "evaluation-time",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "mechanism",
+   "name": "regime_dependence_gate",
+   "content": "Regime dependence is the corpus's #1 durable mechanism: old coefficients break when inflation, rates, policy reaction functions, liquidity, or market structure change, so no rule earns trust from one macro regime. The operational corollary is to condition rules on an observable regime state rather than hunting for regime-free rules.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Bind regime state as a small daily vector: [P(bear) from the 2-state belief; fraction of Dow-30 names above their 50d MA; 21d realized-vol percentile of the EW book vs trailing 756d; VIX/VIX3M close ratio]. Every rule's scorecard must show performance per quartile of this vector.",
+   "failure_conditions": "The corpus's own stated failure mode for HYP-001: a regime gate can look good purely by trading less and avoiding costs — always compare against a no-trade baseline and an exposure-matched unconditioned twin.",
+   "horizon": "weeks-months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "decay_clock",
+   "name": "rule_coefficient_drift_monitor",
+   "content": "Because backstops re-route risk ('risk migrates elsewhere' closes the corpus's master loop), every calibrated rule carries an implicit expiry, and failed rules must be preserved because negative knowledge narrows the future hypothesis space. The previous compression stated this but attached no clock — this atom adds one.",
+   "evidence": "Established",
+   "bot_binding": "Drift monitor from the panels: for each live rule, rolling 252d sign-consistency and IC of its signal vs realized forward returns, compared with calibration-window values; alarm when the sign flips or |IC| halves for two consecutive quarters. Killed rules go into the semantic memory store with their failure signature, never deleted.",
+   "failure_conditions": "A 252d-window alarm fires 1-2 years after decay begins — it bounds losses, it does not prevent them. An alarm during a single regime spike is not decay; check the regime vector first.",
+   "horizon": "quarters-years",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "state_variable",
+   "name": "daily_liquidity_stress_gauge",
+   "content": "Behavior matters only when structural: narrative and herding become investable only when carried by leverage, forced selling, margin, or mandate constraints. The daily-visible shadow of those carriers is abnormal volume attached to abnormal down-moves, and constrained-arbitrage pockets (where mean-reversion can work) exist mainly in that state.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "From per-ticker OHLCV: (1) Amihud illiquidity |ret|/(close x volume), 21d mean, z-scored per name vs trailing 252d, aggregated as the panel median; (2) forced-flow day flag: EW book return < -1.5 x its 63d sigma AND panel-median volume > 1.5 x its 63d median. Elevated readings license mean-reversion rules; normal readings do not.",
+   "failure_conditions": "Volume spikes also come from index rebalances, earnings, and option expiries with zero stress content; csi500 volume semantics (retail share, price limits) differ from Dow-30 — calibrate per panel, never pool.",
+   "horizon": "days-weeks",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/ECONOMIC_WORLD_P"
+  },
+  {
+   "type": "regime",
+   "name": "calm_breeds_fragility",
+   "content": "The single most recurrent claim across the 1985/2005/2006/2007/2017/2018 reports: sustained calm with compressed risk premia is when fragility accumulates ('stability -> leverage drift -> crisis'; 'the most dangerous assets have smooth returns'; 'treat low volatility as a possible warning sign'). Low vol and tight spreads are not an all-clear — they shift the return distribution toward a fatter left tail while carrying no timing information.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "calm-spell counter = consecutive trading days with ^VIX close below its trailing 252d median, computed daily; secondary confirmation = HYG/IEF 63d total-return ratio within 1% of its 252d high. Spells > 60d should raise the bot's tail-risk prior (e.g., widen the drawdown budget used in position sizing), never increase exposure.",
+   "failure_conditions": "Calm spells can run for years (2004-06, 2012-14, 2016-17); using this as a short/de-risk timing signal loses carry badly. It is a distribution-shape prior, not a trigger.",
+   "horizon": "months to quarters",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "mechanism",
+   "name": "intermediary_deleveraging_spiral",
+   "content": "Adrian-Shin / Brunnermeier line (2007, 2010, 2020, 2025 reports): intermediary balance sheets are procyclical — price falls raise haircuts/margins, forcing sales that push prices down further; in these episodes the equity discount rate moves because of plumbing, not earnings revisions. The 2025 report stresses this now runs through NBFI/private credit/repo, so small shocks can produce disproportionately large moves, hitting long-duration equities and leveraged cyclicals hardest.",
+   "evidence": "Established",
+   "bot_binding": "plumbing-stress flag = (SPY 5d return < -3%) AND (IEF 5d return <= 0, i.e., Treasuries NOT rallying) AND (fraction of Dow-30 names down on the day > 0.9). The joint stock+Treasury selloff with near-total downside breadth is the daily-observable fingerprint of forced deleveraging (March 2020 pattern) vs ordinary risk-off (where IEF rallies).",
+   "failure_conditions": "Rate-shock selloffs (2022) also produce joint stock+bond declines without a funding spiral — require a concurrent VIX jump (VIX 5d change > +8 pts) to separate the two. ETF proxies only exist post-2007.",
+   "horizon": "days to weeks",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "mechanism",
+   "name": "policy_backstop_reflex",
+   "content": "The 2020 report's core mechanism: forced-selling dislocations plus a credible policy backstop -> tail risk truncated -> asset prices recover far faster than the real economy ('policy backstop -> lower tail risk -> faster asset-price recovery than real-economy recovery'). The dislocation low is a liquidity/flow event, not a rational solvency repricing, so it mean-reverts once the backstop lands.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "backstop-recovery state = ^VIX closed above 40 within the last 60 trading days AND has since closed back below 30, while the Dow-30 equal-weight index is still > 15% below its 252d high. The VIX retreat is the observable trace of an effective backstop (the bot cannot see policy directly). Enter/extend exposure in this state rather than waiting for price confirmation.",
+   "failure_conditions": "n is small (2009, 2020). Fails in grind-down bears with no acute spike (2000-02) and when inflation constrains the backstop (2022 — VIX never sustained >40, no reflex fired). Do not fire on VIX spikes without the >15%-drawdown condition.",
+   "horizon": "weeks to months",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "state_variable",
+   "name": "stock_bond_correlation_regime",
+   "content": "The 2023 report makes stock-bond correlation an explicit regime variable: 'inflation uncertainty -> unstable stock-bond diversification', 'assume diversification is regime-dependent', and it names the return of persistently negative correlation as a fact that would weaken its own narrative. Inflation-dominant regimes flip the correlation positive and kill the bond hedge — exactly what the project's own P-1 kill found for 2022.",
+   "evidence": "Established",
+   "bot_binding": "rolling 63d Pearson correlation of SPY vs IEF daily close-to-close returns (both free via Yahoo), computed daily. corr > 0 = inflation-dominant regime (bonds do not hedge; cash is the only hedge asset); corr < -0.2 = growth-shock regime (Treasury rallies confirm equity risk-off). Feed as a third input alongside the existing 2-state belief.",
+   "failure_conditions": "63d estimate is noisy and lags regime turns by ~1-2 months; mid-range values (-0.2 to 0) are uninformative.",
+   "horizon": "months to quarters",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "state_variable",
+   "name": "credit_conditions_primary_input",
+   "content": "'Treat credit conditions as a primary valuation input' (2014) and 'compressed spreads are warning signals / separate credit growth from credit quality' (2007) recur across nearly every year: credit is the cycle amplifier (Schularick-Taylor, Jorda et al.), and spread dynamics lead equity trouble. The 2024 report adds that credit migration to opaque private markets delays repricing, making the observable spread series move late but violently.",
+   "evidence": "Established",
+   "bot_binding": "two-speed construction: (a) slow = Fed EBP level and its 3m change (monthly, forward-filled daily — already a PK-survivor in the project's panel v2); (b) fast = 21d total-return spread HYG minus IEF (Yahoo, daily). Deteriorating-credit flag = HYG-IEF 21d spread in its bottom trailing-3y quintile OR EBP 3m change > +0.3 while equities are flat/up over the same 21d (the divergence, not the level, is the signal).",
+   "failure_conditions": "HYG-IEF mixes duration and flow effects and exists only post-2007; EBP is monthly and revised. Spread widening that merely accompanies an equity selloff adds no information — only the lead/divergence does.",
+   "horizon": "weeks to quarters",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "mechanism",
+   "name": "extrapolation_momentum_overshoot",
+   "content": "Extrapolative/diagnostic expectations plus limited attention (2014 p514, 2017 Bordalo-Gennaioli-Shleifer, 2018) make momentum and bubble-overshoot coexist: gradual news is under-incorporated (drift) while spectacular narratives overshoot and reverse. The named indicators are price acceleration without comparable cash-flow improvement, flows, turnover, and media intensity; the mechanism breaks when hard information arrives fast or arbitrage capital is abundant.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "per-ticker from the OHLCV panel: acceleration = (21d return) minus (prior 21d return); crowding proxy = z-score of 21d average dollar volume vs trailing 252d. Overshoot-risk (reversal-prone) = acceleration in top decile AND volume z > 2; steady-trend (drift-prone) = positive 21d return with acceleration near 0 and normal volume. Media/flows/fundamentals legs are NOT in the panel — volume z is the only crowding proxy available.",
+   "failure_conditions": "The project's own broad-universe tests found plain momentum dead and reversal weak-net-of-cost on recent US daily data — so this atom is only actionable in its conditional form (acceleration x volume), and must be validated against exposure-matched twins before deployment, per the project's trim-rule lesson.",
+   "horizon": "weeks to months for drift; days to weeks for post-overshoot reversal",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "guardrail",
+   "name": "no_monocausal_gating",
+   "content": "Recurring negative knowledge (2012: 'models without financial frictions are dangerous'; 2015/2016: 'avoid monocausal narratives'; 2005: use multiple models as 'orthogonal checks' that argue with each other). No single indicator family — vol, credit, or breadth — is a reliable regime gate on its own; each has documented false-positive modes.",
+   "evidence": "Established",
+   "bot_binding": "risk-off regime transitions require >= 2 of 3 independent families to confirm within a 5-day window: (a) vol: ^VIX above its trailing 252d 80th percentile OR ^VIX/^VIX3M > 1.0; (b) credit: HYG-IEF 21d spread in bottom trailing-3y quintile OR EBP 3m rise; (c) breadth: fraction of Dow-30 names above their own 50d MA < 0.40. All three computable daily from the existing panel + free series.",
+   "failure_conditions": "The 2-of-3 rule trades speed for reliability — it will lag single-day crashes (Feb 2018) by 1-3 days; accept that cost rather than loosening to 1-of-3.",
+   "horizon": "any",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "state_variable",
+   "name": "breadth_over_index_level",
+   "content": "The pre-2027 report's principle 'monitor breadth, not only index level' plus the 2019-2026 superstar-concentration mechanism ('intangible scale + concentration -> margin dispersion'): the index can make highs on a few names while the median stock deteriorates, which is a fragility signature, not strength. Concentration means index-level series increasingly mismeasure the market's internal state.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "daily from the per-ticker Dow-30 panel: breadth = fraction of names above their own 50d MA; divergence flag = equal-weight Dow-30 makes a 252d closing high while breadth < 0.6, OR (equal-weight 21d return) minus (best-performing-quintile-weighted 21d return) < -2%. Directly composable with the project's existing new-high-arming lead.",
+   "failure_conditions": "Dow-30 is only 30 names — breadth is coarse (steps of 1/30) and the Dow lacks the mega-cap concentration the mechanism describes; the csi500 panel is the better substrate for this atom. Formal predictive evidence for breadth divergence is mixed.",
+   "horizon": "weeks to months",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "state_variable",
+   "name": "rate_equity_shock_quadrant",
+   "content": "'Low rates are not low risk' (2021 p602, 2016, 2005 saving-glut) and 'r<g does not make debt free' (2019 p514): the LEVEL of rates carries no risk signal because low rates can reflect glut, overhang, or demographics while fragility rises. What is informative daily is the joint SIGN of rate and equity moves, which decomposes shocks: yields up + stocks down = inflation/rate shock (bonds won't hedge); yields down + stocks down = growth/flight shock (bonds hedge, credit is the risk).",
+   "evidence": "Established",
+   "bot_binding": "quadrant = (sign of 21d change in ^TNX, sign of 21d SPY return), computed daily from free Yahoo series. Route the regime response on the quadrant: (up, down) -> reduce duration-sensitive exposure, treat IEF as non-hedging; (down, down) -> classic risk-off, credit flags dominate. Never use the ^TNX level itself as a risk gauge.",
+   "failure_conditions": "21d windows mix overlapping shocks; quadrant near zero on either axis is noise — require |Δ^TNX 21d| > 20bp and |SPY 21d| > 2% before classifying.",
+   "horizon": "weeks",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "valuation_has_no_daily_timing_power",
+   "content": "The 2000 report's principle — 'use valuation for horizon and margin-of-safety, not for precise timing' — is stated as the correct reading of the dot-com peak: valuation-scale signals (CAPE, DY) predict multi-year returns but are useless for daily/weekly decisions, and shorting on valuation alone dies before it pays (limits to arbitrage, 1994/1995 reports). The project's own W3 CAPE falsification independently confirms.",
+   "evidence": "Established",
+   "bot_binding": "NOT_MEASURABLE_DAILY — the OHLCV panel carries no earnings/dividend fundamentals, and the honest lesson is that even if imported (e.g., frozen Shiller data), valuation must NOT be bound to any daily action; it belongs only in multi-year capital-allocation layers (the personalization track), never in the daily bot's decision loop.",
+   "failure_conditions": "n/a — this atom's job is to block a class of bindings, not to fire.",
+   "horizon": "years (hence out of the daily bot's scope)",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "era_lesson",
+   "name": "regimes_not_average_coefficients",
+   "content": "The 1977 Lucas-critique lesson, restated as investor principle #1 ('analyze regimes, not average coefficients') and echoed by the 1975-77 synthesis: macro-financial relationships are not timeless constants — they depend on expectations, policy rules, contracts, and financial structure, so any coefficient estimated across regimes will break out-of-regime. This is the deepest justification for the bot's regime-belief architecture and for refusing pooled-sample signal estimates.",
+   "evidence": "Established",
+   "bot_binding": "a procedure, fully computable: estimate and evaluate every candidate signal separately within each state of the bot's existing 2-state regime belief (and within the stock-bond-correlation regime above); a signal whose sign flips between regime states is regime-dependent information, not noise — pooled estimation would average it to zero. Ship only regime-conditioned rules.",
+   "failure_conditions": "Conditioning halves the effective sample per state — on short histories this trades bias for variance; require each within-regime estimate to clear its own significance bar, not the pooled one.",
+   "horizon": "all",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "decay_clock",
+   "name": "era_contingency_of_learned_rules",
+   "content": "The 2021 report's self-critique (p644) is a general decay law: lessons learned inside an exceptional era (pandemic plumbing, ZIRP) may be contingent on that era, not durable — 'part of the synthesis would have to be weakened' if the old structure returns. Rules trained wholly inside one rate/inflation era (e.g., 2010-2021 ZIRP, where bonds hedged and dips mean-reverted fast) carry an expiry that triggers when the era variable flips, as 2022 demonstrated.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "tag every learned rule with its training-era bucket using ^IRX (3m T-bill, free Yahoo, already used in the project's E-23 eye set): ZIRP era = ^IRX < 0.5%, positive-rate era = ^IRX > 2.0%, transition otherwise. Decay flag fires when the live bucket differs from the training bucket for > 63 consecutive trading days -> quarantine the rule (shadow-book it) until re-certified in the new era through the frozen gate.",
+   "failure_conditions": "^IRX is a crude era proxy (misses inflation-vs-real decomposition); bucket thresholds are heuristic; a rule can also decay within an era (crowding), which this clock does not detect.",
+   "horizon": "quarters to years",
+   "source": "experience/Economic World Picture/_analysis/economic_world_picture_digest_by_report.md — MIDDLE THIRD (lines ~362-723): "
+  },
+  {
+   "type": "guardrail",
+   "name": "regime_before_backtest",
+   "content": "The synthesis's core epistemic law: policy-regime shifts change agent behavior and therefore break historical coefficients (master mechanism: policy_regime_shift -> adaptive_behavior -> broken_backtests; regime dependence tagged High confidence). Any rule validated inside one regime silently assumes that regime's continuation, so regime awareness must precede any backtest read.",
+   "evidence": "Established",
+   "bot_binding": "Label every training/eval day with a daily-computable regime tuple: (a) sign of the 63d rolling correlation between Dow-30 equal-weight daily return and IEF daily return (Yahoo), (b) 10y real yield above/below zero (FRED DFII10, daily), (c) the bot's own 2-state P(bear). Candidate rules must be evaluated within each regime cell and either survive across cells or ship explicitly regime-gated.",
+   "failure_conditions": "Regime labels are themselves estimates (63d correlation is noisy — use +/-0.2 hysteresis); slicing by too many regime axes shrinks samples and invites multiplicity, so cap the tuple at these three axes.",
+   "horizon": "regimes last years; enforcement is daily",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "regime",
+   "name": "stock_bond_correlation_regime_1",
+   "content": "The largest 52-year reversal is inflation-dominant vs demand-shock regimes, and its market-revealed signature is the sign of stock-bond correlation: positive under inflation constraint (1970s-early 90s, 2022 shock) so duration does not hedge equities and cash is the hedge; negative under disinflationary demand shocks (late 1990s-2010s) so duration hedges. The project independently rediscovered this in P-1 (2022 broke the stock-bond hedge).",
+   "evidence": "Established",
+   "bot_binding": "63d rolling correlation of Dow-30 EW daily return vs IEF daily return (Yahoo). Flag inflation-constrained when corr > +0.2, demand-shock regime when corr < -0.2, hysteresis between. In the inflation-constrained state, any hedge/diversifier sleeve must be cash/T-bills (^IRX-accruing, as the executor already does), never duration.",
+   "failure_conditions": "Slow variable — roughly 1-2 sign flips per decade, and the 63d estimator lags true turns by 1-2 months. US-scope only; does not transfer to csi500 (project's E-09 precedent: live US macro does not lift csi500).",
+   "horizon": "months-years",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "state_variable",
+   "name": "backstop_credibility_state",
+   "content": "The crisis -> backstop -> moral-hazard cycle means dip-buying pays only while policy is free to rescue; the pandemic aftermath shows backstops run into inflation, fiscal, and legitimacy constraints. When inflation expectations are rising the central bank cannot backstop drawdowns and stress does not mean-revert (2022); when expectations are anchored, spikes revert fast (2010s, March 2020).",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Two daily proxies: (a) VIX/VIX3M ratio — ratio > 1.0 marks a stress-test state, and days-until-renormalization is the backstop-credibility clock (renormalize within ~10 trading days = backstopped dip; persist > ~20 days = backstop credibility itself in question); (b) 63d change in the 10y breakeven (FRED T10YIE, daily) — positive breakeven drift concurrent with rising 10y yields (^TNX) = policy-constrained state: suppress buy-the-dip responses.",
+   "failure_conditions": "Small sample of true backstop tests; the term-structure clock also inverts on non-policy shocks (single events, elections); breakevens embed liquidity premia in stress (March 2020 breakevens collapsed for liquidity reasons, not expectations).",
+   "horizon": "days-weeks for the VIX clock; months for the breakeven drift",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "mechanism",
+   "name": "credit_price_vs_credit_quantity",
+   "content": "Credit is causal, not background (credit_boom -> collateral_feedback -> leverage -> fragility), and funding quality deteriorates before earnings — read liabilities before earnings near turns. But the validated long-horizon crisis predictor (Schularick-Taylor) is credit QUANTITY (credit/GDP growth, quarterly, lagged), while what is observable daily is only the PRICE of credit risk (spreads) — a faster but more coincident object; the two must not be conflated.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Daily credit-stress dial = z-score (vs trailing 1y) of the 21d return spread HYG minus IEF (Yahoo), combined with the latest Fed EBP print (monthly, ~1-month lag; already PK-passed in this project). Use as a monotone exposure de-scaler. The Schularick-Taylor credit/GDP gap itself: NOT_MEASURABLE_DAILY (BIS quarterly, heavily revised) — do not fake the quantity channel with spread proxies.",
+   "failure_conditions": "Spreads can stay compressed right up to the break (2007); HYG-IEF nets duration but not equity beta, so it partially re-encodes the equity signal; EBP staleness up to ~6 weeks.",
+   "horizon": "weeks-months",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "calm_accumulates_fragility",
+   "content": "The recurring cycle is stability -> spread compression -> leverage -> weak underwriting -> fragility: perceived stability lowers risk premia and invites leverage, making the system path-dependent, so low volatility is evidence of risk accumulation as much as of safety (White 2006 and BoE 2007 warned pre-crisis). Negative-knowledge form: low volatility is not low risk, and low CPI is not financial stability.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Calm-spell counter: consecutive trading days with VIX below its trailing 2y median AND 21d realized vol of Dow-30 EW returns below its own 2y median. Bind as a CONSTRAINT, not a signal: audit that no rule makes exposure an increasing function of spell length, and do not relax the drawdown-budget lambda during long spells (> ~120 days).",
+   "failure_conditions": "Explicitly not a timer: calm regimes ran 2+ years (2012-14, 2016-17) and de-risking early forfeits carry. The mechanism says fragility grows, never when it breaks.",
+   "horizon": "accumulation over months-years; the break is days",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "guardrail",
+   "name": "macro_dial_not_clock",
+   "content": "Operational core of the doctrine: use macro to adjust margin of safety, not to forecast turns — cycles are balance-sheet vulnerability maps, not clocks, and precise crisis timing carries Low confidence in the synthesis's own map. This converges exactly with the project's twice-certified internal result (E-15/E-16/E-28: the conditional exposure dial beats timing; cold PPO re-derives constant dials).",
+   "evidence": "Established",
+   "bot_binding": "Already bound and validated: exposure as a monotone function of P(bear) with H=10d holding (certified rule P(bear)>0.66 -> 0.74). Enforce as a rule-family constraint: macro/stress inputs may only enter as continuous exposure scalers with holding >= 10d; reject proposals that use macro state for binary daily entry/exit.",
+   "failure_conditions": "A genuinely timing-rich substrate (intraday, event windows) could overturn the constraint — matches the project's registered lever-T wake condition.",
+   "horizon": "enforcement daily; the underlying claims operate at weeks-quarters",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "state_variable",
+   "name": "forced_selling_liquidation_state",
+   "content": "Liquidity is a social condition, not an asset property: liquidity_evaporation -> forced_selling -> price/value/liquidity separation. In liquidation states prices are set by whoever must sell, cross-sectional correlations converge toward one, and price temporarily stops carrying fundamental information (March 2020 dash-for-cash is the canonical instance); ask who is the forced seller and who is the natural buyer.",
+   "evidence": "Established",
+   "bot_binding": "Daily composite from the per-ticker panel: (a) mean pairwise 21d correlation of Dow-30 daily returns (spike above ~0.6 = liquidation state); (b) cross-sectional mean Amihud illiquidity |ret|/(close*volume), z-scored vs trailing 1y; (c) mean (high-low)/close range z-score. When elevated: treat price moves as flow not information — widen the regime-belief's observation noise, de-weight cross-sectional selection signals; expect weeks-scale reversion but do not pre-position for it.",
+   "failure_conditions": "Correlation also spikes on genuine common shocks (macro news) without forced selling; Amihud is noisy for mega-caps; csi500 needs separate baselines (different microstructure, limit-down days). The reversion implication is contextual, not guaranteed.",
+   "horizon": "days-weeks",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "state_variable",
+   "name": "breadth_concentration_state",
+   "content": "Prices are set by marginal buyers and sellers, not representative agents; narrative-concentration episodes (dot-com, current AI megacap capex boom) show cap-weight indices rising while breadth narrows, which is why the market-structure dashboard tracks breadth, cap-vs-equal-weight, and concentration. In such states index-level features stop describing the median stock.",
+   "evidence": "Plausible",
+   "bot_binding": "(a) Fraction of Dow-30 names above their own 50d and 200d MA, from the per-ticker panel (same construction on csi500); (b) 21d return of SPY minus RSP (Yahoo) as the cap-minus-equal-weight spread. Use as an additional regime-belief INPUT (breadth-based bear evidence) and as a switch to per-ticker rather than index-level features when breadth < ~40% while the index 21d return is positive.",
+   "failure_conditions": "As a predictor breadth divergence is historically weak — 2023-25 concentration persisted for years without a break, and the source's own adversarial review allows concentration to be durable productivity rather than fragility. Thresholds are ad hoc: calibrate on the panel, do not import literature values.",
+   "horizon": "weeks-months",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "mechanism",
+   "name": "rate_shock_transmission",
+   "content": "Rates act through refinancing access, deposit behavior, duration values, and credit spreads — not just discount rates; the key question is which assets and business models implicitly require one rate regime to continue. The 2020s instance of the chain low_rates -> duration_and_search_for_yield -> rate_shock_fragility: 2022 equity duration compression, then 2023 bank duration/uninsured-deposit runs.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Per-ticker 63d regression beta of daily returns on daily change in the 10y yield (^TNX/10, Yahoo), computed from the Dow-30 panel; book-level yield-beta = exposure-weighted mean. When trailing 63d change in the 10y exceeds +50bp, penalize concentration in negative-yield-beta names and require confirmation from the credit dial (credit_price_vs_credit_quantity atom).",
+   "failure_conditions": "Equity duration betas are regime-unstable (growth names were rate-insensitive pre-2021, hyper-sensitive in 2022) — the beta must stay rolling, never a fixed loading; the 30-name cross-section limits the penalty's statistical power.",
+   "horizon": "weeks-months",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "decay_clock",
+   "name": "risk_migration_decay",
+   "content": "After every visible repair, risk re-emerges in a newly accepted balance-sheet carrier: inflation debt stress -> bank capital -> securitized housing/repo -> low-rate duration -> private credit/NBFI/AI-infrastructure SPV finance (FSB sizes private credit at roughly $1.5-2T, untested at scale in a severe downturn). Consequence: detectors trained on the last crisis's carrier decay, and the current frontier carriers are mostly invisible in public daily data.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Carrier identification: NOT_MEASURABLE_DAILY (private-credit marks, SPV lease obligations, sovereign auction internals are outside the bot's data). Bindable residue: (a) vintage-decay prior — down-weight crisis features validated only on pre-2010 bank-centric episodes; (b) the frontier's first visible footprint in the bot's set would be the daily credit dial widening PLUS a 21d realized-vol spike in IEF (Treasury-plumbing stress) with no equity-earnings catalyst — log that conjunction to episodic memory as a new-carrier-candidate event rather than trading it.",
+   "failure_conditions": "The source's own adversarial review: risk-migration framing can become too elastic (unfalsifiable if any stress anywhere confirms it), and regulation sometimes genuinely reduces total risk rather than relocating it. The current-frontier identification (AI-infra/private credit) is Speculative.",
+   "horizon": "migration over years; the detection conjunction is daily",
+   "source": "experience/Economic World Picture/_analysis/52y_synthesis_1975_2027.txt (52-year full economic synthesis 1975-2027, fina"
+  },
+  {
+   "type": "regime",
+   "name": "two_phase_financial_cycle",
+   "content": "At every synthesis scale (3/9/18/52-year) the same structure recurs: long calm phases in which credit, leverage and risk appetite build slowly under low volatility and tight spreads, then short stress phases in which the collateral -> refinancing -> funding-confidence chain breaks and forced deleveraging reprices everything at once. The build is slow, the unwind is fast; the asymmetry is structural. This is the strongest source-level support for a 2-state regime belief as the bot's first-order world variable.",
+   "evidence": "Established",
+   "bot_binding": "The existing 2-state belief, with eyes spanning vol + credit + slope + breadth: daily 2-state HMM (or logistic belief) over [21d realized vol of the EW Dow-30 return (per-ticker panel), VIX/VIX3M ratio (Yahoo ^VIX, ^VIX3M), HYG/LQD 21d relative total return (Yahoo), fraction of Dow-30 names above their 50d MA (per-ticker panel), 10y-3m slope (^TNX, ^IRX)]. All daily-computable.",
+   "failure_conditions": "Two states compress real heterogeneity: inflationary stress (1981, 2022) and deflationary/credit stress (2008, 2020) are different bears; a belief trained only on deflationary bears mis-reads a rate-shock bear. Regime phase lengths (months-years) far exceed the daily update cadence — do not confuse belief noise with phase change.",
+   "horizon": "phases last months-years; belief updates daily; stress phases weeks-months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "state_variable",
+   "name": "vol_term_backwardation_stress_marker",
+   "content": "The fast-unwind episodes the source dwells on (1987, 1998, 2008, 2020) are liquidity events, not information events: funding stress, forced sellers, dealer constraints. Their cleanest same-day fingerprint inside the bot's free input set is inversion of the volatility term structure — spot fear priced above forward fear.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "VIX/VIX3M ratio from Yahoo (^VIX, ^VIX3M); stress flag = ratio > 1.0, intensity = ratio level. Corroborated project-side: backwardation was the sole survivor of the E-24 kill battery (p=0.0003) and the graduated v12 rule uses a 5-eye P(bear) including it.",
+   "failure_conditions": "Single-day inversions on brief scares revert (false positives); the marker fires late relative to the fragility buildup by construction; ^VIX3M history only extends to ~2007-2008, limiting backtest depth.",
+   "horizon": "days-weeks",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "state_variable",
+   "name": "breadth_vs_index_divergence",
+   "content": "\"Monitor breadth, not only index level\" is an explicit investor principle in the 2027 dossier, echoing the 2011-2019 superstar-concentration and skewed-wealth-creation findings: an index can be carried by a few names while the median stock is already in its own bear. Breadth divergence is the late-cycle and concentration-risk gauge that pure index-level features miss.",
+   "evidence": "Plausible",
+   "bot_binding": "Fraction of Dow-30 names above their own 50d MA and 200d MA, computed from the per-ticker panel (csi500 analog computable identically on the rebuilt single-clock panel). Divergence flag = EW index at a 63d high while 200d-MA breadth < 0.5. Complements the xdisp column already in the 41-col panel.",
+   "failure_conditions": "Divergences can persist for quarters (1998-2000) — not a standalone sell trigger; the digest states the principle but supplies no systematic daily-frequency validation, so treat as a regime-belief input, not a certified signal.",
+   "horizon": "weeks-months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "state_variable",
+   "name": "financial_conditions_left_tail",
+   "content": "The 2017-19 synthesis' strongest shared conclusion (Adrian-Boyarchenko-Giannone growth-at-risk, backed by IMF GFSR 2018/2019): easy financial conditions — low vol, tight spreads, easy refinancing — support near-term growth while fattening the medium-term left tail. Financial conditions as a whole, not the policy rate, are the transmission variable (\"track full financial conditions, not only rates\" — 2024 principles).",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Daily composite z-score = mean of [z(-VIX), z(HYG/LQD 63d relative return), z(10y-3m slope), z(-EBP, Fed monthly forward-filled)]. Persistent easiness (top quintile > ~6 months) = widen the left-tail estimate for the 6-24 month horizon. Bind as a risk-budget/VaR input, NOT a position signal.",
+   "failure_conditions": "The signal inverts near turning points — conditions are easiest immediately before stress — so using it as a de-risk timer is the exact named error; GaR predictive value is established at quarterly horizons, modest in real-time daily use.",
+   "horizon": "6-24 months (quarters)",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "mechanism",
+   "name": "credit_stress_gates_drawdown_depth",
+   "content": "2026 report p514 (Schularick-Taylor / Kiyotaki-Moore / financial-accelerator line, repeated at every scale): crises become DEEP when the collateral-values -> refinancing -> liquidity-transformation -> funding-confidence chain breaks, not merely when demand falls; late cycle is diagnosed by credit growth, composition and rollover needs, not headline P/E. For the bot: equity drawdown depth is gated by whether credit confirms the vol shock.",
+   "evidence": "Established",
+   "bot_binding": "Repricing side, daily: EBP level and 3m change (Fed monthly series, forward-filled), HYG-LQD and LQD-IEF 21d relative returns (Yahoo). Weight the credit eye at least as heavily as the vol eye in the regime belief. HONEST LIMIT: the buildup side (credit quantity, composition, covenant quality) is NOT_MEASURABLE_DAILY from this input set — only its repricing echo is.",
+   "failure_conditions": "Vol spikes WITHOUT credit confirmation (1987, 2018Q4) mean-revert fast; treating every vol spike as a credit event systematically over-de-risks. EBP is monthly and revised — forward-filling adds up to ~1 month of staleness.",
+   "horizon": "weeks-months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "mechanism",
+   "name": "liquidity_spiral_signature",
+   "content": "Forced-selling spirals (1987, 1998, 2008 per Brunnermeier's amplification framing, 2020 Treasury/dealer dysfunction) push prices below value via margin calls, funding stress and constrained intermediaries; the fingerprint is everything falling together, and such episodes partially mean-revert once forced flows exhaust. The 1987-89 lesson: separate behavioral/liquidity selloffs from fundamental decay.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Spiral flag from the per-ticker panel + free series: mean pairwise 21d correlation of Dow-30 daily returns > ~0.7 (baseline ~0.3-0.4) AND Dow-30 aggregate volume z-score > 2 AND VIX 5d change > +10 pts. Actionable read is asymmetric: do not ADD de-risking into the flagged tail; treat post-flag stabilization (flag off, backwardation off) as re-risking-permissive.",
+   "failure_conditions": "The mean-reversion half is the weaker claim: credit-confirmed spirals (see credit_stress_gates_drawdown_depth) chain for months — 2008 was not a V-bottom. The flag marks the state, not its remaining duration.",
+   "horizon": "days-weeks",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "calm_is_fragility_but_not_a_timer",
+   "content": "The two most repeated warnings must be held together: (1) the system looks MOST stable exactly while leverage and fragility accumulate (2005-07, 2017-19: \"calm itself became a source of fragility\"); (2) Minsky-as-crash-timer is a named analytical error across multiple era summaries — fragility and valuation are long-run gravity, not clocks. Long calm is information about tail width, never a de-risking trigger by itself.",
+   "evidence": "Established",
+   "bot_binding": "Calm-age counter is computable daily (consecutive days with VIX below its rolling 1y median, or EW Dow-30 21d realized vol below median) — but bind it ONLY to tail-width/VaR estimates, never to exposure timing. Independent corroboration of the no-timer half: the project's E-24 kill test found bear-age hazard SIGN-REVERSED on our spells.",
+   "failure_conditions": "The failure mode is dropping either half: ignoring (1) understates tail risk in long calms; ignoring (2) turns the bot into a chronic calm-shorter, the documented losing behavior.",
+   "horizon": "buildup operates over years; explicitly unusable for timing at any horizon",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "risk_migrates_beyond_daily_observables",
+   "content": "Risk is rarely destroyed; it migrates to more opaque carriers — listed tech equity -> households/housing/structured credit (2002-07), banks -> shadow banking/NBFI/corporate debt (2011-19), then private credit, sovereign-market plumbing and off-balance-sheet AI infrastructure finance (2020-27, FSB/IMF-backed). The buildup phase is structurally invisible in daily listed prices; daily observables only show the repricing once it starts. Absence of stress in the bot's inputs is NOT absence of risk.",
+   "evidence": "Established",
+   "bot_binding": "The buildup: NOT_MEASURABLE_DAILY (private credit marks, NBFI leverage, covenant quality have no daily public series). Earliest observable echoes — rising EBP, deteriorating HYG/LQD, XLF/SPY 21d relative weakness — all lag the migration by design. Encode as a standing floor on tail-risk estimates during calm regimes, not as a signal.",
+   "failure_conditions": "Fails as an excuse for permanent maximal caution: migration takes years and most calm years end without crisis; the atom bounds confidence in calm, it does not forecast stress.",
+   "horizon": "years (buildup); repricing arrives at daily speed",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "era_lesson",
+   "name": "survivability_over_prediction",
+   "content": "The convergent 52-year lesson is a hierarchy, not a forecast: regime -> survivability -> credit conditions -> incentives -> quality -> valuation (18-year 1975-92 summary), with \"survive the path to being right\" repeated in 2005-07, 1996-98 and 2002-10. The durable, repeatable edge the whole corpus describes is drawdown/regime discipline, not return prediction — exactly the risk-mode (not alpha) shape of the bot's one certified real-data policy.",
+   "evidence": "Established",
+   "bot_binding": "Exposure as a monotone non-increasing function of P(bear) with a fixed dial and holding period — the certified instance already exists (P(bear)>0.66 -> exposure 0.74, H=10d; refined P(bear)>0.575 -> 0.52). The era lesson's directive: defend and extend this risk-mode lane rather than resuming daily-alpha hunts on liquid mega-caps.",
+   "failure_conditions": "Survivability framing can rationalize chronic under-exposure; the source pairs it with \"do not equate avoiding risk with the lesson\" (2008-10: the lesson is separation of leverage-supported demand from productive growth, not blanket caution).",
+   "horizon": "all horizons; expressed through the 10d-rebalance dial",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "decay_clock",
+   "name": "no_timeless_coefficients",
+   "content": "\"Macro relationships are not timeless constants\" (1975-77 Pattern 1) and every later era proves it: money-demand rules, inflation-equity rules, exchange-rate models (Meese-Rogoff), factor anomalies and crisis indicators all decayed after regime change or adoption. Any fitted signal carries an implicit expiry; the 52-year doctrine is \"every thesis with failure conditions\" and \"regime before backtest\".",
+   "evidence": "Established",
+   "bot_binding": "Per-signal decay monitor computable from the bot's own panels: trailing 2y out-of-sample IC vs the frozen training-window IC for every live feature/rule; alarm when the sign flips or |trailing IC| < 0.5x training IC for 2 consecutive quarters -> demote the signal to WATCH and stop weight growth. Applies to the certified P(bear) rule itself via the pre-registered 2027 OOS read.",
+   "failure_conditions": "A decay alarm on 2y windows has low power (few independent observations for 10d-horizon rules); a sign flip in one bear regime is not proof of death — the monitor gates weight growth, it does not auto-kill.",
+   "horizon": "years",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "guardrail",
+   "name": "conditional_efficiency_null_prior",
+   "content": "Grossman-Stiglitz is the single most-cited anchor across the whole digest: prices cannot be fully efficient when information is costly, but markets on liquid mega-caps are conditionally efficient — exploitable mispricing lives where information is costly, arbitrage is constrained and flows are forced, i.e. mostly NOT in daily price-only signals on Dow-30. The correct prior for such signals is zero alpha (\"use EMH as a null, not a dogma\" — 1993-95; \"respect prices but do not worship them\" — 1978-80).",
+   "evidence": "Established",
+   "bot_binding": "Not a market observable (NOT_MEASURABLE_DAILY as a state). Bind as the acceptance protocol: any claimed edge must beat an exposure-matched dial twin AND a carry-matched null through the frozen gate before it updates the world model — the project's own triple-confirmed alpha null on this substrate is the local instance of the global rule.",
+   "failure_conditions": "The prior weakens exactly where the source says efficiency weakens: forced-flow windows (spiral flag on), constrained-arbitrage corners, and non-price information sources — those are where search budget should go, not more daily price transforms.",
+   "horizon": "standing prior",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "mechanism",
+   "name": "rate_speed_duration_channel",
+   "content": "2023-25 synthesis: the SPEED of rate rises, not the level, exposes duration losses and solvency-run dynamics when asset losses meet uninsured/mobile liabilities (2023 bank stress, NBER-backed) — fragility appears BEFORE any credit losses. Transmission to equities runs through financials. This channel is largely absent from pre-2022 eras in the corpus (nearest analog 1994), so historical priors underweight it.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "z-scored 63d change in the 10y yield (Yahoo ^TNX); fragility interaction flag = dYield z > +2 AND XLF/SPY 21d relative return < -3% (both daily from Yahoo). The interaction, not dYield alone, is the flag.",
+   "failure_conditions": "Essentially one fully-documented modern episode (2022-23) — WATCH-grade, not certified. Rate rises driven by growth optimism (2016-17) do not damage financials and must not trigger the flag; hence the mandatory XLF confirmation leg.",
+   "horizon": "months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "state_variable",
+   "name": "credit_cycle_master_amplifier",
+   "content": "The single most-replicated claim across all ~50 annual digests (1975-2026) is that credit conditions — not GDP or CPI — are the primary amplifier of equity cycles: credit booms extend calm and make the subsequent bust deeper and longer (Minsky, Kiyotaki-Moore, Bernanke-Gertler-Gilchrist, Schularick-Taylor, Borio/BIS threads; per-year confidence tables rate the credit channel 'High' in nearly every year). Macro fragility is diagnosed by credit growth, collateral dependence, and funding quality, not by headline P/E or CPI.",
+   "evidence": "Established",
+   "bot_binding": "Two-layer daily-computable credit-conditions state: (i) Fed EBP monthly level and its 3-month change, forward-filled to daily (already a PK-2 survivor in the project panel); (ii) daily credit-appetite spread = 21d adjusted-total-return of HYG minus LQD, and LQD minus IEF to strip the duration leg (Yahoo adjusted closes — adjusted, else the W-G2 carry artifact returns). Tightening state = EBP 3m-change > 0 AND HYG−LQD 21d return < 0; feed as a prior into the 2-state regime belief.",
+   "failure_conditions": "EBP is monthly, revised, and model-based; HYG−LQD without the IEF leg conflates duration with credit; sudden policy backstops (Mar 2020) can sever credit→equity transmission within days.",
+   "horizon": "months-quarters for the state; days for the ETF proxy update",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "guardrail",
+   "name": "calm_is_not_safety_minsky_cap",
+   "content": "Stability breeds instability: long calm induces leverage growth, weaker underwriting, and search for yield, so low volatility and compressed spreads are late-cycle features, not evidence of safety ('treat low perceived risk as potentially late-cycle' 2011; 'treat calm markets with skepticism when margins are compressed' 2016; the 2004-2007 digests are one long instance). The digests simultaneously warn this is a fragility diagnostic, not a market timer.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Complacency clock = count of consecutive trading days with VIX below its trailing 504d median, plus VIX3M/VIX ratio (contango steepness) and the atom-1 spread. Bind as an asymmetric CAP on vol-targeting: when clock is long AND spreads are tight, do not let the inverse-vol position multiplier rise above a fixed ceiling. Never use as a short/exit signal.",
+   "failure_conditions": "Calm regimes persist for years (1990s, 2013-2017) — as a timer it loses badly to buy-and-hold; only valid as a leverage ceiling. Threshold values are calibration-fragile and must pass the exposure-matched-twin gate.",
+   "horizon": "months-years buildup, days-weeks unwind",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "regime",
+   "name": "stock_bond_correlation_regime_2",
+   "content": "Diversification is regime-dependent: stock-bond correlation is negative in demand/deflation-risk regimes and flips positive under inflation uncertainty, when bonds stop hedging equities ('inflation uncertainty -> unstable stock-bond diversification', 2023 digest; 'assume diversification is regime-dependent'). The project's own P-1 kill independently confirmed 2022 broke the stock-bond hedge on this very data.",
+   "evidence": "Established",
+   "bot_binding": "Rolling 63d correlation of daily returns: Dow-30 equal-weight panel return (or SPY) vs TLT and IEF adjusted closes. Sustained corr > +0.2 for 21d = inflation-regime flag: treat bond ETFs as risk-additive and use the T-bill/cash leg (accruing ^IRX) as the only defensive asset.",
+   "failure_conditions": "63d correlation is noisy and lags true regime shifts by weeks; mixed shocks (2025 tariffs) blur the two regimes; the 2023 digest itself lists 'return of stably negative stock-bond correlation' as a fact that would weaken the thesis.",
+   "horizon": "months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "mechanism",
+   "name": "crash_prices_are_flows_not_news",
+   "content": "In stress episodes liquidity is endogenous and vanishes: margin/haircut spirals force selling, so crash prices carry flow information rather than fundamental news, and plumbing-driven dislocations partially mean-revert once deleveraging or a backstop completes. Sources across 1987 (Brady/Shiller: no dominant news, 'intermarket plumbing + feedback trading'), 1998 (LTCM: shocks propagate via leverage, common positions, forced selling), 2008, and 2020 (Haddad-Moreira-Muir; Treasury-market dysfunction).",
+   "evidence": "Established",
+   "bot_binding": "Plumbing-stress flag = mean pairwise correlation of Dow-30 daily returns over trailing 5d > ~0.6 AND (1d VIX change > +20% OR VIX3M/VIX < 1, i.e. backwardation). While flagged: down-weight price-derived belief updates written to episodic memory and do not treat the drawdown as fundamental information for multi-week decisions.",
+   "failure_conditions": "Some crashes ARE fundamental repricings (2022: grinding, correlated, no snap-back) — the flag cannot separate the two in real time, it only justifies widening uncertainty; correlation-spike thresholds need calibration on the frozen gate.",
+   "horizon": "days-weeks",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "state_variable",
+   "name": "vol_clustering_only_reliable_daily_forecast",
+   "content": "The only daily-scale regularity the corpus tags at near-unanimous top confidence is volatility clustering (explicit 'very high' in the 1982 digest): variance is persistent and forecastable while the sign of returns is mostly not. The exploitable channel is therefore risk control / vol-targeting, not direction — consistent with the corpus-wide 'analyze regime before valuation' stance and with the bot's certified risk-mode result.",
+   "evidence": "Established",
+   "bot_binding": "Per-ticker EWMA of squared daily returns (approx. 5d and 21d half-lives) from the OHLCV panels as the vol forecast, scaling position size inversely, subject to the atom-2 cap. In-project validation already exists: EWMA beat Log-HAR on the frozen bar (PK-1).",
+   "failure_conditions": "Fails at jump discontinuities (overnight gaps, event risk); systematically underestimates after long calm — exactly when the atom-2 guardrail must bind.",
+   "horizon": "days-weeks",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "era_lesson",
+   "name": "regime_break_invalidates_learned_coefficients",
+   "content": "The Lucas-critique thread (1976-1982 digests) generalized: statistical relationships are regime-conditional — stable Phillips curves, stable money demand, and stable macro betas all died at regime boundaries; 'old average ROE, multiples and macro betas are unreliable at the regime boundary' (1976). For a learning agent this means trained relationships and stored memories silently expire when the monetary/inflation/FX regime shifts.",
+   "evidence": "Established",
+   "bot_binding": "Tag every episodic memory with the concurrent regime fingerprint (2-state belief, atom-3 correlation flag, atom-1 credit state). On a persistent flip (21d mean of P(bear) crossing 0.5, or the correlation flag flipping), down-weight cross-boundary memories in retrieval and shrink position sizes until ≥21d of post-boundary data accumulates.",
+   "failure_conditions": "Over-triggering on belief noise destroys memory continuity; regime-robust relationships (vol clustering) must be exempted from the down-weighting.",
+   "horizon": "regime boundaries arrive every few years; the response window is weeks",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "regime",
+   "name": "rate_impulse_surfaces_hidden_fragility",
+   "content": "The discount-rate thread runs from Volcker (1979-82: inflation shock -> higher discount rates -> multiple compression) to the 2023 digest's explicit 'higher rates -> hidden balance-sheet fragility surfaces': the transition out of a low-rate regime is when hidden leverage breaks (S&L, 1994, 2022-23 banks/duration), and long-duration equities are most exposed. Slow rises driven by growth are absorbed; fast impulses are not.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "63d change in the 10y Treasury yield from the daily yields feed (plus ^IRX for the short end). Impulse > ~+75bp/quarter = rate-shock regime: reduce duration-sensitive exposure, raise the stress prior of the regime belief, and expect the atom-3 correlation flip.",
+   "failure_conditions": "Growth-driven rate rises (2003, 2013) hurt equities little — the flag cannot fully distinguish cause; threshold is calibration-fragile; transmission lag to visible breakage is weeks-to-quarters and heterogeneous.",
+   "horizon": "weeks-quarters",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "mechanism",
+   "name": "tightening_flight_to_quality_rotation",
+   "content": "The financial accelerator (Bernanke-Gertler-Gilchrist; the 1996 digest calls it 'the main bridge between macro and stock picking'): credit tightening raises the external finance premium and hits weak-balance-sheet, high-elasticity names hardest — flight to quality is the cross-sectional expression of the credit cycle.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "Condition on the atom-1 tightening state: compute per-ticker rolling 63d beta to the Dow-30 EW panel return; in tightening states tilt toward the low-beta half and/or raise the cash leg. The cash-leg expression is the in-project-validated one (the bot's certified edge is cash-timing, not selection); the cross-sectional tilt is the untested extension.",
+   "failure_conditions": "Beta/vol is only an indirect proxy for leverage (no balance sheets in the panel); Dow-30 mega-caps have compressed balance-sheet dispersion so the cross-sectional effect may be too small — the project's Dow-30 selection-signal record is null; policy backstops abort the rotation.",
+   "horizon": "weeks-months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "decay_clock",
+   "name": "published_anomaly_decay",
+   "content": "The corpus repeatedly warns that documented anomalies (size, calendar, value, momentum, reversal) are not scalable free lunches once costs, crowding, data-snooping, and post-publication decay are counted (1983: 'no free lunch in size/January'; 1995/1998: anomalies fragile to methodology; 2013: 'do not confuse intellectual plausibility with investment exploitability'). The project's own panel replicates the decay: momentum dead on S&P-100, reversal and rsi@5d real-but-priced-out net of costs.",
+   "evidence": "Established",
+   "bot_binding": "Partially measurable: for any candidate cross-sectional signal, compare rank-IC on an early panel subsample vs the last 5y and expect shrinkage toward zero. Procedural binding: no digest-derived anomaly ships without beating a cost-adjusted, exposure-matched dial twin at the frozen gate (the project's standing z_dsd-twin rule).",
+   "failure_conditions": "A few structures persist (vol clustering, credit-conditions risk timing); decay tests on short windows are underpowered, so absence of evidence on 4.5y is not proof of death.",
+   "horizon": "years — the clock runs on publication age and crowding",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "state_variable",
+   "name": "breadth_vs_index_divergence_1",
+   "content": "The late-corpus digests (2019-2027) stress concentration and superstar economics: the index is not the average stock, and 'monitor breadth, not only index level' is an explicit 2027 principle. Internal deterioration under a rising index is a fragility marker the index level itself cannot show.",
+   "evidence": "Plausible",
+   "bot_binding": "Fraction of Dow-30 names above their own 50d MA (per-ticker panel); cross-sectional 21d return dispersion (xdisp already in the panel); EW-minus-index return gap. Feed as regime-belief features; falling breadth with a rising index = fragility marker, not a standalone trade signal.",
+   "failure_conditions": "On a 30-name universe breadth is coarse (one name = 3.3pp) and the actual concentration story (mega-cap tech) largely bypasses the Dow-30, so the divergence may not manifest in this panel; predictive power of breadth is asserted, not demonstrated, in the corpus.",
+   "horizon": "weeks-months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "regime",
+   "name": "dollar_cycle_em_headwind_for_csi500",
+   "content": "The global-financial-cycle thread (Rey in the 2013-2015 digests; Calvo sudden stops in 1998): dollar funding conditions and US rates transmit to non-US equities, so dollar strength plus rising US yields is a tightening regime for EM-linked books. Applicability to A-shares specifically is weaker because China's capital account is partially closed.",
+   "evidence": "Plausible",
+   "bot_binding": "UUP (dollar-index ETF, Yahoo) 21d return AND 63d change in the 10y US yield as a headwind flag conditioning the csi500 book's aggregate exposure, with VIX as the global risk-appetite leg. Risk-conditioning only, not an alpha signal.",
+   "failure_conditions": "In-project nulls are adjacent and sobering: live CN macro did not lift csi500 (E-09) and all csi500 daily alpha died net-of-cost (E-15b); the mechanism is documented for open EMs, and A-share pass-through may be too weak to matter at daily scale.",
+   "horizon": "weeks-months",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "narrative_layer_not_measurable_here",
+   "content": "A large fraction of the corpus's post-2010 mechanisms run through narratives, survey expectations, and diagnostic-expectations text channels (Shiller; Bordalo-Gennaioli-Shleifer; 2024: 'narratives are measurable but noisy state variables'), and the corpus itself warns behavioral stories are ex-post flexible and must be paired with observable balance-sheet or flow data (2020 digest). None of this channel is reachable from the bot's current OHLCV+ETF+yields world model.",
+   "evidence": "Strong-but-Contextual",
+   "bot_binding": "NOT_MEASURABLE_DAILY — no point-in-time text or survey feed exists in the current world model, and price-derived 'sentiment' proxies would silently re-encode momentum and must not be labeled sentiment (the project's own text-twin attempts were sign-unstable). Operational consequence: cap the confidence of any regime call that the measurable layers (credit, vol, correlation, rates) do not corroborate, and record narrative-dependent digest mechanisms as a known blind spot in semantic memory.",
+   "failure_conditions": "Becomes partially measurable if the FinGPT point-in-time text-feature layer is wired into the daily panel; until then any 'narrative' feature claim should be treated as a red flag.",
+   "horizon": "n/a — standing blind-spot declaration",
+   "source": "C:/Users/ivanp/RL for Time-Series Forecasting/data_RLagent_for_Joseph/experience/Economic World Picture/_analysis/econom"
+  }
+ ],
+ "schemas_by_year": {
+  "2022": {
+   "n_episodes": 578,
+   "cutoff": "2021-12-31",
+   "centroid_norms": [
+    0.79,
+    39.12,
+    2.72,
+    3.15,
+    5.01,
+    27.34
+   ]
+  },
+  "2023": {
+   "n_episodes": 628,
+   "cutoff": "2022-12-31",
+   "centroid_norms": [
+    2.45,
+    4.97,
+    39.12,
+    27.34,
+    0.81,
+    3.14
+   ]
+  },
+  "2024": {
+   "n_episodes": 678,
+   "cutoff": "2023-12-31",
+   "centroid_norms": [
+    1.32,
+    2.88,
+    39.12,
+    27.34,
+    1.87,
+    4.84
+   ]
+  },
+  "2025": {
+   "n_episodes": 728,
+   "cutoff": "2024-12-31",
+   "centroid_norms": [
+    5.05,
+    1.1,
+    2.97,
+    39.12,
+    2.54,
+    27.34
+   ]
+  },
+  "2026": {
+   "n_episodes": 778,
+   "cutoff": "2025-12-31",
+   "centroid_norms": [
+    5.22,
+    0.99,
+    39.12,
+    2.73,
+    3.43,
+    27.34
+   ]
+  }
+ },
+ "ktd_status": "UNINFORMATIVE at recompute-all operator; semantics-stable operator pending preregistered confirmation | KT-D v2 (csi500 prereg): MIXED/horizon-conditional - consolidation k=1 only",
+ "binding_pipeline": "atom -> prior -> candidate block -> WP-1 completeness harness -> state -> W-battery -> v12 gate (see experience/ECONOMIC_WORLD_PICTURE_V2_FOR_BOT.md section 8)",
+ "wp1_results": {
+  "breadth_dispersion": "NO-ADD (2026-07-19, exp_wp1_completeness): state incrementally complete at 5-20d",
+  "queue": [
+   "credit_appetite_spread_HYG_LQD_IEF",
+   "stock_bond_corr_flag_TLT_IEF",
+   "plumbing_stress_flag",
+   "complacency_clock"
+  ],
+  "wp2_queue": {
+   "credit_appetite_spread": "NO-ADD (capacity tax at k=4)",
+   "stock_bond_corr_flag": "INVALIDATED post-battery: corr63 rolling-window overlap artifact (placebo-market z 4.38; within-block salvage NO-ADD). REJECTED from the state.",
+   "plumbing_stress_flag": "NO-ADD",
+   "complacency_clock": "NO-ADD (capacity tax)"
+  },
+  "net_result": "ZERO knowledge-derived state additions survive on the daily substrate at 5-20d: breadth/credit/plumbing/complacency NO-ADD (capacity), stockbond INVALIDATED (rolling artifact). The state is incrementally complete w.r.t. the corpus queue; the binding pipeline correctly refused all candidates."
+ }
+}

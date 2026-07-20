@@ -1,0 +1,119 @@
+{
+ "version": "v0",
+ "date": "2026-07-19",
+ "governance": "appends only with provenance; every entry reversible; consolidation gated (G10)",
+ "curated": [
+  {
+   "type": "named_regime",
+   "name": "bear_month_state",
+   "content": "elevated VIX (~21), rising dVIX (+0.4), turbulence ~56, in-block dd ~-5%",
+   "provenance": "exp_w2_ktc_l2_swap L2 card (GMM bear component)",
+   "evidence": "Strong-but-Contextual"
+  },
+  {
+   "type": "mechanism",
+   "name": "voi_zero_daily",
+   "content": "daily price-level prediction carries ~zero deployable info; certified value is risk-shaped at the regime level (10-20d)",
+   "provenance": "E-15/E-16, LIT-1, CL-1c, W0 KT-A",
+   "evidence": "Established (in-house, multi-confirmed)"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "continual_lt_frozen",
+   "content": "naive continual refitting underperforms the frozen champion (belief AND tails AND config re-derivation)",
+   "provenance": "CL-1c, CL-2; CLS theory retro-justifies",
+   "evidence": "Established (in-house)"
+  },
+  {
+   "type": "decay_clock",
+   "name": "csi500_reversal",
+   "content": "csi500 5d reversal replicated at HALF magnitude on fresh 2024-26 data and is priced out net of costs",
+   "provenance": "E-14b/E-15b",
+   "evidence": "Established (in-house, untouched-data replication)"
+  },
+  {
+   "type": "mechanism",
+   "name": "hierarchy_horizon",
+   "content": "week-level structure predictable to ~40d, month-level to ~84d (strong nulls, placebo-guarded); part representational (pooled>flat)",
+   "provenance": "W1 KT-B v2 (third-window prereg pending)",
+   "evidence": "Strong-but-Contextual"
+  },
+  {
+   "type": "negative_knowledge",
+   "name": "memory_channel_semantics",
+   "content": "enrichment operators must preserve schema-channel identity: recompute-all clustering under frozen readout coefficients manufactures a fake KILL (channel permutation); grow statistics WITHIN stable schemas instead",
+   "provenance": "W3 KT-D review (exp_w3_review.json)",
+   "evidence": "Established (in-house, instrumented probe)"
+  },
+  {
+   "type": "mechanism",
+   "name": "l2_ood_lockin",
+   "content": "frozen-scaler HMMs over LEVEL features saturate under regime-level shifts (10Y yield z +3.85 vs the 2010-18 scaler pinned the posterior at 1.0, occupancy 98-100% 2022-26); future L2 rebuilds must exclude raw level features or use adaptive scaling",
+   "provenance": "W3 L2 improve review",
+   "evidence": "Established (in-house, mechanism named)"
+  }
+ ],
+ "schemas_by_year": {
+  "2022": {
+   "n_episodes": 578,
+   "cutoff": "2021-12-31",
+   "centroid_norms": [
+    0.79,
+    39.12,
+    2.72,
+    3.15,
+    5.01,
+    27.34
+   ]
+  },
+  "2023": {
+   "n_episodes": 628,
+   "cutoff": "2022-12-31",
+   "centroid_norms": [
+    2.45,
+    4.97,
+    39.12,
+    27.34,
+    0.81,
+    3.14
+   ]
+  },
+  "2024": {
+   "n_episodes": 678,
+   "cutoff": "2023-12-31",
+   "centroid_norms": [
+    1.32,
+    2.88,
+    39.12,
+    27.34,
+    1.87,
+    4.84
+   ]
+  },
+  "2025": {
+   "n_episodes": 728,
+   "cutoff": "2024-12-31",
+   "centroid_norms": [
+    5.05,
+    1.1,
+    2.97,
+    39.12,
+    2.54,
+    27.34
+   ]
+  },
+  "2026": {
+   "n_episodes": 778,
+   "cutoff": "2025-12-31",
+   "centroid_norms": [
+    5.22,
+    0.99,
+    39.12,
+    2.73,
+    3.43,
+    27.34
+   ]
+  }
+ },
+ "ktd_status": "UNINFORMATIVE at recompute-all operator; semantics-stable operator pending preregistered confirmation"
+}
