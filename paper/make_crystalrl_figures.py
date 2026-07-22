@@ -27,7 +27,7 @@ axes_names = ["Faithfulness", "Simulatability", "Stability", "CrystalScore\n(pro
 r6c = [1.00, 0.244, 0.619, 0.151]
 c1 = [1.00, 0.92, 1.00, 0.92]
 x = np.arange(4); w = 0.36
-b1 = ax.bar(x - w / 2, r6c, w, color=LIGHTBLUE, label="R6c (CHRL line): its deployed-panel stance log")
+b1 = ax.bar(x - w / 2, r6c, w, color=LIGHTBLUE, label="CHRL (deployed line): its own stance log")
 b2 = ax.bar(x + w / 2, c1, w, color=BLUE, label="CRYSTAL-1: US goal machinery + certified Dow rule")
 for bars in (b1, b2):
     for b in bars:
@@ -51,7 +51,7 @@ def box(ax, x, y, w, h, text, ec, fc="white", fs=9.5, lw=1.6):
     ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fs, color=INK)
 
 ax = axes[0]
-ax.set_title("CHRL / R6c — transparent LAYERS, opaque core", fontsize=12, color=INK)
+ax.set_title("CHRL — transparent LAYERS, opaque core", fontsize=12, color=INK)
 box(ax, 0.4, 7.6, 9.2, 1.6, "3 readable layers: risk (20d) → groups → stocks (5d)\n+ guardrails: pacing, confidence scaling, top-K, buy gate", BLUE)
 box(ax, 0.4, 4.4, 9.2, 2.4, "the core: 64-dimensional UNNAMED latent\nmemory smeared through the network\n~214 tuning knobs", RED, fc="#fdeeee")
 box(ax, 0.4, 1.2, 9.2, 2.4, "interpretability AFTER training:\nprimitive discovery, K-means codes, counterfactual replay\n(a probe of the policy, not the policy)", AMBER, fc="#fdf6e8")
