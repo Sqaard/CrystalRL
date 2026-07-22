@@ -1,0 +1,2867 @@
+{
+ "preregistration": {
+  "R1": "D_live > B, permutation p<0.1 (else only the linter ships)",
+  "R2_R3_R4": "component isolation reads",
+  "R5_R6": "v4: islands-vs-B isolation + cards-vs-islands split (the referee confound fix)",
+  "v4_amendment": "referee-prescribed BEFORE this run: (a) REPAIR step_mult wired into the reject adaptation (v3 shipped it as dead code), (b) joint_defend deduped in the thompson menu, (c) E_islands arm added (portfolio without cards), (d) 20 seeds, (e) DE-TUNED incumbent (anchor levels) for genuine frontier headroom - the v3 certified-incumbent run measured polish-regime saturation (90% dominated rejections) and is archived as _v3_certified_incumbent",
+  "budget": 40,
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ],
+  "gate": "UNCHANGED v12-lineage, shared core",
+  "scope": "procedural skeleton only; LLM writer not in this A/B"
+ },
+ "summary": {
+  "A": {
+   "mean_accepts": 4.55,
+   "sd": 0.97,
+   "mean_N": 40.0,
+   "mean_wealth": 0.067
+  },
+  "B": {
+   "mean_accepts": 4.5,
+   "sd": 0.92,
+   "mean_N": 40.3,
+   "mean_wealth": 0.063
+  },
+  "C": {
+   "mean_accepts": 2.8,
+   "sd": 1.69,
+   "mean_N": 41.0,
+   "mean_wealth": 0.139
+  },
+  "D_live": {
+   "mean_accepts": 3.4,
+   "sd": 1.85,
+   "mean_N": 41.4,
+   "mean_wealth": 0.153
+  },
+  "D_frozen": {
+   "mean_accepts": 2.95,
+   "sd": 1.8,
+   "mean_N": 41.1,
+   "mean_wealth": 0.13
+  },
+  "E_islands": {
+   "mean_accepts": 3.95,
+   "sd": 1.47,
+   "mean_N": 41.6,
+   "mean_wealth": 0.099
+  }
+ },
+ "per_run": {
+  "A": [
+   {
+    "accepts": 7,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 29,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 1,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0172,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0729,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 6,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0851,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 30,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 1,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.3,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0729,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 2,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0697,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 0,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   }
+  ],
+  "B": [
+   {
+    "accepts": 7,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 29,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 1,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0172,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0729,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0172,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1201,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.3,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0729,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 2,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0697,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0351,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   }
+  ],
+  "C": [
+   {
+    "accepts": 0,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.2,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 40,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 3,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1379,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 36,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 3,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1379,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 36,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 0,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.2,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 40,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.3,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1389,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.1389,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0842,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.2889,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 35,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 3,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.35,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 37,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 1,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.1389,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 6,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1273,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 29,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 1,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0689,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 0,
+    "queries": 40,
+    "attempts_N": 46,
+    "wealth_end": 0.0889,
+    "migrations": 0,
+    "lint_refusals": {
+     "duplicate": 6,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 39,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   }
+  ],
+  "D_live": [
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0135,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 5,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.4,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 36,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.3,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.0172,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 29,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 2,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.25,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 39,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 8,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0991,
+    "migrations": 2,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 27,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 5,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.1889,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 37,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 6,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0324,
+    "migrations": 2,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 1
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 29,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 5,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1201,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1389,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.45,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 35,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 44,
+    "wealth_end": 0.0643,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 4,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 37,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0562,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1389,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0562,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 3,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.2389,
+    "migrations": 2,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 36,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1389,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.1201,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   }
+  ],
+  "D_frozen": [
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0273,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 0,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.2,
+    "migrations": 5,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 40,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.3,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 7,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0267,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 1
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 27,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 6,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.25,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 39,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.2889,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 1,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.1889,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 37,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0172,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 1
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 31,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 4,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 2,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1389,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0842,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 3,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0638,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 35,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 2,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 0,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.0889,
+    "migrations": 5,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 39,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0562,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.1389,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 1,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.1389,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1201,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   }
+  ],
+  "E_islands": [
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0562,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0351,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0729,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.0351,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 1
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 44,
+    "wealth_end": 0.1889,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 4,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 37,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0729,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 46,
+    "wealth_end": 0.1889,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 6,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 37,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0351,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0689,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 0,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.2,
+    "migrations": 5,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 40,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.1889,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 37,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 1,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0351,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 32,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 3,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 2,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.3,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 38,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 0,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 43,
+    "wealth_end": 0.0729,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 3,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0729,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 41,
+    "wealth_end": 0.0689,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 1,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0729,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 4,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0689,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 34,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 40,
+    "wealth_end": 0.0729,
+    "migrations": 3,
+    "lint_refusals": {
+     "duplicate": 0,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   },
+   {
+    "accepts": 5,
+    "queries": 40,
+    "attempts_N": 42,
+    "wealth_end": 0.0729,
+    "migrations": 4,
+    "lint_refusals": {
+     "duplicate": 2,
+     "falsified_direction": 0
+    },
+    "distinct_configs": 40,
+    "audit": {
+     "dominated": 33,
+     "adversary_vetoes": 0,
+     "budget_refusals": 0,
+     "wealth_refusals": 0,
+     "holdout_rejections": 2,
+     "inert_windows": 0,
+     "canary_caught": 0,
+     "canary_escaped": 0,
+     "canary_unarmed": 0
+    }
+   }
+  ]
+ },
+ "reads": {
+  "R1_theater_Dlive_gt_B": {
+   "p": 0.9909,
+   "delta": -1.1
+  },
+  "R2_location_C_minus_B": -1.7,
+  "R3_exclusion_B_minus_A": -0.05,
+  "R4_ktd_frozen_minus_live": -0.45,
+  "R5_islands_E_minus_B": {
+   "p": 0.9272,
+   "delta": -0.55
+  },
+  "R6_cards_Dlive_minus_E": -0.55
+ },
+ "verdict": "R1 FAIL (p=0.991, delta=-1.10): at this scale hypothesis-conditioning is THEATER per the preregistration - only the linter ships; the LLM layer needs a different lever or a bigger budget.",
+ "runtime_s": 112,
+ "post_review": {
+  "status": "CONFIRMED_NARROWED (two-direction referee, 3 lenses + judge; full text exp_hlmem_ab_v4_review.json)",
+  "corrected_verdict": "PREREGISTERED READ = WELL-POWERED NULL: R1 D_live-B = -1.1 (p(D>B)=0.991, power 0.87) - no conditioning component ships per prereg. The printed 'THEATER' template sentence is replaced by the narrowed post-hoc story: (1) the C deficit (-1.7, sign-flip p=0.0004, survives x6 Bonferroni) localizes to ONE wire - REPAIR's fixed step_mult 1.6 on the frontier bars keeps steps above the narrow accept band (accepted moves ~0.03-0.06); the prefer/selection channel is harmless-to-helpful (C_prefer_only 4.75 >= B 4.50). (2) CARDS-HARM RETRACTED: R6 was an arm-ladder confound (use_dev ON for D, OFF for E; D_nostep counterfactual 4.25 = neutral) plus D's Thompson menu appended joint_defend on every island. (3) Islands = directional-only (E-B -0.55, p~0.11; the patience counter counts FREE queries contrary to its docstring - the documented design was never tested). (4) Linter UNEXERCISED (6 refusals/800), not 'neutral'; it ships on a-priori no-harm only. (5) HORIZON-CONDITIONAL: at budget 80 C-B INVERTS to +1.95 (p=0.018, post-hoc, unreplicated) because B's own 0.6 shrink self-traps below the accept band - neither fixed step policy is adaptive; 'the memory question moves to the LLM-writer level' is FALSIFIED in-distribution: the root cause is REJECTED_NO_FRONTIER_GAIN conflating too-bold (82% of C's frontier rejects) with too-timid (82% of B's) while deviation_report discards the cand info the gate already returns. (6) KT-D read went the WRONG way here (frozen-live -0.45@40, -1.3@80) - do not cite this run for frozen>=live. (7) Wealth endpoint = cost-composition gauge, not corroboration (C/D die at the FREE frontier stage, ending wealthier). Scope: one substrate, one hand-coded repair map, budget 40 preregistered; sd is population sd (~3% understated); CRN pairing bought no variance reduction on key contrasts; unexplained negative cross-arm correlations (corr(D_live,E)=-0.67) flagged as anomaly.",
+  "next_lever": "v5 prereg (interpretability/preregistration_hlmem_v5.md): split no_frontier_gain too-bold/too-timid (binary failure side only, hygiene-preserving), baseline step floor/re-expansion, islands patience on PRICED queries, horizons 40 AND 80 both preregistered.",
+  "counterfactual_archive": "interpretability/hlmem_ab_v4_counterfactuals/"
+ }
+}

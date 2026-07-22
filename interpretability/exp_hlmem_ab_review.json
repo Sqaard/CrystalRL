@@ -1,0 +1,50 @@
+{
+ "context": "Mandatory two-direction adversarial review of the HL-MEM A/B v3 run (certified-incumbent substrate, 5 seeds) and its printed R1-FAIL/'theater' verdict. Review workflow wf_15a4383f-c70, task w2zae20ue, 2026-07-22. Verbatim referee output below.",
+ "applies_to": "exp_hlmem_ab_report_v3_certified_incumbent.json (the v3 report was archived under this name; its printed verdict is WITHDRAWN by this review)",
+ "referee": {
+  "verdict": "VERDICT_INVALIDATING_BUG",
+  "findings": [
+   {
+    "severity": "invalidating",
+    "what": "REPAIR map is ~90% dead code: step_mult and flip exist only in src/hl/hlmem.py:82-94 and are never applied by exp_hlmem_ab.py (only 'prefer' is wired, plus hardcoded inert/confirm_fail overrides). 79.8% of all DEV records are dominated/no_frontier_gain, whose only directive is the unwired step_mult=1.6, so arm C is behaviorally identical to B on ~92% of feedback (its conditioning could fire after only 15/200 queries; C's knob usage is statistically indistinguishable from B's in the ledger).",
+    "why_it_matters": "The verdict string claims 'hypothesis-conditioning is THEATER', but the deviation-conditioning channel that would fire on the dominant feedback class was never executed. R2 (C-B=-0.2) and the theater claim measure a stub, not the designed mechanism — this is the same class of bug as the self-caught v2 REPAIR-replacement, one layer subtler."
+   },
+   {
+    "severity": "invalidating",
+    "what": "Power at the observed effect is 36%: paired d(D_live-B)=[-1,1,1,0,1], sd_d=0.8; sign-flip simulation gives power 0.36 at delta=+0.4, and 80% power requires delta ~1.0-1.2 accepts (+22-26% relative) with 5 seeds. Minimum achievable p is 0.031. Detecting the observed +0.4 at 80% power needs ~20 seeds.",
+    "why_it_matters": "R1 'FAIL' at p=0.316 cannot distinguish 'no effect' from 'the exact effect size the lit review predicted'. The prereg's own escape clause ('FAIL -> bigger budget needed') applies: the experiment as sized could only ever certify a near-miraculous effect, so the binary theater conclusion does not follow from the read."
+   },
+   {
+    "severity": "invalidating",
+    "what": "Substrate saturation: 798/883 rejections (90%) are dominated/no_frontier_gain (no frontier headroom around the certified incumbent), only 9% are statistical holdout failures; only 2 of 6 arms (joint_defend, lvl_defensive) EVER accept in any arm (t1/t2/H/lvl_reduced are 0/~150 everywhere); the NegativeRegistry fired 0-2 times per arm across all 25 runs.",
+    "why_it_matters": "The memory components condition on holdout-failure vocabulary that occurs in ~8% of queries. The A/B therefore measures polish-regime headroom around an already-certified config, not memory value — the honest verdict is UNDERPOWERED SUBSTRATE, exactly as the referee question hypothesized."
+   },
+   {
+    "severity": "minor",
+    "what": "The +0.4 D lift is attributable to the PortfolioScheduler, not the cards: D_frozen shows the same lvl_defensive accept concentration as D_live (13/39 vs 13/38, vs 6/38 in B) and R4=-0.2. The islands mechanically reallocated ~16 queries away from three 0-accept knobs onto the island containing lvl_defensive. There is no C+portfolio-only arm, so cards vs islands is confounded by design.",
+    "why_it_matters": "If a follow-up is run, the cheapest promising component is the island scheduler alone (a budget-allocation effect needing no memory at all), and the arm decomposition should include it."
+   },
+   {
+    "severity": "minor",
+    "what": "thompson_pick(avail + [\"joint_defend\"]) double-includes joint_defend when island 3 (H, joint_defend) is active, giving it two Beta draws (max bias), and gives D a 3-arm Thompson menu vs the 2-arm epsilon menu — a non-preregistered mechanical selection bias. In this run it biased away from H (0-accept) and thus favored D, not capped it.",
+    "why_it_matters": "A PASS under this harness would have been partially manufacturable via this bias; it should be fixed (dedupe the arm list) before any re-run so a future R1 PASS is clean."
+   },
+   {
+    "severity": "minor",
+    "what": "'Only the linter ships' is not evidenced by this experiment: the linter fired 2/200 times in B (A and B have identical per-seed accepts and wealth), R3=0.0, and the falsified-direction refusal fired 0 times in B/C/D_live. The linter ships purely on the a-priori no-harm argument.",
+    "why_it_matters": "The conclusion sentence reads as if the A/B validated the linter while falsifying the rest; in fact the data is neutral on the linter and weakly POSITIVE (underpowered) on the component declared theater — the printed conclusion inverts the direction of the weak evidence."
+   },
+   {
+    "severity": "note",
+    "what": "Prereg deviation: section 4 specifies arm A as a 'strengthened amnesiac control (best prompt + frozen negative-knowledge block)'; the shipped A is the plain v9 proposer. Defensible since no LLM is in this A/B, but the frozen negative-knowledge block is procedural and was omitted.",
+    "why_it_matters": "A weaker-than-preregistered baseline would normally inflate B-A; here R3=0.0 anyway, which further confirms the exclusion components were inert on this substrate."
+   },
+   {
+    "severity": "note",
+    "what": "No PASS-manufacturing found: lint-refused attempts (N=41.4) are duplicate refusals that leak no gate information and cost no budget under rules identical for B/C/D; budget accounting (absurdity, inert) is symmetric across arms; seeds are CRN-paired; and D_live is WORSE on the preregistered secondary wealth endpoint (0.040 vs B 0.065), spending more alpha-wealth for its extra accept.",
+    "why_it_matters": "The +0.4 is not inflated by an accounting artifact — it is a real but underpowered and mechanism-confounded difference; the harness's arm symmetry is otherwise sound."
+   }
+  ],
+  "corrected_read": "This A/B does not show that hypothesis-conditioning memory is theater; it shows that around the already-certified incumbent the substrate has almost no headroom for ANY proposer (90% of rejections are dominated/no_frontier_gain, only 2 of 6 knob-arms ever produce accepts, and the holdout-failure vocabulary the memory conditions on occurs in ~8% of queries), and that at 5 seeds x 40 queries the design had 36% power at the observed +0.4 delta — it could only have detected a +22-26% relative lift, so the R1 FAIL is a power statement, not an effect-absence statement. Worse, the deviation-conditioning arm was a stub: REPAIR's step_mult/flip directives are dead code, leaving C behaviorally identical to B on ~92% of feedback, so the mechanism named in the verdict was never actually exercised; meanwhile the +0.4 that D did show traces to the portfolio island scheduler (a budget-reallocation effect, replicated in D_frozen), not the learned cards, and is bought at lower alpha-wealth. The honest verdict is UNDERPOWERED SUBSTRATE / INCONCLUSIVE: the linter ships only on a-priori no-harm grounds (it fired 2/200 times; R3=0.0 is neutrality, not validation), the theater claim should be withdrawn, and any re-test needs (a) the REPAIR wiring fixed, (b) the joint_defend double-draw deduped, (c) an islands-only arm, and (d) either ~20 seeds or a substrate with genuine frontier headroom (e.g., a deliberately de-tuned incumbent) before the memory question is answerable at all."
+ }
+}

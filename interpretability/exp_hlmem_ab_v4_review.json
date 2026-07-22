@@ -1,0 +1,182 @@
+{
+ "context": "Two-direction adversarial review of the v4 HARM verdict (workflow wf_466c2b9e-72c, 2026-07-22): 3 lenses (wiring incl. 7 single-wire counterfactual reruns, statistics, mechanism) + closing judge.",
+ "reviews": [
+  {
+   "findings": [
+    {
+     "severity": "major",
+     "what": "Harm direction is real and not outlier-driven at the family level: recomputed paired sign-flip p(harm) = 0.0004 for C-B (delta -1.70, Wilcoxon 0.0009, 13/20 seeds down, leave-one-out p range [0.0002, 0.0009]) and 0.00015 for the pooled conditioning family (C, D_live, D_frozen mean vs B, delta -1.45). C alone survives two-sided x6-read Bonferroni (0.0008 x 6 = 0.005).",
+     "evidence": "exp_hlmem_ab_report.json per_run, 200k sign-flip permutations + scipy Wilcoxon; per-seed deltas C-B = [-7,-1,-2,-2,-5,-2,0,-1,-3,0,-1,0,0,-1,-2,0,-3,1,0,-5]."
+    },
+    {
+     "severity": "major",
+     "what": "The candidate verdict's D_live-specific claim 'B>D_live at p~0.01' is overstated: the harm direction was NOT preregistered (R1 was one-sided BENEFIT), recomputed one-sided p(harm)=0.0165 / Wilcoxon 0.0149, two-sided 0.033, and after x6-read Bonferroni 0.20. The robust harm citation is C (and the pooled family), not D_live.",
+     "evidence": "exp_hlmem_ab.py lines 26-28 preregister 'D_live > B, one-sided p<0.1'; recomputed sign-flip both directions: p(D>B)=0.9908, p(D<B)=0.0165; x6 correction from the 6 reads in the reads dict."
+    },
+    {
+     "severity": "major",
+     "what": "CRN pairing is effectively broken for every key contrast: cross-arm accept correlations are corr(C,B)=-0.10, corr(D_live,B)=+0.15, corr(E,B)=+0.02, and sd(d)~2.0 equals the unpaired sqrt(sd_a^2+sd_b^2) - the paired design bought zero variance reduction. The wiring itself is correct (corr(A,B)=+0.98 shows the shared rng stream works until arm-specific draw consumption diverges: linter uniforms, cards' beta draws). Sign-flip validity is unaffected; only power was lost.",
+     "evidence": "run_arm seeds rng=default_rng(1000+seed) identically per arm (exp_hlmem_ab.py:83) but arms consume different draw counts per attempt (lines 107-149, CardStore.thompson_pick rng.beta in src/hl/hlmem.py); empirical correlation matrix from per_run."
+    },
+    {
+     "severity": "note",
+     "what": "The preregistered R1 FAIL is well-powered, unlike v3: power to detect the +1.1 benefit at alpha=0.1 one-sided with 20 seeds and the observed sd(d) is 0.87 (R1), 0.86 (R2), 0.93 (R5). 'No benefit' is an informative null, not an underpowered one.",
+     "evidence": "Noncentral-t computation with sd(d)=2.00/2.05/1.76 from per_run; v3's 5-seed critique in exp_hlmem_ab_review.json."
+    },
+    {
+     "severity": "minor",
+     "what": "No budget or lint asymmetry manufactures the harm: all 120 runs spent exactly 40 gate queries (min=max=40), attempts_N max 46 vs cap 200, wealth_refusals=0 in every run. Lint refusals are gate-budget-free and fired MORE in the memory arms (C 20, D_live 26, E 31 duplicate refusals vs B 6 across 20 runs) - a small extra-proposal subsidy TO the harmed arms, wrong direction to fake harm.",
+     "evidence": "per_run queries/attempts_N/audit/lint_refusals fields; run_arm lines 131-151 (lint refusals skip queries+=1)."
+    },
+    {
+     "severity": "minor",
+     "what": "The wealth_end secondary endpoint corroborates rather than contradicts the harm: gate mechanics make dominated/no-frontier-gain rejections FREE and only holdout-stage tests costly (accepts pay +0.05), so C/D's higher wealth (0.13-0.15 vs 0.065) means their queries died at the free admission stage (priced holdout tests: 1.7-2.0/run vs 3.0-3.1 for A/B; dominated 34.5-35.4 vs 32.2). Within-arm corr(wealth_end, accepts) is negative in all six arms, and wealth was never binding (0 wealth_refusals), so wealth cannot explain the accept deficit - it is a cost-composition gauge, not a success gauge.",
+     "evidence": "hl_v4_over_crystal1.py review(): REJECTED_DOMINATED/NO_FRONTIER_GAIN return before the alpha_t charge, wealth -= alpha_t/(1-alpha_t) only on priced rejects, wealth += 0.05 on accept; per_run audit means."
+    },
+    {
+     "severity": "minor",
+     "what": "'The linter is neutral' is the wrong label - the linter was essentially UNEXERCISED in arm B (6 duplicate refusals across 800 queries, 0 falsified-direction refusals) and R3's -0.05 comes from a single seed (19/20 exact ties, corr(A,B)=0.98). Additionally the prereg prediction 'refusing cannot lose accepts' is mechanically false: the refusal handler mutates step[arm] by uniform(0.5,2.0) and can flip direction (exp_hlmem_ab.py:139-144), which is how seed 3 lost one accept.",
+     "evidence": "per_run lint_refusals totals; per-seed B-A deltas all 0 except seed 3 = -1."
+    },
+    {
+     "severity": "note",
+     "what": "Ledger-level mechanism statistics confirm the pre-run smoke hypothesis: mean first-accept query 8.8 (A/B) vs 19.9 (C), 19.9 (D_live), 17.8 (D_frozen), 12.6 (E); zero-accept runs only in memory arms (C 3, D_frozen 2, E 1, A/B 0); E_islands' 79 accepts are 100% lvl_defensive and 0 joint_defend (joint_defend sits on island 3, reachable only after >=16 quiet queries at patience=8). REPAIR's dominated->step_mult 1.6 (effective shrink 0.96, exp_hlmem_ab.py:174-185) delays the small defensive steps that accept; the harm is a real substrate-prior mismatch, not a wiring bug - REPAIR reads 'dominated' as 'too timid' but on this substrate dominated means 'defensive jump too large, return crushed'.",
+     "evidence": "exp_hlmem_ab_ledger.jsonl (4800 priced queries, matches 6x20x40 exactly); accept-by-knob and accept-query-index tabulation; hlmem.py REPAIR map."
+    },
+    {
+     "severity": "note",
+     "what": "Conditioning arms also destabilize acceptance counts, an independent confirmed effect: sd 1.69-1.86 vs 0.92-0.97 for A/B, Levene p=0.006, and accept distributions shift wholesale (C range 0-6 vs B range 2-7 with mode 4-5).",
+     "evidence": "per_run accept count distributions; scipy levene on pooled A/B vs C/D_live/D_frozen."
+    },
+    {
+     "severity": "note",
+     "what": "Unexplained anomaly, not validity-threatening: strong NEGATIVE cross-arm correlations among memory arms sharing a seed - corr(D_live,E)=-0.67 (permutation p=0.001, x15 pairs Bonferroni 0.016), corr(D_frozen,E)=-0.55, corr(C,D_frozen)=-0.48. Code shows no shared state across run_arm calls (fresh gate/registry/cards/portfolio/rng per run), so this is either chance under 15-pair scanning or a seed-mediated anti-symmetric dynamic; it does not bias the sign-flip tests but flags that memory-arm outcomes are chaotic in the early shared draws.",
+     "evidence": "Correlation matrix from per_run + 20k-permutation p; run_arm constructs all state locally."
+    },
+    {
+     "severity": "note",
+     "what": "Report sd values verified but are population sd (np.std ddof=0); sample sd is ~3% larger (e.g. D_live 1.90 vs reported 1.85). Cosmetic. The report's R1 p=0.991 reproduces exactly (0.9908 at 200k flips).",
+     "evidence": "exp_hlmem_ab.py:236 np.std default ddof=0; recomputation."
+    }
+   ],
+   "lens": "STATISTICS: recomputed all preregistered reads from per_run (20 seeds x 6 arms), sign-flip permutation in both directions at 200k flips, Wilcoxon, leave-one-out, CRN pairing verification from code + empirical cross-arm correlations, achieved power at the preregistered delta, budget/wealth accounting audit, and ledger-level accept-timing/knob tabulation.",
+   "verdict": "HARM_CONFIRMED",
+   "mechanism_check": "The pre-run smoke-ledger hypothesis is confirmed in the full run data: (1) REPAIR maps the dominant failure bar (dominated, 34.5-35.4 of 40 queries/run in C/D vs 32.2 in A/B) to step_mult 1.6, making the effective reject shrink 0.6*1.6=0.96 - the step never contracts, so the small joint/level defensive moves that pass the frontier arrive ~11 queries later (mean first accept 19.9 vs 8.8), burning over a quarter of the 40-query budget; C also produced the only 3 zero-accept runs. (2) Islands delay access to the accepting arms exactly as predicted: E_islands' accepts are 79/79 lvl_defensive and 0 joint_defend (island 3 needs >=16 quiet queries at patience=8), first accept 12.6 vs 8.8, delta -0.55 at p=0.11 (directional, not individually significant). The wealth secondary endpoint independently corroborates: C/D's higher wealth comes from dying at the FREE dominated stage (1.7-2.0 priced tests/run vs 3.0-3.1), wealth never binding in any run. This is a genuine substrate-prior mismatch (REPAIR reads dominated as 'too timid' where it actually means 'defensive jump too large'), not a harness artifact - but it is measured on ONE substrate with one hand-coded map, so the verdict's 'on a headroom substrate' scoping must be kept. Caveats folded into findings: the D_live-specific p~0.01 harm claim is post-hoc-directional and dies under x6 multiplicity (cite C at p=0.0004 or the pooled family at p=0.00015 instead), and 'linter neutral' should read 'linter unexercised'."
+  },
+  {
+   "lens": "WIRING CORRECTNESS — full read of interpretability/exp_hlmem_ab.py, src/hl/hlmem.py, src/hl/mechanism_bandit.py, the Crystal1V4Gate (interpretability/hl_v4_over_crystal1.py), the v4 ledger/report, plus 7 counterfactual re-runs (20 seeds each) that reproduced B/C/D_live per-seed exactly before perturbing single wires.",
+   "verdict": "MIXED",
+   "findings": [
+    {
+     "severity": "invalidating",
+     "what": "R6 (cards = D_live - E) is confounded by the arm ladder: use_dev is ON for D_live/D_frozen and OFF for E_islands (exp_hlmem_ab.py line 89), so D carries the REPAIR step_mult harm that E lacks. R6 measured cards+step_mult, not cards. Counterfactual D_nostep (cards+islands+live last_bar, baseline 0.6 shrink) = 4.25 +- 0.94 vs D_live 3.40 +- 1.85 and E 3.95 - cards are NEUTRAL-to-mildly-positive, and half of D's seed variance is step_mult-injected. The candidate verdict's clause 'cards ... actively HARM' is manufactured by this confound and must be retracted; only the step_mult component and (weakly) islands harm.",
+     "evidence": "C:\\Users\\ivanp\\RL for Time-Series Forecasting\\data_RLagent_for_Joseph\\interpretability\\exp_hlmem_ab.py lines 89 + 176-185; counterfactual run (scratchpad hlmem_counterfactual + D_nostep script): D_repro reproduced D_live per-seed exactly [4,4,2,4,5,1,8,2,4,6,4,1,5,1,4,1,4,3,1,4], D_nostep = [4,5,5,6,4,2,5,4,4,5,4,4,4,5,2,5,4,5,4,4]."
+    },
+    {
+     "severity": "major",
+     "what": "The C-arm harm is REAL, correctly measured, and localizes entirely to the step_mult wire. Component split at 20 seeds: C_prefer_only (DEV conditions selection only, baseline shrink untouched) = 4.75 +- 1.41 >= B 4.50; C_mult_only (step_mult wired, prefer disabled) = 2.70 +- 1.55 ~= shipped C 2.80. Mechanism verified from step instrumentation: accepts live in a narrow effective-step band (median 0.042, q10-q90 0.028-0.060; initial step 0.10), reached only by the baseline 0.6 annealing; REPAIR maps the dominant bars (dominated+no_frontier_gain = 86-88% of all rejects) to mult 1.6 -> effective shrink 0.96, so C's steps never anneal into the band. joint_defend inherits step[t2]/step[lvl_defensive] and never self-adapts (the arm != joint_defend guard, symmetric across arms), so the poisoned steps also cut joint_defend's accept rate 33%->20% and the bandit then under-pulls it (209->161 proposals) - the amplifier that makes -1.7 out of a one-knob wire.",
+     "evidence": "Counterfactual output: B_repro 4.5 (per-seed == shipped B), C_composed 2.8 (per-seed == shipped C), C_prefer_only 4.75, C_mult_only 2.7; ledger: A joint_defend 70/209 accepts vs C 32/161; step log: accepted eff_step median 0.0424 [0.0276, 0.0596], rejected q90 0.2716."
+    },
+    {
+     "severity": "major",
+     "what": "Both readings of the REPAIR wiring fail; the shipped composition is the CHARITABLE one. Composing (step *= 0.6*mult, shipped) gives 2.80; letting step_mult REPLACE the shrink (the literal reading of hlmem.py's 'dominated = too timid -> bigger step' intent) gives 0.45 +- 1.36 with 18/20 seeds at ZERO accepts - steps grow to the 0.5-range clip and never re-enter the accept band. Neither reading rescues C, so the harm is design-real, not a wiring-choice artifact. Root cause is in the frozen DEV vocabulary, not the multiplier value: REJECTED_NO_FRONTIER_GAIN collapses 'DD gain < 0.5pp' (too timid) and 'ann give-up > 1pp' (too aggressive) into one bar with margin_band hardcoded far_miss (hlmem.py deviation_report lines 47-49; gate lines 200-205), so ANY fixed step_mult on frontier bars is an unfalsifiable coin-flip prior - here anti-correlated with reality (rejected-step q90 = 0.27, a heavy too-big mass). A repair would split the bar using the gate's already-computed cand vec (info['cand']) without leaking window identities.",
+     "evidence": "C_replace = [0,0,0,0,0,0,0,0,0,4,0,5,0,0,0,0,0,0,0,0]; src/hl/hlmem.py lines 47-49, 81-95; hl_v4_over_crystal1.py lines 197-205 (dominated and no_frontier_gain both fire before any priced/margin information exists)."
+    },
+    {
+     "severity": "minor",
+     "what": "D's Thompson menu appends joint_defend on EVERY island (line 109: avail + ['joint_defend'], deduped correctly on island 3), breaching the island constraint in D's favor - D gets universal access to the top accepting arm while E only reaches it on island 3. This further contaminates the D-vs-E comparison (in the conservative direction for the harm claim: D was advantaged and still trailed) and means R6 was never an islands-matched split even absent the use_dev confound.",
+     "evidence": "exp_hlmem_ab.py line 109; PortfolioScheduler.ISLANDS in hlmem.py line 184; ledger: E joint_defend proposals 77 (0 accepts, all 79 E accepts via lvl_defensive) vs D_live 209."
+    },
+    {
+     "severity": "minor",
+     "what": "PortfolioScheduler.note() counts FREE (unpriced) dominated/no-gain rejections and absurdity refusals toward 'quiet', though its docstring specifies 'no accept in patience PRICED queries' - rotation runs ~5x faster than designed since ~85% of queries are free rejections. Symmetric across D and E so it cannot manufacture the C-B gap, but it changes what 'islands with patience=8' actually tested, and the measured islands cost (E-B = -0.55, one-sided p for B>E only ~0.07) is a property of this accelerated rotation, not the documented design.",
+     "evidence": "hlmem.py lines 181-203 docstring vs code; exp_hlmem_ab.py line 169 calls portfolio.note(ok) on every gate query; audit: 645-708 of 800 queries per arm are free frontier rejections."
+    },
+    {
+     "severity": "note",
+     "what": "No budget/lint/absurdity asymmetry mechanically depresses C/D/E: every arm consumed exactly 800/800 gate queries (40x20); the 200-attempt cap never bound (max N=46); linter refusals are budget-free and tiny (A 0, B 6, C 20, D_live 27, D_frozen 22, E 32 per 800); REFUSED_ABSURDITY_ALARM never fired. The wealth ledger independently confirms the harm sits at the FREE frontier stage: C/D END with MORE alpha-wealth (0.130-0.153 vs A/B 0.063-0.067) and ~half the priced holdout rejections (34-40 vs 60-62) - they were not starved, they proposed out-of-band candidates.",
+     "evidence": "exp_hlmem_ab_report.json summary + per_run audits; ledger verdict counts per arm."
+    },
+    {
+     "severity": "note",
+     "what": "Remaining checklist items verified clean: (3) joint_defend dedupe is in and works (dict.fromkeys; island-3 menu is exactly [H, joint_defend]); (4) E_islands' fallback bandit.select is island-constrained - the 'a in ARMS8' filter is a no-op since every island member is in ARMS8 (which includes joint_defend), confirmed empirically by E's 77 joint_defend proposals vs 209 for A/B; (5) the de-tuned incumbent is bitwise-identical across arms via the shared fresh_gate, equals the exact KNOBS8 anchors (n_off_anchor=0), and seeds the frontier identically; gate verdict strings all match deviation_report's cases; bandit arms include joint_defend so no silent update mismatch; paired-seed sign-flip permutation is a valid test and C-B is negative in 14/20 seeds (positive in 1). R3's linter-neutrality read (B-A = -0.05, near-identical per-seed vectors) is genuine: only ~6 duplicates arose in 800 proposals, so the linter had almost nothing to save.",
+     "evidence": "exp_hlmem_ab.py lines 74-79, 104-114; hl_v8_rebalance_lane.py line 40 (ARMS8 includes joint_defend); mechanism_bandit.py; ledger per-arm proposal/accept counts; report per_run accept vectors."
+    }
+   ],
+   "mechanism_check": "The pre-run working hypothesis is CONFIRMED and sharpened by direct instrumentation and single-wire counterfactuals (my replica reproduced shipped B, C, and D_live per-seed exactly before perturbation). Accepting moves are small defensive steps: on this substrate accepts come only from joint_defend/lvl_defensive at effective step sizes in a narrow band (median 0.042, q10-q90 0.028-0.060 vs initial 0.10), which the baseline x0.6 reject-shrink reaches in 1-2 cycles. REPAIR maps the two dominant bars (dominated/no_frontier_gain, 86-88% of rejects) to step_mult 1.6, making the effective shrink 0.96 - the step never anneals into the band; inert (1.8 -> 1.08) grows it. C_mult_only (2.70) reproduces the full C deficit; C_prefer_only (4.75) shows the selection-conditioning channel is harmless-to-helpful, so 'the hand-coded conditioning harms' is too broad - ONE wire harms. The alternative reading (step_mult replaces the shrink) is strictly worse (0.45, 18/20 seeds at zero): neither reading rescues C because the DEV vocabulary itself cannot tell too-timid from too-aggressive on frontier bars (margin_band is hardcoded far_miss there), so any fixed step multiplier is a blind prior that this substrate falsifies. Islands' contribution is real but weak (-0.55, p~0.07) and operates via delayed access to the accepting family (E: 0 joint_defend accepts); cards contribute ~nothing once step_mult is removed (D_nostep 4.25). Net: HARM_CONFIRMED for the step_mult component with the measurement clean, HARM_MANUFACTURED for the cards clause (R6's use_dev confound); hence MIXED for the candidate verdict as phrased. Suggested amendment before ledgering: replace 'REPAIR priors, cards, islands actively HARM' with 'the REPAIR step-multiplier priors harm (-1.7, and both wiring readings fail because the frozen DEV vocabulary is information-starved on frontier bars); islands cost ~-0.55 (weak); cards and the prefer channel are neutral; the linter is neutral for lack of duplicates'."
+  },
+  {
+   "lens": "MECHANISM — instrumented deterministic replay of run_arm (0 mismatches vs ledger on all 40 B/C runs), step-scale logging at every priced attempt, frontier-rejection side-classification (too-bold vs too-timid), selection-channel decomposition, island access-delay traces, and a budget-80 counterfactual with the verbatim untouched harness (ledger redirected to scratchpad).",
+   "verdict": "MIXED",
+   "findings": [
+    {
+     "severity": "invalidating",
+     "what": "The headline claim 'hand-coded procedural memory conditioning actively HARMS acceptance' is a budget-horizon artifact for the REPAIR arms: at budget 80 with the identical harness C-B INVERTS from -1.7 (p 0.0004) to +1.95 (p 0.018) and D_live-B from -1.1 to +1.35 (p 0.053), because A/B are step-collapse-trapped (literally 0 accepts in queries ~25-80, curves flat from q~22) while C/D are still climbing at q=80. The generalization 'the memory question moves to the LLM hypothesis-writer level' is falsified in-distribution by the harness itself.",
+     "evidence": "cf80 counterfactual (scratchpad/cf80.json, verbatim X.run_arm, budget=80): A 4.55 flat from q30, B 4.50 flat from q30, C 6.45 (curve 2.80@40 -> 6.45@80, still rising), D_live 5.85, D_frozen 4.55, E 3.95 flat. First-40 means reproduce the v4 report exactly (determinism verified). Paired sign-flip p for C>B at 80 = 0.0184 (13 wins/4 losses)."
+    },
+    {
+     "severity": "major",
+     "what": "The true mechanism refines the smoke-ledger hypothesis: the joint_defend accept band is move-size 0.036-0.111 vs initial scale 0.15. B's 0.6 shrink crosses the band in ~5 rejects (accepts early, median accepted move 0.059) then overshoots BELOW it and self-traps (median step 0.0093 by q40; 171/210 late defensive frontier-rejects are TOO-TIMID dd_gain<=EPS_DD). C's 0.96 effective shrink spends ~15-25 queries ABOVE the band (165/229 defensive frontier-rejects are TOO-BOLD ann<-1%; median step 0.114 at q40, still in-band) then harvests steadily. Neither policy is adaptive; the amnesiac wins iff the horizon ends before its collapse.",
+     "evidence": "Instrumented replay (scratchpad/steps_log.json, 1600 priced attempts): B accepts med move 0.0590 (q10-q90 0.039-0.090), C accepts med 0.0864; median (step_t2+step_lvl) trajectory B 0.15->0.0093 vs C 0.15->0.1136 over 40 queries; no_frontier_gain side-split B 171 timid/39 bold vs C 64 timid/165 bold; B first jd accepts q6-8, C q13-32 or never."
+    },
+    {
+     "severity": "major",
+     "what": "The REPAIR prior is not generically 'unable to know the accepting step scale' — it is mis-signed on a direction-AMBIGUOUS bar: REJECTED_NO_FRONTIER_GAIN conflates too-bold (return give-up >1%) and too-timid (dd gain <0.5pp), and REPAIR hard-codes step_mult 1.6 ('too timid') for it. The gate already discloses the disambiguating cand_vec (dev-window data, Thresholdout-hygiene-safe) in info, and deviation_report() drops it. Splitting the bar would let the same deterministic machinery condition step size correctly — the actionable fix is vocabulary enrichment, not abandoning the procedural layer.",
+     "evidence": "hl_v4_over_crystal1.py:199,205 return info={'cand': cand_vec} for both frontier rejections; src/hl/hlmem.py deviation_report maps both to far_miss with no use of info['cand'] (verified by source inspection); REPAIR['no_frontier_gain']={'step_mult':1.6}. Empirically the bar was 82% too-bold for C and 82% too-timid for B — one fixed multiplier cannot be right for both sides."
+    },
+    {
+     "severity": "major",
+     "what": "The budget-40 harm is honestly measured (direction-i confirmed at that horizon): no wiring bug found — REPAIR step_mult is applied exactly as documented, linter refusals cost no gate budget symmetrically in B/C/D/E, the joint_defend dedupe fix is present, CRN pairing holds, and the harm is NOT an accept-counting artifact: on the real objective (cumulative incumbent maxDD improvement) C also loses at budget 40, 0.0265 vs B 0.0406, paired sign-flip p 0.0006.",
+     "evidence": "Determinism check: instrumented copy reproduced ledger accept counts for all 40 (arm,seed) B/C runs with 0 mismatches; progress computed as sum of accepted (d_ann,d_dd) deltas from the instrumented log; per-seed dDD C-B negative in 17/20 seeds."
+    },
+    {
+     "severity": "major",
+     "what": "The islands component is the one genuinely structural harm, but it is statistically unestablished: patience=8 mechanically burns queries 1-8 on the dead (t1,t2) island in 20/20 E seeds (B harvests 0.95 accepts in that window, ~= the entire -0.55 E deficit), E never accepts joint_defend (0/77, island 3 arrives after step collapse), and a longer budget does NOT flip it — E is flat at 3.95 from q=20 through q=80 (trap, not delay). Yet E-B is p 0.11 one-sided, and p 0.20 after excluding the single 0-accept seed 9 whose trace shows the rotation carousel cycling dead islands for all 40 queries.",
+     "evidence": "Ledger: E first lvl_* query = 9 in 20/20 seeds; E accepts 0 in queries 1-8 vs B 19; E island query split 288/353/159 (36% on the dead island); cf80 curve E 3.95@40 = 3.95@80; seed-9 trace shows 5 full island rotations, all no_frontier_gain/dominated."
+    },
+    {
+     "severity": "minor",
+     "what": "The 'B>D_live at p~0.01' harm statistic is a post-hoc direction flip of a preregistered ONE-SIDED read (R1 preregistered D_live>B; harm was never a preregistered hypothesis), taken without multiplicity control over 6 reads; and the three significant harms (C, D_live, D_frozen) all carry the same REPAIR step_mult channel, so they are one mechanism measured three times, not independent confirmations.",
+     "evidence": "Recomputed one-sided harm p-values: B-C 0.0004, B-D_live 0.0163, B-D_frozen 0.0011, B-E 0.1119 — the significant set is exactly the use_dev=True arms; report prereg block lists R1 as 'D_live > B ... else only the linter ships'."
+    },
+    {
+     "severity": "minor",
+     "what": "The alternative explanation for C's deficit (prefer-path steering to non-accepting arms) is refuted: the only prefer-to-dead-arms route (holdout_ni -> H/t2) fired 0 times in all 20 C runs; C's joint_defend share drop (26%->20%) is a bandit-credit knock-on of its early step-scale failures, and decomposition attributes ~73% of C's joint_defend accept deficit to per-attempt success rate (step scale) vs ~27% to attempt allocation.",
+     "evidence": "Ledger: C holdout_ni count = 0; jd accept rates B 69/209=0.33 vs C 32/161=0.199; counterfactual rate*attempts decomposition (0.199x209=41.6 vs actual 32)."
+    },
+    {
+     "severity": "note",
+     "what": "Two secondary reads deserve correction in the write-up: (a) D_frozen loses to D_live by 1.3 accepts at budget 80 (p 0.06) — evidence AGAINST the in-house KT-D frozen>=live expectation on this substrate; (b) C's hand-prior does have a real catastrophic-variance failure mode that survives the horizon fix: seeds 0 and 19 end with 0-1 accepts even at budget 80 (C sd 3.34 vs B 0.92) because the slow shrink can strand the step above the band for an entire run — the honest structural criticism of fixed hand priors is tail risk, not mean harm.",
+     "evidence": "cf80: D_live 5.85 vs D_frozen 4.55 (p 0.062); C per-seed at 80 = [0,1,4,...,12], sd 3.34; linter remains neutral throughout (A==B in 19/20 seeds, 107 lint events in 4907 records)."
+    }
+   ],
+   "mechanism_check": "Verified end-to-end: (1) instrumented verbatim copy of run_arm reproduced the ledger's accept counts for all 40 B/C (arm,seed) runs exactly (0 mismatches), confirming the ledger reflects the shipped code and the run is deterministic; (2) the budget-80 counterfactual used the UNMODIFIED exp_hlmem_ab.run_arm (only LEDGER path redirected to scratchpad; real ledger untouched) and its first-40-query means match the v4 report to the digit for all 6 arms; (3) REPAIR step_mult wiring, linter budget symmetry, joint_defend dedupe, and inert/absurdity accounting were code-audited and found symmetric across arms — the harm is not a harness wiring bug. What IS manufactured: the harm-verdict's scope. Budget 40 samples only the pre-band-crossing regime of C's slow shrink while hiding B's post-collapse regime; at 80 queries the ranking inverts for the REPAIR arms. The correct verdict is: REPAIR's fixed step_mult on a direction-ambiguous bar trades early harvest for late persistence (net negative at 40, net positive at 80, catastrophic-variance tails either way); the island scheduler with patience=8 over dead mechanism families is a genuine horizon-independent trap but its measured deficit is not significant; the linter is neutral; and the cheapest high-value fix is splitting REJECTED_NO_FRONTIER_GAIN into too-bold/too-timid using the cand_vec the gate already discloses — a deterministic fix, not an LLM-level one."
+  }
+ ],
+ "judge": {
+  "final_verdict": "CONFIRMED_NARROWED",
+  "corrected_read": "HL-MEM A/B v4 (20 seeds x 40 gate queries, de-tuned incumbent, v12-lineage gate UNCHANGED): the preregistered read is a well-powered NULL — R1 D_live−B = −1.1 (p(D>B)=0.991, power 0.87 to detect the preregistered +1.1) — the procedural memory skeleton does not help this proposer at the preregistered horizon, so per prereg no conditioning component ships. The post-hoc harm story is real but far narrower than the candidate verdict: the entire C deficit (−1.7, paired sign-flip p=0.0004, survives x6 multiplicity; also real on the underlying objective, cumulative maxDD progress p=0.0006) localizes to ONE wire — REPAIR's fixed step_mult 1.6 on the frontier bars (effective reject-shrink 0.6x1.6=0.96) keeps step sizes above the narrow accept band (accepted moves ~0.03–0.06), delaying first accepts from ~9 to ~20 queries. The prefer/selection channel is harmless-to-helpful (C_prefer_only 4.75 vs B 4.50); cards are NEUTRAL — the R6 \"cards harm\" was an arm-ladder confound (use_dev ON for D, OFF for E; D_nostep counterfactual 4.25) and is RETRACTED; islands are a mechanism-verified but statistically unestablished trap (E−B −0.55, p≈0.11; patience counts free queries contrary to its docstring, so the documented design was never tested); the linter was UNEXERCISED (6 duplicate refusals/800), not \"neutral\". The \"B>D_live at p~0.01\" citation is a post-hoc direction flip of a one-sided benefit prereg and dies under x6 correction — the citable harm is C (or the pooled use_dev family, p=0.00015, which is one mechanism measured three times, not three confirmations). Critically, the harm is HORIZON-CONDITIONAL, not fundamental: at budget 80 with the identical harness C−B INVERTS to +1.95 (p=0.018, post-hoc counterfactual) because B's own 0.6 shrink overshoots below the band and self-traps (0 accepts in queries ~25–80) — neither fixed step policy is adaptive, and the clause \"the memory question moves to the LLM hypothesis-writer level\" is FALSIFIED in-distribution: the root cause is that REJECTED_NO_FRONTIER_GAIN conflates too-bold (82% of C's frontier rejects) with too-timid (82% of B's) and deviation_report discards the cand info the gate already returns (hl_v4_over_crystal1.py:199,205). Correct next lever, deterministic and cheap: split the no_frontier_gain bar into too-bold/too-timid using only WHICH frontier inequality failed (binary, hygiene-preserving), add a step re-expansion/floor fix for the baseline collapse, fix the islands patience counter to priced queries, and rerun the same A/B with the horizon preregistered at both 40 and 80. Scope guard: all of this is one substrate, one hand-coded repair map; and C's catastrophic-variance tail (seeds at 0–1 accepts even at budget 80, sd 3.34) is the honest structural criticism of fixed hand priors that survives the horizon fix.",
+  "required_amendments": [
+   "RETRACT the cards-harm clause: R6 (D_live−E) confounds cards with the REPAIR step_mult (use_dev ON for D, OFF for E — exp_hlmem_ab.py line 89) AND D's Thompson menu appends joint_defend on every island (line 109), so R6 was never an islands-matched split; D_nostep counterfactual = 4.25 shows cards neutral-to-mildly-positive.",
+   "REPLACE 'B>D_live at p~0.01' with the citable harm: C−B −1.7 at sign-flip p=0.0004 (survives x6 Bonferroni; leave-one-out stable; confirmed on cumulative maxDD progress p=0.0006), or the pooled use_dev family p=0.00015 — noting harm was NOT preregistered (R1 was one-sided benefit), D_live harm alone is p=0.20 after x6, and the three use_dev arms are ONE mechanism measured three times.",
+   "SCOPE the harm claim explicitly: budget-40 only, single substrate, single hand-coded REPAIR map. Annotate the budget-80 inversion (C 6.45, D_live 5.85 vs B 4.50 flat from ~q22; C>B p=0.018) and its mechanism (B's 0.6 shrink self-traps below the accept band, median step 0.0093 by q40, 171/210 late frontier rejects too-timid) — mark the counterfactual as post-hoc/unreplicated.",
+   "DELETE 'the memory question moves to the LLM hypothesis-writer level' as falsified; REGISTER the deterministic next lever: split REJECTED_NO_FRONTIER_GAIN into too-bold/too-timid using only the binary failure side (which frontier inequality failed) — the gate already returns cand info on that verdict and deviation_report drops it (src/hl/hlmem.py:48-49) — plus a baseline step re-expansion/floor.",
+   "RELABEL 'linter neutral' as 'linter UNEXERCISED' (B: 6 duplicate refusals per 800 queries, 0 falsified-direction; B−A = −0.05 from a single seed) and correct the prereg claim 'refusing cannot lose accepts' — mechanically false, the refusal handler mutates step/direction (exp_hlmem_ab.py:139-144).",
+   "REPORT islands as directional-only: E−B −0.55 at p≈0.11 (p≈0.20 excluding the seed-9 zero-accept carousel run), with the docstring/code mismatch — PortfolioScheduler.note() counts free (unpriced) rejections toward quiet, so rotation ran ~5x faster than the documented patience=8-priced design; the mechanism (queries 1-8 burned on the dead t1/t2 island in 20/20 seeds, 0/77 joint_defend accepts, no rescue at budget 80) is verified but the deficit is not significant.",
+   "NOTE the KT-D read went the WRONG way on this substrate: R4 frozen−live = −0.45 at budget 40 and −1.3 at budget 80 (p=0.06) — do not cite this run as supporting frozen>=live admission-gating.",
+   "ANNOTATE the wealth secondary endpoint as a cost-composition gauge, not success corroboration: C/D end wealthier (0.13-0.15 vs 0.065) because their proposals die at the FREE frontier stage (1.7-2.0 priced holdout tests/run vs 3.0-3.1); within-arm corr(wealth, accepts) is negative in all six arms; wealth never bound (0 refusals).",
+   "STATISTICS footnotes: report sd is population sd (np.std ddof=0, ~3% understated); CRN pairing bought zero variance reduction on the key contrasts (corr(C,B)=−0.10, corr(D_live,B)=+0.15) though sign-flip tests remain valid; flag the unexplained negative cross-correlations among memory arms sharing a seed (corr(D_live,E)=−0.67, x15 Bonferroni p=0.016) as an anomaly with no shared-state explanation found in code.",
+   "LOG the verified mechanism package with the entry: accept band 0.028-0.060 (median accepted move ~0.042-0.059 vs initial step 0.10-0.15), effective shrink 0.96 on dominated/no_frontier_gain (86-88% of rejects), first-accept 8.8 (A/B) vs 19.9 (C), frontier-reject side-split 82% too-bold (C) vs 82% too-timid (B); archive the three lens counterfactual scripts/outputs (D_nostep, C_prefer_only/C_mult_only/C_replace, cf80) alongside the ledger."
+  ],
+  "open_risks": [
+   "The budget-80 inversion is itself a post-hoc, unreplicated counterfactual (one run, 20 seeds, never preregistered): any future 'REPAIR helps at long budgets' claim needs the horizon fixed in a v5 prereg BEFORE running, or it repeats the exact scope error being corrected here in the opposite direction.",
+   "Single-substrate scoping: harm, inversion, and the accept-band geometry (~0.03-0.06) were all measured on one de-tuned-incumbent headroom substrate; the band and therefore the sign of any fixed step prior may differ on other substrates — the referee-prescribed de-tuning itself chose the regime.",
+   "Hygiene of the vocabulary-split fix: the gate returns raw cand_vec (dev-window ann/maxDD) on frontier rejections; conditioning proposals on raw values would erode the Thresholdout tercile-band design. The split must disclose only the binary failure side, and any deviation_report vocabulary change should be checked against shared-core rules (business/SCOPE_AND_BRANCHES.md) even though the gate itself is untouched.",
+   "Both baseline policies are non-adaptive: A/B's step collapse (self-trap below the band after ~q22) means every arm was compared against a defective control — component conclusions partly reflect control pathology, and a step-floor fix will shift ALL arm means, potentially reordering them.",
+   "C's catastrophic-variance tail survives the horizon fix (seeds at 0-1 accepts even at budget 80, sd 3.34): fixed hand priors carry tail risk even where mean-positive — a mean-based v5 read could ship a tail-fragile component.",
+   "The islands trap is mechanism-verified but statistically unestablished, AND the patience counter tested an undocumented design (free-query quiet): the component can be neither shipped nor killed on this run; fixing note() to priced queries changes the tested object again.",
+   "Unexplained strong negative cross-arm correlations among memory arms sharing a seed (down to −0.67) with no shared state found in code: if a real seed-mediated dynamic rather than 15-pair scanning noise, 20-seed arm means are more fragile than their sds suggest.",
+   "The linter ships (per prereg) on absence of evidence: it was never exercised in a duplicate-rich regime, and its refusal handler's step mutation is an untested side channel that already cost one accept."
+  ]
+ }
+}
