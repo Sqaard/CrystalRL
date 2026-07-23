@@ -1,0 +1,242 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\setlength{\emergencystretch}{2.5em}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.4cm}
+\usepackage{natbib}
+\usepackage{enumitem}
+\setlist{nosep}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\ind}{\mathbf{1}}
+
+\title{\vspace{-1.2em}CrystalRL: Measuring and Engineering Legibility\\ in Reinforcement Learning\\
+\large Project proposal (write-the-paper-first draft)}
+\author{Ivan Pavliuk}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+\vspace{-2.2em}
+
+\begin{abstract}
+\noindent When an RL agent acts in a high-stakes domain, ``why did it do that?'' must have a
+verifiable answer --- and if the agent is allowed to \emph{modify itself}, legibility becomes a
+safety precondition, not a convenience. We propose a measurement-first research program on
+interpretable RL, built on a working three-generation system (a black-box hierarchical trader,
+its best post-hoc explanation program, and a successor rebuilt legible-by-construction) and one
+scalar, $\textsc{CrystalScore} = F \times S \times S\!t$, on which all of them can be scored and
+\emph{lose}. Preliminary results: rebuilding the core moved the score from $0.15$ to $0.92$ on
+real market data, the entire gap being simulatability. We propose three studies the existing
+infrastructure makes cheap and decisive: (A) does machine simulatability predict \emph{human}
+simulatability (psychophysics); (B) a legibility frontier --- how the interpretability--return
+tension depends on the substrate, mapped on designed markets with planted information value;
+(C) interpretability \emph{drift} --- whether names stay faithful while an LLM-driven loop
+modifies the agent, and whether the improver's own rationales predict its effects. Each study
+has a pre-registered kill test. This draft is circulated before the studies are run, precisely
+to collect design criticism while it is still cheap.
+\end{abstract}
+
+\section{Motivation and formal problem}
+\label{sec:problem}
+
+Post-hoc explanation tells a story \emph{about} a black box while the box goes on being one;
+\citet{rudin2019} argues high-stakes models should be interpretable by construction. What the
+field lacks is a measurement discipline that lets that thesis \emph{fail}: most
+interpretability claims are not scored on an axis where a black box could win
+\citep{doshivelez2017,lipton2018}. Our companion systems paper contributes the worked example;
+\emph{this proposal is about the open questions it exposed}, which we believe are general.
+
+Fix a policy $\pi$, a \emph{story budget} $K$ (at most $K$ named rules/leaves), and a
+performance tolerance $\varepsilon$. Define
+\begin{equation}
+\textsc{CrystalScore}(\pi) \;=\; F \times S \times S\!t,
+\label{eq:cs}
+\end{equation}
+\begin{align}
+F &= \E\big[\ind[\pi(b \leftarrow \operatorname{do}(b^{*})) = \pi^{*}(b^{*})]\big]
+&&\text{(faithfulness: do-writes land, judged vs a reference optimum)},
+\label{eq:faith}\\
+S &= \operatorname{acc}(\text{story}_{K}, \pi)
+\ \text{s.t.}\ |\mathcal{R}(\text{story}_K) - \mathcal{R}(\pi)| \le \varepsilon
+&&\text{(simulatability: a $K$-rule story at performance parity)},
+\label{eq:simul}\\
+S\!t &= \tfrac{1}{n}\textstyle\sum_{i} \ind[\text{mechanism replicates on seed } i]
+&&\text{(stability across training seeds)}.
+\label{eq:stab}
+\end{align}
+The parity constraint in Eq.~\ref{eq:simul} blocks the standard cheat (a story that explains a
+lobotomized policy); the do-operator in Eq.~\ref{eq:faith} \citep{pearl2009} blocks the other
+one (correlational ``steering''). Three research questions:
+\begin{description}
+  \item[RQ1.] Is machine simulatability a valid proxy for \emph{human} simulatability ---
+        the quantity that actually matters for oversight?
+  \item[RQ2.] What governs the return$\leftrightarrow$legibility tension: the \emph{substrate}
+        (how much priced structure the environment has) or the \emph{architecture}? Is there a
+        scaling law linking optimal vocabulary size $K^{*}$ to substrate complexity?
+  \item[RQ3.] Does legibility \emph{survive self-modification}: do named coordinates drift
+        as an automated improvement loop edits the agent, and are the improver's stated
+        rationales predictive of its measured effects?
+\end{description}
+
+\section{Preliminary results: the instruments exist and discriminate}
+\label{sec:prelim}
+
+Three generations of one trading agent, evaluated on real market data (Table~\ref{tab:prelim};
+details in the companion draft). \textbf{CHRL}: a constrained hierarchical PPO trader ---
+three readable decision layers, five guardrails; competent (walk-forward Sharpe $1.09$,
+$93\%$ of benchmark Sharpe at $52\%$ less drawdown), but its core is a 64-d unnamed latent
+with ${\sim}214$ knobs. \textbf{Interpretable-CHRL}: the strongest post-hoc program we could
+run over the frozen policy --- an eight-primitive discovered vocabulary whose targeted edits
+survive matched-random controls ($+0.19$ to $+0.30$\,pp control-adjusted) --- which also
+measured its own ceiling: a $K{\le}9$ story reproduces only $0.244$ of deployed behavior, and
+no bound exists on what a latent edit touches. \textbf{CRYSTAL-1}: the core rebuilt so the
+ceiling disappears --- memory is a named regime posterior $b_t = \Prob(\text{bear}\mid
+\mathcal{F}_t)$ (an explicit Bayes filter), the policy is a readable rule at parity, commands
+are five named levers. One certified rule (``$b_t > 0.66 \Rightarrow$ exposure $0.74$'') held
+one-shot on 629 untouched trading days (Sharpe $1.46$ vs $1.39$, max drawdown $-12.9\%$ vs
+$-15.5\%$).
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lccc}
+\toprule
+ & $F$ & $S$ (story, $K{\le}9$) & $S\!t$ \\
+\midrule
+CHRL (black-box core, post-hoc program) & $1.00$ & $0.244$ & $0.619$ \\
+CRYSTAL-1 (legible by construction) & $1.00$ & $0.92$ & $1.00$ \\
+\bottomrule
+\end{tabular}
+\caption{The identical scalar on both architectures, real data. $\textsc{CrystalScore}$:
+$0.151$ vs $0.92$. Two methodological findings shape the proposal: (i) faithfulness does
+\emph{not} discriminate --- steering ``works'' on a black box too; the discriminating axis is
+simulatability; (ii) our first faithfulness probe silently read $F{=}0$ on a policy that
+\emph{was} the rule by construction (fixed-size writes never crossed the decision boundary of
+a threshold policy) --- interpretability metrics are instruments and need calibration
+surfaces.}
+\label{tab:prelim}
+\end{table}
+
+Two further assets matter for the proposed work: a \emph{designed-market} harness (synthetic
+regime environments where the value of belief information is planted by construction, fenced
+from all real-market claims by a value-of-information gate) and a running \emph{LLM-driven
+improvement loop} whose frozen statistical gate has already certified real changes and refused
+fake ones (7 accepts, 0 placebo accepts on the certified rule's history).
+
+\section{Proposed studies}
+\label{sec:studies}
+
+\paragraph{Study A --- does machine simulatability predict human simulatability? (RQ1)}
+\emph{Hypothesis:} machine $S$ (Eq.~\ref{eq:simul}) is a valid, cheap proxy for human
+prediction accuracy. \emph{Design:} psychophysics on the real policy tables --- participants
+see a $K$-rule story and predict the policy's action in unseen states; conditions cross
+architecture (CHRL codes vs CRYSTAL-1 rules) $\times$ story budget
+($K \in \{4, 9, 16\}$); the outcome is human accuracy vs the machine score on identical
+splits. No deception; think-aloud on a subsample for error taxonomy. \emph{Why this way:}
+running user studies \emph{first}, unanchored, is expensive and unfalsifiable --- validating a
+machine proxy once lets every later iteration be measured for free
+\citep{doshivelez2017,hoffman2018}. \emph{Kill test:} human accuracy at chance while machine
+$S$ is at ceiling kills the proxy (and with it, our headline $0.92$ becomes a machine-only
+claim --- worth knowing). \emph{Status: not yet run; no human data collected.}
+
+\paragraph{Study B --- the legibility frontier (RQ2).}
+\emph{Hypothesis:} the return$\leftrightarrow$legibility tension is a \emph{substrate}
+property: it vanishes where belief information carries value and binds where the regime is
+fully priced. \emph{Design:} a family of designed markets with the planted value of belief
+information swept from $0$ to large (our harness already produces the endpoints: value
+$+282\%$ of a belief-blind baseline on one end; a certified return--legibility tension on a
+hard substrate on the other); at each point, train matched pairs (free policy vs
+budget-$K$ readable policy for several $K$) and record the frontier
+$(\text{substrate complexity},\ \text{return gap},\ \textsc{CrystalScore})$; then locate the
+two real panels we operate on that map. The output is a \emph{phase diagram}: where
+legibility is free, where it costs, and how $K^{*}$ scales. \emph{Why this way:} on real data
+alone a null is uninterpretable (the instrument and the substrate are confounded --- our
+value-of-information gate exists precisely because a perfect belief can be worth zero on a
+priced market); designed substrates give ground truth, and the gate keeps their conclusions
+quarantined from market claims. \emph{Kill test:} tension persisting on a high-planted-value
+substrate kills the substrate hypothesis (the tension would be architectural); optimal $K^{*}$
+unrelated to measured complexity kills the scaling law. \emph{Status: harness built; the sweep
+and the phase diagram do not exist yet.}
+
+\paragraph{Study C --- interpretability drift under self-modification (RQ3).}
+\emph{Hypothesis:} under an automated improvement loop, naming faithfulness decays unless
+actively re-certified --- ``bear'' gradually stops meaning bear --- and the improver's stated
+rationales are only weakly predictive of its measured effects. \emph{Design:} run the existing
+loop for $\ge 20$ accepted modifications on the real machinery; after each accept, re-measure
+Eq.~\ref{eq:faith} and the naming audit (is the state called ``bear'' still the state where
+de-risking is optimal under the world model?); separately, score every proposal's written
+rationale against its measured effect (sign agreement, calibration). \emph{Why this way:} this
+is the one study our infrastructure makes uniquely cheap --- the loop, the frozen gate, and
+the audit all exist and have operating history; and it directly tests the safety claim that
+motivates the whole program (\emph{a self-modifying agent must remain readable while it
+changes}). \emph{Kill tests:} $F$ staying at $1.0$ over $20{+}$ accepted changes with no
+re-certification kills the drift hypothesis (good news --- legibility is self-maintaining);
+rationale--effect agreement at chance is itself a publishable confabulation result
+\citep{jacovi2020}. \emph{Status: the loop exists; the longitudinal drift protocol has not
+been run.}
+
+\section{Why this program and not the alternatives}
+\label{sec:whynot}
+
+\emph{Why not post-hoc explanation at scale (saliency, probing, concept extraction)?} We ran
+the strongest version we could build: it found real, editable structure (that is honestly
+reported), but it cannot bound an edit's blast radius, name a command, or compress the policy
+into a story --- measured, not asserted. \emph{Why not user studies first?} Without a
+validated machine proxy, every design iteration costs a new human experiment; Study A is
+sequenced first precisely to unlock cheap iteration. \emph{Why not purely synthetic
+benchmarks?} A synthetic result does not transfer by default; our value-of-information gate
+(designed-market conclusions are quarantined until the same measurement is positive on a real
+book) is the explicit bridge discipline, and Study B uses synthetic substrates only where
+real ones are structurally uninformative. \emph{Why a product score rather than a dashboard?}
+A single scalar with a fixed budget can \emph{lose} --- and its known failure modes (probe
+blindness on threshold policies; faithfulness non-discrimination) are documented and repaired
+rather than hidden.
+
+\section{Gaps this draft does not close}
+\label{sec:gaps}
+
+(i) All preliminary evidence is from \emph{one} domain (daily-frequency trading) and largely
+one substrate per claim; the studies are designed to widen this, but domain transfer beyond
+finance (e.g., robotics, dialogue agents) is future work. (ii) $S$ is currently measured
+against policy \emph{tables}; extending parity-constrained simulatability to stochastic
+policies needs a definition choice (we propose total-variation-bounded story matching ---
+feedback welcome). (iii) The stability axis uses seed replication as a proxy for mechanism
+identity; a stronger identifiability criterion would be better and we do not have one.
+(iv) Study A's power analysis depends on between-subject variance we cannot know in advance;
+we will pilot with $n{=}8$ before committing the full design. (v) The drift study's negative
+control (a loop with re-certification disabled) doubles compute; if resources bind, we run it
+on the designed substrate only.
+
+\section{Plan, resources, and the ask}
+\label{sec:plan}
+
+\textbf{Timeline (6 months):} M1 --- Study A pilot ($n{=}8$) + power analysis; freeze the
+psychophysics protocol. M2--M3 --- Study A full run; Study B substrate sweep (compute-bound,
+parallelizable). M4 --- Study B phase diagram + real-panel placement. M5--M6 --- Study C
+longitudinal run ($\ge 20$ accepts) + rationale-calibration analysis; write-up. All three
+studies are pre-registered with the kill tests above before data collection; every experiment
+logs to the project's public logbook under its honesty contract (every entry names its null,
+its seed, and its worst caveat).
+
+\textbf{Resources:} the codebase, data panels, designed-market harness, and improvement loop
+are built and operating; Studies B--C are CPU-scale. The one new requirement is Study A's
+participant pool (target $n \approx 30$; standard ethics review for anonymous
+behavioral-prediction tasks).
+
+\textbf{The ask:} this draft is circulated \emph{before} any of the three studies has been
+run, in the write-the-paper-first spirit \citep{eisner-paper-first}: criticism of the designs
+--- especially Study A's conditions and the Eq.~\ref{eq:simul} extension of gap (ii) --- is
+worth far more now than after the data arrive. If the program interests you, any of the three
+studies stands alone as a supervised project; Study A is the natural first collaboration.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}
