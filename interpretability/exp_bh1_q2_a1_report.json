@@ -1,0 +1,159 @@
+{
+  "experiment": "BH1-Q2 arm A1 \u2014 transition oversampling vs cold PPO at c=2",
+  "preregistration": "interpretability/exp_bh1_q2_a1_PREREG.md",
+  "framing": "DESIGNED-market instrument calibration (VoI-fenced); not market evidence",
+  "design": {
+    "c": 2.0,
+    "W": 5,
+    "n_days": 2500,
+    "steps": 30000,
+    "ent_coef": 0.005,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "init": "cold (init_from=None)",
+    "primary": "contrast_write_probe (not fidelity_probe)",
+    "eval": "unaltered gen_market(c, seed+500) for both arms",
+    "locked_oracle_f": 0.833,
+    "thresholds": {
+      "supported_gap": 0.4,
+      "supported_f": 0.5,
+      "supported_n_seeds": 2,
+      "null_f": 0.2,
+      "cold_baseline_max": 0.2
+    }
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.3.4",
+    "torch": "2.9.0",
+    "stable_baselines3": "2.9.0"
+  },
+  "local_oracle": {
+    "contrast_write_f": 0.833,
+    "bc_acc": 0.966,
+    "locked_ceiling": 0.833
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "neighborhood_frac_train": 0.274,
+      "neighborhood_frac_a1_train": 0.999,
+      "neighborhood_frac_eval": 0.29,
+      "n_switches_source": 72,
+      "cold": {
+        "f": 0.0,
+        "e_bull": 0.25,
+        "e_bear": 0.25,
+        "regime_gap": 0.0,
+        "ann": 0.0276,
+        "maxDD": -0.5039,
+        "mean_rew": -2382.207,
+        "oracle_ann": 3.5893,
+        "oracle_maxDD": -0.0197,
+        "oracle_mean_rew": 61.182
+      },
+      "a1": {
+        "f": 0.0,
+        "e_bull": 0.25,
+        "e_bear": 0.25,
+        "regime_gap": 0.0,
+        "ann": 0.0276,
+        "maxDD": -0.5039,
+        "mean_rew": -2382.207,
+        "oracle_ann": 3.5893,
+        "oracle_maxDD": -0.0197,
+        "oracle_mean_rew": 61.182
+      },
+      "s_cold": 9,
+      "s_a1": 10
+    },
+    {
+      "seed": 1,
+      "neighborhood_frac_train": 0.236,
+      "neighborhood_frac_a1_train": 0.999,
+      "neighborhood_frac_eval": 0.259,
+      "n_switches_source": 59,
+      "cold": {
+        "f": 0.0,
+        "e_bull": 0.0,
+        "e_bear": 0.0,
+        "regime_gap": 0.0,
+        "ann": 0.0201,
+        "maxDD": -0.0009,
+        "mean_rew": 0.79,
+        "oracle_ann": 3.4143,
+        "oracle_maxDD": -0.0207,
+        "oracle_mean_rew": 59.617
+      },
+      "a1": {
+        "f": 0.0,
+        "e_bull": 0.0,
+        "e_bear": 0.0,
+        "regime_gap": 0.0,
+        "ann": 0.0201,
+        "maxDD": -0.0009,
+        "mean_rew": 0.79,
+        "oracle_ann": 3.4143,
+        "oracle_maxDD": -0.0207,
+        "oracle_mean_rew": 59.617
+      },
+      "s_cold": 9,
+      "s_a1": 9
+    },
+    {
+      "seed": 2,
+      "neighborhood_frac_train": 0.236,
+      "neighborhood_frac_a1_train": 1.0,
+      "neighborhood_frac_eval": 0.294,
+      "n_switches_source": 62,
+      "cold": {
+        "f": 0.0,
+        "e_bull": 0.25,
+        "e_bear": 0.25,
+        "regime_gap": 0.0,
+        "ann": 0.0886,
+        "maxDD": -0.3474,
+        "mean_rew": -1535.966,
+        "oracle_ann": 4.2939,
+        "oracle_maxDD": -0.0214,
+        "oracle_mean_rew": 66.918
+      },
+      "a1": {
+        "f": 0.0,
+        "e_bull": 0.5,
+        "e_bear": 0.5,
+        "regime_gap": 0.0,
+        "ann": 0.1562,
+        "maxDD": -0.588,
+        "mean_rew": -3811.764,
+        "oracle_ann": 4.2939,
+        "oracle_maxDD": -0.0214,
+        "oracle_mean_rew": 66.918
+      },
+      "s_cold": 9,
+      "s_a1": 9
+    }
+  ],
+  "summary": {
+    "f_cold": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "f_a1": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mean_f_cold": 0.0,
+    "mean_f_a1": 0.0,
+    "gap": 0.0,
+    "n_a1_ge_050": 0
+  },
+  "prereg_verdict": "NULL",
+  "logbook_verdict": "NULL",
+  "verdict": "NULL: all three A1 seeds F \u2264 0.20 (F_A1=[0.0, 0.0, 0.0], mean 0.000; F_cold mean 0.000). Transition rarity is NOT why cold RL fails."
+}
