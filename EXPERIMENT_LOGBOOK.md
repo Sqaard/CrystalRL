@@ -16,7 +16,7 @@ shared sequence; a reference of the form "Ivan's E-04" means his, an unqualified
 ---
 
 ### E-48 · 2026-08-18 · BH1-Q2 A1 — transition oversampling does NOT let cold PPO discover belief-use (NULL)
-- **Who / agent:** Joseph via Cursor
+- **Who / agent:** Joseph
 - **Track:** interpretability
 - **Question:** Does oversampling regime-switch neighborhoods (±W=5, ≥50% of train days near a switch) let cold PPO discover belief-use at c=2.0, measured by contrast-write F?
 - **Setup:** Designed 2-regime market (`gen_market`, c=2.0, P_STAY=0.97, N_DAYS=2500). Two arms, same seeds (0,1,2), cold start, 30k steps, `ent_coef=0.005`, unchanged `train()` from `exp_bh1_pressure2`. **Cold:** train on unaltered stream. **A1:** train on concatenated ±5 windows around switches (with replacement). Both evaluated on unaltered `gen_market(c, seed+500)`. Primary = `contrast_write_probe` (not the strict-delta probe). Pre-registered in `interpretability/exp_bh1_q2_a1_PREREG.md` (commit `abedd0e`) **before** any A1 code existed. Locked ceiling = this machine's BC-oracle F **0.833**.
