@@ -1,0 +1,2301 @@
+{
+ "experiment": "HL agent ablation \u2014 WITHOUT (cycle 0) vs WITH the coding-agent, iterative",
+ "engine": "W3_FORECAST_V1_4",
+ "status": "RESEARCH_ONLY_UNCALIBRATED_SCENARIOS",
+ "accept_rule": "dev J_contract improvement > 0.005; hold re-read on accept",
+ "profiles": [
+  {
+   "profile": "conservative",
+   "H": 3,
+   "budget": 0.05,
+   "trajectory": [
+    {
+     "cycle": 0,
+     "candidate": "NO-AGENT BASELINE",
+     "accepted": null,
+     "dev": {
+      "floor_q20_ann": 0.0352,
+      "median_ann": 0.0382,
+      "P_profile_goal": 0.014,
+      "E_shortfall_given_miss": 0.0205,
+      "J_contract": -0.0066,
+      "menu": [
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.035,
+      "median_ann": 0.0381,
+      "P_profile_goal": 0.016,
+      "E_shortfall_given_miss": 0.0207,
+      "J_contract": -0.0048,
+      "menu": [
+       "CASH100"
+      ]
+     }
+    },
+    {
+     "cycle": 1,
+     "candidate": "div_IEF",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0292,
+      "median_ann": 0.0422,
+      "P_profile_goal": 0.305,
+      "E_shortfall_given_miss": 0.0381,
+      "J_contract": 0.2787,
+      "menu": [
+       "B_S45_IEF_a28",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0263,
+      "median_ann": 0.042,
+      "P_profile_goal": 0.306,
+      "E_shortfall_given_miss": 0.0411,
+      "J_contract": 0.2771,
+      "menu": [
+       "B_S45_IEF_a28",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.2787
+    },
+    {
+     "cycle": 2,
+     "candidate": "div_GLD",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0321,
+      "median_ann": 0.0438,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.0351,
+      "J_contract": 0.4153,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0309,
+      "median_ann": 0.0434,
+      "P_profile_goal": 0.419,
+      "E_shortfall_given_miss": 0.0369,
+      "J_contract": 0.3973,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.4153
+    },
+    {
+     "cycle": 3,
+     "candidate": "div_TLT",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0321,
+      "median_ann": 0.0438,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.0351,
+      "J_contract": 0.4153,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0309,
+      "median_ann": 0.0434,
+      "P_profile_goal": 0.419,
+      "E_shortfall_given_miss": 0.0369,
+      "J_contract": 0.3973,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": -0.0066
+    },
+    {
+     "cycle": 4,
+     "candidate": "div_MIX",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0321,
+      "median_ann": 0.0438,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.0351,
+      "J_contract": 0.4153,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0309,
+      "median_ann": 0.0434,
+      "P_profile_goal": 0.419,
+      "E_shortfall_given_miss": 0.0369,
+      "J_contract": 0.3973,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.372
+    },
+    {
+     "cycle": 5,
+     "candidate": "best_at_65",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0321,
+      "median_ann": 0.0438,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.0351,
+      "J_contract": 0.4153,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0309,
+      "median_ann": 0.0434,
+      "P_profile_goal": 0.419,
+      "E_shortfall_given_miss": 0.0369,
+      "J_contract": 0.3973,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.3822
+    },
+    {
+     "cycle": 6,
+     "candidate": "tri_asset",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0321,
+      "median_ann": 0.0438,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.0351,
+      "J_contract": 0.4153,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0309,
+      "median_ann": 0.0434,
+      "P_profile_goal": 0.419,
+      "E_shortfall_given_miss": 0.0369,
+      "J_contract": 0.3973,
+      "menu": [
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.3698
+    },
+    {
+     "cycle": 7,
+     "candidate": "mid_rung",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0315,
+      "median_ann": 0.0447,
+      "P_profile_goal": 0.484,
+      "E_shortfall_given_miss": 0.0384,
+      "J_contract": 0.4638,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0304,
+      "median_ann": 0.0445,
+      "P_profile_goal": 0.475,
+      "E_shortfall_given_miss": 0.0402,
+      "J_contract": 0.4537,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.4638
+    },
+    {
+     "cycle": 8,
+     "candidate": "low_rung",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0315,
+      "median_ann": 0.0447,
+      "P_profile_goal": 0.484,
+      "E_shortfall_given_miss": 0.0384,
+      "J_contract": 0.4638,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0304,
+      "median_ann": 0.0445,
+      "P_profile_goal": 0.475,
+      "E_shortfall_given_miss": 0.0402,
+      "J_contract": 0.4537,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a20",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.4331
+    },
+    {
+     "cycle": 9,
+     "candidate": "tighten_098",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0313,
+      "median_ann": 0.045,
+      "P_profile_goal": 0.499,
+      "E_shortfall_given_miss": 0.04,
+      "J_contract": 0.4791,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.03,
+      "median_ann": 0.0447,
+      "P_profile_goal": 0.487,
+      "E_shortfall_given_miss": 0.0411,
+      "J_contract": 0.4661,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.4791
+    },
+    {
+     "cycle": 10,
+     "candidate": "loosen_090",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0313,
+      "median_ann": 0.045,
+      "P_profile_goal": 0.499,
+      "E_shortfall_given_miss": 0.04,
+      "J_contract": 0.4791,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.03,
+      "median_ann": 0.0447,
+      "P_profile_goal": 0.487,
+      "E_shortfall_given_miss": 0.0411,
+      "J_contract": 0.4661,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.4551
+    },
+    {
+     "cycle": 11,
+     "candidate": "deadzone_010",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0305,
+      "median_ann": 0.0458,
+      "P_profile_goal": 0.531,
+      "E_shortfall_given_miss": 0.0436,
+      "J_contract": 0.5108,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0295,
+      "median_ann": 0.0454,
+      "P_profile_goal": 0.518,
+      "E_shortfall_given_miss": 0.0447,
+      "J_contract": 0.4969,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.5108
+    },
+    {
+     "cycle": 12,
+     "candidate": "deadzone_015",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0305,
+      "median_ann": 0.0458,
+      "P_profile_goal": 0.531,
+      "E_shortfall_given_miss": 0.0436,
+      "J_contract": 0.5108,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0295,
+      "median_ann": 0.0454,
+      "P_profile_goal": 0.518,
+      "E_shortfall_given_miss": 0.0447,
+      "J_contract": 0.4969,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.5108
+    },
+    {
+     "cycle": 13,
+     "candidate": "novel_TIP",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0305,
+      "median_ann": 0.0458,
+      "P_profile_goal": 0.531,
+      "E_shortfall_given_miss": 0.0436,
+      "J_contract": 0.5108,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0295,
+      "median_ann": 0.0454,
+      "P_profile_goal": 0.518,
+      "E_shortfall_given_miss": 0.0447,
+      "J_contract": 0.4969,
+      "menu": [
+       "B_S45_GLD_a12",
+       "B_S45_GLD_a21",
+       "CASH100"
+      ]
+     },
+     "candidate_dev_J": 0.5104
+    }
+   ],
+   "n_accepts": 5,
+   "final_books": [
+    {
+     "B_S45_GLD_a12": {
+      "CASH": 0.8706,
+      "SPY": 0.0582,
+      "GLD": 0.0712
+     }
+    },
+    {
+     "B_S45_GLD_a21": {
+      "CASH": 0.7887,
+      "SPY": 0.0951,
+      "GLD": 0.1162
+     }
+    }
+   ],
+   "final_deadzone": 0.1,
+   "final_controls": {
+    "twin_hold_floor": 0.0297,
+    "matched_random_hold_floor": 0.0286
+   }
+  },
+  {
+   "profile": "mod_conservative",
+   "H": 5,
+   "budget": 0.1,
+   "trajectory": [
+    {
+     "cycle": 0,
+     "candidate": "NO-AGENT BASELINE",
+     "accepted": null,
+     "dev": {
+      "floor_q20_ann": 0.0268,
+      "median_ann": 0.0431,
+      "P_profile_goal": 0.182,
+      "E_shortfall_given_miss": 0.0834,
+      "J_contract": 0.1142,
+      "menu": [
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0264,
+      "median_ann": 0.042,
+      "P_profile_goal": 0.188,
+      "E_shortfall_given_miss": 0.0872,
+      "J_contract": 0.1176,
+      "menu": [
+       "CASH100",
+       "SPY_c80"
+      ]
+     }
+    },
+    {
+     "cycle": 1,
+     "candidate": "div_IEF",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0078,
+      "median_ann": 0.0473,
+      "P_profile_goal": 0.279,
+      "E_shortfall_given_miss": 0.1266,
+      "J_contract": 0.188,
+      "menu": [
+       "B_S45_IEF_a57",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0092,
+      "median_ann": 0.0482,
+      "P_profile_goal": 0.286,
+      "E_shortfall_given_miss": 0.1235,
+      "J_contract": 0.1978,
+      "menu": [
+       "B_S45_IEF_a57",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.188
+    },
+    {
+     "cycle": 2,
+     "candidate": "div_GLD",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.37
+    },
+    {
+     "cycle": 3,
+     "candidate": "div_TLT",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.1988
+    },
+    {
+     "cycle": 4,
+     "candidate": "div_MIX",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2976
+    },
+    {
+     "cycle": 5,
+     "candidate": "best_at_65",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3402
+    },
+    {
+     "cycle": 6,
+     "candidate": "tri_asset",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2586
+    },
+    {
+     "cycle": 7,
+     "candidate": "mid_rung",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3489
+    },
+    {
+     "cycle": 8,
+     "candidate": "low_rung",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3688
+    },
+    {
+     "cycle": 9,
+     "candidate": "tighten_098",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.1142
+    },
+    {
+     "cycle": 10,
+     "candidate": "loosen_090",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3344
+    },
+    {
+     "cycle": 11,
+     "candidate": "deadzone_010",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.37
+    },
+    {
+     "cycle": 12,
+     "candidate": "deadzone_015",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.37
+    },
+    {
+     "cycle": 13,
+     "candidate": "novel_TIP",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0245,
+      "median_ann": 0.0536,
+      "P_profile_goal": 0.432,
+      "E_shortfall_given_miss": 0.11,
+      "J_contract": 0.37,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.025,
+      "median_ann": 0.0541,
+      "P_profile_goal": 0.457,
+      "E_shortfall_given_miss": 0.1097,
+      "J_contract": 0.3976,
+      "menu": [
+       "B_S45_GLD_a40",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3628
+    }
+   ],
+   "n_accepts": 2,
+   "final_books": [
+    {
+     "B_S45_GLD_a40": {
+      "CASH": 0.5903,
+      "SPY": 0.1844,
+      "GLD": 0.2253
+     }
+    }
+   ],
+   "final_deadzone": 0.0,
+   "final_controls": {
+    "twin_hold_floor": 0.0225,
+    "matched_random_hold_floor": 0.0073
+   }
+  },
+  {
+   "profile": "moderate",
+   "H": 5,
+   "budget": 0.15,
+   "trajectory": [
+    {
+     "cycle": 0,
+     "candidate": "NO-AGENT BASELINE",
+     "accepted": null,
+     "dev": {
+      "floor_q20_ann": 0.0264,
+      "median_ann": 0.0417,
+      "P_profile_goal": 0.062,
+      "E_shortfall_given_miss": 0.1148,
+      "J_contract": 0.0077,
+      "menu": [
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0262,
+      "median_ann": 0.0409,
+      "P_profile_goal": 0.068,
+      "E_shortfall_given_miss": 0.1177,
+      "J_contract": 0.0127,
+      "menu": [
+       "CASH100",
+       "SPY_c80"
+      ]
+     }
+    },
+    {
+     "cycle": 1,
+     "candidate": "div_IEF",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": -0.0129,
+      "median_ann": 0.0486,
+      "P_profile_goal": 0.292,
+      "E_shortfall_given_miss": 0.2009,
+      "J_contract": 0.2209,
+      "menu": [
+       "B_S45_IEF_a85",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0101,
+      "median_ann": 0.0509,
+      "P_profile_goal": 0.306,
+      "E_shortfall_given_miss": 0.1978,
+      "J_contract": 0.2369,
+      "menu": [
+       "B_S45_IEF_a85",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2209
+    },
+    {
+     "cycle": 2,
+     "candidate": "div_GLD",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0137,
+      "median_ann": 0.0629,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.1742,
+      "J_contract": 0.3856,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0151,
+      "median_ann": 0.0631,
+      "P_profile_goal": 0.442,
+      "E_shortfall_given_miss": 0.1722,
+      "J_contract": 0.3944,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3856
+    },
+    {
+     "cycle": 3,
+     "candidate": "div_TLT",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0137,
+      "median_ann": 0.0629,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.1742,
+      "J_contract": 0.3856,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0151,
+      "median_ann": 0.0631,
+      "P_profile_goal": 0.442,
+      "E_shortfall_given_miss": 0.1722,
+      "J_contract": 0.3944,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2366
+    },
+    {
+     "cycle": 4,
+     "candidate": "div_MIX",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0137,
+      "median_ann": 0.0629,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.1742,
+      "J_contract": 0.3856,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0151,
+      "median_ann": 0.0631,
+      "P_profile_goal": 0.442,
+      "E_shortfall_given_miss": 0.1722,
+      "J_contract": 0.3944,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.341
+    },
+    {
+     "cycle": 5,
+     "candidate": "best_at_65",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0137,
+      "median_ann": 0.0629,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.1742,
+      "J_contract": 0.3856,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0151,
+      "median_ann": 0.0631,
+      "P_profile_goal": 0.442,
+      "E_shortfall_given_miss": 0.1722,
+      "J_contract": 0.3944,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3577
+    },
+    {
+     "cycle": 6,
+     "candidate": "tri_asset",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0137,
+      "median_ann": 0.0629,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.1742,
+      "J_contract": 0.3856,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0151,
+      "median_ann": 0.0631,
+      "P_profile_goal": 0.442,
+      "E_shortfall_given_miss": 0.1722,
+      "J_contract": 0.3944,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2893
+    },
+    {
+     "cycle": 7,
+     "candidate": "mid_rung",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0137,
+      "median_ann": 0.0629,
+      "P_profile_goal": 0.435,
+      "E_shortfall_given_miss": 0.1742,
+      "J_contract": 0.3856,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0151,
+      "median_ann": 0.0631,
+      "P_profile_goal": 0.442,
+      "E_shortfall_given_miss": 0.1722,
+      "J_contract": 0.3944,
+      "menu": [
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3795
+    },
+    {
+     "cycle": 8,
+     "candidate": "low_rung",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0149,
+      "median_ann": 0.0628,
+      "P_profile_goal": 0.439,
+      "E_shortfall_given_miss": 0.1724,
+      "J_contract": 0.3909,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0166,
+      "median_ann": 0.0635,
+      "P_profile_goal": 0.465,
+      "E_shortfall_given_miss": 0.1746,
+      "J_contract": 0.4185,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3909
+    },
+    {
+     "cycle": 9,
+     "candidate": "tighten_098",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0149,
+      "median_ann": 0.0628,
+      "P_profile_goal": 0.439,
+      "E_shortfall_given_miss": 0.1724,
+      "J_contract": 0.3909,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0166,
+      "median_ann": 0.0635,
+      "P_profile_goal": 0.465,
+      "E_shortfall_given_miss": 0.1746,
+      "J_contract": 0.4185,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.0281
+    },
+    {
+     "cycle": 10,
+     "candidate": "loosen_090",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0149,
+      "median_ann": 0.0628,
+      "P_profile_goal": 0.439,
+      "E_shortfall_given_miss": 0.1724,
+      "J_contract": 0.3909,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0166,
+      "median_ann": 0.0635,
+      "P_profile_goal": 0.465,
+      "E_shortfall_given_miss": 0.1746,
+      "J_contract": 0.4185,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3874
+    },
+    {
+     "cycle": 11,
+     "candidate": "deadzone_010",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0149,
+      "median_ann": 0.0628,
+      "P_profile_goal": 0.439,
+      "E_shortfall_given_miss": 0.1724,
+      "J_contract": 0.3909,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0166,
+      "median_ann": 0.0635,
+      "P_profile_goal": 0.465,
+      "E_shortfall_given_miss": 0.1746,
+      "J_contract": 0.4185,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3909
+    },
+    {
+     "cycle": 12,
+     "candidate": "deadzone_015",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0149,
+      "median_ann": 0.0628,
+      "P_profile_goal": 0.439,
+      "E_shortfall_given_miss": 0.1724,
+      "J_contract": 0.3909,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0166,
+      "median_ann": 0.0635,
+      "P_profile_goal": 0.465,
+      "E_shortfall_given_miss": 0.1746,
+      "J_contract": 0.4185,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.3909
+    },
+    {
+     "cycle": 13,
+     "candidate": "novel_TIP",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0142,
+      "median_ann": 0.0632,
+      "P_profile_goal": 0.456,
+      "E_shortfall_given_miss": 0.1782,
+      "J_contract": 0.4075,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "B_S45_TIP_MIX_a65",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.016,
+      "median_ann": 0.064,
+      "P_profile_goal": 0.476,
+      "E_shortfall_given_miss": 0.1789,
+      "J_contract": 0.4287,
+      "menu": [
+       "B_S45_GLD_a22",
+       "B_S45_GLD_a61",
+       "B_S45_TIP_MIX_a65",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.4075
+    }
+   ],
+   "n_accepts": 4,
+   "final_books": [
+    {
+     "B_S45_GLD_a61": {
+      "CASH": 0.3854,
+      "SPY": 0.2765,
+      "GLD": 0.338
+     }
+    },
+    {
+     "B_S45_GLD_a22": {
+      "CASH": 0.7736,
+      "SPY": 0.1019,
+      "GLD": 0.1245
+     }
+    },
+    {
+     "B_S45_TIP_MIX_a65": {
+      "CASH": 0.3498,
+      "SPY": 0.2926,
+      "TIP": 0.1788,
+      "GLD": 0.1788
+     }
+    }
+   ],
+   "final_deadzone": 0.0,
+   "final_controls": {
+    "twin_hold_floor": 0.013,
+    "matched_random_hold_floor": -0.0191
+   }
+  },
+  {
+   "profile": "mod_aggressive",
+   "H": 10,
+   "budget": 0.2,
+   "trajectory": [
+    {
+     "cycle": 0,
+     "candidate": "NO-AGENT BASELINE",
+     "accepted": null,
+     "dev": {
+      "floor_q20_ann": 0.03,
+      "median_ann": 0.0413,
+      "P_profile_goal": 0.0,
+      "E_shortfall_given_miss": 0.3077,
+      "J_contract": -0.1538,
+      "menu": [
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0294,
+      "median_ann": 0.0405,
+      "P_profile_goal": 0.0,
+      "E_shortfall_given_miss": 0.311,
+      "J_contract": -0.1555,
+      "menu": [
+       "CASH100",
+       "SPY_c80"
+      ]
+     }
+    },
+    {
+     "cycle": 1,
+     "candidate": "div_IEF",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0022,
+      "median_ann": 0.0258,
+      "P_profile_goal": 0.105,
+      "E_shortfall_given_miss": 0.3901,
+      "J_contract": -0.0698,
+      "menu": [
+       "B_S45_IEF_a100",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0006,
+      "median_ann": 0.0252,
+      "P_profile_goal": 0.1,
+      "E_shortfall_given_miss": 0.3939,
+      "J_contract": -0.0777,
+      "menu": [
+       "B_S45_IEF_a100",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": -0.0698
+    },
+    {
+     "cycle": 2,
+     "candidate": "div_GLD",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2161
+    },
+    {
+     "cycle": 3,
+     "candidate": "div_TLT",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": -0.0081
+    },
+    {
+     "cycle": 4,
+     "candidate": "div_MIX",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.0865
+    },
+    {
+     "cycle": 5,
+     "candidate": "best_at_65",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.1934
+    },
+    {
+     "cycle": 6,
+     "candidate": "tri_asset",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.0491
+    },
+    {
+     "cycle": 7,
+     "candidate": "mid_rung",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2169
+    },
+    {
+     "cycle": 8,
+     "candidate": "low_rung",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2102
+    },
+    {
+     "cycle": 9,
+     "candidate": "tighten_098",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2195
+    },
+    {
+     "cycle": 10,
+     "candidate": "loosen_090",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.1868
+    },
+    {
+     "cycle": 11,
+     "candidate": "deadzone_010",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2161
+    },
+    {
+     "cycle": 12,
+     "candidate": "deadzone_015",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2161
+    },
+    {
+     "cycle": 13,
+     "candidate": "novel_TIP",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0129,
+      "median_ann": 0.0555,
+      "P_profile_goal": 0.334,
+      "E_shortfall_given_miss": 0.3539,
+      "J_contract": 0.2161,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": 0.0125,
+      "median_ann": 0.0571,
+      "P_profile_goal": 0.347,
+      "E_shortfall_given_miss": 0.3612,
+      "J_contract": 0.2293,
+      "menu": [
+       "B_S45_GLD_a81",
+       "CASH100",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2038
+    }
+   ],
+   "n_accepts": 2,
+   "final_books": [
+    {
+     "B_S45_GLD_a81": {
+      "CASH": 0.1806,
+      "SPY": 0.3687,
+      "GLD": 0.4507
+     }
+    }
+   ],
+   "final_deadzone": 0.0,
+   "final_controls": {
+    "twin_hold_floor": 0.0294,
+    "matched_random_hold_floor": 0.0188
+   }
+  },
+  {
+   "profile": "aggressive",
+   "H": 10,
+   "budget": 0.25,
+   "trajectory": [
+    {
+     "cycle": 0,
+     "candidate": "NO-AGENT BASELINE",
+     "accepted": null,
+     "dev": {
+      "floor_q20_ann": -0.0152,
+      "median_ann": 0.0312,
+      "P_profile_goal": 0.079,
+      "E_shortfall_given_miss": 0.4808,
+      "J_contract": 0.0788,
+      "menu": [
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0175,
+      "median_ann": 0.0281,
+      "P_profile_goal": 0.079,
+      "E_shortfall_given_miss": 0.4944,
+      "J_contract": 0.0792,
+      "menu": [
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     }
+    },
+    {
+     "cycle": 1,
+     "candidate": "div_IEF",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": -0.0152,
+      "median_ann": 0.0312,
+      "P_profile_goal": 0.079,
+      "E_shortfall_given_miss": 0.4808,
+      "J_contract": 0.0788,
+      "menu": [
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0175,
+      "median_ann": 0.0281,
+      "P_profile_goal": 0.079,
+      "E_shortfall_given_miss": 0.4944,
+      "J_contract": 0.0792,
+      "menu": [
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.076
+    },
+    {
+     "cycle": 2,
+     "candidate": "div_GLD",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0006,
+      "median_ann": 0.0526,
+      "P_profile_goal": 0.257,
+      "E_shortfall_given_miss": 0.4537,
+      "J_contract": 0.2572,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0011,
+      "median_ann": 0.0529,
+      "P_profile_goal": 0.261,
+      "E_shortfall_given_miss": 0.4549,
+      "J_contract": 0.2608,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2572
+    },
+    {
+     "cycle": 3,
+     "candidate": "div_TLT",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0006,
+      "median_ann": 0.0526,
+      "P_profile_goal": 0.257,
+      "E_shortfall_given_miss": 0.4537,
+      "J_contract": 0.2572,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0011,
+      "median_ann": 0.0529,
+      "P_profile_goal": 0.261,
+      "E_shortfall_given_miss": 0.4549,
+      "J_contract": 0.2608,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.0788
+    },
+    {
+     "cycle": 4,
+     "candidate": "div_MIX",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0006,
+      "median_ann": 0.0526,
+      "P_profile_goal": 0.257,
+      "E_shortfall_given_miss": 0.4537,
+      "J_contract": 0.2572,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0011,
+      "median_ann": 0.0529,
+      "P_profile_goal": 0.261,
+      "E_shortfall_given_miss": 0.4549,
+      "J_contract": 0.2608,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.1
+    },
+    {
+     "cycle": 5,
+     "candidate": "best_at_65",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0006,
+      "median_ann": 0.0526,
+      "P_profile_goal": 0.257,
+      "E_shortfall_given_miss": 0.4537,
+      "J_contract": 0.2572,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0011,
+      "median_ann": 0.0529,
+      "P_profile_goal": 0.261,
+      "E_shortfall_given_miss": 0.4549,
+      "J_contract": 0.2608,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2412
+    },
+    {
+     "cycle": 6,
+     "candidate": "tri_asset",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0006,
+      "median_ann": 0.0526,
+      "P_profile_goal": 0.257,
+      "E_shortfall_given_miss": 0.4537,
+      "J_contract": 0.2572,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0011,
+      "median_ann": 0.0529,
+      "P_profile_goal": 0.261,
+      "E_shortfall_given_miss": 0.4549,
+      "J_contract": 0.2608,
+      "menu": [
+       "B_S45_GLD_a100",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.0844
+    },
+    {
+     "cycle": 7,
+     "candidate": "mid_rung",
+     "accepted": true,
+     "dev": {
+      "floor_q20_ann": 0.0012,
+      "median_ann": 0.0531,
+      "P_profile_goal": 0.263,
+      "E_shortfall_given_miss": 0.4557,
+      "J_contract": 0.2628,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0014,
+      "median_ann": 0.0528,
+      "P_profile_goal": 0.252,
+      "E_shortfall_given_miss": 0.452,
+      "J_contract": 0.252,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2628
+    },
+    {
+     "cycle": 8,
+     "candidate": "low_rung",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0012,
+      "median_ann": 0.0531,
+      "P_profile_goal": 0.263,
+      "E_shortfall_given_miss": 0.4557,
+      "J_contract": 0.2628,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0014,
+      "median_ann": 0.0528,
+      "P_profile_goal": 0.252,
+      "E_shortfall_given_miss": 0.452,
+      "J_contract": 0.252,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2608
+    },
+    {
+     "cycle": 9,
+     "candidate": "tighten_098",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0012,
+      "median_ann": 0.0531,
+      "P_profile_goal": 0.263,
+      "E_shortfall_given_miss": 0.4557,
+      "J_contract": 0.2628,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0014,
+      "median_ann": 0.0528,
+      "P_profile_goal": 0.252,
+      "E_shortfall_given_miss": 0.452,
+      "J_contract": 0.252,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2628
+    },
+    {
+     "cycle": 10,
+     "candidate": "loosen_090",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0012,
+      "median_ann": 0.0531,
+      "P_profile_goal": 0.263,
+      "E_shortfall_given_miss": 0.4557,
+      "J_contract": 0.2628,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0014,
+      "median_ann": 0.0528,
+      "P_profile_goal": 0.252,
+      "E_shortfall_given_miss": 0.452,
+      "J_contract": 0.252,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2428
+    },
+    {
+     "cycle": 11,
+     "candidate": "deadzone_010",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0012,
+      "median_ann": 0.0531,
+      "P_profile_goal": 0.263,
+      "E_shortfall_given_miss": 0.4557,
+      "J_contract": 0.2628,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0014,
+      "median_ann": 0.0528,
+      "P_profile_goal": 0.252,
+      "E_shortfall_given_miss": 0.452,
+      "J_contract": 0.252,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2628
+    },
+    {
+     "cycle": 12,
+     "candidate": "deadzone_015",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0012,
+      "median_ann": 0.0531,
+      "P_profile_goal": 0.263,
+      "E_shortfall_given_miss": 0.4557,
+      "J_contract": 0.2628,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0014,
+      "median_ann": 0.0528,
+      "P_profile_goal": 0.252,
+      "E_shortfall_given_miss": 0.452,
+      "J_contract": 0.252,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2628
+    },
+    {
+     "cycle": 13,
+     "candidate": "novel_TIP",
+     "accepted": false,
+     "dev": {
+      "floor_q20_ann": 0.0012,
+      "median_ann": 0.0531,
+      "P_profile_goal": 0.263,
+      "E_shortfall_given_miss": 0.4557,
+      "J_contract": 0.2628,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "hold": {
+      "floor_q20_ann": -0.0014,
+      "median_ann": 0.0528,
+      "P_profile_goal": 0.252,
+      "E_shortfall_given_miss": 0.452,
+      "J_contract": 0.252,
+      "menu": [
+       "B_S45_GLD_a100",
+       "B_S45_GLD_a64",
+       "CASH100",
+       "SPY6040",
+       "SPY_c40",
+       "SPY_c80"
+      ]
+     },
+     "candidate_dev_J": 0.2632
+    }
+   ],
+   "n_accepts": 2,
+   "final_books": [
+    {
+     "B_S45_GLD_a100": {
+      "CASH": 0.0,
+      "SPY": 0.45,
+      "GLD": 0.55
+     }
+    },
+    {
+     "B_S45_GLD_a64": {
+      "CASH": 0.3531,
+      "SPY": 0.2911,
+      "GLD": 0.3558
+     }
+    }
+   ],
+   "final_deadzone": 0.0,
+   "final_controls": {
+    "twin_hold_floor": -0.0175,
+    "matched_random_hold_floor": 0.0073
+   }
+  }
+ ],
+ "total_cycles": 65
+}
